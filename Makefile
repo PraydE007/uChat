@@ -2,7 +2,7 @@ CL_NAME	=	uchat
 SV_NAME = 	uchat_server
 
 CFLG	=	-std=c11 $(addprefix -W, all extra error pedantic) -g
-
+INCD = inc
 CL_SRCD	=	client/src
 SV_SRCD = 	server/src
 CL_INCD	=	client/inc
@@ -15,6 +15,10 @@ CL_GTK_SORT_FLAGS = `pkg-config --cflags gtk+-3.0`
 LMXD	=	libmx
 LMXA:=	$(LMXD)/libmx.a
 LMXI:=	$(LMXD)/$(INCD)
+
+#JSOND	=	json
+#JSONA:=	$(JSOND)/json.a
+#JSONI:=	$(JSOND)/$(INCD)
 
 CL_INC		=	client.h
 SV_INC		=	server.h
@@ -43,7 +47,7 @@ install: install_client install_server
 install_client: $(LMXA) $(CL_NAME)
 
 $(CL_NAME): $(CL_OBJS)
-	@clang $(CFLG) $(CL_OBJS) $(CL_GTK_FLAGS) -L$(LMXD) -lmx -o $@
+	@clang $(CFLG) $(CL_OBJS) $(CL_GTK_FLAGS) -L$(LMXD) -lmx -o $@ libjson-c.a
 	@printf "\r\33[2K$@ \033[32;1mcreated\033[0m\n"
 
 $(CL_OBJD)/%.o: $(CL_SRCD)/%.c $(CL_INCS)
@@ -55,10 +59,10 @@ $(CL_OBJS): | $(CL_OBJD)
 $(CL_OBJD):
 	@mkdir -p $@
 
-install_server: $(LMXA) $(SV_NAME)
+install_server:  $(LMXA) $(SV_NAME)
 
 $(SV_NAME): $(SV_OBJS)
-	@clang $(CFLG) $(SV_OBJS) -L$(LMXD) -lmx -o $@
+	@clang $(CFLG) $(SV_OBJS) -L$(LMXD) -lmx -o $@ libjson-c.a
 	@printf "\r\33[2K$@ \033[32;1mcreated\033[0m\n"
 
 $(SV_OBJD)/%.o: $(SV_SRCD)/%.c $(SV_INCS)

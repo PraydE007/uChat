@@ -10,6 +10,7 @@
 #include <stddef.h>
 #include <string.h>
 #include <time.h>
+#include "../json/include/json-c/json.h"
 
 typedef struct s_u_login_info {
     int u_id;

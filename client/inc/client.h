@@ -1,8 +1,9 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
-#include "../inc/general.h"
+#include "../../inc/general.h"
 #include <gtk/gtk.h>
+#include "../../json/include/json-c/json.h"
 
 typedef struct s_interface {
     GtkWidget *window;

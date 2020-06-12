@@ -1,7 +1,7 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
-#include "../inc/general.h"
+#include "../../inc/general.h"
 #include <signal.h>
 #include <pthread.h>
 
