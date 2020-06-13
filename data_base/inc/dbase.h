@@ -2,14 +2,10 @@
 #define DBASE_H
 
 #include "../inc/general.h"
-#include <signal.h>
-#include <pthread.h>
+#include <sqlite3.h> 
 
-// typedef struct s_sock{
-//     int test;
-// } t_sock;
 
-void *doprocessing(void *sock);
+void mx_data_base_creation(void);
 
 
 
