@@ -1,7 +1,7 @@
-// #include "dbase.h"
-#include <sqlite3.h> 
-#include <stdio.h>
-#include <stdlib.h>
+#include "dbase.h"
+// #include <sqlite3.h>
+// #include <stdio.h>
+// #include <stdlib.h>
 
 static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
     int i;
@@ -38,7 +38,7 @@ void mx_data_base_creation(void) {
     if (err != SQLITE_OK) {
         fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
     }
-    char id[3] = "12\0";
+    char id[3] = "1\0";
     sprintf(sql, "select * from GENERAL_TABLE WHERE ID > %s AND ID < '30';", id);
     connection_point = sqlite3_exec(db, sql, callback, p, &err);
     printf("count  = %d\n", i);
@@ -50,9 +50,4 @@ void mx_data_base_creation(void) {
         fprintf(stdout, "Table created successfully\n");
 
     sqlite3_close(db);
-}
-
-int main() {
-    mx_data_base_creation();
-    return 0;
 }

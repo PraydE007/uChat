@@ -1,5 +1,6 @@
 CL_NAME	=	uchat
 SV_NAME = 	uchat_server
+DB_AR =	data_base/data_base.a
 
 CFLG	=	-std=c11 $(addprefix -W, all extra error pedantic) -g
 INCD = inc
@@ -19,17 +20,15 @@ LMXD	=	libmx
 LMXA:=	$(LMXD)/libmx.a
 LMXI:=	$(LMXD)/$(INCD)
 
-#JSOND	=	json
-#JSONA:=	$(JSOND)/json.a
-#JSONI:=	$(JSOND)/$(INCD)
+DB_MXD	=	data_base
+DB_MXA:=	$(DB_MXD)/uchat_db.a
+DB_MXI:=	$(DB_MXD)/$(INCD)
 
 CL_INC		=	client.h
 SV_INC		=	server.h
-DB_INC		=	dbase.h
 
 CL_INCS	=	$(addprefix $(CL_INCD)/, $(CL_INC))
 SV_INCS =	$(addprefix $(SV_INCD)/, $(SV_INC))
-DB_INCS =	$(addprefix $(DB_INCD)/, $(DB_INC))
 
 CL_SRC		=	main.c \
 				mx_init_auth_screen.c \
@@ -38,14 +37,11 @@ CL_SRC		=	main.c \
 SV_SRC		=	main.c \
 				doprocessing.c \
 
-DB_SRC		=	mx_date_base_creation.c \
 
 CL_SRCS	=	$(addprefix $(CL_SRCD)/, $(CL_SRC))
 SV_SRCS =	$(addprefix $(SV_SRCD)/, $(SV_SRC))
 CL_OBJS	=	$(addprefix $(CL_OBJD)/, $(CL_SRC:%.c=%.o))
 SV_OBJS	=	$(addprefix $(SV_OBJD)/, $(SV_SRC:%.c=%.o))
-DB_SRCS	=	$(addprefix $(DB_SRCD)/, $(DB_SRC))
-DB_OBJS	=	$(addprefix $(DB_OBJD)/, $(DB_SRC:%.c=%.o))
 
 all: install
 
@@ -69,14 +65,16 @@ $(CL_OBJS): | $(CL_OBJD)
 $(CL_OBJD):
 	@mkdir -p $@
 
-install_server:  $(LMXA) $(SV_NAME)
+install_server: $(LMXA) $(SV_NAME)
+
+	@make -sC data_base
 
 $(SV_NAME): $(SV_OBJS)
-	@clang $(CFLG) $(SV_OBJS) -L$(LMXD) -lmx -o $@ libjson-c.a
+	@clang $(CFLG) $(SV_OBJS) -L$(LMXD) -L$(DB_MXD) -lmx -o $@ libjson-c.a data_base/uchat_db.a -lsqlite3
 	@printf "\r\33[2K$@ \033[32;1mcreated\033[0m\n"
 
 $(SV_OBJD)/%.o: $(SV_SRCD)/%.c $(SV_INCS)
-	@clang $(CFLG) -c $< -o $@ -I$(SV_INCD) -I$(DB_INCD) -I$(LMXI)
+	@clang $(CFLG) -c $< -o $@ -I$(SV_INCD) -I$(LMXI) -I$(DB_MXI)
 	@printf "\r\33[2K$(SV_NAME) \033[33;1mcompile \033[0m$(<:$(SV_SRCD)/%.c=%) "
 
 $(SV_OBJS): | $(SV_OBJD)
@@ -84,16 +82,12 @@ $(SV_OBJS): | $(SV_OBJD)
 $(SV_OBJD):
 	@mkdir -p $@
 
-$(DB_OBJS): | $(DB_OBJD)
-
-$(DB_OBJD):
-	@mkdir -p $@
-
 $(LMXA):
 	@make -sC $(LMXD)
 
 clean:
 	@make -sC $(LMXD) $@
+	@make -sC $(DB_MXD) $@
 	@rm -rf $(CL_OBJD)
 	@rm -rf $(SV_OBJD)
 	@printf "$(CL_OBJD)\t   \033[31;1mdeleted\033[0m\n"

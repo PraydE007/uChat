@@ -20,6 +20,9 @@ int main() {
    struct json_object *parsed;
    struct json_object *name;
 
+   mx_data_base_creation();
+
+   exit(0);
 
    test = json_object_to_json_string(jobj);
    parsed = json_tokener_parse(test);
