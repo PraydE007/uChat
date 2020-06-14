@@ -4,11 +4,14 @@ SV_NAME = 	uchat_server
 CFLG	=	-std=c11 $(addprefix -W, all extra error pedantic) -g
 INCD = inc
 CL_SRCD	=	client/src
-SV_SRCD = 	server/src
+SV_SRCD =	server/src
+DB_SRCD =	data_base/src
 CL_INCD	=	client/inc
 SV_INCD =	server/inc
+DB_INCD =	data_base/inc
 CL_OBJD	=	client/obj
 SV_OBJD =	server/obj
+DB_OBJD =	data_base/obj
 CL_GTK_FLAGS = `pkg-config --cflags  --libs gtk+-3.0`
 CL_GTK_SORT_FLAGS = `pkg-config --cflags gtk+-3.0`
 
@@ -22,21 +25,27 @@ LMXI:=	$(LMXD)/$(INCD)
 
 CL_INC		=	client.h
 SV_INC		=	server.h
+DB_INC		=	dbase.h
 
 CL_INCS	=	$(addprefix $(CL_INCD)/, $(CL_INC))
 SV_INCS =	$(addprefix $(SV_INCD)/, $(SV_INC))
+DB_INCS =	$(addprefix $(DB_INCD)/, $(DB_INC))
 
 CL_SRC		=	main.c \
 				mx_init_auth_screen.c \
 				mx_interface.c \
 
-SV_SRC		= 	main.c \
+SV_SRC		=	main.c \
 				doprocessing.c \
+
+DB_SRC		=	mx_date_base_creation.c \
 
 CL_SRCS	=	$(addprefix $(CL_SRCD)/, $(CL_SRC))
 SV_SRCS =	$(addprefix $(SV_SRCD)/, $(SV_SRC))
 CL_OBJS	=	$(addprefix $(CL_OBJD)/, $(CL_SRC:%.c=%.o))
 SV_OBJS	=	$(addprefix $(SV_OBJD)/, $(SV_SRC:%.c=%.o))
+DB_SRCS	=	$(addprefix $(DB_SRCD)/, $(DB_SRC))
+DB_OBJS	=	$(addprefix $(DB_OBJD)/, $(DB_SRC:%.c=%.o))
 
 all: install
 
@@ -54,6 +63,7 @@ $(CL_OBJD)/%.o: $(CL_SRCD)/%.c $(CL_INCS)
 	@clang $(CFLG) -c $< $(CL_GTK_SORT_FLAGS) -o $@ -I$(CL_INCD) -I$(LMXI)
 	@printf "\r\33[2K$(CL_NAME) \033[33;1mcompile \033[0m$(<:$(CL_SRCD)/%.c=%) "
 
+
 $(CL_OBJS): | $(CL_OBJD)
 
 $(CL_OBJD):
@@ -66,12 +76,17 @@ $(SV_NAME): $(SV_OBJS)
 	@printf "\r\33[2K$@ \033[32;1mcreated\033[0m\n"
 
 $(SV_OBJD)/%.o: $(SV_SRCD)/%.c $(SV_INCS)
-	@clang $(CFLG) -c $< -o $@ -I$(SV_INCD) -I$(LMXI)
+	@clang $(CFLG) -c $< -o $@ -I$(SV_INCD) -I$(DB_INCD) -I$(LMXI)
 	@printf "\r\33[2K$(SV_NAME) \033[33;1mcompile \033[0m$(<:$(SV_SRCD)/%.c=%) "
 
 $(SV_OBJS): | $(SV_OBJD)
 
 $(SV_OBJD):
+	@mkdir -p $@
+
+$(DB_OBJS): | $(DB_OBJD)
+
+$(DB_OBJD):
 	@mkdir -p $@
 
 $(LMXA):
