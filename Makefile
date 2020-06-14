@@ -40,7 +40,6 @@ SV_SRC		=	main.c \
 
 CL_SRCS	=	$(addprefix $(CL_SRCD)/, $(CL_SRC))
 SV_SRCS =	$(addprefix $(SV_SRCD)/, $(SV_SRC))
-#DB_SRCS	=	$(addprefix $(DB_SRCD)/, $(DB_SRC))
 CL_OBJS	=	$(addprefix $(CL_OBJD)/, $(CL_SRC:%.c=%.o))
 SV_OBJS	=	$(addprefix $(SV_OBJD)/, $(SV_SRC:%.c=%.o))
 
@@ -95,10 +94,10 @@ clean:
 	@rm -rf $(DB_MXD)/$(DB_MXA)
 	@printf "$(CL_OBJD)\t   \033[31;1mdeleted\033[0m\n"
 	@printf "$(SV_OBJD)\t   \033[31;1mdeleted\033[0m\n"
-	@printf "$(DB_MXA)\t   \033[31;1mdeleted\033[0m\n"
 
 uninstall: clean
 	@make -sC $(LMXD) $@
+	@make -sC $(DB_MXD) $@
 	@rm -rf $(CL_NAME)
 	@rm -rf $(SV_NAME)
 	@printf "$(CL_NAME) \033[31;1muninstalled\033[0m\n"
