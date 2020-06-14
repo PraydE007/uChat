@@ -4,28 +4,29 @@ int main() {
    int sockfd, portno, clilen;
    int newsockfd = 0;
    struct sockaddr_in serv_addr, cli_addr;
-   //int pid;
    int rc = 1;
    pthread_t x = NULL;
-   // json_object *jobj = json_object_new_object();
-   // json_object *jstring = json_object_new_string("Joys of Programming");
-   // json_object *jint = json_object_new_int(10);
-   // json_object *jboolean = json_object_new_boolean(1);
-   // json_object *jdouble = json_object_new_double(2.14);
-   // json_object *jarray = json_object_new_array();
-   // json_object *jstring1 = json_object_new_string("c");
-   // json_object *jstring2 = json_object_new_string("c++");
-   // json_object *jstring3 = json_object_new_string("php");
-   // json_object_array_add(jarray,jstring1);
-   // json_object_array_add(jarray,jstring2);
-   // json_object_array_add(jarray,jstring3);
-   // json_object_object_add(jobj,"Site Name", jstring);
-   // json_object_object_add(jobj,"Technical blog", jboolean);
-   // json_object_object_add(jobj,"Average posts per day", jdouble);
-   // json_object_object_add(jobj,"Number of posts", jint);
-   // json_object_object_add(jobj,"Categories", jarray);
-   // printf("%s", json_object_to_json_string(jobj));
-   // exit(0);
+   json_object *jobj = json_object_new_object();
+   json_object *jstring = json_object_new_string("Joys of Programming");
+   json_object *jint = json_object_new_int(10);
+   json_object *jboolean = json_object_new_boolean(1);
+   json_object *jdouble = json_object_new_double(2.14);
+   json_object_object_add(jobj,"Site Name", jstring);
+   json_object_object_add(jobj,"Technical blog", jboolean);
+   json_object_object_add(jobj,"Average posts per day", jdouble);
+   json_object_object_add(jobj,"Number of posts", jint);
+
+   const char *test;
+   struct json_object *parsed;
+   struct json_object *name;
+
+
+   test = json_object_to_json_string(jobj);
+   parsed = json_tokener_parse(test);
+   json_object_object_get_ex(parsed, "Site Name", &name);
+
+   printf("%s", json_object_to_json_string(name));
+   exit(0);
    /* First call to socket() function */
    sockfd = socket(AF_INET, SOCK_STREAM, 0);
    if (sockfd < 0) {
