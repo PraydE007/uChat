@@ -1,7 +1,7 @@
-// #include "dbase.h"
-#include <sqlite3.h> 
-#include <stdio.h>
-#include <stdlib.h>
+#include "dbase.h"
+// #include <sqlite3.h> 
+// #include <stdio.h>
+// #include <stdlib.h>
 
 static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
     int i;
@@ -52,7 +52,7 @@ void mx_data_base_creation(void) {
     sqlite3_close(db);
 }
 
-int main() {
-    mx_data_base_creation();
-    return 0;
-}
+// int main() {
+//     mx_data_base_creation();
+//     return 0;
+// }

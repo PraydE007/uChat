@@ -27,6 +27,7 @@ int main() {
    // printf("%s", json_object_to_json_string(jobj));
    // exit(0);
    /* First call to socket() function */
+   mx_data_base_creation();
    sockfd = socket(AF_INET, SOCK_STREAM, 0);
    if (sockfd < 0) {
       perror("ERROR opening socket");
