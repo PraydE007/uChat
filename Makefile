@@ -1,6 +1,5 @@
 CL_NAME	=	uchat
 SV_NAME = 	uchat_server
-DB_AR =	data_base/data_base.a
 
 CFLG	=	-std=c11 $(addprefix -W, all extra error pedantic) -g
 INCD = inc
@@ -67,12 +66,10 @@ $(CL_OBJS): | $(CL_OBJD)
 $(CL_OBJD):
 	@mkdir -p $@
 
-install_server: $(LMXA) $(SV_NAME)
-
-	@make -sC data_base
+install_server: $(DB_MXA) $(LMXA) $(SV_NAME)
 
 $(SV_NAME): $(SV_OBJS)
-	@clang $(CFLG) $(SV_OBJS) -L$(LMXD) -L$(DB_MXD) -lmx -o $@ libjson-c.a data_base/uchat_db.a -lsqlite3
+	@clang $(CFLG) $(SV_OBJS) -L$(LMXD) -lmx -o $@ libjson-c.a data_base/uchat_db.a -lsqlite3
 	@printf "\r\33[2K$@ \033[32;1mcreated\033[0m\n"
 
 $(SV_OBJD)/%.o: $(SV_SRCD)/%.c $(SV_INCS)
@@ -87,23 +84,24 @@ $(SV_OBJD):
 $(LMXA):
 	@make -sC $(LMXD)
 
+$(DB_MXA):
+	@make -sC $(DB_MXD)
+
 clean:
 	@make -sC $(LMXD) $@
 	@make -sC $(DB_MXD) $@
 	@rm -rf $(CL_OBJD)
 	@rm -rf $(SV_OBJD)
-	@rm -rf $(DB_OBJD)
+	@rm -rf $(DB_MXD)/$(DB_MXA)
 	@printf "$(CL_OBJD)\t   \033[31;1mdeleted\033[0m\n"
 	@printf "$(SV_OBJD)\t   \033[31;1mdeleted\033[0m\n"
-	@printf "$(DB_OBJD)\t   \033[31;1mdeleted\033[0m\n"
+	@printf "$(DB_MXA)\t   \033[31;1mdeleted\033[0m\n"
 
 uninstall: clean
 	@make -sC $(LMXD) $@
 	@rm -rf $(CL_NAME)
 	@rm -rf $(SV_NAME)
-	@rm -rf $(DB_NAME)
 	@printf "$(CL_NAME) \033[31;1muninstalled\033[0m\n"
 	@printf "$(SV_NAME) \033[31;1muninstalled\033[0m\n"
-	@printf "$(DB_NAME) \033[31;1muninstalled\033[0m\n"
 
 reinstall: uninstall install

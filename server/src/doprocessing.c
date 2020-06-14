@@ -2,12 +2,15 @@
 
 void *doprocessing (void *data) {
    int socket = *(int *)data;
+   json_object *jobj = json_object_new_object();
    int n;
    char buffer[256];
 
 while (true) {
    bzero(buffer,256);
-   n = read(socket,buffer,255);
+   n = recv(socket, jobj, sizeof(jobj), false);
+
+   printf("%s", json_object_to_json_string(jobj));
    if (n <= 0) {
       printf("\n%s", "User ");
       printf("\033[0;35m");
@@ -33,7 +36,7 @@ while (true) {
    printf("\033[0m");
    printf("%c", '\n');
 
-   n = write(socket,"Got it!\n", 8);
+   n = send(socket, "Got it!\n", 8, false);
 
    if (n <= 0) {
       break;

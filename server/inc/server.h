@@ -10,7 +10,7 @@
 // } t_sock;
 
 void *doprocessing(void *sock);
-
+int mx_init_connect();
 
 
 #endif
