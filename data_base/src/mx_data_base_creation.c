@@ -36,7 +36,7 @@ void mx_data_base_creation(void) {
         "MOBILEPHONE    INT             NOT NULL);");
     connection_point = sqlite3_exec(db, sql, callback, 0, &err);
 
-    sprintf(sql, "insert into GENERAL_TABLE (LOGIN, NAME, PASSWORD, SOCKET, MOBILEPHONE) values('SUP', 'Vasya', '3456', 567, 983598789)");
+    sprintf(sql, "insert into GENERAL_TABLE (LOGIN, NAME, PASSWORD, SOCKET, MOBILEPHONE) values('SUP', 'Vasya', '3456', 1231231)");
     connection_point = sqlite3_exec(db, sql, callback, 0, &err);
     if (err != SQLITE_OK) {
         fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
