@@ -53,7 +53,7 @@ int main() {
          exit(1);
       }
       else {
-         printf("%s ", "\033[0;32mUser connected with id:\033[0;32m");
+         printf("%s ", "\033[0;32mUser connected from socket:\033[0;32m");
          printf("%d\n", newsockfd);
       }
       pthread_create(&x, NULL, doprocessing, (void *)&newsockfd);
