@@ -1,18 +1,20 @@
-NAME	=	uchat_db.a
+NAME = uchat_db.a
 
-CFLG	=	-std=c11 $(addprefix -W, all extra error pedantic) -g
+CFLG = -std=c11 $(addprefix -W, all extra error pedantic) -g
 
-SRCD	=	src
-INCD	=	inc
-OBJD	=	obj
+SRCD = src
+INCD = inc
+OBJD = obj
 
-INC		=	dbase.h
-INCS	=	$(addprefix $(INCD)/, $(INC))
+INC = dbase.h
+INCS = $(addprefix $(INCD)/, $(INC))
 
-SRC		=	mx_data_base_creation.c \
+FILES = mx_data_base_creation.c \
+	mx_data_base_creation.c \
 
-SRCS	=	$(addprefix $(SRCD)/, $(SRC))
-OBJS	=	$(addprefix $(OBJD)/, $(SRC:%.c=%.o))
+
+SRCS = $(addprefix $(SRCD)/, $(FILES))
+OBJS = $(addprefix $(OBJD)/, $(FILES:%.c=%.o))
 
 all: install
 

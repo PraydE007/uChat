@@ -19,9 +19,10 @@ void mx_data_base_creation(void) {
     sqlite3 *db;
     char *err = NULL;
     int connection_point;
-    char sql[1024] ;
+    char sql[1024];
     int i = 0;
     int * p = &i;
+
     connection_point = sqlite3_open("chat_base.db", &db);
     if(connection_point)
         fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
@@ -51,6 +52,5 @@ void mx_data_base_creation(void) {
     }
     else
         fprintf(stdout, "Table created successfully\n");
-
     sqlite3_close(db);
 }

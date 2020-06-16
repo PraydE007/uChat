@@ -35,11 +35,11 @@ int main(int argc, char *argv[]) {
    bcopy((char *)server->h_addr, (char *)&serv_addr.sin_addr.s_addr, server->h_length);
    serv_addr.sin_port = htons(portno);
 
-   if (connect(sockfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0) {
-      perror("ERROR connecting");
-      exit(1);
-   } else
-      printf("%s", "Connected!\n");
+   // if (connect(sockfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0) {
+   //    perror("ERROR connecting");
+   //    exit(1);
+   // } else
+   //    printf("%s", "Connected!\n");
 
 while(true) {
    printf("%s", ": ");
@@ -58,6 +58,7 @@ while(true) {
    // struct json_object *name;
    /* Send message to the server */
    send_data = (char *)json_object_to_json_string(jobj);
+   printf("%s", send_data);
 
    n = send(sockfd, send_data, strlen(send_data), 0);
 

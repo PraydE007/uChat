@@ -35,13 +35,20 @@ while (true) {
    printf("%c", '\n');
 
    jobj = json_tokener_parse(buffer);
-   /////////////
-   /////////////
 
-   //json_object *if_logging(json_object *jobj); //prototype
+   struct json_object *parsed;
+   struct json_object *type;
+   const char *all_data;
 
-   //////////////
-   //////////////
+   // json_object *res_j_obj = json_object_new_object(); // create var
+   all_data = json_object_to_json_string(jobj);
+   parsed = json_tokener_parse(all_data);
+   json_object_object_get_ex(parsed, "Type", &type);
+   if (!mx_strcmp("\"Logging\"", json_object_to_json_string(type))) {
+      // res_j_obj = mx_if_logging(jobj);
+      ////////////////////////////////////////////////////////json_object *mx_if_logging(json_object *jobj); //prototype
+   }
+
    n = send(socket, "Got it!\n", 8, 0);
 
    if (n <= 0) {
