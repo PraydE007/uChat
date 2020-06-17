@@ -56,7 +56,7 @@ install: install_client install_server
 install_client: $(LMXA) $(CL_NAME)
 
 $(CL_NAME): $(CL_OBJS)
-	@clang $(CFLG) $(CL_OBJS) $(CL_GTK_FLAGS) -L$(LMXD) -L$(SSLXA) -lmx -o $@ libjson-c.a -lcrypto
+	@clang $(CFLG) $(CL_OBJS) $(CL_GTK_FLAGS) -L$(LMXD) -L$(SSLXA) -lmx -o $@ libjson-c.a openssl/lib/libcrypto.a openssl/lib/libssl.a  -lcrypto
 	@printf "\r\33[2K$@ \033[32;1mcreated\033[0m\n"
 
 $(CL_OBJD)/%.o: $(CL_SRCD)/%.c $(CL_INCS)
@@ -69,7 +69,7 @@ $(CL_OBJS): | $(CL_OBJD)
 $(CL_OBJD):
 	@mkdir -p $@
 
-install_server: $(DB_MXA) $(LMXA) $(SV_NAME)
+install_server: $(LMXA) $(DB_MXA) $(SV_NAME)
 
 $(SV_NAME): $(SV_OBJS)
 	@clang $(CFLG) $(SV_OBJS) -L$(LMXD) -lmx -o $@ libjson-c.a $(DB_MXA) -lsqlite3

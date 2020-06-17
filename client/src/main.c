@@ -1,5 +1,32 @@
 #include "client.h"
 
+char *mx_hash_to_string(unsigned char *hash) {
+    char *string = (char *)malloc(sizeof(char) * SHA512_DIGEST_LENGTH + 1);
+    int a;
+    int count = 0;
+    char arr[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                    'a', 'b', 'c', 'd', 'e', 'f'};
+
+    for (int i = 0; i < 32; i++) {
+        a = hash[i] / 16;
+        string[count++] = arr[a];
+        a = hash[i] % 16;
+        string[count++] = arr[a];
+    }
+    string[SHA512_DIGEST_LENGTH + 1] = '\0';
+    return string;
+}
+
+char *mx_hash(char *login, char *pass) {
+    unsigned char sha512[SHA512_DIGEST_LENGTH];
+    char *hash;
+
+    asprintf(&hash, "%s%s", login, pass);
+    SHA512((unsigned char *)hash, strlen(hash), sha512);
+    free(hash);
+    return mx_hash_to_string(sha512);
+}
+
 int main(int argc, char *argv[]) {
    int sockfd, portno, n;
    struct sockaddr_in serv_addr;
@@ -7,6 +34,11 @@ int main(int argc, char *argv[]) {
    char buffer[2048];
    int rc = 0;
    char *send_data = NULL;
+
+
+   char *test = mx_hash("123", "333");
+   printf("%s", test);
+   exit(0);
 
    if (argc < 3) {
       fprintf(stderr,"usage %s hostname port\n", argv[0]);
