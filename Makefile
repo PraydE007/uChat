@@ -18,11 +18,15 @@ SQL_FLAGS = -lsqlite3
 
 LMXD	=	libmx
 LMXA:=	$(LMXD)/libmx.a
-LMXI:=	$(LMXD)/$(INCD)
+
 
 DB_MXD	=	data_base
 DB_MXA:=	$(DB_MXD)/uchat_db.a
 DB_MXI:=	$(DB_MXD)/$(INCD)
+
+SSLXA:= openssl/libssl.a
+SSLXD:= openssl
+SSLXI:=	inc/openssl/
 
 CL_INC		=	client.h
 SV_INC		=	server.h
@@ -47,7 +51,7 @@ all: install
 
 $(FILE:a/%=%)
 
-install: install_server install_client
+install: install_client install_server
 
 install_client: $(LMXA) $(CL_NAME)
 
@@ -56,7 +60,7 @@ $(CL_NAME): $(CL_OBJS)
 	@printf "\r\33[2K$@ \033[32;1mcreated\033[0m\n"
 
 $(CL_OBJD)/%.o: $(CL_SRCD)/%.c $(CL_INCS)
-	@clang $(CFLG) -c $< $(CL_GTK_SORT_FLAGS) -o $@ -I$(CL_INCD) -I$(LMXI)
+	@clang $(CFLG) -c $< $(CL_GTK_SORT_FLAGS) -o $@ -I$(CL_INCD) -I$(LMXI) -I$(SSLXI)
 	@printf "\r\33[2K$(CL_NAME) \033[33;1mcompile \033[0m$(<:$(CL_SRCD)/%.c=%) "
 
 
@@ -65,14 +69,14 @@ $(CL_OBJS): | $(CL_OBJD)
 $(CL_OBJD):
 	@mkdir -p $@
 
-install_server: $(LMXA) $(SV_NAME)
+install_server: $(DB_MXA) $(LMXA) $(SV_NAME)
 
 $(SV_NAME): $(SV_OBJS)
-	@clang $(CFLG) $(SV_OBJS) -L$(LMXD) -L$(DB_MXD) -lmx -o $@ libjson-c.a $(DB_MXA) -lsqlite3
+	@clang $(CFLG) $(SV_OBJS) -L$(LMXD) -L$(SSLXD) -lmx -o $@ libjson-c.a data_base/uchat_db.a -lsqlite3
 	@printf "\r\33[2K$@ \033[32;1mcreated\033[0m\n"
 
 $(SV_OBJD)/%.o: $(SV_SRCD)/%.c $(SV_INCS)
-	@clang $(CFLG) -c $< -o $@ -I$(SV_INCD) -I$(LMXI) -I$(DB_MXI)
+	@clang $(CFLG) -c $< -o $@ -I$(SV_INCD) -I$(LMXI) -I$(DB_MXI) -Iinclude/md5.h
 	@printf "\r\33[2K$(SV_NAME) \033[33;1mcompile \033[0m$(<:$(SV_SRCD)/%.c=%) "
 
 $(SV_OBJS): | $(SV_OBJD)
@@ -91,6 +95,7 @@ clean:
 	@make -sC $(DB_MXD) $@
 	@rm -rf $(CL_OBJD)
 	@rm -rf $(SV_OBJD)
+	@rm -rf $(DB_MXD)/$(DB_MXA)
 	@printf "$(CL_OBJD)\t   \033[31;1mdeleted\033[0m\n"
 	@printf "$(SV_OBJD)\t   \033[31;1mdeleted\033[0m\n"
 
