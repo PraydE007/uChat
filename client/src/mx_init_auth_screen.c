@@ -1,14 +1,16 @@
 #include "client.h"
 
+
+
 // static t_interface init_elements() {
-//     t_interface auth_interface;
-//     auth_interface.window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-//     auth_interface.box = gtk_box_new (true, 10);
-//     auth_interface.button_login = gtk_button_new_with_label ("Logging in");
-//     auth_interface.button_register = gtk_button_new_with_label ("Register");
-//     auth_interface.entry_login = gtk_entry_new();
-//     auth_interface.entry_passwd = gtk_entry_new();
-//     return auth_interface;
+    // t_interface auth_interface;
+    // auth_interface.window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    // auth_interface.box = gtk_box_new (true, 10);
+    // auth_interface.button_login = gtk_button_new_with_label ("Logging in");
+    // auth_interface.button_register = gtk_button_new_with_label ("Register");
+    // auth_interface.entry_login = gtk_entry_new();
+    // auth_interface.entry_passwd = gtk_entry_new();
+    // return auth_interface;
 // }
 
 void mx_init_auth_screen() {
@@ -25,8 +27,8 @@ void mx_init_auth_screen() {
     // gtk_container_add(GTK_CONTAINER(auth_interface.window), auth_interface.box);
     // gtk_widget_show_all(auth_interface.window);
 
-    // GtkBuilder* builder = gtk_builder_new_from_file("auth_interface.glade");
-    // GtkWidget* b1 = GTK_WIDGET(gtk_builder_get_object(builder, "aw_1"));
+    GtkBuilder* builder = gtk_builder_new_from_file("auth_interface.glade");
+    GtkWidget* b1 = GTK_WIDGET(gtk_builder_get_object(builder, "aw_1"));
 
-    // gtk_widget_show_all(b1);
+    gtk_widget_show_all(b1);
 }
