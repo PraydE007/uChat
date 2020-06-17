@@ -13,7 +13,6 @@
 #include "../json/include/json-c/json.h"
 #include "../data_base/inc/dbase.h"
 #include "../libmx/inc/libmx.h"
-#include "../openssl/include/sha.h"
 
 typedef struct s_u_login_info {
     int u_id;

@@ -24,10 +24,6 @@ DB_MXD	=	data_base
 DB_MXA:=	$(DB_MXD)/uchat_db.a
 DB_MXI:=	$(DB_MXD)/$(INCD)
 
-SSLXD:= openssl
-SSLXA:= $(SSLXD)/lib
-SSLXI:=	$(SSLXD)/include
-
 CL_INC		=	client.h
 SV_INC		=	server.h
 
@@ -56,11 +52,11 @@ install: install_client install_server
 install_client: $(LMXA) $(CL_NAME)
 
 $(CL_NAME): $(CL_OBJS)
-	@clang $(CFLG) $(CL_OBJS) $(CL_GTK_FLAGS) -L$(LMXD) -L$(SSLXA) -lmx -o $@ libjson-c.a openssl/lib/libcrypto.a openssl/lib/libssl.a  -lcrypto
+	@clang $(CFLG) $(CL_OBJS) $(CL_GTK_FLAGS) -L$(LMXD) -lmx -o $@ libjson-c.a
 	@printf "\r\33[2K$@ \033[32;1mcreated\033[0m\n"
 
 $(CL_OBJD)/%.o: $(CL_SRCD)/%.c $(CL_INCS)
-	@clang $(CFLG) -c $< $(CL_GTK_SORT_FLAGS) -o $@ -I$(CL_INCD) -I$(LMXI) -I$(SSLXI)
+	@clang $(CFLG) -c $< $(CL_GTK_SORT_FLAGS) -o $@ -I$(CL_INCD) -I$(LMXI)
 	@printf "\r\33[2K$(CL_NAME) \033[33;1mcompile \033[0m$(<:$(CL_SRCD)/%.c=%) "
 
 
