@@ -46,6 +46,8 @@ int main() {
    listen(sockfd,5);
    clilen = sizeof(cli_addr);
    mx_data_base_creation();
+
+   
    while (true) {
       newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, (socklen_t *)&clilen);
       if (newsockfd < 0) {

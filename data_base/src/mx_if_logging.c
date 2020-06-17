@@ -17,7 +17,8 @@ json_object *mx_if_logging(json_object *parsed) {
     int connection_point;
     sqlite3 *db;
     char *err = NULL;
-    char sql[50] ;
+    char sql[50];
+    char p_login[50];
     struct json_object *logging;
     const char *all_data = NULL;
 
@@ -26,14 +27,14 @@ json_object *mx_if_logging(json_object *parsed) {
         fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
     else
         fprintf(stdout, "Opened database successfully\n");
-    sprintf(sql, "select * from GENERAL_TABLE WHERE ID > %s AND ID < '30';", id);
+    sprintf(sql, "select LOGIN from GENERAL_TABLE;");
     json_object_object_get_ex(parsed, "Logging", &logging);
     connection_point = sqlite3_exec(db, sql, callback, p, &err);
-    if (!mx_strcmp("\"Logging\"", json_object_to_json_string(type))) {
+    if (!mx_strcmp("\"Logging\"", json_object_to_json_string(logging))) {
         // result = mx_if_logging(jobj);
         // printf("%s", json_object_to_json_string(name));
     }
-    if (!mx_strcmp("\"Registration\"", json_object_to_json_string(type))) {
+    if (!mx_strcmp("\"Registration\"", json_object_to_json_string(logging))) {
         // result = mx_if_logging(jobj);
     }
 }
