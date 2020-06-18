@@ -8,6 +8,8 @@ int main(int argc, char *argv[]) {
    int rc = 0;
    char *send_data = NULL;
 
+   printf("%s", mx_hash("ioahg"));
+
    if (argc < 3) {
       fprintf(stderr,"usage %s hostname port\n", argv[0]);
       exit(0);

@@ -4,6 +4,7 @@
 #include "../../inc/general.h"
 #include <gtk/gtk.h>
 #include "../../json/include/json-c/json.h"
+#include <openssl/ssl.h>
 
 typedef struct s_interface {
     GtkWidget *window;
@@ -16,5 +17,6 @@ typedef struct s_interface {
 
 void mx_init_auth_screen();
 void mx_interface(int argc, char *argv[]);
-
+char *mx_hash_to_string(unsigned char *hash);
+char *mx_hash(char *pass);
 #endif
