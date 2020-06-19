@@ -1,6 +1,6 @@
 #include "server.h"
 static void if_disconnect(int socket) {
-      printf("\n%s", "User ");
+      printf("\n%s", "User from socket");
       printf("\033[0;35m");
       printf("%d", socket);
       printf("\033[0m");

@@ -18,5 +18,5 @@ typedef struct s_interface {
 void mx_init_auth_screen();
 void mx_interface(int argc, char *argv[]);
 char *mx_hash_to_string(unsigned char *hash);
-char *mx_hash(char *login, char *pass);
+char *mx_hash(char *pass);
 #endif

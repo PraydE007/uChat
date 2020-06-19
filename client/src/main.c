@@ -48,8 +48,7 @@ while(true) {
    json_object *jobj = json_object_new_object();
    json_object *j_type = json_object_new_string("Logging");
    json_object *j_login = json_object_new_string("Vasya");
-   json_object *j_passwd = json_object_new_string(mx_hash("Vasya", "qwert"));
-   printf("\n%s\n", mx_hash("Vasya", "qwert"));
+   json_object *j_passwd = json_object_new_string(mx_hash("uksgdfj12bf"));
    json_object_object_add(jobj,"Type", j_type);
    json_object_object_add(jobj,"Login", j_login);
    json_object_object_add(jobj,"Passwd", j_passwd);
