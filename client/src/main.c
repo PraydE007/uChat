@@ -8,8 +8,6 @@ int main(int argc, char *argv[]) {
    int rc = 0;
    char *send_data = NULL;
 
-   printf("%s", mx_hash("ioahg"));
-
    if (argc < 3) {
       fprintf(stderr,"usage %s hostname port\n", argv[0]);
       exit(0);
@@ -50,7 +48,8 @@ while(true) {
    json_object *jobj = json_object_new_object();
    json_object *j_type = json_object_new_string("Logging");
    json_object *j_login = json_object_new_string("Vasya");
-   json_object *j_passwd = json_object_new_string("123qwert");
+   json_object *j_passwd = json_object_new_string(mx_hash("Vasya", "qwert"));
+   printf("\n%s\n", mx_hash("Vasya", "qwert"));
    json_object_object_add(jobj,"Type", j_type);
    json_object_object_add(jobj,"Login", j_login);
    json_object_object_add(jobj,"Passwd", j_passwd);
@@ -60,7 +59,7 @@ while(true) {
    // struct json_object *name;
    /* Send message to the server */
    send_data = (char *)json_object_to_json_string(jobj);
-
+   printf("%s\n", send_data);
    n = send(sockfd, send_data, strlen(send_data), 0);
 
    if (n < 0) {

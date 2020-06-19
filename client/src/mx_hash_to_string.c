@@ -17,12 +17,13 @@ char *mx_hash_to_string(unsigned char *hash) {
     return string;
 }
 
-char *mx_hash(char *pass) {
+char *mx_hash(char *login, char *pass) {
     unsigned char sha512[SHA512_DIGEST_LENGTH];
     char *hash;
 
-    asprintf(&hash, "%s", pass);
+    asprintf(&hash, "%s%s", login, pass);
     SHA512((unsigned char *)hash, strlen(hash), sha512);
+    printf("%s", hash);
     free(hash);
     return mx_hash_to_string(sha512);
 }
