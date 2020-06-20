@@ -18,6 +18,10 @@ json_object *mx_if_registr(json_object *jobj, sqlite3 *db, t_datab *datab);
 t_datab *mx_create_datab_node(void);
 void mx_data_base_creation(sqlite3 **db);
 void mx_js_add(json_object *j_result, char *key, char *value);
+void mx_table_chats(char *sql);
+void mx_table_messages(char *sql);
+void mx_table_users(char *sql);
+void mx_table_users_chats(char *sql);
 void mx_users_insert(json_object *jobj, sqlite3 *db);
 
 
