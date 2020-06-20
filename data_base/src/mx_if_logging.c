@@ -1,40 +1,36 @@
 #include "dbase.h"
 
-static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
-    int i;
-    (*(int*)NotUsed)++;
-    // (*(int*)NotUsed)++;
-    // (*(int*)NotUsed)--;
-    for(i = 0; i<argc; i++) {
-        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+static int callback(void *datab, int argc, char **argv, char **azColName) {
+    t_datab *new_datab = (t_datab *)datab;
+
+    (void)argc;
+    (void)azColName;
+    if (!mx_strcmp(new_datab->login_db, argv[0])) {
+        new_datab->logtrigger = 1;
+        if (!mx_strcmp(new_datab->password_db, argv[1]))
+            new_datab->passtrigger = 1;
+        return 1;
     }
-    printf("\n");
     return 0;
 }
 
-json_object *mx_if_logging(json_object *parsed) {
-    json_object *result = json_object_new_object();
+json_object *mx_if_logging(json_object *jobj, sqlite3 *db, t_datab *datab) {
+    json_object *j_result = json_object_new_object();
     int connection_point;
-    sqlite3 *db;
     char *err = NULL;
     char sql[50];
-    char p_login[50];
-    struct json_object *logging;
-    const char *all_data = NULL;
 
-    connection_point = sqlite3_open("chat_base.db", &db);
-    if(connection_point)
-        fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
+    datab->login_db = mx_json_to_str(jobj, "Login");
+    datab->password_db = mx_json_to_str(jobj, "Passwd");
+    sprintf(sql, "select LOGIN, PASSWORD from USERS;");
+    connection_point = sqlite3_exec(db, sql, callback, datab, &err);
+    if (err != SQLITE_OK)
+        fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
+    if (datab->logtrigger == 1 && datab->passtrigger == 1)
+        mx_js_add(j_result, "Answer", MX_LOG);
     else
-        fprintf(stdout, "Opened database successfully\n");
-    sprintf(sql, "select LOGIN from GENERAL_TABLE;");
-    json_object_object_get_ex(parsed, "Logging", &logging);
-    connection_point = sqlite3_exec(db, sql, callback, p, &err);
-    if (!mx_strcmp("\"Logging\"", json_object_to_json_string(logging))) {
-        // result = mx_if_logging(jobj);
-        // printf("%s", json_object_to_json_string(name));
-    }
-    if (!mx_strcmp("\"Registration\"", json_object_to_json_string(logging))) {
-        // result = mx_if_logging(jobj);
-    }
+        mx_js_add(j_result, "Answer", MX_ERRLOG);
+    datab->logtrigger = 0;
+    datab->passtrigger = 0;
+    return j_result;
 }

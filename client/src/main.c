@@ -64,67 +64,6 @@ int main(int argc, char **argv) {
 //    bzero(buffer, 2048);
 //    n = recv(sockfd, buffer, 2048, 0);
 
-<<<<<<< HEAD
-   server = gethostbyname(argv[1]);
-
-   if (server == NULL) {
-      fprintf(stderr,"ERROR, no such host\n");
-      exit(0);
-   }
-
-   bzero((char *) &serv_addr, sizeof(serv_addr));
-   serv_addr.sin_family = AF_INET;
-   bcopy((char *)server->h_addr, (char *)&serv_addr.sin_addr.s_addr, server->h_length);
-   serv_addr.sin_port = htons(portno);
-
-   // if (connect(sockfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0) {
-   //    perror("ERROR connecting");
-   //    exit(1);
-   // } else
-   //    printf("%s", "Connected!\n");
-
-while(true) {
-   printf("%s", ": ");
-   bzero(buffer,2048);
-   fgets(buffer,2048,stdin);
-   json_object *jobj = json_object_new_object();
-   json_object *j_type = json_object_new_string("Logging");
-   json_object *j_login = json_object_new_string("Vasya");
-   json_object *j_passwd = json_object_new_string("123qwert");
-   json_object_object_add(jobj,"Type", j_type);
-   json_object_object_add(jobj,"Login", j_login);
-   json_object_object_add(jobj,"Passwd", j_passwd);
-
-   // const char *test;
-   // struct json_object *parsed;
-   // struct json_object *name;
-   /* Send message to the server */
-   send_data = (char *)json_object_to_json_string(jobj);
-   printf("%s", send_data);
-
-   n = send(sockfd, send_data, strlen(send_data), 0);
-
-   if (n < 0) {
-      perror("ERROR writing to socket");
-      exit(1);
-   }
-   /* Now read server response */
-   bzero(buffer, 2048);
-   n = recv(sockfd, buffer, 2048, 0);
-
-   if (n <= 0) {
-      printf("%s","Lost connection with the server\n");
-      while (connect(sockfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0) {
-         printf("%s", "Reconnecting...\n");
-         close(sockfd);
-         sockfd = socket(AF_INET, SOCK_STREAM, 0);
-         sleep(3);
-      }
-   }
-   printf("%s", buffer);
-}
-   return 0;
-=======
 //    if (n <= 0) {
 //       printf("%s","Lost connection with the server\n");
 //       while (connect(sockfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0) {
@@ -137,5 +76,4 @@ while(true) {
 //    printf("%s", buffer);
 // }
     return 0;
->>>>>>> e72ee4835e56f1e1e0533adacb28f0e7a4e088bb
 }
