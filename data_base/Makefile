@@ -10,13 +10,17 @@ INC = dbase.h
 INCS = $(addprefix $(INCD)/, $(INC))
 
 FILES = mx_create_datab_node.c \
-	mx_data_base_creation.c \
-	mx_dbase_handler.c \
-	mx_if_logging.c \
-	mx_if_registr.c \
-	mx_js_add.c \
-	mx_json_to_str.c \
-	mx_users_insert.c \
+		mx_data_base_creation.c \
+		mx_dbase_handler.c \
+		mx_if_logging.c \
+		mx_if_registr.c \
+		mx_js_add.c \
+		mx_json_to_str.c \
+		mx_table_chats.c \
+		mx_table_messages.c \
+		mx_table_users.c \
+		mx_table_users_chats.c \
+		mx_users_insert.c \
 
 
 SRCS = $(addprefix $(SRCD)/, $(FILES))
