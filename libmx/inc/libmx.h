@@ -1,14 +1,14 @@
 #ifndef LIBMX_H
 #define LIBMX_H
 
-//#include <stdio.h>
+// #include <stdio.h>
 #include <stdlib.h>
-//#include <string.h>
+// #include <string.h>
 #include <unistd.h>
 #include <time.h>
 #include <stdbool.h>
 #include <fcntl.h>
-#include <malloc/malloc.h>
+// #include <malloc/malloc.h>
 
 typedef struct  s_list {
     void  *data;

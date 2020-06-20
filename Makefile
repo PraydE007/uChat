@@ -12,9 +12,11 @@ DB_INCD =	data_base/inc
 CL_OBJD	=	client/obj
 SV_OBJD =	server/obj
 DB_OBJD =	data_base/obj
-CL_GTK_FLAGS = `pkg-config --cflags  --libs gtk+-3.0`
+CL_GTK_FLAGS = `pkg-config --cflags --libs gtk+-3.0`
 CL_GTK_SORT_FLAGS = `pkg-config --cflags gtk+-3.0`
 SQL_FLAGS = -lsqlite3
+
+CL_THREADS_LINKER = -pthread -lpthread
 
 LMXD	=	libmx
 LMXA:=	$(LMXD)/libmx.a
@@ -23,10 +25,6 @@ LMXA:=	$(LMXD)/libmx.a
 DB_MXD	=	data_base
 DB_MXA:=	$(DB_MXD)/uchat_db.a
 DB_MXI:=	$(DB_MXD)/$(INCD)
-
-SSLXD:= openssl
-SSLXA:= $(SSLXD)/lib
-SSLXI:=	$(SSLXD)/include
 
 CL_INC		=	client.h
 SV_INC		=	server.h
@@ -37,6 +35,16 @@ SV_INCS =	$(addprefix $(SV_INCD)/, $(SV_INC))
 CL_SRC		=	main.c \
 				mx_init_auth_screen.c \
 				mx_interface.c \
+				mx_close_auth_settings.c \
+				mx_open_auth_settings.c \
+				mx_get_widget.c \
+				mx_load_theme.c \
+				mx_darkmode_switch.c \
+				mx_logged_in.c \
+				mx_logged_in_chat.c \
+				mx_open_signup.c \
+				mx_close_signup.c \
+				mx_hash_to_string.c \
 
 SV_SRC		=	main.c \
 				doprocessing.c \
@@ -56,11 +64,11 @@ install: install_client install_server
 install_client: $(LMXA) $(CL_NAME)
 
 $(CL_NAME): $(CL_OBJS)
-	@clang $(CFLG) $(CL_OBJS) $(CL_GTK_FLAGS) -L$(LMXD) -L$(SSLXA) -lmx -o $@ libjson-c.a -lcrypto
+	@clang $(CFLG) $(CL_OBJS) $(CL_GTK_FLAGS) -L$(LMXD) -L/usr/local/opt/openssl/lib/ -lssl -lcrypto -lmx -rdynamic -o $@ libjson-c.a
 	@printf "\r\33[2K$@ \033[32;1mcreated\033[0m\n"
 
 $(CL_OBJD)/%.o: $(CL_SRCD)/%.c $(CL_INCS)
-	@clang $(CFLG) -c $< $(CL_GTK_SORT_FLAGS) -o $@ -I$(CL_INCD) -I$(LMXI) -I$(SSLXI)
+	@clang $(CFLG) -c $< $(CL_GTK_SORT_FLAGS) -I/usr/local/opt/openssl/include/ -o $@ -I$(CL_INCD) -I$(LMXI)
 	@printf "\r\33[2K$(CL_NAME) \033[33;1mcompile \033[0m$(<:$(CL_SRCD)/%.c=%) "
 
 
@@ -69,14 +77,18 @@ $(CL_OBJS): | $(CL_OBJD)
 $(CL_OBJD):
 	@mkdir -p $@
 
-install_server: $(DB_MXA) $(LMXA) $(SV_NAME)
+install_server: $(LMXA) $(DB_MXA) $(SV_NAME)
 
 $(SV_NAME): $(SV_OBJS)
-	@clang $(CFLG) $(SV_OBJS) -L$(LMXD) -lmx -o $@ libjson-c.a $(DB_MXA) -lsqlite3
+	@clang $(CFLG) $(SV_OBJS) -L$(LMXD) -L/usr/local/opt/openssl/lib/ -lssl -lcrypto -lmx -o $@ libjson-c.a $(DB_MXA) -lsqlite3
 	@printf "\r\33[2K$@ \033[32;1mcreated\033[0m\n"
 
 $(SV_OBJD)/%.o: $(SV_SRCD)/%.c $(SV_INCS)
+<<<<<<< HEAD
 	@clang $(CFLG) -c $< -o $@ -I$(SV_INCD) -I$(LMXI) -I$(DB_MXI) -Iinclude/md5.h
+=======
+	@clang $(CFLG) -c $< -I/usr/local/opt/openssl/include/ -o $@ -I$(SV_INCD) -I$(LMXI) -I$(DB_MXI)
+>>>>>>> e72ee4835e56f1e1e0533adacb28f0e7a4e088bb
 	@printf "\r\33[2K$(SV_NAME) \033[33;1mcompile \033[0m$(<:$(SV_SRCD)/%.c=%) "
 
 $(SV_OBJS): | $(SV_OBJD)
