@@ -47,7 +47,7 @@ CL_SRC		=	main.c \
 				mx_hash_to_string.c \
 
 SV_SRC		=	main.c \
-				doprocessing.c \
+				mx_doprocessing.c \
 
 
 CL_SRCS	=	$(addprefix $(CL_SRCD)/, $(CL_SRC))
