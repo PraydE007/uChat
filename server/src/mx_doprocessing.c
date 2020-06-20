@@ -38,13 +38,13 @@ void *mx_doprocessing (void *data) {
         j_result = mx_dbase_handler(jobj, db); //
         // printf("json_object_to_json_string(j_result): %s\n", json_object_to_json_string(j_result));
         if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_LOG))
-            n = send(socket, MX_LOG_MES, 8, 0);
+            n = send(socket, MX_LOG_MES, mx_strlen(MX_LOG_MES), 0);
         else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_REG))
-            n = send(socket, MX_REG_MES, 8, 0);
+            n = send(socket, MX_REG_MES, mx_strlen(MX_REG_MES), 0);
         else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_ERRLOG))
-            n = send(socket, MX_ERR_LOG, 8, 0);
+            n = send(socket, MX_ERR_LOG, mx_strlen(MX_ERR_LOG), 0);
         else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_ERRREG))
-            n = send(socket, MX_ERR_REG, 8, 0);
+            n = send(socket, MX_ERR_REG, mx_strlen(MX_ERR_REG), 0);
         if (n <= 0) 
             break;
     }
