@@ -129,7 +129,7 @@
         </child>
         <child>
           <object class="GtkButton" id="button.settings">
-            <property name="label">gtk-properties</property>
+            <property name="label" translatable="yes">Settings</property>
             <property name="width_request">86</property>
             <property name="height_request">50</property>
             <property name="visible">True</property>

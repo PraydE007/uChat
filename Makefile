@@ -45,6 +45,7 @@ CL_SRC		=	main.c \
 				mx_open_signup.c \
 				mx_close_signup.c \
 				mx_hash_to_string.c \
+				mx_registration.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \

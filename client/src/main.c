@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
         perror("ERROR connecting");
         return 1;
     }
-    mx_interface(&argc, &argv);
+    mx_interface(&argc, &argv, sockfd);
 
 // while(true) {
 //    printf("%s", ": ");
