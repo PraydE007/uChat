@@ -9,7 +9,7 @@
 //     int test;
 // } t_sock;
 
-void *doprocessing(void *sock);
+void *mx_doprocessing(void *data);
 int mx_init_connect();
 
 

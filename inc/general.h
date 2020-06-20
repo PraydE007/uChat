@@ -15,6 +15,15 @@
 #include "../libmx/inc/libmx.h"
 #include "../openssl/include/openssl/md5.h"
 
+#define MX_LOG "1"
+#define MX_LOG_MES "You have logged in!"
+#define MX_REG "2"
+#define MX_REG_MES "You have registered successfully!"
+#define MX_ERRLOG "3"
+#define MX_ERR_LOG "Login or password is incorrect!"
+#define MX_ERRREG "4"
+#define MX_ERR_REG "User already exist!"
+
 typedef struct s_u_login_info {
     int u_id;
     char u_login[256];

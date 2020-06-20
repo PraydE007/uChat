@@ -39,7 +39,7 @@ CL_SRC		=	main.c \
 				mx_interface.c \
 
 SV_SRC		=	main.c \
-				doprocessing.c \
+				mx_doprocessing.c \
 
 
 CL_SRCS	=	$(addprefix $(CL_SRCD)/, $(CL_SRC))
@@ -53,14 +53,14 @@ $(FILE:a/%=%)
 
 install: install_client install_server
 
-install_client: $(LMXA) $(CL_NAME)
+install_client: $(DB_MXA) $(LMXA) $(CL_NAME)
 
 $(CL_NAME): $(CL_OBJS)
-	@clang $(CFLG) $(CL_OBJS) $(CL_GTK_FLAGS) -L$(LMXD) -L$(SSLXA) -lmx -o $@ libjson-c.a -lcrypto
+	@clang $(CFLG) $(CL_OBJS) $(CL_GTK_FLAGS) -L$(LMXD) -lmx -o $@ libjson-c.a $(DB_MXA) -lsqlite3
 	@printf "\r\33[2K$@ \033[32;1mcreated\033[0m\n"
 
 $(CL_OBJD)/%.o: $(CL_SRCD)/%.c $(CL_INCS)
-	@clang $(CFLG) -c $< $(CL_GTK_SORT_FLAGS) -o $@ -I$(CL_INCD) -I$(LMXI) -I$(SSLXI)
+	@clang $(CFLG) -c $< $(CL_GTK_SORT_FLAGS) -o $@ -I$(CL_INCD) -I$(LMXI)  -I$(SSLXI)
 	@printf "\r\33[2K$(CL_NAME) \033[33;1mcompile \033[0m$(<:$(CL_SRCD)/%.c=%) "
 
 
@@ -76,7 +76,7 @@ $(SV_NAME): $(SV_OBJS)
 	@printf "\r\33[2K$@ \033[32;1mcreated\033[0m\n"
 
 $(SV_OBJD)/%.o: $(SV_SRCD)/%.c $(SV_INCS)
-	@clang $(CFLG) -c $< -o $@ -I$(SV_INCD) -I$(LMXI) -I$(DB_MXI) -Iinclude/md5.h
+	@clang $(CFLG) -c $< -o $@ -I$(SV_INCD) -I$(LMXI) -I$(DB_MXI)
 	@printf "\r\33[2K$(SV_NAME) \033[33;1mcompile \033[0m$(<:$(SV_SRCD)/%.c=%) "
 
 $(SV_OBJS): | $(SV_OBJD)

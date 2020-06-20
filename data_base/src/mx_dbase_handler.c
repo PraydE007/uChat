@@ -1,20 +1,12 @@
 #include "dbase.h"
 
-json_object *mx_data_base_creation(json_object *jobj) {
-    json_object *result = json_object_new_object();
-    struct json_object *parsed;
-    struct json_object *type;
-    const char *all_data = NULL;
+json_object *mx_dbase_handler(json_object *jobj, sqlite3 *db) {
+    t_datab *datab = mx_create_datab_node();
+    json_object *j_result = json_object_new_object();
 
-    // all_data = json_object_to_json_string(jobj);
-    // parsed = json_tokener_parse(all_data);
-    json_object_object_get_ex(parsed, "Type", &type);
-    // const char *type = json_object_get_string(json_object_object_get(jobj, "Type"));
-    if (!mx_strcmp("\"Logging\"", json_object_to_json_string(type))) {
-        result = mx_if_logging(parsed);
-    }
-    if (!mx_strcmp("\"Registr\"", json_object_to_json_string(type))) {
-        result = mx_if_registr(parsed);
-    }
-    
+    if (!mx_strcmp("Logging", mx_json_to_str(jobj, "Type")))
+        j_result = mx_if_logging(jobj, db, datab);
+    else if (!mx_strcmp("Registr", mx_json_to_str(jobj, "Type")))
+        j_result = mx_if_registr(jobj, db, datab);
+    return j_result;
 }
