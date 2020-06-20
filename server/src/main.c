@@ -5,7 +5,7 @@ int main() {
    int newsockfd = 0;
    struct sockaddr_in serv_addr, cli_addr;
    int rc = 1;
-   pthread_t x = NULL;
+   pthread_t x = 0;
 
    sockfd = socket(AF_INET, SOCK_STREAM, 0);
    if (sockfd < 0) {
