@@ -2,7 +2,8 @@
 
 static void rewrite(struct json_object *obj) {
     int file = open("settings.json", O_RDWR | O_TRUNC);
-    const char *json = json_object_to_json_string(obj);
+    const char *json = json_object_to_json_string_ext(obj,
+                                                      JSON_C_TO_STRING_PRETTY);
 
     write(file, json, mx_strlen(json));
     close(file);
@@ -26,12 +27,10 @@ static void write_mode(bool res) {
     mx_strdel(&json);
 }
 
-void mx_darkmode_switch(GtkSwitch *s_switch, gpointer data) {
+void mx_darkmode_switch(GtkSwitch *s_darkmode, gpointer data) {
     t_s_glade *gui = (t_s_glade *)data;
 
-    mx_printstr("1\n");
-    (void)s_switch;
-    mx_printstr("2\n");
-    write_mode(!(gui->darkmode));
-    mx_printstr("3\n");
+    (void)gui;
+    bool res = gtk_switch_get_active(s_darkmode);
+    write_mode(res);
 }
