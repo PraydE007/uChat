@@ -7,6 +7,15 @@ int main() {
    int rc = 1;
    pthread_t x = NULL;
 
+   if (fork()!=0)
+      exit(0);
+
+   setsid();
+   close(1);
+   close(2);
+   close(3);
+   chdir("/");
+
    sockfd = socket(AF_INET, SOCK_STREAM, 0);
    if (sockfd < 0) {
       perror("ERROR opening socket");

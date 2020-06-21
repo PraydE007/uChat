@@ -5,6 +5,7 @@
 #include <signal.h>
 #include <pthread.h>
 #include "../../json/include/json-c/json.h"
+#include <stdio.h>
 // typedef struct s_sock{
 //     int test;
 // } t_sock;
