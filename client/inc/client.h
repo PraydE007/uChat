@@ -2,6 +2,7 @@
 #define CLIENT_H
 
 #include "../../inc/general.h"
+#include <ctype.h>
 #include <strings.h>
 #include <gtk/gtk.h>
 #include "../../libmx/inc/libmx.h"
