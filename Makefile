@@ -12,9 +12,11 @@ DB_INCD =	data_base/inc
 CL_OBJD	=	client/obj
 SV_OBJD =	server/obj
 DB_OBJD =	data_base/obj
-CL_GTK_FLAGS = `pkg-config --cflags  --libs gtk+-3.0`
+CL_GTK_FLAGS = `pkg-config --cflags --libs gtk+-3.0`
 CL_GTK_SORT_FLAGS = `pkg-config --cflags gtk+-3.0`
 SQL_FLAGS = -lsqlite3
+
+CL_THREADS_LINKER = -pthread -lpthread
 
 LMXD	=	libmx
 LMXA:=	$(LMXD)/libmx.a
@@ -33,10 +35,20 @@ SV_INCS =	$(addprefix $(SV_INCD)/, $(SV_INC))
 CL_SRC		=	main.c \
 				mx_init_auth_screen.c \
 				mx_interface.c \
+				mx_close_auth_settings.c \
+				mx_open_auth_settings.c \
+				mx_get_widget.c \
+				mx_load_theme.c \
+				mx_darkmode_switch.c \
+				mx_logged_in.c \
+				mx_logged_in_chat.c \
+				mx_open_signup.c \
+				mx_close_signup.c \
 				mx_hash_to_string.c \
+				mx_registration.c \
 
 SV_SRC		=	main.c \
-				doprocessing.c \
+				mx_doprocessing.c \
 
 
 CL_SRCS	=	$(addprefix $(CL_SRCD)/, $(CL_SRC))
@@ -53,7 +65,7 @@ install: install_client install_server
 install_client: $(LMXA) $(CL_NAME)
 
 $(CL_NAME): $(CL_OBJS)
-	@clang $(CFLG) $(CL_OBJS) $(CL_GTK_FLAGS) -L$(LMXD) -L/usr/local/opt/openssl/lib/ -lssl -lcrypto -lmx -o $@ libjson-c.a
+	@clang $(CFLG) $(CL_OBJS) $(CL_GTK_FLAGS) -L$(LMXD) -L/usr/local/opt/openssl/lib/ -lssl -lcrypto -lmx -rdynamic -o $@ libjson-c.a
 	@printf "\r\33[2K$@ \033[32;1mcreated\033[0m\n"
 
 $(CL_OBJD)/%.o: $(CL_SRCD)/%.c $(CL_INCS)

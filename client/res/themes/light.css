@@ -1,0 +1,62 @@
+
+box {
+    background-color: #4995be;
+}
+
+box label {
+    color: #ffffff;
+}
+
+label {
+    font: 16px Sans Bold;
+}
+
+switch {
+    border-radius: 27px;
+    background-image: linear-gradient(#ffffff, #ffffff);
+    border-color: #e6e9ef;
+    border-width: 2px;
+}
+
+switch slider {
+    border-radius: 27px;
+    border-color: #e6e9ef;
+    border-width: 2px;
+}
+
+switch:checked {
+    border-color: #4995be;
+    border-width: 2px;
+}
+
+switch:checked slider {
+    border-color: #4995be;
+    border-width: 3px;
+}
+
+entry {
+    border-color: #4995be;
+    border-width: 2px;
+}
+
+/* entry:active {
+    border-color: #e6e9ef;
+    border-width: 2px;
+} */
+
+button {
+    border-radius: 0%;
+    background-image: linear-gradient(#4995be, #4995be);
+}
+
+button:active {
+    background-image: linear-gradient(#ffffff, #ffffff);
+}
+
+button label {
+    color: #ffffff;
+}
+
+button:active label {
+    color: #4995be;
+}

@@ -1,18 +1,30 @@
-NAME	=	uchat_db.a
+NAME = uchat_db.a
 
-CFLG	=	-std=c11 $(addprefix -W, all extra error pedantic) -g
+CFLG = -std=c11 $(addprefix -W, all extra error pedantic) -g
 
-SRCD	=	src
-INCD	=	inc
-OBJD	=	obj
+SRCD = src
+INCD = inc
+OBJD = obj
 
-INC		=	dbase.h
-INCS	=	$(addprefix $(INCD)/, $(INC))
+INC = dbase.h
+INCS = $(addprefix $(INCD)/, $(INC))
 
-SRC		=	mx_data_base_creation.c \
+FILES = mx_create_datab_node.c \
+		mx_data_base_creation.c \
+		mx_dbase_handler.c \
+		mx_if_logging.c \
+		mx_if_registr.c \
+		mx_js_add.c \
+		mx_json_to_str.c \
+		mx_table_chats.c \
+		mx_table_messages.c \
+		mx_table_users.c \
+		mx_table_users_chats.c \
+		mx_users_insert.c \
 
-SRCS	=	$(addprefix $(SRCD)/, $(SRC))
-OBJS	=	$(addprefix $(OBJD)/, $(SRC:%.c=%.o))
+
+SRCS = $(addprefix $(SRCD)/, $(FILES))
+OBJS = $(addprefix $(OBJD)/, $(FILES:%.c=%.o))
 
 all: install
 
