@@ -41,7 +41,7 @@ static void connect_signals(t_s_glade *gui) {
     g_signal_connect(gui->w_signup, "destroy",
                     G_CALLBACK(gtk_main_quit), NULL);
     g_signal_connect(gui->w_chat, "destroy",
-                    G_CALLBACK(gtk_main_quit), NULL);
+                     G_CALLBACK(gtk_main_quit), NULL);
 
     // Login Window Signals
     g_signal_connect(gui->b_l_signin, "clicked",
@@ -62,6 +62,10 @@ static void connect_signals(t_s_glade *gui) {
                     G_CALLBACK(mx_close_signup), gui);
     g_signal_connect(gui->b_r_signup, "clicked",
                      G_CALLBACK(mx_registration), gui);
+
+    // Chat Window Signals
+    g_signal_connect(gui->b_send, "clicked",
+                     G_CALLBACK(mx_send_message), gui);
 }
 
 static bool read_mode(void) {

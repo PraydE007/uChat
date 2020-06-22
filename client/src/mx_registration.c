@@ -17,6 +17,7 @@ int check_mail_else_body(const char *mail, int i) {
             }
         }
     }
+    return 1;
 }
 
 int check_mail(const char *mail, int i) {
@@ -26,19 +27,39 @@ int check_mail(const char *mail, int i) {
         if (mail[i] != '@')
             return 1;
         else
-            check_mail_else_body(mail, i);
+            return check_mail_else_body(mail, i);
+    }
+    return 1;
+}
+
+int check_login(const char *login, int j) {
+    if (isalpha(login[0]) || isdigit(login[0])) {
+        for (; login[j]; j++) {
+            if (!isalpha(login[j]) || !isdigit(login[j]))
+                return 1;
+        }
+        return 0;
+    }
+    return 1;
+}
+
+int check_pass(const char *pass, int j) {
+    if (isalpha(pass[0]) || isdigit(pass[0])) {
+        for (; pass[j]; j++) {
+            if (!isalpha(pass[j]) || !isdigit(pass[j]))
+                return 1;
+        }
+        return 0;
     }
     return 1;
 }
 
 int check_data(const char *pass, const char *mail, const char *login) {
-    if (!isprint(mail[0]))
-        return 1;
     if (check_mail(mail, 0))
         return 1;
-    if (!isprint(login[0]))
+    if (check_login(login, 0))
         return 2;
-    if (!isprint(pass[0]))
+    if (check_pass(pass, 0))
         return 3;
     else
         return 0;
