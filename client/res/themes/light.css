@@ -1,6 +1,25 @@
 
+/********************* Colour reference chart****************
+*************************** comment ********* colour ******** 
+
+box background colour       bbg              #1b92d1
+box background light col    bbg              #37afe2
+box filldes colour          bfc              #ecf5fb
+box border colour           bb               #dfd8cb
+box text colour             bt               #101010
+
+*/
+
+window {
+    background-color: #ecf5fb;
+}
+
+label {
+    color: #101010;
+}
+
 box {
-    background-color: #4995be;
+    background-color: #1b92d1;
 }
 
 box label {
@@ -16,6 +35,13 @@ switch {
     background-image: linear-gradient(#ffffff, #ffffff);
     border-color: #e6e9ef;
     border-width: 2px;
+}
+
+switch:focus {
+    border-top-width: 3px;
+    border-left-width: 3px;
+    border-right-width: 3px;
+    border-bottom-width: 3px;
 }
 
 switch slider {
@@ -35,22 +61,34 @@ switch:checked slider {
 }
 
 entry {
-    border-color: #4995be;
-    border-width: 2px;
+    /* border-color: #4995be; */
+    background-color: #dfd8cb;
+    border-width: 0px;
+    border-radius: 0px;
 }
 
-/* entry:active {
-    border-color: #e6e9ef;
-    border-width: 2px;
-} */
+textview.view {
+    border-color: #ffffff;
+    border-width: 3px;
+}
+
+textview text {
+    background-color: #dfd8cb;
+    color: #101010;
+}
 
 button {
     border-radius: 0%;
-    background-image: linear-gradient(#4995be, #4995be);
+    background-image: linear-gradient(#1b92d1, #1b92d1);
 }
 
 button:active {
-    background-image: linear-gradient(#ffffff, #ffffff);
+    background-image: linear-gradient(#dfd8cb, #dfd8cb);
+}
+
+button:focus {
+    border-color: #dfd8cb;
+    border-width: 4px;
 }
 
 button label {
@@ -58,5 +96,5 @@ button label {
 }
 
 button:active label {
-    color: #4995be;
+    color: #1b92d1;
 }
