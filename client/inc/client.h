@@ -69,5 +69,6 @@ void mx_logged_in(GtkButton *button, gpointer data);
 void mx_open_signup(GtkButton *button, gpointer data);
 void mx_close_signup(GtkButton *button, gpointer data);
 void mx_registration(GtkButton *button, gpointer data);
+void mx_send_message(GtkButton *button, gpointer data);
 
 #endif
