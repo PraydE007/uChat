@@ -2,6 +2,7 @@
 #define CLIENT_H
 
 #include "../../inc/general.h"
+#include <ctype.h>
 #include <strings.h>
 #include <gtk/gtk.h>
 #include "../../libmx/inc/libmx.h"
@@ -17,6 +18,7 @@
 
 typedef struct s_s_glade {
     bool darkmode;
+    int sockfd;
 
     // Login window
     GtkWidget *w_signin;
@@ -53,8 +55,8 @@ char *mx_hash_to_string(unsigned char *hash);
 char *mx_hash(char *pass);
 
 // GUI
-void mx_interface(int *argc, char ***argv);
-t_s_glade *mx_init_auth_screen(void);
+void mx_interface(int *argc, char ***argv, int socket);
+t_s_glade *mx_init_auth_screen(int socket);
 GtkWidget *mx_get_widget(GtkBuilder **b, char *id);
 void mx_load_theme(t_s_glade *gui);
 void mx_logged_in_chat(t_s_glade *gui);
@@ -66,5 +68,6 @@ void mx_darkmode_switch(GtkSwitch *s_switch, gpointer data);
 void mx_logged_in(GtkButton *button, gpointer data);
 void mx_open_signup(GtkButton *button, gpointer data);
 void mx_close_signup(GtkButton *button, gpointer data);
+void mx_registration(GtkButton *button, gpointer data);
 
 #endif

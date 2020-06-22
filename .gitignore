@@ -12,3 +12,6 @@ libmx.a
 .vscode
 src/uls.h
 .idea
+uchat
+uchat_server
+uchat_db.a

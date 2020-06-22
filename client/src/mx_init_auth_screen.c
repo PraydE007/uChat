@@ -60,6 +60,8 @@ static void connect_signals(t_s_glade *gui) {
     // Registration Window Signals
     g_signal_connect(gui->b_r_signin, "clicked",
                     G_CALLBACK(mx_close_signup), gui);
+    g_signal_connect(gui->b_r_signup, "clicked",
+                     G_CALLBACK(mx_registration), gui);
 }
 
 static bool read_mode(void) {
@@ -81,11 +83,12 @@ static bool read_mode(void) {
     return false;
 }
 
-t_s_glade *mx_init_auth_screen(void) {
+t_s_glade *mx_init_auth_screen(int socket) {
     GtkBuilder *builder = NULL;
     t_s_glade *gui = (t_s_glade *)malloc(sizeof(t_s_glade));
 
     gui->darkmode = read_mode();
+    gui->sockfd = socket;
     init_login(&builder, &gui);
     init_signup(&builder, &gui);
     init_chat(&builder, &gui);
