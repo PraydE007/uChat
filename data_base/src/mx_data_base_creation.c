@@ -24,7 +24,7 @@ static void table_creator(sqlite3 *db, char *sql) {
 void mx_data_base_creation(sqlite3 **db) {
     char *err = NULL;
     int connection_point;
-    char sql[1024];
+    char sql[255];
     int i = 0;
     int * p = &i;
 
@@ -40,6 +40,8 @@ void mx_data_base_creation(sqlite3 **db) {
     mx_table_users_chats(sql);
     table_creator(*db, sql);
     mx_table_messages(sql);
+    table_creator(*db, sql);
+    mx_table_contacts(sql);
     table_creator(*db, sql);
     // sprintf(sql, "CREATE TABLE IF NOT EXISTS 'USERS'(" \
     //     "ID INTEGER PRIMARY KEY AUTOINCREMENT," \
@@ -66,6 +68,33 @@ void mx_data_base_creation(sqlite3 **db) {
     // connection_point = sqlite3_exec(*db, sql, callback, 0, &err);
 
     // sprintf(sql, "insert into USERS (LOGIN, PASSWORD, EMAIL) values('Vova', 'tyuri45637', 'vova@gmail.com')");
+    // connection_point = sqlite3_exec(*db, sql, callback, 0, &err);
+    // if (err != SQLITE_OK) {
+    //     fprintf(stderr, "error: %s\n", sqlite3_errmsg(*db));
+    // }
+    // sprintf(sql, "insert into CHATS (CHAT_NAME, CHAT_STATUS) values('The best', 'private')");
+    // connection_point = sqlite3_exec(*db, sql, callback, 0, &err);
+    // sprintf(sql, "insert into CHATS (CHAT_NAME, CHAT_STATUS) values('Chisto potrindetb', 'public')");
+    // connection_point = sqlite3_exec(*db, sql, callback, 0, &err);
+    // sprintf(sql, "insert into CHATS (CHAT_NAME, CHAT_STATUS) values('Tryndelki', 'public')");
+    // connection_point = sqlite3_exec(*db, sql, callback, 0, &err);
+    // sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id) values('1', '1')");
+    // connection_point = sqlite3_exec(*db, sql, callback, 0, &err);
+    // sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id) values('1', '2')");
+    // connection_point = sqlite3_exec(*db, sql, callback, 0, &err);
+    // sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id) values('1', '3')");
+    // connection_point = sqlite3_exec(*db, sql, callback, 0, &err);
+    // sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id) values('2', '1')");
+    // connection_point = sqlite3_exec(*db, sql, callback, 0, &err);
+    // sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id) values('1', '4')");
+    // connection_point = sqlite3_exec(*db, sql, callback, 0, &err);
+    // sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id) values('2', '5')");
+    // connection_point = sqlite3_exec(*db, sql, callback, 0, &err);
+    // sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id) values('3', '1')");
+    // connection_point = sqlite3_exec(*db, sql, callback, 0, &err);
+    // sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id) values('3', '2')");
+    // connection_point = sqlite3_exec(*db, sql, callback, 0, &err);
+    // sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id) values('3', '3')");
     // connection_point = sqlite3_exec(*db, sql, callback, 0, &err);
     // if (err != SQLITE_OK) {
     //     fprintf(stderr, "error: %s\n", sqlite3_errmsg(*db));
