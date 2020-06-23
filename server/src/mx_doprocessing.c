@@ -34,7 +34,8 @@ void *mx_doprocessing (void *data) {
         printf("%c", '\n');
         jobj = json_tokener_parse(buffer);
         j_result = mx_dbase_handler(jobj, sockbd.bd); //
-         printf("json_object_to_json_string(j_result): %s\n", json_object_to_json_string(j_result));
+        json_object_put(jobj);
+        printf("json_object_to_json_string(j_result): %s\n", json_object_to_json_string(j_result)); //
         if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_LOG))
             n = send(sockbd.sockfd, MX_LOG_MES, mx_strlen(MX_LOG_MES), 0);
         else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_REG))
