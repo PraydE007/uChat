@@ -11,6 +11,8 @@ static void init_login(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->w_settings = mx_get_widget(builder, "window.settings");
     (*gui)->b_close = mx_get_widget(builder, "button.close");
     (*gui)->s_darkmode = mx_get_widget(builder, "switch.darkmode");
+    if ((*gui)->darkmode)
+        gtk_switch_set_active(GTK_SWITCH((*gui)->s_darkmode), true);
 }
 
 static void init_signup(GtkBuilder **builder, t_s_glade **gui) {
