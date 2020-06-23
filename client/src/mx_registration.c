@@ -21,8 +21,8 @@ int check_mail_else_body(const char *mail, int i) {
 }
 
 int check_mail(const char *mail, int i) {
-    if (isalpha(mail[0]) || isdigit(mail[0])) {
-        while (isalpha(mail[i]) || isdigit(mail[i]))
+    if (isalpha(mail[0]) || isdigit(mail[0]) || mail[0] == '.' || mail[0] == '_') {
+        while (isalpha(mail[i]) || isdigit(mail[i]) || mail[i] == '.' || mail[i] == '_')
             i++;
         if (mail[i] != '@')
             return 1;
@@ -35,7 +35,7 @@ int check_mail(const char *mail, int i) {
 int check_login(const char *login, int j) {
     if (isalpha(login[0]) || isdigit(login[0])) {
         for (; login[j]; j++) {
-            if (!isalpha(login[j]) || !isdigit(login[j]))
+            if (!isalpha(login[j]) && !isdigit(login[j]))
                 return 1;
         }
         return 0;
@@ -46,7 +46,7 @@ int check_login(const char *login, int j) {
 int check_pass(const char *pass, int j) {
     if (isalpha(pass[0]) || isdigit(pass[0])) {
         for (; pass[j]; j++) {
-            if (!isalpha(pass[j]) || !isdigit(pass[j]))
+            if (!isalpha(pass[j]) && !isdigit(pass[j]))
                 return 1;
         }
         return 0;
