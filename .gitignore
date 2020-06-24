@@ -15,3 +15,5 @@ src/uls.h
 uchat
 uchat_server
 uchat_db.a
+Makefile.nix
+*~
