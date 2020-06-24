@@ -9,6 +9,7 @@ typedef struct s_datab {
     int passtrigger;
     char *id;
     char *commd;
+    char *type;
     const char *login_db;
     const char *password_db;
 }               t_datab;
@@ -21,11 +22,13 @@ json_object *mx_if_registr(json_object *jobj, sqlite3 *db, t_datab *datab);
 t_datab *mx_create_datab_node(void);
 void mx_data_base_creation(sqlite3 **db);
 void mx_js_add(json_object *j_result, char *key, char *value);
-void mx_table_chats(char *sql);
-void mx_table_messages(char *sql);
-void mx_table_contacts(char *sql);
-void mx_table_users(char *sql);
-void mx_table_users_chats(char *sql);
+void mx_table_chats(sqlite3 *db, char *sql);
+void mx_table_contacts(sqlite3 *db, char *sql);
+void mx_table_messages(sqlite3 *db, char *sql);
+void mx_table_setting(sqlite3 *db, char *sql);
+void mx_table_users(sqlite3 *db, char *sql);
+void mx_table_users_chats(sqlite3 *db, char *sql);
+void mx_trigger_for_users(sqlite3 *db, char *sql);
 void mx_users_insert(json_object *jobj, sqlite3 *db);
 
 
