@@ -17,18 +17,15 @@ void *mx_doprocessing (void *data) {
     while (true) {
         bzero(buffer,2048);
         n = recv(sockbd.sockfd, buffer, sizeof(buffer), 0);
-
-
-        printf("%s\n", buffer);
         if (n <= 0) {
             if_disconnect(sockbd);
             break;
         }
-        // write (sockbd.log_sescr, "Taked ", 6);
-        // write (sockbd.log_sescr, buffer, strlen(buffer));
-        // write (sockbd.log_sescr, " from socket: ", 14);
-        // write (sockbd.log_sescr, mx_itoa(sockbd.log_sescr), 1);
-        // write (sockbd.log_sescr, "\n", 1);
+        write (sockbd.log_sescr, "Taked ", 6);
+        write (sockbd.log_sescr, buffer, strlen(buffer));
+        write (sockbd.log_sescr, " from socket: ", 14);
+        write (sockbd.log_sescr, mx_itoa(sockbd.log_sescr), 1);
+        write (sockbd.log_sescr, "\n", 1);
         j_result = mx_dbase_handler(jobj, sockbd.bd); //
         //json_object_put(jobj);
         //printf("json_object_to_json_string(j_result): %s\n", json_object_to_json_string(j_result)); //

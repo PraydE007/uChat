@@ -50,8 +50,8 @@ CL_SRC		=	main.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \
-				mx_create_log.c \
 				mx_demonize.c \
+				mx_create_log.c \
 
 
 CL_SRCS	=	$(addprefix $(CL_SRCD)/, $(CL_SRC))

@@ -11,10 +11,11 @@ int main(int argc, char **argv) {
         fprintf(stderr,"usage: %s port\n", argv[0]);
         return 0;
    }
+   //mx_demonize();
+
    sockbd->bd = NULL;
    sockbd->sockfd = 0;
    sockbd->log_sescr = mx_create_log();
-   //mx_demonize();
 
    sockfd = socket(AF_INET, SOCK_STREAM, 0);
    if (sockfd < 0) {
