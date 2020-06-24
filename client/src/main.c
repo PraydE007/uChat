@@ -7,6 +7,7 @@ int main(int argc, char **argv) {
     int rc = 0;
     // char *send_data = NULL;
 
+
     if (argc < 3) {
         fprintf(stderr,"usage %s hostname port\n", argv[0]);
         return 0;
@@ -44,7 +45,7 @@ int main(int argc, char **argv) {
     // json_object *j_login = json_object_new_string("Vasya");
     // json_object *j_passwd = json_object_new_string(mx_hash("uksgdfj12bf"));
     // json_object_object_add(jobj,"Type", j_type);
-   
+
 //    json_object_object_add(jobj,"Login", j_login);
 //    json_object_object_add(jobj,"Passwd", j_passwd);
 

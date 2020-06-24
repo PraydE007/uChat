@@ -14,4 +14,3 @@ double mx_pow(double n, unsigned int pow) {
 	}
 	return res;
 }
-

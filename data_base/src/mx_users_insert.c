@@ -14,7 +14,7 @@ void mx_users_insert(json_object *jobj, sqlite3 *db) {
     char sql[255];
 
     sprintf(sql, "insert into USERS (LOGIN, PASSWORD, EMAIL)" \
-            "values('%s', '%s', '%s')", mx_json_to_str(jobj, "Login"), 
+            "values('%s', '%s', '%s')", mx_json_to_str(jobj, "Login"),
             mx_json_to_str(jobj, "Passwd"), mx_json_to_str(jobj, "Email"));
     connection_point = sqlite3_exec(db, sql, callback, NULL, &err);
     if (err != SQLITE_OK)

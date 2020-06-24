@@ -49,6 +49,8 @@ CL_SRC		=	main.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \
+				mx_create_log.c \
+				mx_demonize.c \
 
 
 CL_SRCS	=	$(addprefix $(CL_SRCD)/, $(CL_SRC))
@@ -61,6 +63,8 @@ all: install
 $(FILE:a/%=%)
 
 install: install_client install_server
+
+install_db:
 
 install_client: $(LMXA) $(CL_NAME)
 
@@ -98,7 +102,6 @@ $(LMXA):
 
 $(DB_MXA):
 	@make -sC $(DB_MXD)
-
 clean:
 	@make -sC $(LMXD) $@
 	@make -sC $(DB_MXD) $@
