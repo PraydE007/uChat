@@ -1,6 +1,6 @@
 #include "dbase.h"
 
-static int callback(void *datab, int argc, char **argv, char **azColName) {
+static int cb_reganswer(void *datab, int argc, char **argv, char **azColName) {
     (void)argc;
     (void)azColName;
     if (datab) {
@@ -22,7 +22,7 @@ json_object *mx_if_registr(json_object *jobj, sqlite3 *db, t_datab *datab) {
 
     datab->login_db = mx_json_to_str(jobj, "Login");
     sprintf(sql, "select LOGIN from USERS;");
-    connection_point = sqlite3_exec(db, sql, callback, datab, &err);
+    connection_point = sqlite3_exec(db, sql, cb_reganswer, datab, &err);
     if (datab->logtrigger == 1)
         mx_js_add(j_result, "Answer", MX_ERRREG);
     else {
