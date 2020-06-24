@@ -22,10 +22,6 @@ void mx_logged_in(GtkButton *button, gpointer data) {
     n = send(gui->sockfd, send_data, strlen(send_data), 0);
     bzero(buffer, 2048);
     n = recv(gui->sockfd, buffer, 2048, 0);
-    if ((!mx_strcmp(login, "admin") && !mx_strcmp(pass, "admin")) || !strcmp(buffer, "You have logged in!")) {
-        gtk_widget_hide(gui->w_signin);
-        gtk_widget_hide(gui->w_settings);
-        gtk_widget_hide(gui->w_signup);
+    if ((!mx_strcmp(login, "admin") && !mx_strcmp(pass, "admin")) || !strcmp(buffer, "You have logged in!"))
         mx_logged_in_chat(gui);
-    }
 }

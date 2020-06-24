@@ -14,7 +14,7 @@ int main(int argc, char **argv) {
    sockbd->bd = NULL;
    sockbd->sockfd = 0;
    sockbd->log_sescr = mx_create_log();
-   mx_demonize(); 
+   mx_demonize();
 
    sockfd = socket(AF_INET, SOCK_STREAM, 0);
    if (sockfd < 0) {
@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
    serv_addr.sin_addr.s_addr = INADDR_ANY;
    serv_addr.sin_port = htons(portno);
 
-   setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, (char *)&rc, sizeof(int));
+    setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, (char *)&rc, sizeof(int));
 
    if (bind(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0) {
       write(sockbd->log_sescr, "ERROR on binding\n", 17);

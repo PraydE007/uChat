@@ -7,6 +7,8 @@ t_datab *mx_create_datab_node(void) {
     if (node) {
         node->logtrigger = 0;
         node->passtrigger = 0;
+        node->id = NULL;
+        node->commd =NULL;
         node->login_db = NULL;
         node->password_db = NULL;
     }

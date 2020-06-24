@@ -76,5 +76,6 @@ int main(int argc, char **argv) {
 //    }
 //    printf("%s", buffer);
 // }
+    system("leaks -q uchat");
     return 0;
 }
