@@ -90,7 +90,6 @@ $(OBJS): | $(OBJD)
 $(OBJD):
 	@mkdir -p $@
 
-
 clean:
 	@rm -rf $(OBJD)
 	@printf "$(OBJD)\t   \033[31;1mdeleted\033[0m\n"

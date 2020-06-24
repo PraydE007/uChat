@@ -24,8 +24,9 @@ void *mx_doprocessing (void *data) {
         write (sockbd.log_sescr, "Taked ", 6);
         write (sockbd.log_sescr, buffer, strlen(buffer));
         write (sockbd.log_sescr, " from socket: ", 14);
-        write (sockbd.log_sescr, mx_itoa(sockbd.log_sescr), 1);
+        write (sockbd.log_sescr, mx_itoa(sockbd.sockfd), 1);
         write (sockbd.log_sescr, "\n", 1);
+        jobj = json_tokener_parse(buffer);
         j_result = mx_dbase_handler(jobj, sockbd.bd); //
         //json_object_put(jobj);
         //printf("json_object_to_json_string(j_result): %s\n", json_object_to_json_string(j_result)); //
