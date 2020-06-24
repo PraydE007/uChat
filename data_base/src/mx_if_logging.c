@@ -37,14 +37,16 @@ static void js_chts_conts(json_object *j_result, sqlite3 *db, t_datab *datab) {
     connection_point = sqlite3_exec(db, sql, cb_chs_cnts, &datab->commd, NULL);
     if (connection_point != SQLITE_OK)
         fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
-    mx_js_add(j_result, "Chats", datab->commd);
+    if (datab->commd)
+        mx_js_add(j_result, "Chats", datab->commd);
     mx_strdel(&datab->commd);
     sprintf(sql, "select LOGIN from USERS INNER JOIN CONTACTS " \
             "ON ID = FOLLOWER_id WHERE OWNER_id = %s;", datab->id);
     connection_point = sqlite3_exec(db, sql, cb_chs_cnts, &datab->commd, NULL);
     if (connection_point != SQLITE_OK)
         fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
-    mx_js_add(j_result, "Contacts", datab->commd);
+    if (datab->commd)
+        mx_js_add(j_result, "Contacts", datab->commd);
     mx_strdel(&datab->commd);
     mx_strdel(&datab->id);
 }
