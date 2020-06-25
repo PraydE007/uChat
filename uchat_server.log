@@ -1,36 +1,13 @@
 User connected from socket 4
-Taked { "Type": "Logging", "Login": "admin55", "Passwd": "admin555" } from socket: 4
-Taked { "Type": "Logging", "Login": "admin55", "Passwd": "admin555" } from socket: 4
-Taked { "Type": "Logging", "Login": "admin55", "Passwd": "admin555" } from socket: 4
-Taked { "Type": "Logging", "Login": "admin55", "Passwd": "admin555" } from socket: 4
-Taked { "Type": "Logging", "Login": "admin55", "Passwd": "admin555" } from socket: 4
-Taked { "Type": "Logging", "Login": "admin55", "Passwd": "admin555sdsd" } from socket: 4
-Taked { "Type": "Logging", "Login": "admin55", "Passwd": "admin555sdsd" } from socket: 4
-Taked { "Type": "Logging", "Login": "admin55", "Passwd": "admin555sdsd" } from socket: 4
-Taked { "Type": "Logging", "Login": "admin55", "Passwd": "admin555sdsd" } from socket: 4
-Taked { "Type": "Logging", "Login": "admin55", "Passwd": "admin555sdsd" } from socket: 4
-Taked { "Type": "Logging", "Login": "admin55", "Passwd": "admin555sdsd" } from socket: 4
-Taked { "Type": "Logging", "Login": "admin55", "Passwd": "admin555sd" } from socket: 4
-Taked { "Type": "Logging", "Login": "admin55", "Passwd": "admin555sd" } from socket: 4
-Taked { "Type": "Logging", "Login": "admin55", "Passwd": "admin555sd" } from socket: 4
-Taked { "Type": "Logging", "Login": "admin55", "Passwd": "admin555sd" } from socket: 4
-Taked { "Type": "Logging", "Login": "admin55", "Passwd": "admin555sd" } from socket: 4
-Taked { "Type": "Logging", "Login": "admin55", "Passwd": "admin555sd" } from socket: 4
-Taked { "Type": "Logging", "Login": "admin55", "Passwd": "admin555sd" } from socket: 4
-Taked { "Type": "Logging", "Login": "admin55", "Passwd": "admin555sd" } from socket: 4
-Taked { "Type": "Logging", "Login": "admin55", "Passwd": "admin555sd" } from socket: 4
-Taked { "Type": "Logging", "Login": "admin55", "Passwd": "admin555sd" } from socket: 4
-Taked { "Type": "Logging", "Login": "admin55", "Passwd": "admin555sd" } from socket: 4
-Taked { "Type": "Logging", "Login": "admin55", "Passwd": "admin555sd" } from socket: 4
-Taked { "Type": "Logging", "Login": "admin55", "Passwd": "admin555sd" } from socket: 4
-User 4 Disconnected
-User connected from socket 4
-Taked { "Type": "Logging", "Login": "admin", "Passwd": "admin" } from socket: 4
-User 4 Disconnected
-User connected from socket 4
-Taked { "Type": "Logging", "Login": "admind", "Passwd": "admind" } from socket: 4
-Taked { "Type": "Logging", "Login": "admind", "Passwd": "admind" } from socket: 4
-Taked { "Type": "Logging", "Login": "admind", "Passwd": "admind" } from socket: 4
-Taked { "Type": "Logging", "Login": "admind", "Passwd": "admind" } from socket: 4
-Taked { "Type": "Logging", "Login": "admind", "Passwd": "admind" } from socket: 4
+Taked { "Type": "Logging", "Login": "adm2in", "Passwd": "adm2in", "Socket": 4 } from socket: 4
+Taked { "Type": "Logging", "Login": "adm2in", "Passwd": "adm2in", "Socket": 4 } from socket: 4
+Taked { "Type": "Logging", "Login": "adm2in", "Passwd": "adm2in", "Socket": 4 } from socket: 4
+Taked { "Type": "Logging", "Login": "adm2in", "Passwd": "adm2in", "Socket": 4 } from socket: 4
+Taked { "Type": "Logging", "Login": "adm2in", "Passwd": "adm2in", "Socket": 4 } from socket: 4
+User connected from socket 5
+Taked { "Type": "Logging", "Login": "admin123", "Passwd": "admin123", "Socket": 5 } from socket: 5
+Taked { "Type": "Logging", "Login": "admin123", "Passwd": "admin123", "Socket": 5 } from socket: 5
+Taked { "Type": "Logging", "Login": "admin123", "Passwd": "admin123", "Socket": 5 } from socket: 5
+Taked { "Type": "Logging", "Login": "admin123", "Passwd": "admin123", "Socket": 5 } from socket: 5
+Taked { "Type": "Logging", "Login": "admin123", "Passwd": "admin123", "Socket": 5 } from socket: 5
 User 4 Disconnected
