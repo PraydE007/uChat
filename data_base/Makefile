@@ -20,8 +20,10 @@ FILES = mx_create_datab_node.c \
 		mx_table_chats.c \
 		mx_table_contacts.c \
 		mx_table_messages.c \
+		mx_table_setting.c \
 		mx_table_users.c \
 		mx_table_users_chats.c \
+		mx_trigger_for_users.c \
 		mx_users_insert.c \
 
 
