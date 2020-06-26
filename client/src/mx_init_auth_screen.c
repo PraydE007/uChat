@@ -70,11 +70,11 @@ static void connect_signals(t_s_glade *gui) {
                     G_CALLBACK(mx_logged_in), gui);
     g_signal_connect(gui->b_l_signup, "clicked",
                     G_CALLBACK(mx_open_signup), gui);
-
-    // Settings Window Signals
     g_signal_connect(gui->b_settings, "clicked",
                     G_CALLBACK(mx_open_auth_settings), gui->w_settings);
-    g_signal_connect(gui->b_p_close, "clicked",
+
+    // Settings Window Signals
+    g_signal_connect(gui->b_s_close, "clicked",
                     G_CALLBACK(mx_close_auth_settings), gui->w_settings);
     g_signal_connect(gui->s_darkmode, "state-set",
                     G_CALLBACK(mx_darkmode_switch), gui);
@@ -101,6 +101,7 @@ static bool read_mode(void) {
     char *json = mx_strnew(1024);
     struct json_object *settings = NULL;
     struct json_object *darkmode = NULL;
+    bool res = false;
 
     if (file != -1) {
         read(file, json, 1024);
@@ -108,8 +109,9 @@ static bool read_mode(void) {
         settings = json_tokener_parse(json);
         darkmode = json_object_object_get(settings, "darkmode");
         mx_strdel(&json);
+        res = json_object_get_boolean(darkmode);
         json_object_put(settings);
-        return json_object_get_boolean(darkmode);
+        return res;
     }
     mx_strdel(&json);
     return false;
