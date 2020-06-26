@@ -20,6 +20,13 @@ typedef struct s_s_glade {
     bool darkmode;
     int sockfd;
 
+    // Window position
+    gint w_x;
+    gint w_y;
+
+    // Application
+    GdkPixbuf *icon;
+
     // Login window
     GtkWidget *w_signin;
     GtkWidget *f_panel;
@@ -60,6 +67,7 @@ t_s_glade *mx_init_auth_screen(int socket);
 GtkWidget *mx_get_widget(GtkBuilder **b, char *id);
 void mx_load_theme(t_s_glade *gui);
 void mx_logged_in_chat(t_s_glade *gui);
+GtkWindow *mx_gw(GtkWidget *widget);
 
 // GUI SIGNALS
 void mx_open_auth_settings(GtkButton *button, gpointer data);

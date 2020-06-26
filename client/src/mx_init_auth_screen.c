@@ -11,8 +11,15 @@ static void init_login(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->w_settings = mx_get_widget(builder, "window.settings");
     (*gui)->b_close = mx_get_widget(builder, "button.close");
     (*gui)->s_darkmode = mx_get_widget(builder, "switch.darkmode");
+
     if ((*gui)->darkmode)
         gtk_switch_set_active(GTK_SWITCH((*gui)->s_darkmode), true);
+
+    (*gui)->icon = gdk_pixbuf_new_from_file("client/res/images/icon.ico", NULL);
+    if ((*gui)->icon) {
+        printf("ICON OK!\n");
+        gtk_window_set_icon(GTK_WINDOW((*gui)->w_signin), (*gui)->icon);
+    }
 }
 
 static void init_signup(GtkBuilder **builder, t_s_glade **gui) {
@@ -41,7 +48,7 @@ static void connect_signals(t_s_glade *gui) {
     g_signal_connect(gui->w_signup, "destroy",
                     G_CALLBACK(gtk_main_quit), NULL);
     g_signal_connect(gui->w_chat, "destroy",
-                     G_CALLBACK(gtk_main_quit), NULL);
+                    G_CALLBACK(gtk_main_quit), NULL);
 
     // Login Window Signals
     g_signal_connect(gui->b_l_signin, "clicked",
@@ -61,11 +68,11 @@ static void connect_signals(t_s_glade *gui) {
     g_signal_connect(gui->b_r_signin, "clicked",
                     G_CALLBACK(mx_close_signup), gui);
     g_signal_connect(gui->b_r_signup, "clicked",
-                     G_CALLBACK(mx_registration), gui);
+                    G_CALLBACK(mx_registration), gui);
 
     // Chat Window Signals
     g_signal_connect(gui->b_send, "clicked",
-                     G_CALLBACK(mx_send_message), gui);
+                    G_CALLBACK(mx_send_message), gui);
 }
 
 static bool read_mode(void) {

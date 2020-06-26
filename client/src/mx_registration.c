@@ -109,9 +109,9 @@ void mx_registration(GtkButton *button, gpointer data) {
     else
         printf("PAROLY NE SOVPADAYT BLEAT<3\n");
     if (!strcmp(buffer, "You have registered successfully!")) {
+        gtk_window_get_position(mx_gw(gui->w_signup), &(gui->w_x), &(gui->w_y));
         gtk_widget_hide(gui->w_signup);
-        gtk_widget_hide(gui->w_signin);
-        gtk_widget_hide(gui->w_settings);
         gtk_widget_show_all(gui->w_signin);
+        gtk_window_move(mx_gw(gui->w_signin), gui->w_x, gui->w_y + 22);
     }
 }
