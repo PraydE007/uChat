@@ -83,19 +83,27 @@ void mx_data_base_creation(sqlite3 **db) {
     // connection_point = sqlite3_exec(*db, sql, callback, 0, NULL);
     // sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id) values('1', '3')");
     // connection_point = sqlite3_exec(*db, sql, callback, 0, NULL);
-    // sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id) values('10', '1')");
+    // sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id) values('2', '1')");
     // connection_point = sqlite3_exec(*db, sql, callback, 0, NULL);
-    // sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id) values('10', '4')");
+    // sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id) values('2', '4')");
     // connection_point = sqlite3_exec(*db, sql, callback, 0, NULL);
-    // sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id) values('10', '5')");
+    // sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id) values('2', '5')");
     // connection_point = sqlite3_exec(*db, sql, callback, 0, NULL);
-    // sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id) values('9', '1')");
+    // sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id) values('3', '1')");
     // connection_point = sqlite3_exec(*db, sql, callback, 0, NULL);
-    // sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id) values('9', '2')");
+    // sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id) values('3', '2')");
     // connection_point = sqlite3_exec(*db, sql, callback, 0, NULL);
-    // sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id) values('9', '3')");
+    // sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id) values('4', '3')");
     // connection_point = sqlite3_exec(*db, sql, callback, 0, NULL);
-    // if (err != SQLITE_OK) {
+    // sprintf(sql, "insert into CONTACTS (OWNER_id, FOLLOWER_id) values('1', '5')");
+    // connection_point = sqlite3_exec(*db, sql, callback, 0, NULL);
+    // sprintf(sql, "insert into CONTACTS (OWNER_id, FOLLOWER_id) values('1', '4')");
+    // connection_point = sqlite3_exec(*db, sql, callback, 0, NULL);
+    // sprintf(sql, "insert into CONTACTS (OWNER_id, FOLLOWER_id) values('1', '2')");
+    // connection_point = sqlite3_exec(*db, sql, callback, 0, NULL);
+    // sprintf(sql, "insert into CONTACTS (OWNER_id, FOLLOWER_id) values('1', '3')");
+    // connection_point = sqlite3_exec(*db, sql, callback, 0, NULL);
+    // if (connection_point != SQLITE_OK) {
     //     fprintf(stderr, "error: %s\n", sqlite3_errmsg(*db));
     // }
     char id[3] = "1\0";
@@ -104,9 +112,11 @@ void mx_data_base_creation(sqlite3 **db) {
     printf("count  = %d\n", i);
     // sprintf(sql, "DROP TABLE IF EXISTS CONTACTS;");
     // connection_point = sqlite3_exec(*db, sql, callback, p, NULL);
-    sprintf(sql, "DELETE FROM USERS WHERE ID = 10;");
+    sprintf(sql, "DELETE FROM USERS WHERE ID = 1;");
     connection_point = sqlite3_exec(*db, sql, callback, p, NULL);
-    
+    sprintf(sql, "DELETE FROM USERS WHERE ID = 2;");
+    connection_point = sqlite3_exec(*db, sql, callback, p, NULL);
+    printf("sql  = %s\n", sql);
     // if(connection_point != SQLITE_OK){
     //     fprintf(stderr, "SQL error: %s\n", err);
     //     sqlite3_free(err);
