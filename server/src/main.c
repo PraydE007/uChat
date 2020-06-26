@@ -66,5 +66,5 @@ int main(int argc, char **argv) {
       accepting(sockbd);
       pthread_create(&x, NULL, mx_doprocessing, (void *)sockbd);
    }
-   //sqlite3_close(sockbd->bd);
+   sqlite3_close(sockbd->bd);
 }
