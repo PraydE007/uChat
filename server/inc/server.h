@@ -4,7 +4,6 @@
 #include "../../inc/general.h"
 #include <signal.h>
 #include <strings.h>
-#include <pthread.h>
 #include "../../json/include/json-c/json.h"
 #include <stdio.h>
 #include <fcntl.h>

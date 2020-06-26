@@ -47,6 +47,7 @@ CL_SRC		=	main.c \
 				mx_hash_to_string.c \
 				mx_registration.c \
 				mx_send_message.c \
+				mx_client_recv.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \

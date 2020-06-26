@@ -75,4 +75,7 @@ void mx_close_signup(GtkButton *button, gpointer data);
 void mx_registration(GtkButton *button, gpointer data);
 void mx_send_message(GtkButton *button, gpointer data);
 
+//infinity_recive_from_server
+void *mx_client_recv(void *data);
+
 #endif

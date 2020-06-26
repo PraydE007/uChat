@@ -6,8 +6,7 @@ int main(int argc, char **argv) {
     struct hostent *server;
     int rc = 0;
     // char *send_data = NULL;
-
-
+    //pthread_t x;
     if (argc < 3) {
         fprintf(stderr,"usage %s hostname port\n", argv[0]);
         return 0;
@@ -34,6 +33,7 @@ int main(int argc, char **argv) {
         perror("ERROR connecting");
         return 1;
     }
+    //pthread_create(&x, NULL, mx_client_recv, (void *)&sockfd);
     mx_interface(&argc, &argv, sockfd);
 
 // while(true) {
