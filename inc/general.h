@@ -13,7 +13,7 @@
 #include "../json/include/json-c/json.h"
 #include "../data_base/inc/dbase.h"
 #include "../libmx/inc/libmx.h"
-
+#include <pthread.h>
 
 #define MX_LOG "1"
 #define MX_LOG_MES "You have logged in!"

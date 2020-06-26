@@ -14,12 +14,16 @@ FILES = mx_create_datab_node.c \
 		mx_dbase_handler.c \
 		mx_if_logging.c \
 		mx_if_registr.c \
+		mx_strjoin_free_js_value.c \
 		mx_js_add.c \
 		mx_json_to_str.c \
 		mx_table_chats.c \
+		mx_table_contacts.c \
 		mx_table_messages.c \
+		mx_table_setting.c \
 		mx_table_users.c \
 		mx_table_users_chats.c \
+		mx_trigger_for_users.c \
 		mx_users_insert.c \
 
 

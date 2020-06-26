@@ -48,9 +48,14 @@ CL_SRC		=	main.c \
 				mx_registration.c \
 				mx_send_message.c \
 				mx_gw.c \
+				mx_client_recv.c \
+				mx_open_profile.c \
+				mx_close_profile.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \
+				mx_demonize.c \
+				mx_create_log.c \
 
 
 CL_SRCS	=	$(addprefix $(CL_SRCD)/, $(CL_SRC))
@@ -64,14 +69,16 @@ $(FILE:a/%=%)
 
 install: install_client install_server
 
+install_db:
+
 install_client: $(LMXA) $(CL_NAME)
 
 $(CL_NAME): $(CL_OBJS)
-	@clang $(CFLG) $(CL_OBJS) $(CL_GTK_FLAGS) -L$(LMXD) -L/usr/local/opt/openssl/lib/ -lssl -lcrypto -lmx -rdynamic -o $@ libjson-c.a
+	@clang $(CFLG) $(CL_OBJS) $(CL_GTK_FLAGS) -L$(LMXD) -L/usr/local/opt/openssl/lib/ -lssl -lcrypto -lmx -rdynamic -o $@ libjson-c.a -fsanitize=address
 	@printf "\r\33[2K$@ \033[32;1mcreated\033[0m\n"
 
 $(CL_OBJD)/%.o: $(CL_SRCD)/%.c $(CL_INCS)
-	@clang $(CFLG) -c $< $(CL_GTK_SORT_FLAGS) -I/usr/local/opt/openssl/include/ -o $@ -I$(CL_INCD) -I$(LMXI)
+	@clang $(CFLG) -c $< $(CL_GTK_SORT_FLAGS) -I/usr/local/opt/openssl/include/ -o $@ -I$(CL_INCD) -I$(LMXI) -fsanitize=address
 	@printf "\r\33[2K$(CL_NAME) \033[33;1mcompile \033[0m$(<:$(CL_SRCD)/%.c=%) "
 
 
@@ -83,11 +90,11 @@ $(CL_OBJD):
 install_server: $(LMXA) $(DB_MXA) $(SV_NAME)
 
 $(SV_NAME): $(SV_OBJS)
-	@clang $(CFLG) $(SV_OBJS) -L$(LMXD) -L/usr/local/opt/openssl/lib/ -lssl -lcrypto -lmx -o $@ libjson-c.a $(DB_MXA) -lsqlite3
+	@clang $(CFLG) $(SV_OBJS) -L$(LMXD) -L/usr/local/opt/openssl/lib/ -lssl -lcrypto -lmx -o $@ libjson-c.a $(DB_MXA) -lsqlite3 -fsanitize=address
 	@printf "\r\33[2K$@ \033[32;1mcreated\033[0m\n"
 
 $(SV_OBJD)/%.o: $(SV_SRCD)/%.c $(SV_INCS)
-	@clang $(CFLG) -c $< -I/usr/local/opt/openssl/include/ -o $@ -I$(SV_INCD) -I$(LMXI) -I$(DB_MXI)
+	@clang $(CFLG) -c $< -I/usr/local/opt/openssl/include/ -o $@ -I$(SV_INCD) -I$(LMXI) -I$(DB_MXI) -fsanitize=address
 	@printf "\r\33[2K$(SV_NAME) \033[33;1mcompile \033[0m$(<:$(SV_SRCD)/%.c=%) "
 
 $(SV_OBJS): | $(SV_OBJD)
@@ -100,7 +107,6 @@ $(LMXA):
 
 $(DB_MXA):
 	@make -sC $(DB_MXD)
-
 clean:
 	@make -sC $(LMXD) $@
 	@make -sC $(DB_MXD) $@
@@ -110,6 +116,7 @@ clean:
 	@printf "$(CL_OBJD)\t   \033[31;1mdeleted\033[0m\n"
 	@printf "$(SV_OBJD)\t   \033[31;1mdeleted\033[0m\n"
 
+
 uninstall: clean
 	@make -sC $(LMXD) $@
 	@make -sC $(DB_MXD) $@
@@ -118,4 +125,11 @@ uninstall: clean
 	@printf "$(CL_NAME) \033[31;1muninstalled\033[0m\n"
 	@printf "$(SV_NAME) \033[31;1muninstalled\033[0m\n"
 
+uninstall_server:
+	@make -sC $(DB_MXD) uninstall
+	@rm -rf $(SV_NAME)
+	@printf "$(SV_NAME) \033[31;1muninstalled\033[0m\n"
+
 reinstall: uninstall install
+
+reinstall_server : uninstall_server install_server

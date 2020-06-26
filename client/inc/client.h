@@ -1,3 +1,7 @@
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE 1
+#endif
+
 #ifndef CLIENT_H
 #define CLIENT_H
 
@@ -12,6 +16,7 @@
 #define MX_WINDOW_LOGIN "client/res/forms/window.login.glade"
 #define MX_WINDOW_SIGNUP "client/res/forms/window.signup.glade"
 #define MX_WINDOW_CHAT "client/res/forms/window.chat.glade"
+#define MX_WINDOW_PROFILE "client/res/forms/window.profile.glade"
 
 #define MX_DEF_THEME "client/res/themes/light.css"
 #define MX_DARK_THEME "client/res/themes/dark.css"
@@ -38,7 +43,7 @@ typedef struct s_s_glade {
 
     // Settings window
     GtkWidget *w_settings;
-    GtkWidget *b_close;
+    GtkWidget *b_s_close;
     GtkWidget *s_darkmode;
 
     // Registration window
@@ -53,8 +58,21 @@ typedef struct s_s_glade {
     // Chat window
     GtkWidget *w_chat;
     GtkWidget *b_send;
+    GtkWidget *b_profile;
     GtkWidget *e_message;
     GtkWidget *tv_term_emul;
+
+    // Profile window
+    GtkWidget *w_profile;
+    GtkWidget *i_avatar;
+    GtkWidget *e_p_login;
+    GtkWidget *e_p_email;
+    GtkWidget *e_p_number;
+    GtkWidget *e_p_oldpass;
+    GtkWidget *e_p_newpass1;
+    GtkWidget *e_p_newpass2;
+    GtkWidget *b_p_apply;
+    GtkWidget *b_p_close;
 }              t_s_glade;
 
 // HASH
@@ -78,5 +96,10 @@ void mx_open_signup(GtkButton *button, gpointer data);
 void mx_close_signup(GtkButton *button, gpointer data);
 void mx_registration(GtkButton *button, gpointer data);
 void mx_send_message(GtkButton *button, gpointer data);
+void mx_open_profile(GtkButton *button, gpointer data);
+void mx_close_profile(GtkButton *button, gpointer data);
+
+//infinity_recive_from_server
+void *mx_client_recv(void *data);
 
 #endif

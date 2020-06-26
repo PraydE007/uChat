@@ -6,7 +6,7 @@ int main(int argc, char **argv) {
     struct hostent *server;
     int rc = 0;
     // char *send_data = NULL;
-
+    //pthread_t x;
     if (argc < 3) {
         fprintf(stderr,"usage %s hostname port\n", argv[0]);
         return 0;
@@ -33,6 +33,7 @@ int main(int argc, char **argv) {
         perror("ERROR connecting");
         return 1;
     }
+    //pthread_create(&x, NULL, mx_client_recv, (void *)&sockfd);
     mx_interface(&argc, &argv, sockfd);
 
 // while(true) {
@@ -44,7 +45,7 @@ int main(int argc, char **argv) {
     // json_object *j_login = json_object_new_string("Vasya");
     // json_object *j_passwd = json_object_new_string(mx_hash("uksgdfj12bf"));
     // json_object_object_add(jobj,"Type", j_type);
-   
+
 //    json_object_object_add(jobj,"Login", j_login);
 //    json_object_object_add(jobj,"Passwd", j_passwd);
 
@@ -75,5 +76,6 @@ int main(int argc, char **argv) {
 //    }
 //    printf("%s", buffer);
 // }
+    system("leaks -q uchat");
     return 0;
 }
