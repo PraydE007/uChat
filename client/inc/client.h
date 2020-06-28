@@ -13,6 +13,8 @@
 #include "../../json/include/json-c/json.h"
 #include <openssl/ssl.h>
 
+#define MX_AVATAR_MIS "client/res/images/avatar_missing.png"
+
 #define MX_WINDOW_LOGIN "client/res/forms/window.login.glade"
 #define MX_WINDOW_SIGNUP "client/res/forms/window.signup.glade"
 #define MX_WINDOW_CHAT "client/res/forms/window.chat.glade"
@@ -61,6 +63,9 @@ typedef struct s_s_glade {
     GtkWidget *b_profile;
     GtkWidget *e_message;
     GtkWidget *tv_term_emul;
+    GtkWidget *e_find;
+    GtkWidget *b_find;
+    GtkWidget *l_chats;
 
     // Profile window
     GtkWidget *w_profile;
@@ -86,6 +91,9 @@ GtkWidget *mx_get_widget(GtkBuilder **b, char *id);
 void mx_load_theme(t_s_glade *gui);
 void mx_logged_in_chat(t_s_glade *gui);
 GtkWindow *mx_gw(GtkWidget *widget);
+GtkWidget *mx_load_img(const char *filename, int w, int h);
+void mx_push_chat(GtkWidget *lst, const char *user_name);
+void mx_find_user(GtkButton *button, gpointer data);
 
 // GUI SIGNALS
 void mx_open_auth_settings(GtkButton *button, gpointer data);

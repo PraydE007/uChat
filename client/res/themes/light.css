@@ -26,6 +26,22 @@ box label {
     color: #ffffff;
 }
 
+grid {
+    background-color: white;
+}
+
+list label {
+    color: #101010;
+    background-color: white;
+}
+
+list image {
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
 label {
     font: 16px Sans Bold;
 }

@@ -51,6 +51,9 @@ CL_SRC		=	main.c \
 				mx_client_recv.c \
 				mx_open_profile.c \
 				mx_close_profile.c \
+				mx_load_img.c \
+				mx_push_chat.c \
+				mx_find_user.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \
