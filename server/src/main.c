@@ -22,6 +22,7 @@ static void usage_port(int argc, char **argv) {
 static void usage_socket(int sockfd, t_sockbd *sockbd) {
    sockbd->bd = NULL;
    sockbd->sockfd = 0;
+   sockbd->login = NULL;
    sockbd->log_sescr = mx_create_log();
    if (sockfd < 0) {
       write(sockbd->log_sescr, "ERROR: opening socket\n", 22);
@@ -49,7 +50,7 @@ int main(int argc, char **argv) {
    t_sockbd *sockbd = (t_sockbd *)malloc(sizeof(t_sockbd));
 
    usage_port(argc, argv);
-   mx_demonize();
+   // mx_demonize();
    sockfd = socket(AF_INET, SOCK_STREAM, 0);
    usage_socket(sockfd, sockbd);
    portno = atoi(argv[1]);

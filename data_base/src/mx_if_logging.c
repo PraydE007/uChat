@@ -20,9 +20,9 @@ static int cb_chs_cnts(void *datab, int argc, char **argv,char **colName) {
     char **new_str = (char **)datab;
 
     for(int i = 0; i < argc; i++) {
-        printf("%s = %s\n", colName[i], argv[i] ? argv[i] : "NULL");
+        printf("%s = %s\n", colName[i], argv[i] ? argv[i] : "NULL");//
         *new_str = mx_strjoin_free_js_value(*new_str, argv[i]);
-        printf("new_str = %s\n", *new_str);
+        printf("new_str = %s\n", *new_str);//
     }
     return 0;
 }
@@ -40,10 +40,10 @@ static void call_to_db(json_object *j_result, sqlite3 *db, t_datab *datab,
     mx_strdel(&datab->type);
 }
 
-static void js_chts_conts(json_object *j_result, sqlite3 *db, t_datab *datab) {
-    char sql[1024];
+static void js_chts_conts(json_object *j_result, sqlite3 *db, t_datab *datab,
+                                                                   char *sql) {
 
-    mx_js_add(j_result, "Answer", MX_LOG);
+    mx_js_add(j_result, "Answer", MX_LOG_MES);
     sprintf(sql, "select CHAT_NAME from CHATS INNER JOIN USERS_CHATS " \
             "ON ID = CHAT_id WHERE USER_id = %s;", datab->id);
     datab->type = mx_strdup("Chats");
@@ -58,18 +58,21 @@ static void js_chts_conts(json_object *j_result, sqlite3 *db, t_datab *datab) {
 json_object *mx_if_logging(json_object *jobj, sqlite3 *db, t_datab *datab) {
     json_object *j_result = json_object_new_object();
     int connection_point;
-    char sql[1024];
+    char sql[255];
 
     datab->login_db = mx_json_to_str(jobj, "Login");
     datab->password_db = mx_json_to_str(jobj, "Passwd");
+    datab->socket = mx_json_to_int(jobj, "Socket");
     sprintf(sql, "select ID, LOGIN, PASSWORD from USERS;");
     connection_point = sqlite3_exec(db, sql, cb_loganswer, datab, NULL);
     if (connection_point != SQLITE_OK && connection_point != SQLITE_ABORT)
         fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
-    if (datab->logtrigger == 1 && datab->passtrigger == 1)
-        js_chts_conts(j_result, db, datab);
+    if (datab->logtrigger == 1 && datab->passtrigger == 1) {
+        mx_status_change(db, (char *)datab->login_db, datab->socket, 1);
+        js_chts_conts(j_result, db, datab, sql);
+    }
     else
-        mx_js_add(j_result, "Answer", MX_ERRLOG);
+        mx_js_add(j_result, "Answer", MX_ERR_LOG);
     datab->logtrigger = 0;
     datab->passtrigger = 0;
     return j_result;

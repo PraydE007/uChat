@@ -17,19 +17,20 @@ static int cb_reganswer(void *datab, int argc, char **argv, char **azColName) {
 json_object *mx_if_registr(json_object *jobj, sqlite3 *db, t_datab *datab) {
     json_object *j_result = json_object_new_object();
     int connection_point;
-    char *err = NULL;
-    char sql[1024];
+    char sql[30];
 
     datab->login_db = mx_json_to_str(jobj, "Login");
     sprintf(sql, "select LOGIN from USERS;");
-    connection_point = sqlite3_exec(db, sql, cb_reganswer, datab, &err);
+    connection_point = sqlite3_exec(db, sql, cb_reganswer, datab, NULL);
+    if (connection_point != SQLITE_OK && connection_point != SQLITE_ABORT)
+        fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
     if (datab->logtrigger == 1)
         mx_js_add(j_result, "Answer", MX_ERRREG);
     else {
         mx_users_insert(jobj, db);
         mx_js_add(j_result, "Answer", MX_REG);
     }
-    printf("answer: %s\n", mx_json_to_str(j_result, "Answer"));
+    printf("answer: %s\n", mx_json_to_str(j_result, "Answer")); //
     datab->logtrigger = 0;
     return j_result;
 }
