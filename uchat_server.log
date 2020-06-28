@@ -22,7 +22,6 @@ LOGIN = ddd
 PASSWORD = 123
 EMAIL = jhggj@gfhfh.com
 
-<<<<<<< HEAD
 ID = 7
 LOGIN = ff
 PASSWORD = ff
@@ -286,7 +285,6 @@ Taked { "Type": "Logging", "Login": "admin", "Passwd": "admin", "Socket": 4 } fr
 User 4 Disconnected
 User connected from socket 4
 User 4 Disconnected
-=======
 count  = 4
 sql  = DELETE FROM USERS WHERE ID = 2;
 answer: 2
@@ -556,4 +554,99 @@ User connected from socket 7
 Taked { "Type": "Logging", "Login": "BBB", "Passwd": "123", "Socket": 7 } from socket: 7
 User 7 Disconnected
 User 6 Disconnected
->>>>>>> kos-uch
+User connected from socket 6
+Taked { "Type": "Logging", "Login": "AAA", "Passwd": "123", "Socket": 6 } from socket: 6
+User 6 Disconnected
+User connected from socket 6
+Taked { "Type": "Logging", "Login": "AAA", "Passwd": "123", "Socket": 6 } from socket: 6
+User 6 Disconnected
+User connected from socket 6
+Taked { "Type": "Logging", "Login": "AAAAA", "Passwd": "3456", "Socket": 6 } from socket: 6
+User 6 Disconnected
+User connected from socket 6
+User 6 Disconnected
+User connected from socket 6
+Taked { "Type": "Registr", "Login": "AAA", "Passwd": "123", "Email": "fdfdg@hhfddh.com", "Socket": 6 } from socket: 6
+User 6 Disconnected
+User connected from socket 6
+Taked { "Type": "Registr", "Login": "BBB", "Passwd": "123", "Email": "FDDG@GFHD.COM", "Socket": 6 } from socket: 6
+User 6 Disconnected
+User connected from socket 6
+Taked { "Type": "Registr", "Login": "CCC", "Passwd": "123", "Email": "GHFG@JGJ.UA", "Socket": 6 } from socket: 6
+User 6 Disconnected
+User connected from socket 6
+Taked { "Type": "Registr", "Login": "DDD", "Passwd": "123", "Email": "FGDGDG@GFGF.UA", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "FFF", "Passwd": "123", "Email": "FGDGDG@GFGF.UA", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "EEE", "Passwd": "123", "Email": "FGDGDG@GFGF.UA", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "GGG", "Passwd": "123", "Email": "FGDGDG@GFGF.UA", "Socket": 6 } from socket: 6
+User 6 Disconnected
+User connected from socket 6
+Taked { "Type": "Registr", "Login": "AAA", "Passwd": "123", "Email": "fdfgdg@jsahd.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "BBB", "Passwd": "123", "Email": "fdfgdg@jsahd.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "CCC", "Passwd": "123", "Email": "fdfgdg@jsahd.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "DDD", "Passwd": "123", "Email": "fdfgdg@jsahd.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "EEE", "Passwd": "123", "Email": "fdfgdg@jsahd.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "FFF", "Passwd": "123", "Email": "fdfgdg@jsahd.ua", "Socket": 6 } from socket: 6
+User connected from socket 6
+Taked { "Type": "Registr", "Login": "AAA", "Passwd": "123", "Email": "gfhdg@hhfh.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "BBB", "Passwd": "123", "Email": "gfhdg@hhfh.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "CCC", "Passwd": "123", "Email": "gfhdg@hhfh.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "DDD", "Passwd": "123", "Email": "gfhdg@hhfh.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "EEE", "Passwd": "123", "Email": "gfhdg@hhfh.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "FFF", "Passwd": "123", "Email": "gfhdg@hhfh.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "GGG", "Passwd": "123", "Email": "gfhdg@hhfh.ua", "Socket": 6 } from socket: 6
+User 6 Disconnected
+User connected from socket 6
+Taked { "Type": "Registr", "Login": "AAA", "Passwd": "123", "Email": "gfghfh@gfgfg.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "BBB", "Passwd": "123", "Email": "gfghfh@gfgfg.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "CCC", "Passwd": "123", "Email": "gfghfh@gfgfg.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "DDD", "Passwd": "123", "Email": "gfghfh@gfgfg.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "EEE", "Passwd": "123", "Email": "gfghfh@gfgfg.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "FFF", "Passwd": "123", "Email": "gfghfh@gfgfg.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "GGG", "Passwd": "123", "Email": "gfghfh@gfgfg.ua", "Socket": 6 } from socket: 6
+User 6 Disconnected
+User connected from socket 6
+Taked { "Type": "Logging", "Login": "CCC", "Passwd": "123", "Socket": 6 } from socket: 6
+User 6 Disconnected
+User connected from socket 6
+Taked { "Type": "Registr", "Login": "AAA", "Passwd": "123", "Email": "fdgdgd@gggf.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "BBB", "Passwd": "123", "Email": "fdgdgd@gggf.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "CCC", "Passwd": "123", "Email": "fdgdgd@gggf.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "DDD", "Passwd": "123", "Email": "fdgdgd@gggf.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "EEE", "Passwd": "123", "Email": "fdgdgd@gggf.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "FFF", "Passwd": "123", "Email": "fdgdgd@gggf.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "GGG", "Passwd": "123", "Email": "fdgdgd@gggf.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Logging", "Login": "AAA", "Passwd": "123", "Socket": 6 } from socket: 6
+User 6 Disconnected
+User connected from socket 6
+Taked { "Type": "Registr", "Login": "AAA", "Passwd": "123", "Email": "gfgfg@hghhfg.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "BBB", "Passwd": "123", "Email": "gfgfg@hghhfg.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "CCC", "Passwd": "123", "Email": "gfgfg@hghhfg.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "DDD", "Passwd": "123", "Email": "gfgfg@hghhfg.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "EEE", "Passwd": "123", "Email": "gfgfg@hghhfg.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "FFF", "Passwd": "123", "Email": "gfgfg@hghhfg.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "GGG", "Passwd": "123", "Email": "gfgfg@hghhfg.ua", "Socket": 6 } from socket: 6
+Taked { "Type": "Logging", "Login": "AAA", "Passwd": "123", "Socket": 6 } from socket: 6
+User 6 Disconnected
+User connected from socket 6
+Taked { "Type": "Registr", "Login": "AAA", "Passwd": "123", "Email": "GGFGFG@HHDH.UA", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "BBB", "Passwd": "123", "Email": "GGFGFG@HHDH.UA", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "CCC", "Passwd": "123", "Email": "GGFGFG@HHDH.UA", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "DDD", "Passwd": "123", "Email": "GGFGFG@HHDH.UA", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "EEE", "Passwd": "123", "Email": "GGFGFG@HHDH.UA", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "FFF", "Passwd": "123", "Email": "GGFGFG@HHDH.UA", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "GGG", "Passwd": "123", "Email": "GGFGFG@HHDH.UA", "Socket": 6 } from socket: 6
+Taked { "Type": "Logging", "Login": "BBB", "Passwd": "123", "Socket": 6 } from socket: 6
+User 6 Disconnected
+User connected from socket 6
+Taked { "Type": "Registr", "Login": "AAA", "Passwd": "123", "Email": "FDGGD@GGGFF.UA", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "BBB", "Passwd": "123", "Email": "FDGGD@GGGFF.UA", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "CCC", "Passwd": "123", "Email": "FDGGD@GGGFF.UA", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "DDD", "Passwd": "123", "Email": "FDGGD@GGGFF.UA", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "EEE", "Passwd": "123", "Email": "FDGGD@GGGFF.UA", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "FFF", "Passwd": "123", "Email": "FDGGD@GGGFF.UA", "Socket": 6 } from socket: 6
+Taked { "Type": "Registr", "Login": "GGG", "Passwd": "123", "Email": "FDGGD@GGGFF.UA", "Socket": 6 } from socket: 6
+Taked { "Type": "Logging", "Login": "AAA", "Passwd": "123", "Socket": 6 } from socket: 6
+User 6 Disconnected
+User connected from socket 6
+User 6 Disconnected

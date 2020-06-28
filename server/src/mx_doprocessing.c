@@ -50,12 +50,12 @@ void *mx_doprocessing (void *data) {
         // n = send(sockbd.sockfd, answer, mx_strlen(answer),  0);
         if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_LOG_MES))
             n = send(sockbd.sockfd, MX_LOG_MES, mx_strlen(MX_LOG_MES),  0);
-        else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_REG))
+        else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_REG_MES))
             n = send(sockbd.sockfd, MX_REG_MES, mx_strlen(MX_REG_MES),  0);
-        else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_ERRLOG))
-            n = send(sockbd.sockfd, MX_ERR_LOG, mx_strlen(MX_ERR_LOG),  0);
-        else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_ERRREG))
-            n = send(sockbd.sockfd, MX_ERR_REG, mx_strlen(MX_ERR_REG),  0);
+        else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_LOG_ERR))
+            n = send(sockbd.sockfd, MX_LOG_ERR, mx_strlen(MX_LOG_ERR),  0);
+        else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_REG_ERR))
+            n = send(sockbd.sockfd, MX_REG_ERR, mx_strlen(MX_REG_ERR),  0);
         json_object_put(j_result);
         if (n <= 0) {
             mx_status_change(sockbd.bd, login, sockbd.sockfd, 0);
