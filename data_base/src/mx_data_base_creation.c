@@ -12,17 +12,9 @@ static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
     return 0;
 }
 
-// static void table_creator(sqlite3 *db, char *sql) {
-//     int connection_point;
-
-//     connection_point = sqlite3_exec(db, sql, callback, 0, NULL);
-//     if (connection_point != SQLITE_OK)
-//         fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
-// }
-
 void mx_data_base_creation(sqlite3 **db) {
     int connection_point;
-    char sql[255];
+    char sql[512];
     int i = 0;
     int * p = &i;
 
@@ -32,16 +24,12 @@ void mx_data_base_creation(sqlite3 **db) {
     else
         fprintf(stdout, "Opened database successfully\n");
     mx_table_users(*db, sql);
-    // table_creator(*db, sql);
     mx_table_chats(*db, sql);
-    // table_creator(*db, sql);
     mx_table_users_chats(*db, sql);
-    // table_creator(*db, sql);
     mx_table_messages(*db, sql);
-    // table_creator(*db, sql);
     mx_table_contacts(*db, sql);
-    // table_creator(*db, sql);
     mx_trigger_for_users(*db, sql);
+    mx_trigger_for_messages(*db, sql);
     // sprintf(sql, "CREATE TABLE IF NOT EXISTS 'USERS'(" \
     //     "ID INTEGER PRIMARY KEY AUTOINCREMENT," \
     //     "LOGIN          VARCHAR(50)     NOT NULL," \
@@ -103,6 +91,12 @@ void mx_data_base_creation(sqlite3 **db) {
     // connection_point = sqlite3_exec(*db, sql, callback, 0, NULL);
     // sprintf(sql, "insert into CONTACTS (OWNER_id, FOLLOWER_id) values('1', '3')");
     // connection_point = sqlite3_exec(*db, sql, callback, 0, NULL);
+    // sprintf(sql, "insert into MESSAGES (SENDER_id, CHAT_id, MESSAGE_text) values(1, 2, 'YO, kak dela, Bill?')");
+    // connection_point = sqlite3_exec(*db, sql, callback, 0, NULL);
+    // sprintf(sql, "insert into MESSAGES (SENDER_id, CHAT_id, MESSAGE_text) values(3, 3, 'I am still waiting for you')");
+    // connection_point = sqlite3_exec(*db, sql, callback, 0, NULL);
+    // sprintf(sql, "insert into MESSAGES (SENDER_id, CHAT_id, MESSAGE_text) values(5, 1, 'Where are you?')");
+    // connection_point = sqlite3_exec(*db, sql, callback, 0, NULL);
     // if (connection_point != SQLITE_OK) {
     //     fprintf(stderr, "error: %s\n", sqlite3_errmsg(*db));
     // }
@@ -116,6 +110,10 @@ void mx_data_base_creation(sqlite3 **db) {
     // connection_point = sqlite3_exec(*db, sql, callback, p, NULL);
     // sprintf(sql, "DELETE FROM USERS WHERE ID = 2;");
     // connection_point = sqlite3_exec(*db, sql, callback, p, NULL);
+    sprintf(sql, "DELETE FROM CHATS WHERE CHAT_NAME = 'The best';");
+    connection_point = sqlite3_exec(*db, sql, callback, p, NULL);
+    sprintf(sql, "DELETE FROM CHATS WHERE ID = 2;");
+    connection_point = sqlite3_exec(*db, sql, callback, p, NULL);
     // printf("sql  = %s\n", sql);
     // if(connection_point != SQLITE_OK){
     //     fprintf(stderr, "SQL error: %s\n", err);
