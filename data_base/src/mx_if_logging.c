@@ -72,7 +72,7 @@ json_object *mx_if_logging(json_object *jobj, sqlite3 *db, t_datab *datab) {
         js_chts_conts(j_result, db, datab, sql);
     }
     else
-        mx_js_add(j_result, "Answer", MX_ERR_LOG);
+        mx_js_add(j_result, "Answer", MX_LOG_ERR);
     datab->logtrigger = 0;
     datab->passtrigger = 0;
     return j_result;

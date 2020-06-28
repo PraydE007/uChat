@@ -5,6 +5,7 @@
 #include <sqlite3.h>
 
 typedef struct s_datab {
+    int id;
     int logtrigger;
     int passtrigger;
     int socket;
@@ -22,6 +23,7 @@ const char *mx_json_to_str(json_object *jobj, char *key);
 int mx_callback(void *datab, int argc, char **argv, char **azColName);
 int mx_json_to_int(json_object *jobj, char *key);
 json_object *mx_dbase_handler(json_object *jobj, sqlite3 *db);
+json_object *mx_if_chat(json_object *jobj, sqlite3 *db, t_datab *datab);
 json_object *mx_if_contact(json_object *jobj, sqlite3 *db, t_datab *datab);
 json_object *mx_if_logging(json_object *jobj, sqlite3 *db, t_datab *datab);
 json_object *mx_if_registr(json_object *jobj, sqlite3 *db, t_datab *datab);
@@ -36,8 +38,8 @@ void mx_table_messages(sqlite3 *db, char *sql);
 void mx_table_setting(sqlite3 *db, char *sql);
 void mx_table_users(sqlite3 *db, char *sql);
 void mx_table_users_chats(sqlite3 *db, char *sql);
+void mx_trigger_for_messages(sqlite3 *db, char *sql);
 void mx_trigger_for_users(sqlite3 *db, char *sql);
-void mx_users_insert(json_object *jobj, sqlite3 *db);
 
 
 #endif
