@@ -19,25 +19,36 @@ void *mx_doprocessing (void *data) {
     t_sockbd sockbd = *(t_sockbd *)data;
     int n;
     char buffer[2048];
+    // const char *answer = NULL;
     json_object *jobj = json_object_new_object();
     json_object *j_result = json_object_new_object();
-    json_object *j_socket = json_object_new_int(sockbd.sockfd);
+    json_object *j_socket = NULL;
+    char *login = NULL;
 
     while (true) {
         bzero(buffer,2048);
         n = recv(sockbd.sockfd, buffer, sizeof(buffer), 0);
+        j_socket = json_object_new_int(sockbd.sockfd);
         //n = send(sockbd.sockfd, buffer, sizeof(buffer), 0);
         if (n <= 0) {
             if_disconnect(sockbd);
+            mx_status_change(sockbd.bd, login, sockbd.sockfd, 0);
             break;
         }
         jobj = json_tokener_parse(buffer);
         json_object_object_add(jobj,"Socket", j_socket);
         log_add_info(sockbd, jobj);
+        if (!mx_strcmp(mx_json_to_str(jobj, "Type"), "Logging")) { //
+            sockbd.login = mx_json_to_str(jobj, "Login"); //
+            login = mx_strdup(sockbd.login); //
+        } //
+        printf("char *login: %s\n", login); //
         j_result = mx_dbase_handler(jobj, sockbd.bd); //
-        json_object_put(jobj);
+        json_object_put(jobj); //
         printf("json_object_to_json_string(j_result): %s\n", json_object_to_json_string(j_result)); //
-        if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_LOG))
+        // answer = json_object_get_string(j_result); //
+        // n = send(sockbd.sockfd, answer, mx_strlen(answer),  0);
+        if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_LOG_MES))
             n = send(sockbd.sockfd, MX_LOG_MES, mx_strlen(MX_LOG_MES),  0);
         else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_REG))
             n = send(sockbd.sockfd, MX_REG_MES, mx_strlen(MX_REG_MES),  0);
@@ -45,8 +56,12 @@ void *mx_doprocessing (void *data) {
             n = send(sockbd.sockfd, MX_ERR_LOG, mx_strlen(MX_ERR_LOG),  0);
         else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_ERRREG))
             n = send(sockbd.sockfd, MX_ERR_REG, mx_strlen(MX_ERR_REG),  0);
-        if (n <= 0)
+        json_object_put(j_result);
+        if (n <= 0) {
+            mx_status_change(sockbd.bd, login, sockbd.sockfd, 0);
             break;
+        }
     }
+    mx_strdel(&login);
     return 0;
 }

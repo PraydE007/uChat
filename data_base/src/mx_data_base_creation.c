@@ -112,11 +112,11 @@ void mx_data_base_creation(sqlite3 **db) {
     printf("count  = %d\n", i);
     // sprintf(sql, "DROP TABLE IF EXISTS CONTACTS;");
     // connection_point = sqlite3_exec(*db, sql, callback, p, NULL);
-    sprintf(sql, "DELETE FROM USERS WHERE ID = 1;");
-    connection_point = sqlite3_exec(*db, sql, callback, p, NULL);
-    sprintf(sql, "DELETE FROM USERS WHERE ID = 2;");
-    connection_point = sqlite3_exec(*db, sql, callback, p, NULL);
-    printf("sql  = %s\n", sql);
+    // sprintf(sql, "DELETE FROM USERS WHERE ID = 1;");
+    // connection_point = sqlite3_exec(*db, sql, callback, p, NULL);
+    // sprintf(sql, "DELETE FROM USERS WHERE ID = 2;");
+    // connection_point = sqlite3_exec(*db, sql, callback, p, NULL);
+    // printf("sql  = %s\n", sql);
     // if(connection_point != SQLITE_OK){
     //     fprintf(stderr, "SQL error: %s\n", err);
     //     sqlite3_free(err);
