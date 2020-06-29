@@ -12,8 +12,9 @@
 
 typedef struct s_sockbd {
     int sockfd;
-    sqlite3 *bd;
     int log_sescr;
+    const char *login;
+    sqlite3 *bd;
 } t_sockbd;
 
 void *mx_doprocessing(void *data);

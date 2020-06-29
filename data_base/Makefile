@@ -9,22 +9,28 @@ OBJD = obj
 INC = dbase.h
 INCS = $(addprefix $(INCD)/, $(INC))
 
-FILES = mx_create_datab_node.c \
+FILES = mx_callback.c \
+		mx_create_datab_node.c \
 		mx_data_base_creation.c \
 		mx_dbase_handler.c \
+		mx_dealloc_datab.c \
+		mx_if_chat.c \
+		mx_if_contact.c \
 		mx_if_logging.c \
 		mx_if_registr.c \
-		mx_strjoin_free_js_value.c \
 		mx_js_add.c \
+		mx_json_to_int.c \
 		mx_json_to_str.c \
+		mx_status_change.c \
+		mx_strjoin_free_js_value.c \
 		mx_table_chats.c \
 		mx_table_contacts.c \
 		mx_table_messages.c \
 		mx_table_setting.c \
 		mx_table_users.c \
 		mx_table_users_chats.c \
+		mx_trigger_for_messages.c \
 		mx_trigger_for_users.c \
-		mx_users_insert.c \
 
 
 SRCS = $(addprefix $(SRCD)/, $(FILES))

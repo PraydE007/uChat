@@ -40,6 +40,9 @@ static void init_chat(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->b_profile = mx_get_widget(builder, "button.profile");
     (*gui)->e_message = mx_get_widget(builder, "entry.message");
     (*gui)->tv_term_emul = mx_get_widget(builder, "tv.term_emul");
+    (*gui)->e_find = mx_get_widget(builder, "entry.find");
+    (*gui)->b_find = mx_get_widget(builder, "button.find");
+    (*gui)->l_chats = mx_get_widget(builder, "list.chats");
 }
 
 static void init_profile(GtkBuilder **builder, t_s_glade **gui) {
@@ -63,6 +66,8 @@ static void connect_signals(t_s_glade *gui) {
     g_signal_connect(gui->w_signup, "destroy",
                     G_CALLBACK(gtk_main_quit), NULL);
     g_signal_connect(gui->w_chat, "destroy",
+                    G_CALLBACK(gtk_main_quit), NULL);
+    g_signal_connect(gui->w_profile, "destroy",
                     G_CALLBACK(gtk_main_quit), NULL);
 
     // Login Window Signals
@@ -90,6 +95,8 @@ static void connect_signals(t_s_glade *gui) {
                     G_CALLBACK(mx_send_message), gui);
     g_signal_connect(gui->b_profile, "clicked",
                     G_CALLBACK(mx_open_profile), gui);
+    g_signal_connect(gui->b_find, "clicked",
+                    G_CALLBACK(mx_find_user), gui);
 
     // Profile Window Signals
     g_signal_connect(gui->b_p_close, "clicked",

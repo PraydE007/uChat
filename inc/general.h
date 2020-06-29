@@ -20,9 +20,17 @@
 #define MX_REG "2"
 #define MX_REG_MES "You have registered successfully!"
 #define MX_ERRLOG "3"
-#define MX_ERR_LOG "Login or password is incorrect!"
+#define MX_LOG_ERR "Login or password is incorrect!"
 #define MX_ERRREG "4"
-#define MX_ERR_REG "User already exist!"
+#define MX_REG_ERR "User already exist!"
+#define MX_CONT "5"
+#define MX_CONT_MES "The contact was added!"
+#define MX_ERRCONT "6"
+#define MX_CONT_ERR "There is no such contact in the uchat!"
+#define MX_CHAT "7"
+#define MX_CHAT_MES "The chat was created!"
+#define MX_ERRCHAT "8"
+#define MX_CHAT_ERR "The chat with such name already exists!"
 
 typedef struct s_u_login_info {
     int u_id;
