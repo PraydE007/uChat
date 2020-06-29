@@ -31,6 +31,7 @@ static void init_signup(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->e_r_password = mx_get_widget(builder, "entry.password");
     (*gui)->e_r_password2 = mx_get_widget(builder, "entry.password2");
     (*gui)->b_r_signin = mx_get_widget(builder, "button.login");
+    (*gui)->e_r_number = mx_get_widget(builder, "entry.phone");
 }
 
 static void init_chat(GtkBuilder **builder, t_s_glade **gui) {

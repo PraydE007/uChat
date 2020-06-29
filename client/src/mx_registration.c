@@ -71,6 +71,8 @@ void mx_registration(GtkButton *button, gpointer data) {
     const char *mail = gtk_entry_get_text(GTK_ENTRY(gui->e_email));
     const char *pass0 = gtk_entry_get_text(GTK_ENTRY(gui->e_r_password));
     const char *pass1 = gtk_entry_get_text(GTK_ENTRY(gui->e_r_password2));
+    const char *number = gtk_entry_get_text(GTK_ENTRY(gui->e_r_number));
+
     int n = 0;
     char buffer[2048];
     char *send_data = NULL;
@@ -80,6 +82,7 @@ void mx_registration(GtkButton *button, gpointer data) {
     printf("PASS0 = %s\n", pass0);
     printf("PASS1 = %s\n", pass1);
     printf("CHECK_PASS = %d\n", check_data(pass0, mail, login));
+    printf("NUMBER = %s\n", number);
     (void)button;
     if (!strcmp(pass0, pass1) && !check_data(pass0, mail, login)) {
         json_object *jobj = json_object_new_object();
@@ -87,10 +90,12 @@ void mx_registration(GtkButton *button, gpointer data) {
         json_object *j_login = json_object_new_string(login);
         json_object *j_passwd = json_object_new_string(pass0);
         json_object *j_email = json_object_new_string(mail);
+        json_object *j_number = json_object_new_string(number);
         json_object_object_add(jobj, "Type", j_type);
         json_object_object_add(jobj, "Login", j_login);
         json_object_object_add(jobj, "Passwd", j_passwd);
         json_object_object_add(jobj, "Email", j_email);
+        json_object_object_add(jobj, "Number", j_number);
 
         send_data = (char *) json_object_to_json_string(jobj);
 

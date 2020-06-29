@@ -9,7 +9,7 @@ void mx_find_user(GtkButton *button, gpointer data) {
     json_object *j_type = json_object_new_string("Add_contact");
     json_object *j_login = json_object_new_string(login);
     json_object *j_passwd = json_object_new_string(name);
-    json_object *j_key = json_object_new_string("0");
+    json_object *j_key = json_object_new_int(0);
     json_object_object_add(jobj,"Type", j_type);
     json_object_object_add(jobj,"Login", j_login);
     json_object_object_add(jobj,"Login_contact", j_passwd);
