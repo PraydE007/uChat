@@ -5,7 +5,7 @@
 #include <sqlite3.h>
 
 typedef struct s_datab {
-    int id;
+    // int id;
     int logtrigger;
     int passtrigger;
     int socket;
@@ -16,6 +16,7 @@ typedef struct s_datab {
     const char *login_db;
     const char *login_db2;
     const char *password_db;
+    const char *security_db;
 }               t_datab;
 
 char *mx_strjoin_free_js_value(char *s1, const char *s2);

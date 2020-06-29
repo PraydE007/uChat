@@ -6,14 +6,15 @@ static int cb_conanswer(void *datab, int argc, char **argv, char **azColName) {
     if (datab) {
         t_datab *new_datab = (t_datab *)datab;
 
-        if (!mx_strcmp(new_datab->login_db, argv[0])) {
+        if (!mx_strcmp(new_datab->login_db, argv[1])
+            && !mx_strcmp(new_datab->security_db, argv[2])) {
             new_datab->id = mx_strdup(argv[0]);
             new_datab->logtrigger = 1;
             if (new_datab->passtrigger == 1)
                 return 1;
         }
         else if (!mx_strcmp(new_datab->login_db2, argv[1])) {
-            new_datab->second_id = mx_strdup(argv[1]);
+            new_datab->second_id = mx_strdup(argv[0]);
             new_datab->passtrigger = 1;
             if (new_datab->logtrigger == 1)
                 return 1;
@@ -40,17 +41,20 @@ json_object *mx_if_contact(json_object *jobj, sqlite3 *db, t_datab *datab) {
 
     datab->login_db = mx_json_to_str(jobj, "Login");
     datab->login_db2 = mx_json_to_str(jobj, "Contact_login");
-    sprintf(sql, "select LOGIN from USERS;");
+    datab->security_db = mx_json_to_str(jobj, "Security_key");
+    sprintf(sql, "select ID, LOGIN, SECURITY_KEY from USERS;");
     connection_point = sqlite3_exec(db, sql, cb_conanswer, datab, NULL);
     if (connection_point != SQLITE_OK && connection_point != SQLITE_ABORT)
         fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
     if (datab->logtrigger == 1 && datab->passtrigger == 1)
         insert_contact(j_result, db, sql);
+    else if (datab->passtrigger == 1)
+        mx_js_add(j_result, "Answer", MX_CHEAT_MESSAGE);
     else
         mx_js_add(j_result, "Answer", MX_CONT_ERR);
     printf("answer: %s\n", mx_json_to_str(j_result, "Answer"));//
-    mx_strdel(&datab->id);
-    mx_strdel(&datab->second_id);
+    // mx_strdel(&datab->id);
+    // mx_strdel(&datab->second_id);
     datab->logtrigger = 0;
     datab->passtrigger = 0;
     return j_result;

@@ -5,7 +5,7 @@ t_datab *mx_create_datab_node(void) {
 
 
     if (node) {
-        node->id = 0;
+        // node->id = 0;
         node->logtrigger = 0;
         node->passtrigger = 0;
         node->socket = 0;
@@ -16,6 +16,7 @@ t_datab *mx_create_datab_node(void) {
         node->login_db = NULL;
         node->login_db2 = NULL;
         node->password_db = NULL;
+        node->security_db = NULL;
     }
     return node;
 }
