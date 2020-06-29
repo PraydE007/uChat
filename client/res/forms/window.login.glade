@@ -129,6 +129,7 @@
         </child>
         <child>
           <object class="GtkButton" id="button.settings">
+            <property name="label">Settings</property>
             <property name="width_request">86</property>
             <property name="height_request">50</property>
             <property name="visible">True</property>
@@ -137,7 +138,6 @@
             <property name="use_stock">True</property>
             <property name="image_position">top</property>
             <property name="always_show_image">True</property>
-            <property name="label" translatable="yes">Settings</property>
             <signal name="clicked" handler="mx_open_auth_settings" swapped="no"/>
           </object>
           <packing>
