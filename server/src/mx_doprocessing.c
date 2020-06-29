@@ -42,9 +42,17 @@ void *mx_doprocessing (void *data) {
             sockbd.login = mx_json_to_str(jobj, "Login"); //
             login = mx_strdup(sockbd.login); //
         } //
+        ///////// Затычка для добавления контактов
+        if (!mx_strcmp(mx_json_to_str(jobj, "Type"), "Add_contact")) { //
+            // sockbd.login = mx_json_to_str(jobj, "Login"); //
+            // login = mx_strdup(sockbd.login); //
+            printf("%s\n", buffer);
+            continue;
+        } //
+        ///////// Конец затычки для добавления контактов
         printf("char *login: %s\n", login); //
         j_result = mx_dbase_handler(jobj, sockbd.bd); //
-        json_object_put(jobj); //
+        //json_object_put(jobj); //
         printf("json_object_to_json_string(j_result): %s\n", json_object_to_json_string(j_result)); //
         // answer = json_object_get_string(j_result); //
         // n = send(sockbd.sockfd, answer, mx_strlen(answer),  0);

@@ -5,7 +5,6 @@
 #include <sqlite3.h>
 
 typedef struct s_datab {
-    int id;
     int logtrigger;
     int passtrigger;
     int socket;

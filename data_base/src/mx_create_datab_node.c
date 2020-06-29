@@ -5,7 +5,6 @@ t_datab *mx_create_datab_node(void) {
 
 
     if (node) {
-        node->id = 0;
         node->logtrigger = 0;
         node->passtrigger = 0;
         node->socket = 0;
