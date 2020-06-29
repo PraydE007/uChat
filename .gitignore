@@ -18,3 +18,4 @@ uchat_db.a
 chat_base.db
 Makefile.nix
 *~
+uchat_server.log
