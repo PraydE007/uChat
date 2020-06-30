@@ -81,6 +81,12 @@ typedef struct s_s_glade {
     GtkWidget *b_p_close;
 }              t_s_glade;
 
+// VALIDATION
+int mx_check_number(const char *number, int j);
+int mx_check_pass(const char *pass, int j);
+int mx_check_login(const char *login, int j);
+int mx_check_mail(const char *mail, int i);
+
 // HASH
 char *mx_hash_to_string(unsigned char *hash);
 char *mx_hash(char *pass);
