@@ -54,6 +54,8 @@ CL_SRC		=	main.c \
 				mx_load_img.c \
 				mx_push_chat.c \
 				mx_find_user.c \
+				mx_push_message.c \
+				mx_change_theme.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \

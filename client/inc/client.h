@@ -33,6 +33,7 @@ typedef struct s_s_glade {
 
     // Application
     GdkPixbuf *icon;
+    GtkCssProvider *css_provider;
 
     // Login window
     GtkWidget *w_signin;
@@ -63,10 +64,10 @@ typedef struct s_s_glade {
     GtkWidget *b_send;
     GtkWidget *b_profile;
     GtkWidget *e_message;
-    GtkWidget *tv_term_emul;
     GtkWidget *e_find;
     GtkWidget *b_find;
     GtkWidget *l_chats;
+    GtkWidget *l_messages;
 
     // Profile window
     GtkWidget *w_profile;
@@ -107,6 +108,8 @@ void mx_registration(GtkButton *button, gpointer data);
 void mx_send_message(GtkButton *button, gpointer data);
 void mx_open_profile(GtkButton *button, gpointer data);
 void mx_close_profile(GtkButton *button, gpointer data);
+void mx_push_message(GtkWidget *lst, const char *msg);
+void mx_change_theme(t_s_glade *gui, bool mode);
 
 //infinity_recive_from_server
 void *mx_client_recv(void *data);
