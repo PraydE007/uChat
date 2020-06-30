@@ -45,8 +45,7 @@
         </child>
         <child>
           <object class="GtkButton" id="button.signup">
-            <property name="label" translatable="yes"> Create
-account</property>
+            <property name="label" translatable="yes">Apply</property>
             <property name="width_request">100</property>
             <property name="height_request">50</property>
             <property name="visible">True</property>

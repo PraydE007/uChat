@@ -56,6 +56,10 @@ CL_SRC		=	main.c \
 				mx_find_user.c \
 				mx_push_message.c \
 				mx_change_theme.c \
+				mx_check_number.c \
+				mx_check_pass.c \
+				mx_check_login.c \
+				mx_check_mail.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \
