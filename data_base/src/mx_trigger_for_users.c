@@ -7,5 +7,5 @@ void mx_trigger_for_users(sqlite3 *db, char *sql) {
     "DELETE FROM 'USERS_CHATS' WHERE OLD.ID = USER_id;" \
     "DELETE FROM 'CONTACTS'    WHERE OLD.ID = OWNER_id;" \
     "END;");
-    mx_table_setting(db, sql);
+    mx_table_creation(db, sql, mx_callback);
 }

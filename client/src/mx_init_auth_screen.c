@@ -31,7 +31,7 @@ static void init_signup(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->e_r_password = mx_get_widget(builder, "entry.password");
     (*gui)->e_r_password2 = mx_get_widget(builder, "entry.password2");
     (*gui)->b_r_signin = mx_get_widget(builder, "button.login");
-    (*gui)->e_r_number = mx_get_widget(builder, "entry.phone");
+    (*gui)->e_r_mobile = mx_get_widget(builder, "entry.phone");
 }
 
 static void init_chat(GtkBuilder **builder, t_s_glade **gui) {
@@ -135,6 +135,8 @@ static void connect_signals(t_s_glade *gui) {
     // Profile Window Signals
     g_signal_connect(gui->b_p_close, "clicked",
                     G_CALLBACK(mx_close_profile), gui);
+    g_signal_connect(gui->b_p_apply, "clicked",
+                    G_CALLBACK(mx_change_profile), gui);
 }
 
 static bool read_mode(void) {

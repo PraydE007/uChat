@@ -6,5 +6,5 @@ void mx_table_messages(sqlite3 *db, char *sql) {
             "SENDER_id    INTEGER NOT NULL," \
             "CHAT_id      INTEGER NOT NULL," \
             "MESSAGE_text TEXT    NOT NULL);");
-    mx_table_setting(db, sql);
+    mx_table_creation(db, sql, mx_callback);
 }

@@ -20,7 +20,7 @@ void mx_registration(GtkButton *button, gpointer data) {
     const char *mail = gtk_entry_get_text(GTK_ENTRY(gui->e_email));
     const char *pass0 = gtk_entry_get_text(GTK_ENTRY(gui->e_r_password));
     const char *pass1 = gtk_entry_get_text(GTK_ENTRY(gui->e_r_password2));
-    const char *number = gtk_entry_get_text(GTK_ENTRY(gui->e_r_number));
+    const char *mobile = gtk_entry_get_text(GTK_ENTRY(gui->e_r_mobile));
 
     int n = 0;
     char buffer[2048];
@@ -30,21 +30,21 @@ void mx_registration(GtkButton *button, gpointer data) {
     printf("MAIL = %s\n", mail);
     printf("PASS0 = %s\n", pass0);
     printf("PASS1 = %s\n", pass1);
-    printf("CHECK_PASS = %d\n", check_data(pass0, mail, login, number));
-    printf("NUMBER = %s\n", number);
+    printf("CHECK_PASS = %d\n", check_data(pass0, mail, login, mobile));
+    printf("NUMBER = %s\n", mobile);
     (void)button;
-    if (!strcmp(pass0, pass1) && !check_data(pass0, mail, login, number)) {
+    if (!strcmp(pass0, pass1) && !check_data(pass0, mail, login, mobile)) {
         json_object *jobj = json_object_new_object();
         json_object *j_type = json_object_new_string("Registr");
         json_object *j_login = json_object_new_string(login);
         json_object *j_passwd = json_object_new_string(pass0);
         json_object *j_email = json_object_new_string(mail);
-        json_object *j_number = json_object_new_string(number);
+        json_object *j_mobile = json_object_new_string(mobile);
         json_object_object_add(jobj, "Type", j_type);
         json_object_object_add(jobj, "Login", j_login);
         json_object_object_add(jobj, "Passwd", j_passwd);
         json_object_object_add(jobj, "Email", j_email);
-        json_object_object_add(jobj, "Number", j_number);
+        json_object_object_add(jobj, "Mobile", j_mobile);
 
         send_data = (char *) json_object_to_json_string(jobj);
 
@@ -54,14 +54,14 @@ void mx_registration(GtkButton *button, gpointer data) {
         n = recv(gui->sockfd, buffer, 2048, 0);
         printf("BUFFER = %s\n", buffer);
     }
-    else if (check_data(pass0, mail, login, number) == 1)
-        mx_show_dialog(gui->w_signup, "Incorrect email adress. Example - *********@****.***\n");
-    else if (check_data(pass0, mail, login, number) == 2)
-        mx_show_dialog(gui->w_signup, "Incorrect login.\n");
-    else if (check_data(pass0, mail, login, number) == 3)
-        mx_show_dialog(gui->w_signup, "Incorrect password.\n");
-    else if (check_data(pass0, mail, login, number) == 4)
-        mx_show_dialog(gui->w_signup, "Incorrect number. Example - +X (XXX) XXX - XXXX\n");
+    else if (check_data(pass0, mail, login, mobile) == 1)
+        printf("Incorrect email adress. Example - *********@****.***\n");
+    else if (check_data(pass0, mail, login, mobile) == 2)
+        printf("Incorrect login.\n");
+    else if (check_data(pass0, mail, login, mobile) == 3)
+        printf("Incorrect password.\n");
+    else if (check_data(pass0, mail, login, mobile) == 4)
+        printf("Incorrect number. Example - +X (XXX) XXX - XXXX\n");
     else
         mx_show_dialog(gui->w_signup, "PAROLY NE SOVPADAYT BLEAT<3\n");
     if (!strcmp(buffer, "You have registered successfully!")) {

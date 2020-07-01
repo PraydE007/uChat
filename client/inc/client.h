@@ -64,7 +64,7 @@ typedef struct s_s_glade {
     GtkWidget *e_r_password;
     GtkWidget *e_r_password2;
     GtkWidget *b_r_signin;
-    GtkWidget *e_r_number;
+    GtkWidget *e_r_mobile;
 
     // Chat window
     GtkWidget *w_chat;
@@ -103,6 +103,13 @@ typedef struct s_s_glade {
     GtkWidget *b_p_close;
 }              t_s_glade;
 
+// BUFFERS_PROFILE_STRUCTS_FOR_AUDITOR
+typedef struct s_buff_getchar_prof {
+    char *login;
+    char *email;
+    char *number;
+}   t_buff_getchar_prof;
+
 // VALIDATION
 int mx_check_number(const char *number, int j);
 int mx_check_pass(const char *pass, int j);
@@ -140,6 +147,7 @@ void mx_open_profile(GtkButton *button, gpointer data);
 void mx_close_profile(GtkButton *button, gpointer data);
 void mx_push_message(GtkWidget *lst, const char *msg);
 void mx_change_theme(t_s_glade *gui, bool mode);
+void mx_change_profile(GtkButton *button, gpointer data);
 
 //infinity_recive_from_server
 void *mx_client_recv(void *data);

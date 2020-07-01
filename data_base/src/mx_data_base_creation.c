@@ -23,11 +23,15 @@ void mx_data_base_creation(sqlite3 **db) {
         fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(*db));
     else
         fprintf(stdout, "Opened database successfully\n");
+    sprintf(sql, "DROP TABLE IF EXISTS ACTIVITY;");
+    connection_point = sqlite3_exec(*db, sql, callback, p, NULL);
     mx_table_users(*db, sql);
     mx_table_chats(*db, sql);
     mx_table_users_chats(*db, sql);
     mx_table_messages(*db, sql);
     mx_table_contacts(*db, sql);
+    mx_table_activity(*db, sql);
+    mx_trigger_for_activity(*db, sql);
     mx_trigger_for_users(*db, sql);
     mx_trigger_for_messages(*db, sql);
     // sprintf(sql, "CREATE TABLE IF NOT EXISTS 'USERS'(" \

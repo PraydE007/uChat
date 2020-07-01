@@ -18,19 +18,25 @@ FILES = mx_callback.c \
 		mx_if_contact.c \
 		mx_if_logging.c \
 		mx_if_registr.c \
+		mx_is_active.c \
 		mx_js_add.c \
+		mx_json_to_datab.c \
 		mx_json_to_int.c \
 		mx_json_to_str.c \
-		mx_status_change.c \
 		mx_strjoin_free_js_value.c \
+		mx_table_activity.c \
+		mx_table_creation.c \
 		mx_table_chats.c \
 		mx_table_contacts.c \
 		mx_table_messages.c \
 		mx_table_setting.c \
 		mx_table_users.c \
 		mx_table_users_chats.c \
+		mx_trigger_for_activity.c \
 		mx_trigger_for_messages.c \
 		mx_trigger_for_users.c \
+		mx_user_activate.c \
+		mx_user_deactivate.c \
 
 
 SRCS = $(addprefix $(SRCD)/, $(FILES))
