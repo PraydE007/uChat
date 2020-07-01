@@ -1,4 +1,6 @@
 #include "server.h"
+#include <stdio.h>
+#include <string.h>
 
 static void accepting(t_sockbd *sockbd) {
    if (sockbd->sockfd < 0) {
