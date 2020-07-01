@@ -1,7 +1,3 @@
-#ifndef _GNU_SOURCE
-#define _GNU_SOURCE 1
-#endif
-
 #ifndef CLIENT_H
 #define CLIENT_H
 
@@ -14,7 +10,14 @@
 #include <openssl/ssl.h>
 
 #define MX_AVATAR_MIS "client/res/images/avatar_missing.png"
+#define MX_BUTTON_PROFILE "client/res/icons/profile.png"
+#define MX_BUTTON_LOGOUT "client/res/icons/logout.png"
+#define MX_BUTTON_FIND "client/res/icons/search.png"
+#define MX_BUTTON_SETTINGS "client/res/icons/settings.png"
+#define MX_BUTTON_EMOJI "client/res/icons/smile.png"
+#define MX_BUTTON_SEND "client/res/icons/send.png"
 
+#define MX_WINDOW_WARNING "client/res/icons/warning.png"
 #define MX_WINDOW_LOGIN "client/res/forms/window.login.glade"
 #define MX_WINDOW_SIGNUP "client/res/forms/window.signup.glade"
 #define MX_WINDOW_CHAT "client/res/forms/window.chat.glade"
@@ -24,7 +27,7 @@
 #define MX_DARK_THEME "client/res/themes/dark.css"
 
 typedef struct s_s_glade {
-    bool darkmode;
+    int mode;
     int sockfd;
 
     // Window position
@@ -42,12 +45,16 @@ typedef struct s_s_glade {
     GtkWidget *e_l_password;
     GtkWidget *b_l_signin;
     GtkWidget *b_l_signup;
-    GtkWidget *b_settings;
+    GtkWidget *b_l_settings;
 
     // Settings window
     GtkWidget *w_settings;
+    GtkWidget *b_t_light;
+    GtkWidget *b_t_dark;
+    GtkWidget *b_t_custom;
+    GtkWidget *b_t_connect;
     GtkWidget *b_s_close;
-    GtkWidget *s_darkmode;
+    GtkWidget *e_package;
 
     // Registration window
     GtkWidget *w_signup;
@@ -62,12 +69,26 @@ typedef struct s_s_glade {
     // Chat window
     GtkWidget *w_chat;
     GtkWidget *b_send;
+    GtkWidget *i_b_send;
     GtkWidget *b_profile;
+    GtkWidget *i_b_profile;
+    GtkWidget *b_logout;
+    GtkWidget *i_b_logout;
+    GtkWidget *b_c_settings;
+    GtkWidget *i_b_settings;
+    GtkWidget *b_emoji;
+    GtkWidget *i_b_emoji;
     GtkWidget *e_message;
     GtkWidget *e_find;
     GtkWidget *b_find;
+    GtkWidget *i_b_find;
     GtkWidget *l_chats;
     GtkWidget *l_messages;
+
+    // Emoji window
+    GtkWidget *w_emoji;
+    GtkWidget *b_e_close;
+    GtkWidget *l_one;
 
     // Profile window
     GtkWidget *w_profile;
@@ -102,11 +123,14 @@ GtkWindow *mx_gw(GtkWidget *widget);
 GtkWidget *mx_load_img(const char *filename, int w, int h);
 void mx_push_chat(GtkWidget *lst, const char *user_name);
 void mx_find_user(GtkButton *button, gpointer data);
+void mx_rep_img(GtkWidget *image, const char *filename, int w, int h);
+void mx_show_dialog(GtkWidget *parent, char *message);
 
 // GUI SIGNALS
-void mx_open_auth_settings(GtkButton *button, gpointer data);
-void mx_close_auth_settings(GtkButton *button, gpointer data);
-void mx_darkmode_switch(GtkSwitch *s_switch, gpointer data);
+void mx_open_window(GtkButton *button, gpointer data);
+void mx_close_window(GtkButton *button, gpointer data);
+void mx_light_theme(GtkButton *b, gpointer data);
+void mx_dark_theme(GtkButton *b, gpointer data);
 void mx_logged_in(GtkButton *button, gpointer data);
 void mx_open_signup(GtkButton *button, gpointer data);
 void mx_close_signup(GtkButton *button, gpointer data);

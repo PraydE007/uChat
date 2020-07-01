@@ -31,9 +31,12 @@ grid {
     background-color: #3e3e3e;
 }
 
+list {
+    background-image: linear-gradient(to bottom right, #211927, #131313);
+}
+
 list label {
     color: #ffffff;
-    background-color: #3e3e3e;
 }
 
 list image {

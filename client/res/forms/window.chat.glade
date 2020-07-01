@@ -129,7 +129,7 @@
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <child>
-                          <object class="GtkImage" id="image.button.profile4">
+                          <object class="GtkImage" id="image.button.find">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="stock">gtk-missing-image</property>
@@ -357,10 +357,10 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
-              <object class="GtkLabel">
+              <object class="GtkLabel" id="label.one">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">EM HERE</property>
+                <property name="label" translatable="yes">1</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>

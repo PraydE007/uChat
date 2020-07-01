@@ -9,28 +9,28 @@ static void rewrite(struct json_object *obj) {
     close(file);
 }
 
-static void write_mode(bool res) {
+static void write_mode(int res) {
     int file = open("settings.json", O_RDWR);
     char *json = mx_strnew(1024);
     struct json_object *settings = NULL;
-    struct json_object *darkmode = NULL;
+    struct json_object *thememode = NULL;
 
     if (file != -1) {
         read(file, json, 1024);
         close(file);
         settings = json_tokener_parse(json);
-        darkmode = json_object_object_get(settings, "darkmode");
-        if (json_object_set_boolean(darkmode, res))
+        thememode = json_object_object_get(settings, "mode");
+        if (json_object_set_int(thememode, res))
             rewrite(settings);
         json_object_put(settings);
     }
     mx_strdel(&json);
 }
 
-void mx_darkmode_switch(GtkSwitch *s_darkmode, gpointer data) {
+void mx_light_theme(GtkButton *b, gpointer data) {
     t_s_glade *gui = (t_s_glade *)data;
 
-    (void)gui;
-    bool res = gtk_switch_get_active(s_darkmode);
-    write_mode(res);
+    (void)b;
+    gtk_css_provider_load_from_path(gui->css_provider, MX_DEF_THEME, NULL);
+    write_mode(0);
 }

@@ -55,16 +55,17 @@ void mx_registration(GtkButton *button, gpointer data) {
         printf("BUFFER = %s\n", buffer);
     }
     else if (check_data(pass0, mail, login, number) == 1)
-        printf("Incorrect email adress. Example - *********@****.***\n");
+        mx_show_dialog(gui->w_signup, "Incorrect email adress. Example - *********@****.***\n");
     else if (check_data(pass0, mail, login, number) == 2)
-        printf("Incorrect login.\n");
+        mx_show_dialog(gui->w_signup, "Incorrect login.\n");
     else if (check_data(pass0, mail, login, number) == 3)
-        printf("Incorrect password.\n");
+        mx_show_dialog(gui->w_signup, "Incorrect password.\n");
     else if (check_data(pass0, mail, login, number) == 4)
-        printf("Incorrect number. Example - +X (XXX) XXX - XXXX\n");
+        mx_show_dialog(gui->w_signup, "Incorrect number. Example - +X (XXX) XXX - XXXX\n");
     else
-        printf("PAROLY NE SOVPADAYT BLEAT<3\n");
+        mx_show_dialog(gui->w_signup, "PAROLY NE SOVPADAYT BLEAT<3\n");
     if (!strcmp(buffer, "You have registered successfully!")) {
+        mx_show_dialog(gui->w_signup, "You have registered successfully!\n");
         gtk_window_get_position(mx_gw(gui->w_signup), &(gui->w_x), &(gui->w_y));
         gtk_widget_hide(gui->w_signup);
         gtk_widget_show_all(gui->w_signin);

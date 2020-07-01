@@ -35,11 +35,12 @@ SV_INCS =	$(addprefix $(SV_INCD)/, $(SV_INC))
 CL_SRC		=	main.c \
 				mx_init_auth_screen.c \
 				mx_interface.c \
-				mx_close_auth_settings.c \
-				mx_open_auth_settings.c \
+				mx_close_window.c \
+				mx_open_window.c \
 				mx_get_widget.c \
 				mx_load_theme.c \
-				mx_darkmode_switch.c \
+				mx_light_theme.c \
+				mx_dark_theme.c \
 				mx_logged_in.c \
 				mx_logged_in_chat.c \
 				mx_open_signup.c \
@@ -60,6 +61,8 @@ CL_SRC		=	main.c \
 				mx_check_pass.c \
 				mx_check_login.c \
 				mx_check_mail.c \
+				mx_rep_img.c \
+				mx_show_dialog.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \

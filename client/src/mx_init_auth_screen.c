@@ -7,13 +7,13 @@ static void init_login(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->e_l_password = mx_get_widget(builder, "entry.password");
     (*gui)->b_l_signin = mx_get_widget(builder, "button.signin");
     (*gui)->b_l_signup = mx_get_widget(builder, "button.signup");
-    (*gui)->b_settings = mx_get_widget(builder, "button.settings");
+    (*gui)->b_l_settings = mx_get_widget(builder, "button.settings");
     (*gui)->w_settings = mx_get_widget(builder, "window.settings");
     (*gui)->b_s_close = mx_get_widget(builder, "button.close");
-    (*gui)->s_darkmode = mx_get_widget(builder, "switch.darkmode");
-
-    if ((*gui)->darkmode)
-        gtk_switch_set_active(GTK_SWITCH((*gui)->s_darkmode), true);
+    (*gui)->b_t_light = mx_get_widget(builder, "button.theme.light");
+    (*gui)->b_t_dark = mx_get_widget(builder, "button.theme.dark");
+    (*gui)->b_t_custom = mx_get_widget(builder, "button.theme.custom");
+    (*gui)->b_t_connect = mx_get_widget(builder, "button.theme.connect");
 
     // (*gui)->icon = gdk_pixbuf_new_from_file("client/res/images/icon.ico", NULL);
     // if ((*gui)->icon) {
@@ -38,12 +38,25 @@ static void init_chat(GtkBuilder **builder, t_s_glade **gui) {
     (*builder) = gtk_builder_new_from_file(MX_WINDOW_CHAT);
     (*gui)->w_chat = mx_get_widget(builder, "window.chat");
     (*gui)->b_send = mx_get_widget(builder, "button.send");
+    (*gui)->i_b_send = mx_get_widget(builder, "image.button.send");
     (*gui)->b_profile = mx_get_widget(builder, "button.profile");
+    (*gui)->i_b_profile = mx_get_widget(builder, "image.button.profile");
+    (*gui)->b_logout = mx_get_widget(builder, "button.profile");
+    (*gui)->i_b_logout = mx_get_widget(builder, "image.button.logout");
+    (*gui)->b_c_settings = mx_get_widget(builder, "button.settings");
+    (*gui)->i_b_settings = mx_get_widget(builder, "image.button.settings");
     (*gui)->e_message = mx_get_widget(builder, "entry.message");
     (*gui)->e_find = mx_get_widget(builder, "entry.find");
     (*gui)->b_find = mx_get_widget(builder, "button.find");
+    (*gui)->i_b_find = mx_get_widget(builder, "image.button.find");
     (*gui)->l_chats = mx_get_widget(builder, "list.chats");
     (*gui)->l_messages = mx_get_widget(builder, "list.messages");
+    (*gui)->w_emoji = mx_get_widget(builder, "window.emoji");
+    (*gui)->b_emoji = mx_get_widget(builder, "button.emoji");
+    (*gui)->i_b_emoji = mx_get_widget(builder, "image.button.emoji");
+    (*gui)->b_e_close = mx_get_widget(builder, "button.close");
+    (*gui)->l_one = mx_get_widget(builder, "label.one");
+    // gtk_label_set_text(GTK_LABEL((*gui)->l_one), "\U0001F600 <-");
 }
 
 static void init_profile(GtkBuilder **builder, t_s_glade **gui) {
@@ -60,30 +73,42 @@ static void init_profile(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->b_p_close = mx_get_widget(builder, "button.close");
 }
 
+static void init_images(t_s_glade **gui) {
+    mx_rep_img((*gui)->i_avatar, MX_AVATAR_MIS, 225, 225);
+    mx_rep_img((*gui)->i_b_profile, MX_BUTTON_PROFILE, 32, 32);
+    mx_rep_img((*gui)->i_b_logout, MX_BUTTON_LOGOUT, 32, 32);
+    mx_rep_img((*gui)->i_b_find, MX_BUTTON_FIND, 25, 25);
+    mx_rep_img((*gui)->i_b_settings, MX_BUTTON_SETTINGS, 25, 25);
+    mx_rep_img((*gui)->i_b_emoji, MX_BUTTON_EMOJI, 25, 25);
+    mx_rep_img((*gui)->i_b_send, MX_BUTTON_SEND, 25, 25);
+}
+
 static void connect_signals(t_s_glade *gui) {
-    // UChat Quit Signals
+    // Uchat Quit Signals
     g_signal_connect(gui->w_signin, "destroy",
-                    G_CALLBACK(gtk_main_quit), NULL);
+                    G_CALLBACK(exit), (void *)0);
     g_signal_connect(gui->w_signup, "destroy",
-                    G_CALLBACK(gtk_main_quit), NULL);
+                    G_CALLBACK(exit), (void *)0);
     g_signal_connect(gui->w_chat, "destroy",
-                    G_CALLBACK(gtk_main_quit), NULL);
+                    G_CALLBACK(exit), (void *)0);
     g_signal_connect(gui->w_profile, "destroy",
-                    G_CALLBACK(gtk_main_quit), NULL);
+                    G_CALLBACK(exit), (void *)0);
 
     // Login Window Signals
     g_signal_connect(gui->b_l_signin, "clicked",
                     G_CALLBACK(mx_logged_in), gui);
     g_signal_connect(gui->b_l_signup, "clicked",
                     G_CALLBACK(mx_open_signup), gui);
-    g_signal_connect(gui->b_settings, "clicked",
-                    G_CALLBACK(mx_open_auth_settings), gui->w_settings);
+    g_signal_connect(gui->b_l_settings, "clicked",
+                    G_CALLBACK(mx_open_window), gui->w_settings);
 
     // Settings Window Signals
     g_signal_connect(gui->b_s_close, "clicked",
-                    G_CALLBACK(mx_close_auth_settings), gui->w_settings);
-    g_signal_connect(gui->s_darkmode, "state-set",
-                    G_CALLBACK(mx_darkmode_switch), gui);
+                    G_CALLBACK(mx_close_window), gui->w_settings);
+    g_signal_connect(gui->b_t_light, "clicked",
+                    G_CALLBACK(mx_light_theme), gui);
+    g_signal_connect(gui->b_t_dark, "clicked",
+                    G_CALLBACK(mx_dark_theme), gui);
 
     // Registration Window Signals
     g_signal_connect(gui->b_r_signin, "clicked",
@@ -98,6 +123,14 @@ static void connect_signals(t_s_glade *gui) {
                     G_CALLBACK(mx_open_profile), gui);
     g_signal_connect(gui->b_find, "clicked",
                     G_CALLBACK(mx_find_user), gui);
+    g_signal_connect(gui->b_c_settings, "clicked",
+                    G_CALLBACK(mx_open_window), gui->w_settings);
+    g_signal_connect(gui->b_emoji, "clicked",
+                    G_CALLBACK(mx_open_window), gui->w_emoji);
+
+    // Emoji window
+    g_signal_connect(gui->b_e_close, "clicked",
+                    G_CALLBACK(mx_close_window), gui->w_emoji);
 
     // Profile Window Signals
     g_signal_connect(gui->b_p_close, "clicked",
@@ -108,16 +141,16 @@ static bool read_mode(void) {
     int file = open("settings.json", O_RDONLY);
     char *json = mx_strnew(1024);
     struct json_object *settings = NULL;
-    struct json_object *darkmode = NULL;
-    bool res = false;
+    struct json_object *thememode = NULL;
+    int res = 0;
 
     if (file != -1) {
         read(file, json, 1024);
         close(file);
         settings = json_tokener_parse(json);
-        darkmode = json_object_object_get(settings, "darkmode");
+        thememode = json_object_object_get(settings, "mode");
         mx_strdel(&json);
-        res = json_object_get_boolean(darkmode);
+        res = json_object_get_boolean(thememode);
         json_object_put(settings);
         return res;
     }
@@ -129,12 +162,13 @@ t_s_glade *mx_init_auth_screen(int socket) {
     GtkBuilder *builder = NULL;
     t_s_glade *gui = (t_s_glade *)malloc(sizeof(t_s_glade));
 
-    gui->darkmode = read_mode();
+    gui->mode = read_mode();
     gui->sockfd = socket;
     init_login(&builder, &gui);
     init_signup(&builder, &gui);
     init_chat(&builder, &gui);
     init_profile(&builder, &gui);
+    init_images(&gui);
     mx_load_theme(gui);
     connect_signals(gui);
     gtk_widget_show_all(gui->w_signin);
