@@ -1,60 +1,75 @@
 #include "dbase.h"
 
-static int cb_conanswer(void *datab, int argc, char **argv, char **azColName) {
+static int cb_id_finder(void *datab, int argc, char **argv, char **azColName) {
     (void)argc;
     (void)azColName;
     if (datab) {
         t_datab *new_datab = (t_datab *)datab;
 
-        if (!mx_strcmp(new_datab->login_db, argv[1])
-            && !mx_strcmp(new_datab->security_db, argv[2])) {
-            new_datab->id = mx_strdup(argv[0]);
-            new_datab->logtrigger = 1;
-            if (new_datab->passtrigger == 1)
-                return 1;
-        }
-        else if (!mx_strcmp(new_datab->login_db2, argv[1])) {
+        if (!mx_strcmp(new_datab->login_db2, argv[1])) {
             new_datab->second_id = mx_strdup(argv[0]);
-            new_datab->passtrigger = 1;
-            if (new_datab->logtrigger == 1)
-                return 1;
+            new_datab->logtrigger = 1;
+            return 1;
         }
     }
     return 0;
 }
 
-static void insert_contact(json_object *j_result, sqlite3 *db, char *sql) {
-    int connection_point;
+static int cb_contact_id_finder(void *datab, int argc, char **argv,
+                                                            char **azColName) {
+    (void)argc;
+    (void)azColName;
+    if (datab) {
+        t_datab *new_datab = (t_datab *)datab;
 
+        if (!mx_strcmp(new_datab->second_id, argv[1])) {
+            new_datab->passtrigger = 1;
+            return 1;
+        }
+    }
+    return 0;
+}
+
+static void insert_contact(json_object *j_result, sqlite3 *db, char *sql,
+                                                            t_datab *datab) {
+    int connection_point;
+// printf("datab->id: %s\n", datab->id);
+// printf("datab->second_id: %s\n", datab->second_id);
     sprintf(sql, "insert into CONTACTS (OWNER_id, FOLLOWER_id) " \
-            "values(datab->id, datab->second_id)");
+            "values(%s, %s)", datab->id, datab->second_id);
     connection_point = sqlite3_exec(db, sql, mx_callback, NULL, NULL);
     if (connection_point != SQLITE_OK && connection_point != SQLITE_ABORT)
         fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
     mx_js_add(j_result, "Answer", MX_CONT_MES);
+    mx_strdel(&datab->id);
+    mx_strdel(&datab->second_id);
 }
 
 json_object *mx_if_contact(json_object *jobj, sqlite3 *db, t_datab *datab) {
     json_object *j_result = json_object_new_object();
-    int connection_point;
     char sql[255];
 
-    datab->login_db = mx_json_to_str(jobj, "Login");
     datab->login_db2 = mx_json_to_str(jobj, "Contact_login");
     datab->security_db = mx_json_to_str(jobj, "Security_key");
-    sprintf(sql, "select ID, LOGIN, SECURITY_KEY from USERS;");
-    connection_point = sqlite3_exec(db, sql, cb_conanswer, datab, NULL);
-    if (connection_point != SQLITE_OK && connection_point != SQLITE_ABORT)
-        fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
-    if (datab->logtrigger == 1 && datab->passtrigger == 1)
-        insert_contact(j_result, db, sql);
-    else if (datab->passtrigger == 1)
-        mx_js_add(j_result, "Answer", MX_CHEAT_MESSAGE);
+    if (mx_is_active(jobj, db, datab)) {
+        sprintf(sql, "select ID, LOGIN from USERS;");
+        mx_table_setting(db, sql, cb_id_finder, datab);
+        sprintf(sql, "select OWNER_id, FOLLOWER_id from CONTACTS where OWNER_id = %s;", datab->id);
+        printf("sql!!!: %s\n", sql);
+        mx_table_setting(db, sql, cb_contact_id_finder, datab);
+        if (!mx_strcmp(datab->login_db, datab->login_db2))
+            mx_js_add(j_result, "Answer", "You can not add yourself into contacts!");
+        else if (datab->passtrigger == 1)
+            mx_js_add(j_result, "Answer", "You have already this contact in the list!");
+        else if (datab->logtrigger == 1)
+            insert_contact(j_result, db, sql, datab);
+        else
+            mx_js_add(j_result, "Answer", MX_CONT_ERR);
+    }
     else
-        mx_js_add(j_result, "Answer", MX_CONT_ERR);
-    printf("answer: %s\n", mx_json_to_str(j_result, "Answer"));//
-    // mx_strdel(&datab->id);
-    // mx_strdel(&datab->second_id);
+        mx_js_add(j_result, "Answer", MX_CHEAT_MESSAGE);
+    mx_strdel(&datab->id);// comment in mx_is_active
+    mx_strdel(&datab->second_id);
     datab->logtrigger = 0;
     datab->passtrigger = 0;
     return j_result;

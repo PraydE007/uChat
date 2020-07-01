@@ -8,6 +8,8 @@ json_object *mx_dbase_handler(json_object *jobj, sqlite3 *db) {
         j_result = mx_if_logging(jobj, db, datab);
     else if (!mx_strcmp("Registr", mx_json_to_str(jobj, "Type")))
         j_result = mx_if_registr(jobj, db, datab);
+    else if (!mx_strcmp("Add_contact", mx_json_to_str(jobj, "Type")))
+        j_result = mx_if_contact(jobj, db, datab);
     mx_dealloc_datab(&datab);
     return j_result;
 }

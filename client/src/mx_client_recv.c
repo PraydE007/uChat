@@ -9,6 +9,10 @@ void *mx_client_recv(void *data) {
         bzero(buffer, 2048);
         n = recv(sockfd, buffer, sizeof(buffer), MSG_WAITALL);
             printf("%s\n", buffer);
+        if (n <= 0) {
+            printf("%s\n", "SERVER_DOWN!");
+            exit(0);
+        }
     }
     return NULL;
 }

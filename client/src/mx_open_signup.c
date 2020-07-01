@@ -10,7 +10,7 @@ void mx_open_signup(GtkButton *button, gpointer data) {
     gtk_window_move(mx_gw(gui->w_signup), gui->w_x, gui->w_y + 22);
 
     gtk_entry_set_text(GTK_ENTRY(gui->e_email), "");
-    gtk_entry_set_text(GTK_ENTRY(gui->e_r_number), "");
+    gtk_entry_set_text(GTK_ENTRY(gui->e_r_mobile), "");
     gtk_entry_set_text(GTK_ENTRY(gui->e_r_login), "");
     gtk_entry_set_text(GTK_ENTRY(gui->e_r_password), "");
     gtk_entry_set_text(GTK_ENTRY(gui->e_r_password2), "");

@@ -47,6 +47,7 @@ SRC		=	mx_isalpha.c \
 			mx_del_extra_spaces.c \
 			mx_strsplit.c \
 			mx_strjoin.c \
+			mx_strjoin_free.c \
 			mx_file_to_str.c \
 			mx_read_line.c \
 			mx_replace_substr.c \

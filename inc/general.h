@@ -18,6 +18,7 @@
 #include <pthread.h>
 
 #define MX_CHEAT_MESSAGE "Just stay on your place and wait for police!"
+#define MX_SECURITY_KEY "cdef9e974ae775ea9b1472cedb108607127607e538b5c1ff8f9e4"
 #define MX_LOG "1"
 #define MX_LOG_MES "You have logged in!"
 #define MX_REG "2"
