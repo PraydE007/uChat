@@ -15,6 +15,7 @@
 #include "../libmx/inc/libmx.h"
 #include <pthread.h>
 
+#define MX_CHEAT_MESSAGE "Just stay on your place and wait for police!"
 #define MX_LOG "1"
 #define MX_LOG_MES "You have logged in!"
 #define MX_REG "2"

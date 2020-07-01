@@ -40,10 +40,10 @@ static void init_chat(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->b_send = mx_get_widget(builder, "button.send");
     (*gui)->b_profile = mx_get_widget(builder, "button.profile");
     (*gui)->e_message = mx_get_widget(builder, "entry.message");
-    (*gui)->tv_term_emul = mx_get_widget(builder, "tv.term_emul");
     (*gui)->e_find = mx_get_widget(builder, "entry.find");
     (*gui)->b_find = mx_get_widget(builder, "button.find");
     (*gui)->l_chats = mx_get_widget(builder, "list.chats");
+    (*gui)->l_messages = mx_get_widget(builder, "list.messages");
 }
 
 static void init_profile(GtkBuilder **builder, t_s_glade **gui) {

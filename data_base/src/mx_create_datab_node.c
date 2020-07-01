@@ -15,6 +15,7 @@ t_datab *mx_create_datab_node(void) {
         node->login_db = NULL;
         node->login_db2 = NULL;
         node->password_db = NULL;
+        node->security_db = NULL;
     }
     return node;
 }

@@ -6,8 +6,9 @@ void mx_table_users(sqlite3 *db, char *sql) {
         "LOGIN          VARCHAR(50)     NOT NULL," \
         "PASSWORD       VARCHAR(50)     NOT NULL," \
         "EMAIL          VARCHAR(50)     NOT NULL," \
-        "MOBILE         INTEGER," \
+        "MOBILE         VARCHAR(20)     NOT NULL," \
         "SOCKET         INTEGER," \
-        "STATUS         VARCHAR(10));");
+        "STATUS         VARCHAR(10)," \
+        "SECURITY_KEY   CHAR;");
     mx_table_setting(db, sql);
 }
