@@ -51,10 +51,31 @@ void *mx_doprocessing (void *data) {
             continue;
         } //
         ///////// Конец затычки для добавления контактов
-        printf("char *login: %s\n", login); //
+
+        ///////// Затычка для профиля
+        if (!mx_strcmp(mx_json_to_str(jobj, "Type"), "Get_Profile")) { //
+            // sockbd.login = mx_json_to_str(jobj, "Login"); //
+            // login = mx_strdup(sockbd.login); //
+            json_object *j_test_jobj = json_object_new_object();
+            json_object *j_test_Answer = json_object_new_string("Sucsess");
+            json_object *j_test_Login = json_object_new_string("TEST_LOGIN");
+            json_object *j_test_Email = json_object_new_string("TEST_EMAIL");
+            json_object *j_test_Number = json_object_new_string("TEST_NUMBER");
+            json_object_object_add(j_test_jobj,"Answer_profile", j_test_Answer);
+            json_object_object_add(j_test_jobj,"Login", j_test_Login);
+            json_object_object_add(j_test_jobj,"Email", j_test_Email);
+            json_object_object_add(j_test_jobj,"Number", j_test_Number);
+            json_object_object_add(j_test_jobj,"Socket", j_socket);
+
+            n = send(sockbd.sockfd, json_object_to_json_string(j_test_jobj), mx_strlen(json_object_to_json_string(j_test_jobj)), 0);
+            continue;
+        } //
+         ///////// Конец затычки для профиля
+
+        //printf("char *login: %s\n", login); //
         j_result = mx_dbase_handler(jobj, sockbd.bd); //
         //json_object_put(jobj); //
-        printf("json_object_to_json_string(j_result): %s\n", json_object_to_json_string(j_result)); //
+        //printf("json_object_to_json_string(j_result): %s\n", json_object_to_json_string(j_result)); //
         // answer = json_object_get_string(j_result); //
         // n = send(sockbd.sockfd, answer, mx_strlen(answer),  0);
         if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_LOG_MES))

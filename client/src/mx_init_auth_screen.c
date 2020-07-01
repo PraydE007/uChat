@@ -102,6 +102,8 @@ static void connect_signals(t_s_glade *gui) {
     // Profile Window Signals
     g_signal_connect(gui->b_p_close, "clicked",
                     G_CALLBACK(mx_close_profile), gui);
+    g_signal_connect(gui->b_p_apply, "clicked",
+                    G_CALLBACK(mx_change_profile), gui);
 }
 
 static bool read_mode(void) {
