@@ -13,7 +13,7 @@
 #include "../../json/include/json-c/json.h"
 #include <openssl/ssl.h>
 
-#define MX_AVATAR_MIS "client/res/images/avatar_missing.png"
+#define MX_AVATAR_MIS "client/res/images/meme.png"
 
 #define MX_WINDOW_LOGIN "client/res/forms/window.login.glade"
 #define MX_WINDOW_SIGNUP "client/res/forms/window.signup.glade"

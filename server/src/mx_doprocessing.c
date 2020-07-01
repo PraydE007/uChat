@@ -28,6 +28,7 @@ void *mx_doprocessing (void *data) {
     while (true) {
         bzero(buffer,2048);
         n = recv(sockbd.sockfd, buffer, sizeof(buffer), 0);
+        printf("%s\n", buffer);
         j_socket = json_object_new_int(sockbd.sockfd);
         //n = send(sockbd.sockfd, buffer, sizeof(buffer), 0);
         if (n <= 0) {

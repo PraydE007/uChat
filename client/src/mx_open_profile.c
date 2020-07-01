@@ -8,4 +8,5 @@ void mx_open_profile(GtkButton *button, gpointer data) {
     gtk_widget_hide(gui->w_chat);
     gtk_widget_show_all(gui->w_profile);
     gtk_window_move(mx_gw(gui->w_profile), gui->w_x, gui->w_y + 22);
+    printf("%s\n", "TEST!!");
 }
