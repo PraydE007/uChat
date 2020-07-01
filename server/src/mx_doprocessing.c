@@ -15,6 +15,28 @@ static void log_add_info(t_sockbd sockbd, json_object *jobj) {
     write (sockbd.log_sescr, "\n", 1);
 }
 
+static void send_mail(char *email, char *message) {
+    int fd = open("MAIL", O_CREAT | O_RDWR);
+    char cmd[1024];
+    // char *command[] = {"sendmail", email, NULL};
+
+    printf("SENDENDND !11!!1!!!!!\n");
+    write(fd, message, strlen(message));
+    sprintf(cmd, "zsh send.sh \"%s\" \"%s\"", message, email);
+    system(cmd);
+    system("rm -rf MAIL");
+    close(fd);
+//    if (wpid == 0) {
+//        close(pipe_des[0]);
+//        dup2(pipe_des[1], 1);
+//        if (execvp("sendmail", command) != -1) {
+//            fprintf(stderr, "123\n");
+//        }
+//        else if (execvp("sendmail", command))
+//    }
+
+}
+
 void *mx_doprocessing (void *data) {
     t_sockbd sockbd = *(t_sockbd *)data;
     int n;
@@ -25,6 +47,7 @@ void *mx_doprocessing (void *data) {
     json_object *j_socket = NULL;
     char *login = NULL;
 
+    send_mail("ozahirny@gmail.com", "DAROVA EPT\n");
     while (true) {
         bzero(buffer,2048);
         n = recv(sockbd.sockfd, buffer, sizeof(buffer), 0);
