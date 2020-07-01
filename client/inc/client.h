@@ -56,7 +56,7 @@ typedef struct s_s_glade {
     GtkWidget *e_r_password;
     GtkWidget *e_r_password2;
     GtkWidget *b_r_signin;
-    GtkWidget *e_r_number;
+    GtkWidget *e_r_mobile;
 
     // Chat window
     GtkWidget *w_chat;

@@ -8,7 +8,6 @@ void mx_table_users(sqlite3 *db, char *sql) {
         "EMAIL          VARCHAR(50)     NOT NULL," \
         "MOBILE         VARCHAR(20)     NOT NULL," \
         "SOCKET         INTEGER," \
-        "STATUS         VARCHAR(10)," \
-        "SECURITY_KEY   CHAR;");
-    mx_table_setting(db, sql);
+        "SECURITY_KEY   CHAR);");
+    mx_table_creation(db, sql, mx_callback);
 }
