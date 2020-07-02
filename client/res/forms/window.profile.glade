@@ -2,6 +2,121 @@
 <!-- Generated with glade 3.22.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
+  <object class="GtkWindow" id="window.password">
+    <property name="can_focus">False</property>
+    <property name="resizable">False</property>
+    <property name="window_position">center</property>
+    <property name="default_width">512</property>
+    <property name="default_height">384</property>
+    <property name="deletable">False</property>
+    <child type="titlebar">
+      <placeholder/>
+    </child>
+    <child>
+      <object class="GtkFixed">
+        <property name="width_request">32</property>
+        <property name="height_request">32</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <object class="GtkBox">
+            <property name="width_request">512</property>
+            <property name="height_request">75</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
+                <property name="label" translatable="yes">Password</property>
+                <attributes>
+                  <attribute name="font-desc" value="Sans Bold 32"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="button.password.close">
+            <property name="label" translatable="yes">Close</property>
+            <property name="width_request">100</property>
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="x">305</property>
+            <property name="y">270</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="entry.newpass1">
+            <property name="width_request">300</property>
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="xalign">0.5</property>
+            <property name="placeholder_text" translatable="yes">New password</property>
+          </object>
+          <packing>
+            <property name="x">106</property>
+            <property name="y">170</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="button.password.apply">
+            <property name="label" translatable="yes">Apply</property>
+            <property name="width_request">100</property>
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="x">105</property>
+            <property name="y">270</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="entry.newpass2">
+            <property name="width_request">300</property>
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="xalign">0.5</property>
+            <property name="placeholder_text" translatable="yes">Repeat password</property>
+          </object>
+          <packing>
+            <property name="x">106</property>
+            <property name="y">220</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="entry.oldpass">
+            <property name="width_request">300</property>
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="xalign">0.5</property>
+            <property name="placeholder_text" translatable="yes">Old password</property>
+          </object>
+          <packing>
+            <property name="x">106</property>
+            <property name="y">120</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
   <object class="GtkWindow" id="window.profile">
     <property name="can_focus">False</property>
     <property name="resizable">False</property>
@@ -99,45 +214,17 @@
           </packing>
         </child>
         <child>
-          <object class="GtkEntry" id="entry.oldpass">
-            <property name="width_request">300</property>
+          <object class="GtkButton" id="button.close">
+            <property name="label" translatable="yes">Close</property>
+            <property name="width_request">100</property>
             <property name="height_request">40</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
-            <property name="xalign">0.5</property>
-            <property name="placeholder_text" translatable="yes">Old password</property>
+            <property name="receives_default">True</property>
           </object>
           <packing>
-            <property name="x">362</property>
-            <property name="y">560</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkEntry" id="entry.newpass1">
-            <property name="width_request">300</property>
-            <property name="height_request">40</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="xalign">0.5</property>
-            <property name="placeholder_text" translatable="yes">New password</property>
-          </object>
-          <packing>
-            <property name="x">362</property>
-            <property name="y">610</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkEntry" id="entry.newpass2">
-            <property name="width_request">300</property>
-            <property name="height_request">40</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="xalign">0.5</property>
-            <property name="placeholder_text" translatable="yes">Repeat password</property>
-          </object>
-          <packing>
-            <property name="x">362</property>
-            <property name="y">660</property>
+            <property name="x">462</property>
+            <property name="y">670</property>
           </packing>
         </child>
         <child>
@@ -150,13 +237,13 @@
             <property name="receives_default">True</property>
           </object>
           <packing>
-            <property name="x">362</property>
-            <property name="y">715</property>
+            <property name="x">462</property>
+            <property name="y">620</property>
           </packing>
         </child>
         <child>
-          <object class="GtkButton" id="button.close">
-            <property name="label" translatable="yes">Close</property>
+          <object class="GtkButton" id="button.password">
+            <property name="label" translatable="yes">Password</property>
             <property name="width_request">100</property>
             <property name="height_request">40</property>
             <property name="visible">True</property>
@@ -164,8 +251,8 @@
             <property name="receives_default">True</property>
           </object>
           <packing>
-            <property name="x">562</property>
-            <property name="y">715</property>
+            <property name="x">462</property>
+            <property name="y">570</property>
           </packing>
         </child>
       </object>
