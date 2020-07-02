@@ -10,6 +10,10 @@ json_object *mx_dbase_handler(json_object *jobj, sqlite3 *db) {
         j_result = mx_if_registr(jobj, db, datab);
     else if (!mx_strcmp("Add_contact", mx_json_to_str(jobj, "Type")))
         j_result = mx_if_contact(jobj, db, datab);
+    else if (!mx_strcmp("Get_Profile", mx_json_to_str(jobj, "Type")))
+        j_result = mx_if_get_profile(jobj, db, datab);
+    else if (!mx_strcmp("Change_profile", mx_json_to_str(jobj, "Type")))
+        j_result = mx_if_change_profile(jobj, db, datab);
     mx_dealloc_datab(&datab);
     return j_result;
 }
