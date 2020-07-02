@@ -9,6 +9,7 @@ typedef struct s_datab {
     int passtrigger;
     int socket;
     char *id;
+    char *chat_id;
     char *second_id;
     char *email;
     char *mobile;
@@ -30,8 +31,10 @@ int mx_callback(void *datab, int argc, char **argv, char **azColName);
 int mx_json_to_int(json_object *jobj, char *key);
 json_object *mx_dbase_handler(json_object *jobj, sqlite3 *db);
 json_object *mx_if_chat(json_object *jobj, sqlite3 *db, t_datab *datab);
+json_object *mx_if_change_passwd(json_object *jobj, sqlite3 *db, t_datab *datab);
 json_object *mx_if_change_profile(json_object *jobj, sqlite3 *db, t_datab *datab);
 json_object *mx_if_contact(json_object *jobj, sqlite3 *db, t_datab *datab);
+json_object *mx_if_create_chat(json_object *jobj, sqlite3 *db, t_datab *datab);
 json_object *mx_if_logging(json_object *jobj, sqlite3 *db, t_datab *datab);
 json_object *mx_if_get_profile(json_object *jobj, sqlite3 *db, t_datab *datab);
 json_object *mx_if_registr(json_object *jobj, sqlite3 *db, t_datab *datab);
