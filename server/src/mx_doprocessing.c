@@ -16,17 +16,17 @@ static void log_add_info(t_sockbd sockbd, json_object *jobj) {
     write (sockbd.log_sescr, "\n", 1);
 }
 
-static void send_mail(char *email, char *message) {
-    int fd = open("MAIL", O_CREAT | O_RDWR);
-    char cmd[1024];
-    // char *command[] = {"sendmail", email, NULL};
+// static void send_mail(char *email, char *message) {
+//     int fd = open("MAIL", O_CREAT | O_RDWR);
+//     char cmd[1024];
+//     // char *command[] = {"sendmail", email, NULL};
 
-    printf("SENDENDND !11!!1!!!!!\n");
-    write(fd, message, strlen(message));
-    sprintf(cmd, "zsh send.sh \"%s\" \"%s\"", message, email);
-    system(cmd);
-    system("rm -rf MAIL");
-    close(fd);
+//     printf("SENDENDND !11!!1!!!!!\n");
+//     write(fd, message, strlen(message));
+//     sprintf(cmd, "zsh send.sh \"%s\" \"%s\"", message, email);
+//     system(cmd);
+//     system("rm -rf MAIL");
+//     close(fd);
 //    if (wpid == 0) {
 //        close(pipe_des[0]);
 //        dup2(pipe_des[1], 1);
@@ -36,7 +36,7 @@ static void send_mail(char *email, char *message) {
 //        else if (execvp("sendmail", command))
 //    }
 
-}
+// }
 
 void *mx_doprocessing (void *data) {
     t_sockbd sockbd = *(t_sockbd *)data;
@@ -48,13 +48,13 @@ void *mx_doprocessing (void *data) {
     json_object *j_socket = NULL;
     char *login = NULL;
 
-    send_mail("ozahirny@gmail.com", "DAROVA EPT\n");
+    //send_mail("ozahirny@gmail.com", "DAROVA EPT\n");
     while (true) {
         bzero(buffer,2048);
         n = recv(sockbd.sockfd, buffer, sizeof(buffer), 0);
-        printf("%s\n", buffer);
+        //printf("%s\n", buffer);
         j_socket = json_object_new_int(sockbd.sockfd);
-        printf("buffer: %s\n", buffer);
+        //printf("buffer: %s\n", buffer);
         //n = send(sockbd.sockfd, buffer, sizeof(buffer), 0);
         if (n <= 0) {
             if_disconnect(sockbd);
@@ -72,7 +72,14 @@ void *mx_doprocessing (void *data) {
             continue;
         } //
         ///////// Конец затычки для добавления контактов
-
+        ///////// Затычка для изменения логина, почты и номера
+        if (!mx_strcmp(mx_json_to_str(jobj, "Type"), "Change_profile")) { //
+            // sockbd.login = mx_json_to_str(jobj, "Login"); //
+            // login = mx_strdup(sockbd.login); //
+            printf("%s\n", buffer);
+            continue;
+        } //
+        ///////// Конец затычки для добавления контактов
         ///////// Затычка для профиля
         if (!mx_strcmp(mx_json_to_str(jobj, "Type"), "Get_Profile")) { //
             // sockbd.login = mx_json_to_str(jobj, "Login"); //
