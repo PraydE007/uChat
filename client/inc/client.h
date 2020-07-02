@@ -110,6 +110,13 @@ typedef struct s_buff_getchar_prof {
     char *number;
 }   t_buff_getchar_prof;
 
+typedef struct s_change_prof {
+    char *login;
+    char *email;
+    char *mobile;
+    char *new_login;
+}   t_change_prof;
+
 // VALIDATION
 int mx_check_number(const char *number, int j);
 int mx_check_pass(const char *pass, int j);
