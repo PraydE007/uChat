@@ -10,11 +10,15 @@ t_datab *mx_create_datab_node(void) {
         node->socket = 0;
         node->id = NULL;
         node->second_id = NULL;
+        node->email = NULL;
+        node->mobile = NULL;
         node->commd = NULL;
         node->type = NULL;
         node->security_key = NULL;
         node->login_db = NULL;
         node->login_db2 = NULL;
+        node->email_db = NULL;
+        node->mobile_db = NULL;
         node->password_db = NULL;
         node->security_db = NULL;
     }

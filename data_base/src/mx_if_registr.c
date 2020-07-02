@@ -42,7 +42,7 @@ json_object *mx_if_registr(json_object *jobj, sqlite3 *db, t_datab *datab) {
         mx_js_add(j_result, "Answer", MX_REG_ERR);
     else
         insert_user(jobj, j_result, db);
-    printf("answer: %s\n", mx_json_to_str(j_result, "Answer")); //
+printf("answer: %s\n", mx_json_to_str(j_result, "Answer")); //
     datab->logtrigger = 0;
     return j_result;
 }
