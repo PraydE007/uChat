@@ -83,24 +83,26 @@ void *mx_doprocessing (void *data) {
         } //
         ///////// Конец затычки для добавления контактов
         ///////// Затычка для профиля
-        if (!mx_strcmp(mx_json_to_str(jobj, "Type"), "Get_Profile")) { //
-            // sockbd.login = mx_json_to_str(jobj, "Login"); //
-            // login = mx_strdup(sockbd.login); //
-            // json_object *j_test_jobj = json_object_new_object();
-            // json_object *j_test_Answer = json_object_new_string("Sucsess");
-            json_object *j_test_Login = json_object_new_string("AAA");
-            // json_object *j_test_Email = json_object_new_string("TEST_EMAIL");
-            // json_object *j_test_Mobile = json_object_new_string("TEST_MOBILE");
-            json_object *j_test_Security_key = json_object_new_string("cdef9e974ae775ea9b1472cedb108607127607e538b5c1ff8f9e46123");
-            // json_object_object_add(jobj,"Answer", j_test_Answer);
-            json_object_object_add(jobj,"Login", j_test_Login);
-            // json_object_object_add(jobj,"Email", j_test_Email);
-            // json_object_object_add(jobj,"Mobile", j_test_Mobile);
-            // json_object_object_add(jobj,"Socket", j_socket);
-            json_object_object_add(jobj,"Security_key", j_test_Security_key);
-            // n = send(sockbd.sockfd, json_object_to_json_string(jobj), mx_strlen(json_object_to_json_string(jobj)), 0); //
-            // continue;
-        } //
+        // json_object *j_test_type = json_object_new_string("Chat");
+        // json_object_object_add(jobj,"Type", j_test_type);
+        // if (!mx_strcmp(mx_json_to_str(jobj, "Type"), "Chat")) { //
+        //     // sockbd.login = mx_json_to_str(jobj, "Login"); //
+        //     // login = mx_strdup(sockbd.login); //
+        //     // json_object *j_test_jobj = json_object_new_object();
+        //     // json_object *j_test_Answer = json_object_new_string("Sucsess");
+        //     json_object *j_test_Login = json_object_new_string("AAA");
+        //     json_object *j_test_Chat_name = json_object_new_string("Chisto potrindetb");
+        //     // json_object *j_test_Mobile = json_object_new_string("TEST_MOBILE");
+        //     json_object *j_test_Security_key = json_object_new_string("cdef9e974ae775ea9b1472cedb108607127607e538b5c1ff8f9e46123");
+        //     // json_object_object_add(jobj,"Answer", j_test_Answer);
+        //     json_object_object_add(jobj,"Login", j_test_Login);
+        //     // json_object_object_add(jobj,"Email", j_test_Email);
+        //     // json_object_object_add(jobj,"Mobile", j_test_Mobile);
+        //     json_object_object_add(jobj,"Chat_name", j_test_Chat_name);
+        //     json_object_object_add(jobj,"Security_key", j_test_Security_key);
+        //     // n = send(sockbd.sockfd, json_object_to_json_string(jobj), mx_strlen(json_object_to_json_string(jobj)), 0); //
+        //     // continue;
+        // } //
          ///////// Конец затычки для профиля
 
         //printf("char *login: %s\n", login); //

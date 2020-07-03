@@ -39,7 +39,7 @@ static void insert_contact(json_object *j_result, sqlite3 *db, char *sql,
     connection_point = sqlite3_exec(db, sql, mx_callback, NULL, NULL);
     if (connection_point != SQLITE_OK && connection_point != SQLITE_ABORT)
         fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
-    mx_js_add(j_result, "Answer", MX_CONT_MES);
+    mx_js_add_str(j_result, "Answer", MX_CONT_MES);
     mx_strdel(&datab->id);
     mx_strdel(&datab->second_id);
 }
@@ -54,15 +54,15 @@ void condition_for_contact(json_object *j_result, sqlite3 *db, t_datab *datab,
             mx_table_setting(db, sql, cb_contact_id_finder, datab);
         }
     if (!mx_strcmp(datab->login_db, datab->login_db2))
-        mx_js_add(j_result, "Answer", "You can not add yourself " \
-                  "into contacts!");
+        mx_js_add_str(j_result, "Answer", "You can not add yourself " \
+                      "into contacts!");
     else if (datab->passtrigger == 1)
-        mx_js_add(j_result, "Answer", "You have already this contact " \
-                  "in the list!");
+        mx_js_add_str(j_result, "Answer", "You have already this contact " \
+                      "in the list!");
     else if (datab->logtrigger == 1)
         insert_contact(j_result, db, sql, datab);
     else
-        mx_js_add(j_result, "Answer", MX_CONT_ERR);
+        mx_js_add_str(j_result, "Answer", MX_CONT_ERR);
 }
 
 json_object *mx_if_contact(json_object *jobj, sqlite3 *db, t_datab *datab) {
@@ -74,7 +74,7 @@ json_object *mx_if_contact(json_object *jobj, sqlite3 *db, t_datab *datab) {
     if (mx_is_active(jobj, db, datab))
         condition_for_contact(j_result, db, datab, sql);
     else
-        mx_js_add(j_result, "Answer", MX_CHEAT_MESSAGE);
+        mx_js_add_str(j_result, "Answer", MX_CHEAT_MESSAGE);
 printf("if_contact(j_result): %s\n", json_object_to_json_string(j_result));//
     mx_strdel(&datab->id);// comment in mx_is_active
     mx_strdel(&datab->second_id);
