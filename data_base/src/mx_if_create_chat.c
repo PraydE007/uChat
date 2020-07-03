@@ -1,6 +1,7 @@
 #include "dbase.h"
 
-static int cb_chat_checking(void *datab, int argc, char **argv, char **azColName) {
+static int cb_chat_checking(void *datab, int argc, char **argv,
+                                                            char **azColName) {
     (void)argc;
     (void)azColName;
     if (datab) {
@@ -14,33 +15,33 @@ static int cb_chat_checking(void *datab, int argc, char **argv, char **azColName
     return 0;
 }
 
-static int cb_chat_id_finder(void *datab, int argc, char **argv,
-                                                            char **azColName) {
-    (void)argc;
-    (void)azColName;
-    if (datab) {
-        t_datab *new_datab = (t_datab *)datab;
+// static int cb_chat_id_finder(void *datab, int argc, char **argv,
+//                                                             char **azColName) {
+//     (void)argc;
+//     (void)azColName;
+//     if (datab) {
+//         t_datab *new_datab = (t_datab *)datab;
 
-        new_datab->chat_id = mx_strdup(argv[0]);
-    }
-    return 0;
-}
+//         new_datab->chat_id = mx_strdup(argv[0]);
+//     }
+//     return 0;
+// }
 
 static void insert_chat(json_object *jobj, json_object *j_reslt, sqlite3 *db,
                                                             t_datab *datab) {
     char sql[255];
 
     sprintf(sql, "insert into CHATS (CHAT_NAME, CHAT_STATUS)" \
-            "values('%s', '%s')", mx_json_to_str(jobj, "Name"),
+            "values('%s', '%s')", datab->login_db2,
             mx_json_to_str(jobj, "Status"));
     mx_table_creation(db, sql, mx_callback);
     sprintf(sql, "select ID from CHATS where CHAT_NAME = '%s';",
-            mx_json_to_str(jobj, "Name"));
-    mx_table_setting(db, sql, cb_chat_id_finder, datab);
+            datab->login_db2);
+    mx_table_setting(db, sql, mx_cb_chat_id_finder, datab);
     sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id)" \
             "values('%s', '%s')", datab->id, datab->chat_id);
     mx_table_creation(db, sql, mx_callback);
-    mx_js_add(j_reslt, "Answer", MX_CHAT_MES);
+    mx_js_add_str(j_reslt, "Answer", MX_CHAT_MES);
 }
 
 json_object *mx_if_create_chat(json_object *jobj, sqlite3 *db, t_datab *datab) {
@@ -48,16 +49,16 @@ json_object *mx_if_create_chat(json_object *jobj, sqlite3 *db, t_datab *datab) {
     char sql[30];
 
     if (mx_is_active(jobj, db, datab)) {
-        datab->login_db2 = mx_json_to_str(jobj, "Chat");
+        datab->login_db2 = mx_json_to_str(jobj, "Chat_name");
         sprintf(sql, "select ID, CHAT_NAME from CHATS;");
         mx_table_setting(db, sql, cb_chat_checking, datab);
         if (datab->logtrigger == 1)
-            mx_js_add(j_result, "Answer", MX_CHAT_ERR);
+            mx_js_add_str(j_result, "Answer", MX_CHAT_ERR);
         else
             insert_chat(jobj, j_result, db, datab);
     }
     else
-        mx_js_add(j_result, "Answer", MX_CHEAT_MESSAGE);
+        mx_js_add_str(j_result, "Answer", MX_CHEAT_MESSAGE);
     printf("mx_if_create_chat(j_result): %s\n", json_object_to_json_string(j_result));//
     mx_strdel(&datab->id);// comment in mx_is_activ
     datab->logtrigger = 0;

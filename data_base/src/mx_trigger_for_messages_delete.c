@@ -1,6 +1,6 @@
 #include "dbase.h"
 
-void mx_trigger_for_messages(sqlite3 *db, char *sql) {
+void mx_trigger_for_messages_delete(sqlite3 *db, char *sql) {
     sprintf(sql, "CREATE TRIGGER IF NOT EXISTS 'MESSAGE_DELETE' AFTER DELETE " \
     "ON CHATS " \
     "BEGIN " \
