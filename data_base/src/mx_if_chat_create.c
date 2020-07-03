@@ -44,7 +44,7 @@ static void insert_chat(json_object *jobj, json_object *j_reslt, sqlite3 *db,
     mx_js_add_str(j_reslt, "Answer", MX_CHAT_MES);
 }
 
-json_object *mx_if_create_chat(json_object *jobj, sqlite3 *db, t_datab *datab) {
+json_object *mx_if_chat_create(json_object *jobj, sqlite3 *db, t_datab *datab) {
     json_object *j_result = json_object_new_object();
     char sql[30];
 
