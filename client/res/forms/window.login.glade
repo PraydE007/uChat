@@ -8,6 +8,7 @@
     <property name="window_position">center</property>
     <property name="default_width">1024</property>
     <property name="default_height">768</property>
+    <property name="type_hint">dialog</property>
     <child type="titlebar">
       <placeholder/>
     </child>
@@ -155,6 +156,7 @@
     <property name="default_width">512</property>
     <property name="default_height">384</property>
     <property name="deletable">False</property>
+    <property name="type_hint">dialog</property>
     <child type="titlebar">
       <placeholder/>
     </child>

@@ -1,5 +1,36 @@
 #include "client.h"
 
+static char *get_unicode(wchar_t c) {
+    // char wc[] = {0, 0, 0, 0, 0};
+    char *wc = (char *)malloc(sizeof(char) * 5);
+
+    wc[0] = 0;
+    wc[1] = 0;
+    wc[2] = 0;
+    wc[3] = 0;
+    wc[4] = 0;
+
+    if (c < 0x80) {
+        wc[0] = (c >> 0) & 0x7F;
+    }
+    else if (c < 0x800) {
+        wc[0] = ((c >> 6) & 0x1F) | 0xC0;
+        wc[1] = ((c >> 0) & 0x3F) | 0x80;
+    }
+    else if (c < 0x10000) {
+        wc[0] = ((c >> 12) & 0x0F) | 0xE0;
+        wc[1] = ((c >> 6) & 0x3F) | 0x80;
+        wc[2] = ((c >> 0) & 0x3F) | 0x80;
+    }
+    else if (c < 0x110000) {
+        wc[0] = ((c >> 18) & 0x7) | 0xF0;
+        wc[1] = ((c >> 12) & 0x3F) | 0x80;
+        wc[2] = ((c >> 6) & 0x3F) | 0x80;
+        wc[3] = ((c >> 0) & 0x3F) | 0x80;
+    }
+    return wc;
+}
+
 static void init_login(GtkBuilder **builder, t_s_glade **gui) {
     (*builder) = gtk_builder_new_from_file(MX_WINDOW_LOGIN);
     (*gui)->w_signin = mx_get_widget(builder, "window.login");
@@ -56,7 +87,8 @@ static void init_chat(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->i_b_emoji = mx_get_widget(builder, "image.button.emoji");
     (*gui)->b_e_close = mx_get_widget(builder, "button.close");
     (*gui)->l_one = mx_get_widget(builder, "label.one");
-    // gtk_label_set_text(GTK_LABEL((*gui)->l_one), "\U0001F600 <-");
+
+    gtk_label_set_text(GTK_LABEL((*gui)->l_one), get_unicode(0x1F150)); // TRYING UNICODE
 }
 
 static void init_profile(GtkBuilder **builder, t_s_glade **gui) {
@@ -66,11 +98,15 @@ static void init_profile(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->e_p_login = mx_get_widget(builder, "entry.login");
     (*gui)->e_p_email = mx_get_widget(builder, "entry.email");
     (*gui)->e_p_number = mx_get_widget(builder, "entry.number");
+    (*gui)->b_password = mx_get_widget(builder, "button.password");
+    (*gui)->b_p_apply = mx_get_widget(builder, "button.apply");
+    (*gui)->b_p_close = mx_get_widget(builder, "button.close");
+    (*gui)->w_password = mx_get_widget(builder, "window.password");
     (*gui)->e_p_oldpass = mx_get_widget(builder, "entry.oldpass");
     (*gui)->e_p_newpass1 = mx_get_widget(builder, "entry.newpass1");
     (*gui)->e_p_newpass2 = mx_get_widget(builder, "entry.newpass2");
-    (*gui)->b_p_apply = mx_get_widget(builder, "button.apply");
-    (*gui)->b_p_close = mx_get_widget(builder, "button.close");
+    (*gui)->b_pp_apply = mx_get_widget(builder, "button.password.apply");
+    (*gui)->b_pp_close = mx_get_widget(builder, "button.password.close");
 }
 
 static void init_images(t_s_glade **gui) {
@@ -84,6 +120,22 @@ static void init_images(t_s_glade **gui) {
 }
 
 static void connect_signals(t_s_glade *gui) {
+    // Uchat Anti Resize Signals
+    g_signal_connect(gui->w_signin, "window-state-event",
+                    G_CALLBACK(mx_anti_resize), gui);
+    g_signal_connect(gui->w_settings, "window-state-event",
+                    G_CALLBACK(mx_anti_resize), gui);
+    g_signal_connect(gui->w_signup, "window-state-event",
+                    G_CALLBACK(mx_anti_resize), gui);
+    g_signal_connect(gui->w_chat, "window-state-event",
+                    G_CALLBACK(mx_anti_resize), gui);
+    g_signal_connect(gui->w_emoji, "window-state-event",
+                    G_CALLBACK(mx_anti_resize), gui);
+    g_signal_connect(gui->w_profile, "window-state-event",
+                    G_CALLBACK(mx_anti_resize), gui);
+    g_signal_connect(gui->w_password, "window-state-event",
+                    G_CALLBACK(mx_anti_resize), gui);
+
     // Uchat Quit Signals
     g_signal_connect(gui->w_signin, "destroy",
                     G_CALLBACK(exit), (void *)0);
@@ -137,6 +189,12 @@ static void connect_signals(t_s_glade *gui) {
                     G_CALLBACK(mx_close_profile), gui);
     g_signal_connect(gui->b_p_apply, "clicked",
                     G_CALLBACK(mx_change_profile), gui);
+    g_signal_connect(gui->b_password, "clicked",
+                    G_CALLBACK(mx_open_window), gui->w_password);
+
+    // Password Window Signals
+    g_signal_connect(gui->b_pp_close, "clicked",
+                    G_CALLBACK(mx_close_window), gui->w_password);
 }
 
 static bool read_mode(void) {

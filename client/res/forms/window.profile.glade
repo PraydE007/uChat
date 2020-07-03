@@ -9,6 +9,7 @@
     <property name="default_width">512</property>
     <property name="default_height">384</property>
     <property name="deletable">False</property>
+    <property name="type_hint">dialog</property>
     <child type="titlebar">
       <placeholder/>
     </child>
@@ -123,6 +124,7 @@
     <property name="window_position">center</property>
     <property name="default_width">1024</property>
     <property name="default_height">768</property>
+    <property name="type_hint">dialog</property>
     <child type="titlebar">
       <placeholder/>
     </child>
@@ -243,7 +245,7 @@
         </child>
         <child>
           <object class="GtkButton" id="button.password">
-            <property name="label" translatable="yes">Password</property>
+            <property name="label" translatable="yes">Pass</property>
             <property name="width_request">100</property>
             <property name="height_request">40</property>
             <property name="visible">True</property>
