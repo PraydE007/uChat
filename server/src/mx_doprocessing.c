@@ -73,14 +73,14 @@ void *mx_doprocessing (void *data) {
         // } //
         ///////// Конец затычки для добавления контактов
         ///////// Затычка для изменения логина, почты и номера
-        if (!mx_strcmp(mx_json_to_str(jobj, "Type"), "Change_profile")) { //
-            // sockbd.login = mx_json_to_str(jobj, "Login"); //
-            // login = mx_strdup(sockbd.login); //
-            json_object *j_test_Security_key = json_object_new_string("cdef9e974ae775ea9b1472cedb108607127607e538b5c1ff8f9e46123");
-            json_object_object_add(jobj,"Security_key", j_test_Security_key);
-            // printf("%s\n", buffer);
-            // continue;
-        } //
+        // if (!mx_strcmp(mx_json_to_str(jobj, "Type"), "Change_profile")) { //
+        //     // sockbd.login = mx_json_to_str(jobj, "Login"); //
+        //     // login = mx_strdup(sockbd.login); //
+        //     json_object *j_test_Security_key = json_object_new_string("cdef9e974ae775ea9b1472cedb108607127607e538b5c1ff8f9e46123");
+        //     json_object_object_add(jobj,"Security_key", j_test_Security_key);
+        //     // printf("%s\n", buffer);
+        //     // continue;
+        // } //
         ///////// Конец затычки для добавления контактов
         ///////// Затычка для профиля
         // json_object *j_test_type = json_object_new_string("Chat");
@@ -112,24 +112,24 @@ void *mx_doprocessing (void *data) {
         printf("json_object_to_json_string(j_result): %s\n", json_object_to_json_string(j_result)); //
          answer = json_object_get_string(j_result); //
          n = send(sockbd.sockfd, answer, mx_strlen(answer),  0);
-//        if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_LOG_MES))
-//            n = send(sockbd.sockfd, MX_LOG_MES, mx_strlen(MX_LOG_MES),  0);
-//        else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_REG_MES))
-//            n = send(sockbd.sockfd, MX_REG_MES, mx_strlen(MX_REG_MES),  0);
-//        else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_CONT_MES))
-//            n = send(sockbd.sockfd, MX_CONT_MES, mx_strlen(MX_CONT_MES),  0);
-//        else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_LOG_ERR))
-//            n = send(sockbd.sockfd, MX_LOG_ERR, mx_strlen(MX_LOG_ERR),  0);
-//        else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_REG_ERR))
-//            n = send(sockbd.sockfd, MX_REG_ERR, mx_strlen(MX_REG_ERR),  0);
-//        else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_CHEAT_MESSAGE))
-//            n = send(sockbd.sockfd, MX_CHEAT_MESSAGE, mx_strlen(MX_CHEAT_MESSAGE),  0);
-//        else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_CONT_ERR))
-//            n = send(sockbd.sockfd, MX_CONT_ERR, mx_strlen(MX_CONT_ERR),  0);
-//        else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), "Profile info!"))
-//            n = send(sockbd.sockfd, "Profile info!", mx_strlen("Profile info!"),  0);
-//        else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), "Profile data is changed!"))
-//            n = send(sockbd.sockfd, "Profile data is changed!", mx_strlen("Profile data is changed!"),  0);
+    //    if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_LOG_MES))
+    //        n = send(sockbd.sockfd, MX_LOG_MES, mx_strlen(MX_LOG_MES),  0);
+    //    else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_REG_MES))
+    //        n = send(sockbd.sockfd, MX_REG_MES, mx_strlen(MX_REG_MES),  0);
+    //    else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_CONT_MES))
+    //        n = send(sockbd.sockfd, MX_CONT_MES, mx_strlen(MX_CONT_MES),  0);
+    //    else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_LOG_ERR))
+    //        n = send(sockbd.sockfd, MX_LOG_ERR, mx_strlen(MX_LOG_ERR),  0);
+    //    else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_REG_ERR))
+    //        n = send(sockbd.sockfd, MX_REG_ERR, mx_strlen(MX_REG_ERR),  0);
+    //    else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_CHEAT_MESSAGE))
+    //        n = send(sockbd.sockfd, MX_CHEAT_MESSAGE, mx_strlen(MX_CHEAT_MESSAGE),  0);
+    //    else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_CONT_ERR))
+    //        n = send(sockbd.sockfd, MX_CONT_ERR, mx_strlen(MX_CONT_ERR),  0);
+    //    else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), "Profile info!"))
+    //        n = send(sockbd.sockfd, "Profile info!", mx_strlen("Profile info!"),  0);
+    //    else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), "Profile data is changed!"))
+    //        n = send(sockbd.sockfd, "Profile data is changed!", mx_strlen("Profile data is changed!"),  0);
         json_object_put(j_result);
         if (n <= 0) {
             mx_user_deactivate(sockbd.bd, sockbd.sockfd);

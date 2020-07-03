@@ -17,7 +17,7 @@ static int cb_massege_history(void *datab, int argc, char **argv,
 static void if_active(json_object *jobj, json_object *j_result, sqlite3 *db,
                                                             t_datab *datab) {
     json_object *j_answer = json_object_new_object();
-    char sql[100];
+    char sql[255];
 
     mx_js_add_str(j_answer, "Answer", "Message history!");
     mx_js_arr_add(j_result, j_answer);
