@@ -3,12 +3,12 @@
 t_datab *mx_create_datab_node(void) {
     t_datab *node = (t_datab*)malloc(sizeof(t_datab));
 
-
     if (node) {
         node->logtrigger = 0;
         node->passtrigger = 0;
         node->socket = 0;
         node->id = NULL;
+        node->chat_id = NULL;
         node->second_id = NULL;
         node->email = NULL;
         node->mobile = NULL;

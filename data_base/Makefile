@@ -14,9 +14,10 @@ FILES = mx_callback.c \
 		mx_data_base_creation.c \
 		mx_dbase_handler.c \
 		mx_dealloc_datab.c \
-		mx_if_chat.c \
+		mx_if_change_passwd.c \
 		mx_if_change_profile.c \
 		mx_if_contact.c \
+		mx_if_create_chat.c \
 		mx_if_logging.c \
 		mx_if_get_profile.c \
 		mx_if_registr.c \
