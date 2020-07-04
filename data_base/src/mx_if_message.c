@@ -42,7 +42,7 @@ static void insert_chat(json_object *jobj, json_object *j_reslt, sqlite3 *db) {
     connection_point = sqlite3_exec(db, sql, mx_callback, NULL, NULL);
     if (connection_point != SQLITE_OK)
         fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
-    mx_js_add(j_reslt, "Answer", MX_CHAT_MES);
+    mx_js_add_str(j_reslt, "Answer", MX_CHAT_MES);
 }
 
 json_object *mx_if_message(json_object *jobj, sqlite3 *db, t_datab *datab) {
@@ -62,7 +62,7 @@ json_object *mx_if_message(json_object *jobj, sqlite3 *db, t_datab *datab) {
             fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
     }
     if (datab->logtrigger == 1)
-        mx_js_add(j_result, "Answer", MX_CHAT_ERR);
+        mx_js_add_str(j_result, "Answer", MX_CHAT_ERR);
     else
         insert_chat(jobj, j_result, db);
     printf("answer: %s\n", mx_json_to_str(j_result, "Answer")); //

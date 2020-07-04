@@ -22,6 +22,10 @@ void mx_logged_in(GtkButton *button, gpointer data) {
     n = send(gui->sockfd, send_data, strlen(send_data), 0);
     bzero(buffer, 2048);
     n = recv(gui->sockfd, buffer, 2048, 0);
-    if ((!mx_strcmp(login, "admin") && !mx_strcmp(pass, "admin")) || !strcmp(buffer, "You have logged in!"))
+    printf("BUFFER LOGGED = %s\n", buffer);
+    jobj = json_tokener_parse(buffer);
+    char *res = (char *)json_object_get_string(json_object_object_get(jobj, "Answer"));
+    printf("RES = %s\n", res);
+    if ((!mx_strcmp(login, "admin") && !mx_strcmp(pass, "admin")) || !strcmp(res, "You have logged in!"))
         mx_logged_in_chat(gui);
 }

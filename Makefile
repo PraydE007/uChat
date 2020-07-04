@@ -69,6 +69,7 @@ CL_SRC		=	main.c \
 				mx_p_owned.c \
 				mx_clear_container.c \
 				mx_open_chat.c \
+				mx_change_pass.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \

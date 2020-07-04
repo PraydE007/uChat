@@ -162,6 +162,7 @@ void mx_registration(GtkButton *button, gpointer data);
 void mx_send_message(GtkButton *button, gpointer data);
 void mx_open_profile(GtkButton *button, gpointer data);
 void mx_close_profile(GtkButton *button, gpointer data);
+void mx_change_pass(GtkButton *button, gpointer data);
 void mx_push_message(GtkWidget *lst, const char *msg, const char *owner);
 void mx_change_theme(t_s_glade *gui, bool mode);
 void mx_change_profile(GtkButton *button, gpointer data);

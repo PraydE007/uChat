@@ -14,6 +14,12 @@ json_object *mx_dbase_handler(json_object *jobj, sqlite3 *db) {
         j_result = mx_if_get_profile(jobj, db, datab);
     else if (!mx_strcmp("Change_profile", mx_json_to_str(jobj, "Type")))
         j_result = mx_if_change_profile(jobj, db, datab);
+    else if (!mx_strcmp("Change_passwd", mx_json_to_str(jobj, "Type")))
+        j_result = mx_if_change_passwd(jobj, db, datab);
+    else if (!mx_strcmp("Chat_create", mx_json_to_str(jobj, "Type")))
+        j_result = mx_if_chat_create(jobj, db, datab);
+    else if (!mx_strcmp("Chat", mx_json_to_str(jobj, "Type")))
+        j_result = mx_if_chat(jobj, db, datab);
     mx_dealloc_datab(&datab);
     return j_result;
 }

@@ -16,8 +16,8 @@ static int cb_change_psswd(void *datab, int argc, char **argv,
 }
 
 static void json_profile_add(json_object *j_result, t_datab *datab) {
-        mx_js_add(j_result, "Answer", "The password were changed!");
-        mx_js_add(j_result, "Passwd", (char *)datab->password_db);
+        mx_js_add_str(j_result, "Answer", "The password were changed!");
+        mx_js_add_str(j_result, "Passwd", (char *)datab->password_db);
 }
 
 static void passwd_update(json_object *jobj, sqlite3 *db, char *sql,
@@ -46,10 +46,10 @@ json_object *mx_if_change_passwd(json_object *jobj, sqlite3 *db,
             json_profile_add(j_result, datab);
         }
         else
-            mx_js_add(j_result, "Answer", "Wrong password!");
+            mx_js_add_str(j_result, "Answer", "Wrong password!");
     }
     else
-        mx_js_add(j_result, "Answer", MX_CHEAT_MESSAGE);
+        mx_js_add_str(j_result, "Answer", MX_CHEAT_MESSAGE);
 printf("mx_if_change_passwd(j_result): %s\n", json_object_to_json_string(j_result));//
     mx_strdel(&datab->id);// comment in mx_is_active
     datab->passtrigger = 0;
