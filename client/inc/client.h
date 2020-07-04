@@ -9,7 +9,8 @@
 #include "../../json/include/json-c/json.h"
 #include <openssl/ssl.h>
 
-#define MX_AVATAR_MIS "client/res/images/avatar_missing.png"
+// #define MX_AVATAR_MIS "client/res/images/avatar_missing.png"
+#define MX_AVATAR_MIS "client/res/images/meme.png"
 #define MX_BUTTON_PROFILE "client/res/icons/profile.png"
 #define MX_BUTTON_LOGOUT "client/res/icons/logout.png"
 #define MX_BUTTON_FIND "client/res/icons/search.png"
@@ -96,15 +97,24 @@ typedef struct s_s_glade {
     GtkWidget *e_p_login;
     GtkWidget *e_p_email;
     GtkWidget *e_p_number;
-    GtkWidget *e_p_oldpass;
-    GtkWidget *e_p_newpass1;
-    GtkWidget *e_p_newpass2;
+    GtkWidget *b_password;
     GtkWidget *b_p_apply;
     GtkWidget *b_p_close;
 
+    // Password window
+    GtkWidget *w_password;
+    GtkWidget *e_p_oldpass;
+    GtkWidget *e_p_newpass1;
+    GtkWidget *e_p_newpass2;
+
     //key
     char *key;
+    GtkWidget *b_pp_apply;
+    GtkWidget *b_pp_close;
+
+    //recv_data
     char buffer[MX_MAX_BYTES];
+    char *recv_data;
 }              t_s_glade;
 
 // BUFFERS_PROFILE_STRUCTS_FOR_AUDITOR
@@ -119,6 +129,7 @@ typedef struct s_change_prof {
     char *email;
     char *mobile;
     char *new_login;
+    char *key;
 }   t_change_prof;
 
 // VALIDATION
@@ -156,14 +167,18 @@ void mx_registration(GtkButton *button, gpointer data);
 void mx_send_message(GtkButton *button, gpointer data);
 void mx_open_profile(GtkButton *button, gpointer data);
 void mx_close_profile(GtkButton *button, gpointer data);
+void mx_change_pass(GtkButton *button, gpointer data);
 void mx_push_message(GtkWidget *lst, const char *msg);
 void mx_change_theme(t_s_glade *gui, bool mode);
 void mx_change_profile(GtkButton *button, gpointer data);
+void mx_anti_resize(GtkWindow *w, GdkEventWindowState *e, gpointer data);
 
 //infinity_recive_from_server
 void *mx_client_recv(void *data);
 
 //successes
 gboolean mx_success_logging(void *data);
+gboolean mx_success_registr(void *data);
+gboolean mx_success_profile(void *data);
 
 #endif

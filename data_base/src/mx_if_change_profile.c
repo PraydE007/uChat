@@ -1,10 +1,10 @@
 #include "dbase.h"
 
 static void json_profile_add(json_object *j_result, t_datab *datab) {
-        mx_js_add(j_result, "Answer", "Profile data is changed!");
-        mx_js_add(j_result, "Login", (char *)datab->login_db2);
-        mx_js_add(j_result, "Email", (char *)datab->email_db);
-        mx_js_add(j_result, "Mobile", (char *)datab->mobile_db);
+        mx_js_add_str(j_result, "Answer", "Profile data is changed!");
+        mx_js_add_str(j_result, "Login", (char *)datab->login_db2);
+        mx_js_add_str(j_result, "Email", (char *)datab->email_db);
+        mx_js_add_str(j_result, "Mobile", (char *)datab->mobile_db);
 }
 
 json_object *mx_if_change_profile(json_object *jobj, sqlite3 *db,
@@ -24,7 +24,7 @@ json_object *mx_if_change_profile(json_object *jobj, sqlite3 *db,
         json_profile_add(j_result, datab);
     }
     else
-        mx_js_add(j_result, "Answer", MX_CHEAT_MESSAGE);
+        mx_js_add_str(j_result, "Answer", MX_CHEAT_MESSAGE);
 printf("mx_if_change_profile(j_result): %s\n", json_object_to_json_string(j_result));//
     mx_strdel(&datab->id);// comment in mx_is_active
     return j_result;
