@@ -21,6 +21,8 @@ t_datab *mx_create_datab_node(void) {
         node->mobile_db = NULL;
         node->password_db = NULL;
         node->security_db = NULL;
+        node->db = NULL;
+        node->j_result = NULL;
     }
     return node;
 }

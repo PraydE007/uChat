@@ -58,14 +58,15 @@ static void js_chts_conts(json_object *j_result, sqlite3 *db, t_datab *datab,
 
 json_object *mx_if_logging(json_object *jobj, sqlite3 *db, t_datab *datab) {
     json_object *j_result = json_object_new_object();
-    int connection_point;
+    // int connection_point;
     char sql[255];
 
     mx_json_to_datab(jobj, datab);
     sprintf(sql, "select ID, LOGIN, PASSWORD from USERS;");
-    connection_point = sqlite3_exec(db, sql, cb_loganswer, datab, NULL);
-    if (connection_point != SQLITE_OK && connection_point != SQLITE_ABORT)
-        fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
+    mx_table_setting(db, sql, cb_loganswer, datab);
+    // connection_point = sqlite3_exec(db, sql, cb_loganswer, datab, NULL);
+    // if (connection_point != SQLITE_OK && connection_point != SQLITE_ABORT)
+    //     fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
     if (datab->logtrigger == 1 && datab->passtrigger == 1) {
         mx_user_activate(db, datab, datab->socket);
         js_chts_conts(j_result, db, datab, sql);

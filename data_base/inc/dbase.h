@@ -22,9 +22,12 @@ typedef struct s_datab {
     const char *mobile_db;
     const char *password_db;
     const char *security_db;
+    struct sqlite3 *db;
+    struct json_object *j_result;
 }               t_datab;
 
 bool mx_is_active(json_object *jobj, sqlite3 *db, t_datab *datab);
+char *mx_find_user_login(sqlite3 *db, char *id);
 char *mx_strjoin_free_js_value(char *s1, const char *s2);
 const char *mx_json_to_str(json_object *jobj, char *key);
 int mx_callback(void *datab, int argc, char **argv, char **azColName);

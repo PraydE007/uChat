@@ -1,7 +1,7 @@
 #include "dbase.h"
 
 static void json_profile_add(json_object *j_result, t_datab *datab) {
-        mx_js_add_str(j_result, "Answer", "Profile data is changed!");
+        mx_js_add_str(j_result, "Answer", "Profile data are changed!");
         mx_js_add_str(j_result, "Login", (char *)datab->login_db2);
         mx_js_add_str(j_result, "Email", (char *)datab->email_db);
         mx_js_add_str(j_result, "Mobile", (char *)datab->mobile_db);

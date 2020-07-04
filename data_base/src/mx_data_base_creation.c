@@ -16,7 +16,7 @@ void mx_data_base_creation(sqlite3 **db) {
     int connection_point;
     char sql[512];
     int i = 0;
-    int * p = &i;
+    int *p = &i;
 
     connection_point = sqlite3_open("chat_base.db", db);
     if(connection_point)
