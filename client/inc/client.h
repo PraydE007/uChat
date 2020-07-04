@@ -101,6 +101,10 @@ typedef struct s_s_glade {
     GtkWidget *e_p_newpass2;
     GtkWidget *b_p_apply;
     GtkWidget *b_p_close;
+
+    //key
+    char *key;
+    char buffer[MX_MAX_BYTES];
 }              t_s_glade;
 
 // BUFFERS_PROFILE_STRUCTS_FOR_AUDITOR
@@ -158,5 +162,8 @@ void mx_change_profile(GtkButton *button, gpointer data);
 
 //infinity_recive_from_server
 void *mx_client_recv(void *data);
+
+//successes
+gboolean mx_success_logging(void *data);
 
 #endif

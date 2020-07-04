@@ -64,6 +64,7 @@ CL_SRC		=	main.c \
 				mx_rep_img.c \
 				mx_show_dialog.c \
 				mx_change_profile.c \
+				mx_success_logging.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \
