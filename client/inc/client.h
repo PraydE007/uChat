@@ -146,6 +146,9 @@ void mx_push_chat(GtkWidget *lst, const char *user_name);
 void mx_find_user(GtkButton *button, gpointer data);
 void mx_rep_img(GtkWidget *image, const char *filename, int w, int h);
 void mx_show_dialog(GtkWidget *parent, char *message);
+void mx_p_own(GtkWidget *lst, const char *msg);
+void mx_p_owned(GtkWidget *lst, const char *msg);
+void mx_clear_container(GtkWidget *con);
 
 // GUI SIGNALS
 void mx_open_window(GtkButton *button, gpointer data);
@@ -159,10 +162,11 @@ void mx_registration(GtkButton *button, gpointer data);
 void mx_send_message(GtkButton *button, gpointer data);
 void mx_open_profile(GtkButton *button, gpointer data);
 void mx_close_profile(GtkButton *button, gpointer data);
-void mx_push_message(GtkWidget *lst, const char *msg);
+void mx_push_message(GtkWidget *lst, const char *msg, const char *owner);
 void mx_change_theme(t_s_glade *gui, bool mode);
 void mx_change_profile(GtkButton *button, gpointer data);
 void mx_anti_resize(GtkWindow *w, GdkEventWindowState *e, gpointer data);
+void mx_open_chat(GtkListBox *box, GtkListBoxRow *row, gpointer data);
 
 //infinity_recive_from_server
 void *mx_client_recv(void *data);

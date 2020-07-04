@@ -30,9 +30,25 @@ grid {
     background-color: white;
 }
 
+list grid {
+    background-color: transparent;
+}
+
+list grid grid {
+    background-color: #1b92d1;
+    border-radius: 15px;
+}
+
+list {
+    background-color: white;
+}
+
 list label {
     color: #101010;
-    background-color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 list image {

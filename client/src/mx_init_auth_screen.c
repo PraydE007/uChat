@@ -179,6 +179,8 @@ static void connect_signals(t_s_glade *gui) {
                     G_CALLBACK(mx_open_window), gui->w_settings);
     g_signal_connect(gui->b_emoji, "clicked",
                     G_CALLBACK(mx_open_window), gui->w_emoji);
+    g_signal_connect(gui->l_chats, "row-activated",
+                    G_CALLBACK(mx_open_chat), gui);
 
     // Emoji window
     g_signal_connect(gui->b_e_close, "clicked",
