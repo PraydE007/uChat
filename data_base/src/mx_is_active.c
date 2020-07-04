@@ -31,21 +31,16 @@ static int cb_check_acty(void *datab, int argc, char **argv,
 }
 
 bool mx_is_active(json_object *jobj, sqlite3 *db, t_datab *datab) {
-    int connection_point;
     bool result = false;
     char sql[255];
 
     datab->login_db = mx_json_to_str(jobj, "Login");
-    if (datab->login_db) {
-        datab->security_db = mx_json_to_str(jobj, "Security_key");
+    datab->security_db = mx_json_to_str(jobj, "Security_key");
+    if (datab->login_db && datab->security_db) {
         sprintf(sql, "select ID, LOGIN from USERS;");
-        connection_point = sqlite3_exec(db, sql, cb_id_finder, datab, NULL);
-        if (connection_point != SQLITE_OK && connection_point != SQLITE_ABORT)
-            fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
+        mx_table_setting(db, sql, cb_id_finder, datab);
         sprintf(sql, "select USER_id, SECURITY_KEY from ACTIVITY;");
-        connection_point = sqlite3_exec(db, sql, cb_check_acty, datab, NULL);
-        if (connection_point != SQLITE_OK && connection_point != SQLITE_ABORT)
-            fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
+        mx_table_setting(db, sql, cb_check_acty, datab);
         if (datab->passtrigger == 1)
             result = true;
     }
