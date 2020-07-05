@@ -225,6 +225,7 @@ static bool read_mode(void) {
 t_s_glade *mx_init_auth_screen(int socket) {
     GtkBuilder *builder = NULL;
     t_s_glade *gui = (t_s_glade *)malloc(sizeof(t_s_glade));
+    pthread_t x;
 
     gui->mode = read_mode();
     gui->sockfd = socket;
@@ -236,6 +237,7 @@ t_s_glade *mx_init_auth_screen(int socket) {
     mx_load_theme(gui);
     connect_signals(gui);
     gtk_widget_show_all(gui->w_signin);
+    pthread_create(&x, NULL, mx_client_recv, (void *)&gui);
     gtk_main();
     return gui;
 }

@@ -23,7 +23,6 @@ void mx_registration(GtkButton *button, gpointer data) {
     const char *mobile = gtk_entry_get_text(GTK_ENTRY(gui->e_r_mobile));
 
     int n = 0;
-    char buffer[2048];
     char *send_data = NULL;
 
     printf("LOGIN = %s\n", login);
@@ -50,9 +49,6 @@ void mx_registration(GtkButton *button, gpointer data) {
 
         printf("SEND_DATA = %s\n", send_data);
         n = send(gui->sockfd, send_data, strlen(send_data), 0);
-        bzero(buffer, 2048);
-        n = recv(gui->sockfd, buffer, 2048, 0);
-        printf("BUFFER = %s\n", buffer);
     }
     else if (check_data(pass0, mail, login, mobile) == 1)
         printf("Incorrect email adress. Example - *********@****.***\n");
@@ -64,11 +60,4 @@ void mx_registration(GtkButton *button, gpointer data) {
         printf("Incorrect number. Example - +X (XXX) XXX - XXXX\n");
     else
         mx_show_dialog(gui->w_signup, "PAROLY NE SOVPADAYT BLEAT<3\n");
-    if (!strcmp(buffer, "You have registered successfully!")) {
-        mx_show_dialog(gui->w_signup, "You have registered successfully!\n");
-        gtk_window_get_position(mx_gw(gui->w_signup), &(gui->w_x), &(gui->w_y));
-        gtk_widget_hide(gui->w_signup);
-        gtk_widget_show_all(gui->w_signin);
-        gtk_window_move(mx_gw(gui->w_signin), gui->w_x, gui->w_y + 22);
-    }
 }

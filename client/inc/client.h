@@ -106,8 +106,15 @@ typedef struct s_s_glade {
     GtkWidget *e_p_oldpass;
     GtkWidget *e_p_newpass1;
     GtkWidget *e_p_newpass2;
+
+    //key
+    char *key;
     GtkWidget *b_pp_apply;
     GtkWidget *b_pp_close;
+
+    //recv_data
+    char buffer[MX_MAX_BYTES];
+    char *recv_data;
 }              t_s_glade;
 
 // BUFFERS_PROFILE_STRUCTS_FOR_AUDITOR
@@ -122,6 +129,7 @@ typedef struct s_change_prof {
     char *email;
     char *mobile;
     char *new_login;
+    char *key;
 }   t_change_prof;
 
 // VALIDATION
@@ -171,5 +179,10 @@ void mx_open_chat(GtkListBox *box, GtkListBoxRow *row, gpointer data);
 
 //infinity_recive_from_server
 void *mx_client_recv(void *data);
+
+//successes
+gboolean mx_success_logging(void *data);
+gboolean mx_success_registr(void *data);
+gboolean mx_success_profile(void *data);
 
 #endif
