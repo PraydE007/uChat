@@ -26,7 +26,11 @@ static char *create_send_prof(t_change_prof change_prof) {
     json_object *j_login = json_object_new_string(change_prof.login);
     json_object *j_email = json_object_new_string(change_prof.email);
     json_object *j_number = json_object_new_string(change_prof.mobile);
-    json_object *j_new_login = json_object_new_string(change_prof.new_login);
+    json_object *j_new_login;
+    if (!mx_strcmp(change_prof.login, change_prof.new_login))
+        j_new_login = json_object_new_string("");
+    else
+        j_new_login = json_object_new_string(change_prof.new_login);
     json_object *j_key = json_object_new_string(change_prof.key);
     json_object_object_add(jobj,"Type", j_type);
     json_object_object_add(jobj,"Login", j_login);
