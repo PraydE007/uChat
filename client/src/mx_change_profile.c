@@ -14,9 +14,7 @@ static t_change_prof change_prof_buf(t_s_glade *gui) {
     change_prof.email = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_p_email));
     change_prof.mobile = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_p_number));
     change_prof.new_login = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_p_login));
-                printf("%s\n", "TEST");
-    exit(0);
-    change_prof.key= (char *)gtk_entry_get_text(GTK_ENTRY(gui->key));
+    change_prof.key= strdup(gui->key);
     return change_prof;
 }
 
@@ -51,6 +49,7 @@ void mx_change_profile(GtkButton *button, gpointer data) {
             send_data = create_send_prof(change_prof);
             printf("%s\n", send_data);
             n = send(gui->sockfd, send_data, strlen(send_data), 0);
+            printf("SEND_DATA = %s\n", send_data);
         }
     (void)button;
     mx_change_window(gui);

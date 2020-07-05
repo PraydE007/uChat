@@ -52,7 +52,7 @@ void *mx_doprocessing (void *data) {
     while (true) {
         bzero(buffer,2048);
         n = recv(sockbd.sockfd, buffer, sizeof(buffer), 0);
-        printf("!!!!!!!!!!!%s\n", buffer);
+        printf("GET %s\n\n", buffer);
         //printf("%s\n", buffer);
         j_socket = json_object_new_int(sockbd.sockfd);
         //printf("buffer: %s\n", buffer);
@@ -112,7 +112,7 @@ void *mx_doprocessing (void *data) {
         //json_object_put(jobj); //
         //printf("json_object_to_json_string(j_result): %s\n", json_object_to_json_string(j_result)); //
         answer = json_object_get_string(j_result); //
-        printf("%s\n", answer);
+        printf("ANSWER : %s\n\n", answer);
         n = send(sockbd.sockfd, answer, mx_strlen(answer),  0);
 
 

@@ -184,5 +184,6 @@ void *mx_client_recv(void *data);
 gboolean mx_success_logging(void *data);
 gboolean mx_success_registr(void *data);
 gboolean mx_success_profile(void *data);
+gboolean mx_success_change_profile(void *data);
 
 #endif
