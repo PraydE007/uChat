@@ -15,7 +15,7 @@ printf("new_datab->login_db: %s\n", new_datab->login_db2); //
     return 0;
 }
 
-bool mx_check_login(sqlite3 *db, t_datab *datab, const char *login) {
+bool mx_check_login_on_server(sqlite3 *db, t_datab *datab, const char *login) {
     bool result = false;
     // int connection_point;
     char sql[30];

@@ -40,7 +40,7 @@ json_object *mx_if_registr(json_object *jobj, sqlite3 *db, t_datab *datab) {
     // connection_point = sqlite3_exec(db, sql, cb_reganswer, datab, NULL);
     // if (connection_point != SQLITE_OK && connection_point != SQLITE_ABORT)
     //     fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
-    if (mx_check_login(db, datab, datab->login_db))
+    if (mx_check_login_on_server(db, datab, datab->login_db))
         mx_js_add_str(j_result, "Answer", MX_REG_ERR);
     else
         insert_user(jobj, j_result, db);
