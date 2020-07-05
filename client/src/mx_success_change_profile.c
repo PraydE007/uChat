@@ -15,7 +15,7 @@ gboolean mx_success_change_profile(void *data) {
     char *email = (char *)json_to_str(jobj, "Email");
     char *mobile = (char *)json_to_str(jobj, "Mobile");
 
-    //gtk_entry_set_text(GTK_ENTRY(gui->e_l_login), login);
+    gtk_entry_set_text(GTK_ENTRY(gui->e_l_login), login);
     gtk_entry_set_text(GTK_ENTRY(gui->e_p_login), login);
     gtk_entry_set_text(GTK_ENTRY(gui->e_p_email), email);
     gtk_entry_set_text(GTK_ENTRY(gui->e_p_number), mobile);
