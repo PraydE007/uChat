@@ -1,6 +1,6 @@
 #include "dbase.h"
 
-static int cb_massege_history(void *datab, int argc, char **argv,
+static int cb_users_id_for_chat(void *datab, int argc, char **argv,
                                                             char **azColName) {
     (void)argc;
     (void)azColName;
@@ -34,7 +34,7 @@ static int cb_massege_history(void *datab, int argc, char **argv,
 json_object *mx_if_send_message(json_object *jobj, sqlite3 *db, t_datab *datab) {
     // json_object *j_answer = json_object_new_object();
     json_object *j_result = json_object_new_array();
-    // char sql[100];
+    char sql[100];
 
     if (mx_is_active(jobj, db, datab)) {
         // if_active(jobj, j_result, db, datab);
@@ -44,8 +44,8 @@ json_object *mx_if_send_message(json_object *jobj, sqlite3 *db, t_datab *datab) 
         sprintf(sql, "select ID from CHATS where CHAT_NAME = '%s';",
                 datab->login_db2);
         mx_table_setting(db, sql, mx_cb_chat_id_finder, datab);
-        sprintf(sql, "select MESSAGE_text from MESSAGES where CHAT_id = '%s' " \
-                "order by ID desc limit 2;", datab->chat_id);
+        sprintf(sql, "select USER_id from USERS_CHATS where CHAT_id = '%s';",
+                                                                datab->chat_id);
         mx_table_setting(db, sql, cb_massege_history, j_result);
     }
     else

@@ -11,6 +11,7 @@ INCS = $(addprefix $(INCD)/, $(INC))
 
 FILES = mx_callback.c \
 		mx_cb_chat_id_finder.c \
+		mx_check_login.c \
 		mx_create_datab_node.c \
 		mx_data_base_creation.c \
 		mx_dbase_handler.c \
