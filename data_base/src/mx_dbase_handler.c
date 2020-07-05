@@ -30,6 +30,8 @@ json_object *mx_dbase_handler(json_object *jobj, sqlite3 *db) {
         j_result = mx_if_chat_create(jobj, db, datab);
     else if (!mx_strcmp("Chat", mx_json_to_str(jobj, "Type")))
         j_result = mx_if_chat(jobj, db, datab);
+    // else if (!mx_strcmp("Send_message", mx_json_to_str(jobj, "Type")))
+    //     j_result = mx_if_send_message(jobj, db, datab);
     mx_dealloc_datab(&datab);
     return j_result;
 }
