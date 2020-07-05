@@ -1,5 +1,6 @@
 #include "client.h"
 
+
 void *mx_client_recv(void *data) {
     int n = 0;
     t_s_glade *gui = *(t_s_glade **)data;
@@ -23,6 +24,9 @@ void *mx_client_recv(void *data) {
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_profile, gui, 0);
         if (!mx_strcmp(answer, "Profile data are changed!"))
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_change_profile, gui, 0);
+        if (!mx_strcmp(answer, "The password were changed!"))
+            gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_change_passwd, gui, 0);
+
     }
     return NULL;
 }

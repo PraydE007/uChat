@@ -74,6 +74,7 @@ CL_SRC		=	main.c \
 				mx_success_registr.c \
 				mx_success_profile.c \
 				mx_success_change_profile.c \
+				mx_success_change_passwd.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \
