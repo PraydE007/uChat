@@ -189,7 +189,9 @@ gboolean mx_success_registr(void *data);
 gboolean mx_success_profile(void *data);
 gboolean mx_success_change_profile(void *data);
 gboolean mx_success_change_passwd(void *data);
+gboolean mx_success_add_contact(void *data);
 
 //If_login_render
-void mx_render_contacts(t_s_glade *gui);
+gboolean mx_render_contacts(t_s_glade *gui);
+
 #endif
