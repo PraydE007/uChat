@@ -115,6 +115,9 @@ typedef struct s_s_glade {
     //recv_data
     char buffer[MX_MAX_BYTES];
     char *recv_data;
+
+    //sending
+    char *send_to;
 }              t_s_glade;
 
 // BUFFERS_PROFILE_STRUCTS_FOR_AUDITOR
@@ -186,5 +189,9 @@ gboolean mx_success_registr(void *data);
 gboolean mx_success_profile(void *data);
 gboolean mx_success_change_profile(void *data);
 gboolean mx_success_change_passwd(void *data);
+gboolean mx_success_add_contact(void *data);
+
+//If_login_render
+gboolean mx_render_contacts(t_s_glade *gui);
 
 #endif
