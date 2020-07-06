@@ -66,23 +66,12 @@ void *mx_doprocessing (void *data) {
         json_object_object_add(jobj,"Socket", j_socket);
         log_add_info(sockbd, jobj);
         ///////// Затычка для добавления контактов
-        // if (!mx_strcmp(mx_json_to_str(jobj, "Type"), "Add_contact")) { //
-        //     // sockbd.login = mx_json_to_str(jobj, "Login"); //
-        //     // login = mx_strdup(sockbd.login); //
-        //     printf("%s\n", buffer);
-        //     continue;
-        // } //
-        ///////// Конец затычки для добавления контактов
-        ///////// Затычка для изменения логина, почты и номера
-        // if (!mx_strcmp(mx_json_to_str(jobj, "Type"), "Change_profile")) { //
-        //     // sockbd.login = mx_json_to_str(jobj, "Login"); //
-        //     // login = mx_strdup(sockbd.login); //
-        //     json_object *j_test_Security_key = json_object_new_string("cdef9e974ae775ea9b1472cedb108607127607e538b5c1ff8f9e46123");
-        //     json_object_object_add(jobj,"Security_key", j_test_Security_key);
-        //     // printf("%s\n", buffer);
-        //     // continue;
-        // } //
-        ///////// Конец затычки для добавления контактов
+        if (!mx_strcmp(mx_json_to_str(jobj, "Type"), "Sending")) { //
+            // sockbd.login = mx_json_to_str(jobj, "Login"); //
+            // login = mx_strdup(sockbd.login); //
+            printf("%s\n", buffer);
+            continue;
+        } //
         ///////// Затычка для профиля
         // json_object *j_test_type = json_object_new_string("Chat");
         // json_object_object_add(jobj,"Type", j_test_type);

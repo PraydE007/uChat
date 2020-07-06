@@ -115,6 +115,9 @@ typedef struct s_s_glade {
     //recv_data
     char buffer[MX_MAX_BYTES];
     char *recv_data;
+
+    //sending
+    char *send_to;
 }              t_s_glade;
 
 // BUFFERS_PROFILE_STRUCTS_FOR_AUDITOR

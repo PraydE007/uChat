@@ -16,6 +16,7 @@ void *mx_client_recv(void *data) {
         answer = (char *)json_object_get_string(json_object_object_get(jobj, "Answer"));
         if (!mx_strcmp(answer, "You have logged in!")) {
             gui->key = (char *)json_object_get_string(json_object_object_get(jobj, "Security_key"));
+            printf("%s\n", gui->recv_data);
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_logging, gui, 0);
         }
         if (!mx_strcmp(answer, "You have registered successfully!"))
@@ -26,6 +27,9 @@ void *mx_client_recv(void *data) {
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_change_profile, gui, 0);
         if (!mx_strcmp(answer, "The password were changed!"))
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_change_passwd, gui, 0);
+        else {
+            continue;
+        }
 
     }
     return NULL;
