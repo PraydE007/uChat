@@ -28,8 +28,8 @@ void *mx_client_recv(void *data) {
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_change_passwd, gui, 0);
         if (!mx_strcmp(answer, "The contact was added!"))
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_add_contact, gui, 0);
-        if (!mx_strcmp(answer, "Recive_message"))
-            gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_add_contact, gui, 0);
+        if (!mx_strcmp(answer, "Receive_message"))
+            gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_message, gui, 0);
 
     }
     return NULL;

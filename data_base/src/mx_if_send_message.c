@@ -25,7 +25,7 @@ static int message_sending(void *datab, int argc, char **argv,
     (void)argc;
     (void)azColName;
     if (datab) {
-// printf("argv[0]: %s\n", argv[0]); //
+printf("argv[0]: %s\n", argv[0]); //
         t_datab *new_datab = (t_datab *)datab;
         int n;
         json_object *receive_message = json_object_new_object();
@@ -34,6 +34,7 @@ static int message_sending(void *datab, int argc, char **argv,
         new_datab->message_db = json_object_get_string(receive_message);
 printf("new_datab->message_db: %d\n", mx_strlen(new_datab->message_db)); //
         n = send(mx_atoi(argv[0]), new_datab->message_db, mx_strlen(new_datab->message_db),  0);
+        printf("%s\n", "TESTESTESTETSETSETSTE");
     }
     return 0;
 }
@@ -58,7 +59,7 @@ json_object *mx_if_send_message(json_object *jobj, sqlite3 *db, t_datab *datab) 
         lenth = json_object_array_length(datab->j_result);;
         for (int i = 0; i < lenth; i++) {
             datab->id_db = json_object_get_string(json_object_array_get_idx(datab->j_result, i));
-            // printf("datab->id_db[%d]: %s\n", i, datab->id_db);
+            printf("datab->id_db[%d]: %s\n", i, datab->id_db);
             sprintf(sql, "select SOCKET from ACTIVITY where USER_id = '%s';",
                                                                 datab->id_db);
             mx_table_setting(db, sql, message_sending, datab);

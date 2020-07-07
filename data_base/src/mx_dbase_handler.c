@@ -3,7 +3,7 @@
 json_object *mx_dbase_handler(json_object *jobj, sqlite3 *db) {
     t_datab *datab = mx_create_datab_node();
     json_object *j_result = json_object_new_object();
-    json_object *j_result2 = json_object_new_object();
+    // json_object *j_result2 = json_object_new_object();
 
     if (!mx_strcmp("Logging", mx_js_to_str(jobj, "Type"))) {
         j_result = mx_if_logging(jobj, db, datab);
@@ -41,8 +41,12 @@ json_object *mx_dbase_handler(json_object *jobj, sqlite3 *db) {
         j_result = mx_if_chat_create(jobj, db, datab);
     else if (!mx_strcmp("Chat", mx_js_to_str(jobj, "Type")))
         j_result = mx_if_chat(jobj, db, datab);
-    else if (!mx_strcmp("Send_message", mx_js_to_str(jobj, "Type")))
+    else if (!mx_strcmp("Send_message", mx_js_to_str(jobj, "Type"))) {
+        json_object *j_test_Chat_name = json_object_new_string("Chisto potrindetb");
+        json_object_object_add(jobj,"Chat_name", j_test_Chat_name);
+        printf("BUFFER: %s\n", json_object_get_string(jobj));
         j_result = mx_if_send_message(jobj, db, datab);
+    }
     mx_dealloc_datab(&datab);
     return j_result;
 }
