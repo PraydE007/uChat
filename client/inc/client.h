@@ -190,6 +190,8 @@ gboolean mx_success_profile(void *data);
 gboolean mx_success_change_profile(void *data);
 gboolean mx_success_change_passwd(void *data);
 gboolean mx_success_add_contact(void *data);
+gboolean mx_success_message(void *data);
+
 
 //If_login_render
 gboolean mx_render_contacts(t_s_glade *gui);
