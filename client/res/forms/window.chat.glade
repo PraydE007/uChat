@@ -26,7 +26,6 @@
             <property name="can_focus">False</property>
             <child>
               <object class="GtkButton" id="button.profile">
-                <property name="name">btn-profile</property>
                 <property name="width_request">62</property>
                 <property name="height_request">62</property>
                 <property name="visible">True</property>
@@ -65,7 +64,6 @@
             </child>
             <child>
               <object class="GtkButton" id="button.logout">
-                <property name="name">btn-profile</property>
                 <property name="width_request">62</property>
                 <property name="height_request">62</property>
                 <property name="visible">True</property>
@@ -108,6 +106,27 @@
                     <property name="can_focus">False</property>
                     <property name="hexpand">True</property>
                     <child>
+                      <object class="GtkButton" id="button.group">
+                        <property name="width_request">50</property>
+                        <property name="height_request">50</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <child>
+                          <object class="GtkImage" id="image.button.group">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="stock">gtk-missing-image</property>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
                       <object class="GtkEntry" id="entry.find">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
@@ -117,12 +136,11 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">0</property>
+                        <property name="position">1</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkButton" id="button.find">
-                        <property name="name">btn-profile</property>
                         <property name="width_request">50</property>
                         <property name="height_request">50</property>
                         <property name="visible">True</property>
@@ -139,7 +157,7 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">1</property>
+                        <property name="position">2</property>
                       </packing>
                     </child>
                   </object>
@@ -219,7 +237,7 @@
                     <property name="can_focus">False</property>
                     <child>
                       <object class="GtkButton" id="button.settings">
-                        <property name="name">btn-profile</property>
+                        <property name="name">btn-profil</property>
                         <property name="width_request">50</property>
                         <property name="height_request">50</property>
                         <property name="visible">True</property>
@@ -240,7 +258,6 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="button.send">
-                        <property name="name">btn-profile</property>
                         <property name="width_request">50</property>
                         <property name="height_request">50</property>
                         <property name="visible">True</property>
@@ -278,7 +295,6 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="button.emoji">
-                        <property name="name">btn-profile</property>
                         <property name="width_request">50</property>
                         <property name="height_request">50</property>
                         <property name="visible">True</property>
@@ -324,8 +340,8 @@
     <property name="window_position">center</property>
     <property name="default_width">512</property>
     <property name="default_height">384</property>
-    <property name="deletable">False</property>
     <property name="type_hint">dialog</property>
+    <property name="deletable">False</property>
     <child type="titlebar">
       <placeholder/>
     </child>
