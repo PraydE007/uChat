@@ -41,7 +41,7 @@ static void log_add_info(t_sockbd sockbd, json_object *jobj) {
 void *mx_doprocessing (void *data) {
     t_sockbd sockbd = *(t_sockbd *)data;
     int n;
-    char buffer[2048];
+    char buffer[MX_MAX_BYTES];
     const char *answer = NULL;
     json_object *jobj = json_object_new_object();
     json_object *j_result = json_object_new_object();
@@ -50,9 +50,10 @@ void *mx_doprocessing (void *data) {
 
     //send_mail("ozahirny@gmail.com", "DAROVA EPT\n");
     while (true) {
-        bzero(buffer,2048);
+        bzero(buffer,MX_MAX_BYTES);
         n = recv(sockbd.sockfd, buffer, sizeof(buffer), 0);
         printf("GET %s\n\n", buffer);
+
         //printf("%s\n", buffer);
         j_socket = json_object_new_int(sockbd.sockfd);
         //printf("buffer: %s\n", buffer);
