@@ -9,12 +9,12 @@ static int cb_massege_history(void *datab, int argc, char **argv,
         t_datab *new_datab = (t_datab *)datab;
         char *login = mx_find_user_login(new_datab->db, argv[0]);
 
-        mx_js_add_str(j_message, "Login", login);
+        mx_add_str_to_js(j_message, "Login", login);
         if (!mx_strcmp(new_datab->id, argv[0]))
-            mx_js_add_str(j_message, "Own_message", argv[1]);
+            mx_add_str_to_js(j_message, "Own_message", argv[1]);
         else
-            mx_js_add_str(j_message, "Message", argv[1]);
-        mx_js_arr_add(new_datab->j_result, j_message);
+            mx_add_str_to_js(j_message, "Message", argv[1]);
+        mx_add_arr_to_js(new_datab->j_result, j_message);
         mx_strdel(&login);
     }
     return 0;
@@ -24,9 +24,9 @@ static void if_active(json_object *jobj, sqlite3 *db, t_datab *datab) {
     json_object *j_answer = json_object_new_object();
     char sql[255];
 
-    mx_js_add_str(j_answer, "Answer", "Message history!");
-    mx_js_arr_add((datab)->j_result, j_answer);
-    (datab)->login_db2 = mx_json_to_str(jobj, "Chat_name");
+    mx_add_str_to_js(j_answer, "Answer", "Message history!");
+    mx_add_arr_to_js((datab)->j_result, j_answer);
+    (datab)->login_db2 = mx_js_to_str(jobj, "Chat_name");
     sprintf(sql, "select ID from CHATS where CHAT_NAME = '%s';",
             (datab)->login_db2);
     mx_table_setting(db, sql, mx_cb_chat_id_finder, datab);
@@ -42,7 +42,7 @@ json_object *mx_if_chat(json_object *jobj, sqlite3 *db, t_datab *datab) {
     if (mx_is_active(jobj, db, datab))
         if_active(jobj, db, datab);
     else
-        mx_js_add_str(datab->j_result, "Answer", MX_CHEAT_MESSAGE);
+        mx_add_str_to_js(datab->j_result, "Answer", MX_CHEAT_MESSAGE);
 //
 // int lenth = json_object_array_length(datab->j_result);
 // printf("lenth: %d\n", lenth);

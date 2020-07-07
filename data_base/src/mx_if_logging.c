@@ -35,7 +35,7 @@ static void call_to_db(json_object *j_result, sqlite3 *db, t_datab *datab,
     if (connection_point != SQLITE_OK)
         fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
     if (datab->commd)
-        mx_js_add_str(j_result, datab->type, datab->commd);
+        mx_add_str_to_js(j_result, datab->type, datab->commd);
     mx_strdel(&datab->commd);
     mx_strdel(&datab->type);
 }
@@ -43,8 +43,8 @@ static void call_to_db(json_object *j_result, sqlite3 *db, t_datab *datab,
 static void js_chts_conts(json_object *j_result, sqlite3 *db, t_datab *datab,
                                                                    char *sql) {
 
-    mx_js_add_str(j_result, "Answer", MX_LOG_MES);
-    mx_js_add_str(j_result, "Security_key", datab->security_key);
+    mx_add_str_to_js(j_result, "Answer", MX_LOG_MES);
+    mx_add_str_to_js(j_result, "Security_key", datab->security_key);
     sprintf(sql, "select CHAT_NAME from CHATS INNER JOIN USERS_CHATS " \
             "ON ID = CHAT_id WHERE USER_id = %s;", datab->id);
     datab->type = mx_strdup("Chats");
@@ -61,7 +61,7 @@ json_object *mx_if_logging(json_object *jobj, sqlite3 *db, t_datab *datab) {
     // int connection_point;
     char sql[255];
 
-    mx_json_to_datab(jobj, datab);
+    mx_js_to_datab(jobj, datab);
     sprintf(sql, "select ID, LOGIN, PASSWORD from USERS;");
     mx_table_setting(db, sql, cb_loganswer, datab);
     // connection_point = sqlite3_exec(db, sql, cb_loganswer, datab, NULL);
@@ -72,7 +72,7 @@ json_object *mx_if_logging(json_object *jobj, sqlite3 *db, t_datab *datab) {
         js_chts_conts(j_result, db, datab, sql);
     }
     else
-        mx_js_add_str(j_result, "Answer", MX_LOG_ERR);
+        mx_add_str_to_js(j_result, "Answer", MX_LOG_ERR);
     datab->logtrigger = 0;
     datab->passtrigger = 0;
     mx_strdel(&datab->security_key);

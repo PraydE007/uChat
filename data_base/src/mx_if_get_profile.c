@@ -23,13 +23,13 @@ json_object *mx_if_get_profile(json_object *jobj, sqlite3 *db, t_datab *datab) {
     if (mx_is_active(jobj, db, datab)){
         sprintf(sql, "select ID, LOGIN, EMAIL, MOBILE from USERS;");
         mx_table_setting(db, sql, cb_get_profile, datab);
-        mx_js_add_str(j_result, "Answer", "Profile info!");
-        mx_js_add_str(j_result, "Login", (char *)datab->login_db);
-        mx_js_add_str(j_result, "Email", datab->email);
-        mx_js_add_str(j_result, "Mobile", datab->mobile);
+        mx_add_str_to_js(j_result, "Answer", "Profile info!");
+        mx_add_str_to_js(j_result, "Login", (char *)datab->login_db);
+        mx_add_str_to_js(j_result, "Email", datab->email);
+        mx_add_str_to_js(j_result, "Mobile", datab->mobile);
     }
     else
-        mx_js_add_str(j_result, "Answer", MX_CHEAT_MESSAGE);
+        mx_add_str_to_js(j_result, "Answer", MX_CHEAT_MESSAGE);
 printf("if_get_profile(j_result): %s\n", json_object_to_json_string(j_result));//
     mx_strdel(&datab->id);// comment in mx_is_active
     mx_strdel(&datab->email);
