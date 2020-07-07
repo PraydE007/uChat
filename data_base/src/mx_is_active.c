@@ -34,8 +34,8 @@ bool mx_is_active(json_object *jobj, sqlite3 *db, t_datab *datab) {
     bool result = false;
     char sql[255];
 
-    datab->login_db = mx_json_to_str(jobj, "Login");
-    datab->security_db = mx_json_to_str(jobj, "Security_key");
+    datab->login_db = mx_js_to_str(jobj, "Login");
+    datab->security_db = mx_js_to_str(jobj, "Security_key");
     if (datab->login_db && datab->security_db) {
         sprintf(sql, "select ID, LOGIN from USERS;");
         mx_table_setting(db, sql, cb_id_finder, datab);

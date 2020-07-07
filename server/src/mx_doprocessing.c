@@ -67,8 +67,8 @@ void *mx_doprocessing (void *data) {
         json_object_object_add(jobj,"Socket", j_socket);
         log_add_info(sockbd, jobj);
         ///////// Затычка для добавления контактов
-        if (!mx_strcmp(mx_json_to_str(jobj, "Type"), "Sending")) { //
-            // sockbd.login = mx_json_to_str(jobj, "Login"); //
+        if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Sending")) { //
+            // sockbd.login = mx_js_to_str(jobj, "Login"); //
             // login = mx_strdup(sockbd.login); //
             printf("%s\n", buffer);
             continue;
@@ -76,21 +76,21 @@ void *mx_doprocessing (void *data) {
         ///////// Затычка для профиля
         // json_object *j_test_type = json_object_new_string("Chat");
         // json_object_object_add(jobj,"Type", j_test_type);
-        // if (!mx_strcmp(mx_json_to_str(jobj, "Type"), "Chat")) { //
-        //     // sockbd.login = mx_json_to_str(jobj, "Login"); //
+        // if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Chat")) { //
+        //     // sockbd.login = mx_js_to_str(jobj, "Login"); //
         //     // login = mx_strdup(sockbd.login); //
         //     // json_object *j_test_jobj = json_object_new_object();
         //     // json_object *j_test_Answer = json_object_new_string("Sucsess");
         //     json_object *j_test_Login = json_object_new_string("AAA");
         //     json_object *j_test_Chat_name = json_object_new_string("Chisto potrindetb");
         //     // json_object *j_test_Mobile = json_object_new_string("TEST_MOBILE");
-            json_object *j_test_Security_key = json_object_new_string("cdef9e974ae775ea9b1472cedb108607127607e538b5c1ff8f9e461234");
+            // json_object *j_test_Security_key = json_object_new_string("cdef9e974ae775ea9b1472cedb108607127607e538b5c1ff8f9e461234");
         //     // json_object_object_add(jobj,"Answer", j_test_Answer);
         //     json_object_object_add(jobj,"Login", j_test_Login);
         //     // json_object_object_add(jobj,"Email", j_test_Email);
         //     // json_object_object_add(jobj,"Mobile", j_test_Mobile);
         //     json_object_object_add(jobj,"Chat_name", j_test_Chat_name);
-            json_object_object_add(jobj,"Security_key", j_test_Security_key);
+            // json_object_object_add(jobj,"Security_key", j_test_Security_key);
         //     // n = send(sockbd.sockfd, json_object_to_json_string(jobj), mx_strlen(json_object_to_json_string(jobj)), 0); //
         //     // continue;
         // } //
@@ -106,23 +106,23 @@ void *mx_doprocessing (void *data) {
         n = send(sockbd.sockfd, answer, mx_strlen(answer),  0);
 
 
-        // if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_LOG_MES))
+        // if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), MX_LOG_MES))
         //     n = send(sockbd.sockfd, MX_LOG_MES, mx_strlen(MX_LOG_MES),  0);
-        // /*else*/ if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_REG_MES))
+        // /*else*/ if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), MX_REG_MES))
         //     n = send(sockbd.sockfd, MX_REG_MES, mx_strlen(MX_REG_MES),  0);
-        // else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_CONT_MES))
+        // else if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), MX_CONT_MES))
         //     n = send(sockbd.sockfd, MX_CONT_MES, mx_strlen(MX_CONT_MES),  0);
-        // else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_LOG_ERR))
+        // else if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), MX_LOG_ERR))
         //     n = send(sockbd.sockfd, MX_LOG_ERR, mx_strlen(MX_LOG_ERR),  0);
-        // else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_REG_ERR))
+        // else if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), MX_REG_ERR))
         //     n = send(sockbd.sockfd, MX_REG_ERR, mx_strlen(MX_REG_ERR),  0);
-        // else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_CHEAT_MESSAGE))
+        // else if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), MX_CHEAT_MESSAGE))
         //     n = send(sockbd.sockfd, MX_CHEAT_MESSAGE, mx_strlen(MX_CHEAT_MESSAGE),  0);
-        // else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), MX_CONT_ERR))
+        // else if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), MX_CONT_ERR))
         //     n = send(sockbd.sockfd, MX_CONT_ERR, mx_strlen(MX_CONT_ERR),  0);
-        // else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), "Profile info!"))
+        // else if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), "Profile info!"))
         //     n = send(sockbd.sockfd, "Profile info!", mx_strlen("Profile info!"),  0);
-        // else if (!mx_strcmp(mx_json_to_str(j_result, "Answer"), "Profile data is changed!"))
+        // else if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), "Profile data is changed!"))
         //     n = send(sockbd.sockfd, "Profile data is changed!", mx_strlen("Profile data is changed!"),  0);
         json_object_put(j_result);
         if (n <= 0) {

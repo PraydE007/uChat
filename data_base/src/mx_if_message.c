@@ -1,5 +1,5 @@
 #include "dbase.h"
-
+//CHECK IF WE NEED THIS FUNCTION
 static int cb_sender_check(void *datab, int argc, char **argv, char **azColName) {
     (void)argc;
     (void)azColName;
@@ -37,12 +37,12 @@ static void insert_chat(json_object *jobj, json_object *j_reslt, sqlite3 *db) {
     char sql[255];
 
     sprintf(sql, "insert into CHATS (CHAT_NAME, CHAT_STATUS)" \
-            "values('%s', '%s')", mx_json_to_str(jobj, "Name"),
-            mx_json_to_str(jobj, "Status"));
+            "values('%s', '%s')", mx_js_to_str(jobj, "Name"),
+            mx_js_to_str(jobj, "Status"));
     connection_point = sqlite3_exec(db, sql, mx_callback, NULL, NULL);
     if (connection_point != SQLITE_OK)
         fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
-    mx_js_add_str(j_reslt, "Answer", MX_CHAT_MES);
+    mx_add_str_to_js(j_reslt, "Answer", MX_CHAT_MES);
 }
 
 json_object *mx_if_message(json_object *jobj, sqlite3 *db, t_datab *datab) {
@@ -50,22 +50,22 @@ json_object *mx_if_message(json_object *jobj, sqlite3 *db, t_datab *datab) {
     int connection_point;
     char sql[30];
 
-    datab->login_db = mx_json_to_str(jobj, "Login");
-    datab->security_db = mx_json_to_str(jobj, "Security_key");
+    datab->login_db = mx_js_to_str(jobj, "Login");
+    datab->security_db = mx_js_to_str(jobj, "Security_key");
     sprintf(sql, "select ID, LOGIN, SECURITY_KEY from USERS ;");
     connection_point = sqlite3_exec(db, sql, cb_sender_check, datab, NULL);
     if (datab->passtrigger == 1) {
-        datab->login_db = mx_json_to_str(jobj, "Chat");
+        datab->login_db = mx_js_to_str(jobj, "Chat");
         sprintf(sql, "select ID, CHAT_NAME from CHATS;");
         connection_point = sqlite3_exec(db, sql, cb_chatanswer, datab, NULL);
         if (connection_point != SQLITE_OK && connection_point != SQLITE_ABORT)
             fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
     }
     if (datab->logtrigger == 1)
-        mx_js_add_str(j_result, "Answer", MX_CHAT_ERR);
+        mx_add_str_to_js(j_result, "Answer", MX_CHAT_ERR);
     else
         insert_chat(jobj, j_result, db);
-    printf("answer: %s\n", mx_json_to_str(j_result, "Answer")); //
+    printf("answer: %s\n", mx_js_to_str(j_result, "Answer")); //
     datab->passtrigger = 0;
     datab->logtrigger = 0;
     return j_result;
