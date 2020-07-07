@@ -94,20 +94,20 @@ void *mx_doprocessing (void *data) {
         //     json_object *j_test_Login = json_object_new_string("AAA");
         //     json_object *j_test_Chat_name = json_object_new_string("Chisto potrindetb");
         //     // json_object *j_test_Mobile = json_object_new_string("TEST_MOBILE");
-        //     json_object *j_test_Security_key = json_object_new_string("cdef9e974ae775ea9b1472cedb108607127607e538b5c1ff8f9e46123");
+            json_object *j_test_Security_key = json_object_new_string("cdef9e974ae775ea9b1472cedb108607127607e538b5c1ff8f9e461234");
         //     // json_object_object_add(jobj,"Answer", j_test_Answer);
         //     json_object_object_add(jobj,"Login", j_test_Login);
         //     // json_object_object_add(jobj,"Email", j_test_Email);
         //     // json_object_object_add(jobj,"Mobile", j_test_Mobile);
         //     json_object_object_add(jobj,"Chat_name", j_test_Chat_name);
-        //     json_object_object_add(jobj,"Security_key", j_test_Security_key);
+            json_object_object_add(jobj,"Security_key", j_test_Security_key);
         //     // n = send(sockbd.sockfd, json_object_to_json_string(jobj), mx_strlen(json_object_to_json_string(jobj)), 0); //
         //     // continue;
         // } //
          ///////// Конец затычки для профиля
 
         //printf("char *login: %s\n", login); //
-        //printf("json_object_to_json_string(jobj): %s\n", json_object_to_json_string(jobj));
+        printf("json_object_to_json_string(jobj): %s\n", json_object_to_json_string(jobj));
         j_result = mx_dbase_handler(jobj, sockbd.bd); //
         //json_object_put(jobj); //
         //printf("json_object_to_json_string(j_result): %s\n", json_object_to_json_string(j_result)); //
