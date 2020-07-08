@@ -82,6 +82,7 @@ static void init_chat(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->i_b_find = mx_get_widget(builder, "image.button.find");
     (*gui)->l_chats = mx_get_widget(builder, "list.chats");
     (*gui)->l_messages = mx_get_widget(builder, "list.messages");
+    (*gui)->s_w_messages = mx_get_widget(builder, "s.w.messages");
     (*gui)->w_emoji = mx_get_widget(builder, "window.emoji");
     (*gui)->b_emoji = mx_get_widget(builder, "button.emoji");
     (*gui)->i_b_emoji = mx_get_widget(builder, "image.button.emoji");

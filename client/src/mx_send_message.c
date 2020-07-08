@@ -21,5 +21,12 @@ void mx_send_message(GtkButton *button, gpointer data) {
     n = send(gui->sockfd, send_data, strlen(send_data), 0);
     bzero(buffer, 2048);
     n = recv(gui->sockfd, buffer, 2048, 0);
+
     mx_push_message(gui->l_messages, message, NULL);
+
+    // SCROLL DOWN
+    GtkScrolledWindow *w = GTK_SCROLLED_WINDOW(gui->s_w_messages);
+    GtkAdjustment *ad = gtk_scrolled_window_get_vadjustment(w);
+    double l_pos = gtk_adjustment_get_upper(ad) + gtk_adjustment_get_page_increment(ad);
+    gtk_adjustment_set_value(ad, l_pos);
 }
