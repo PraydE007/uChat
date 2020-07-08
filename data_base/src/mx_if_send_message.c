@@ -62,7 +62,6 @@ static void db_handler_for_message(sqlite3 *db, t_datab *datab, char *sql) {
 json_object *mx_if_send_message(json_object *jobj, sqlite3 *db, t_datab *datab) {
     json_object *j_answer = json_object_new_object();
     datab->j_result = json_object_new_array();
-    // int lenth = 0;
     char sql[255];
 
     if (mx_is_active(jobj, db, datab)) {
