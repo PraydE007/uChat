@@ -80,6 +80,8 @@ static void init_chat(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->e_find = mx_get_widget(builder, "entry.find");
     (*gui)->b_find = mx_get_widget(builder, "button.find");
     (*gui)->i_b_find = mx_get_widget(builder, "image.button.find");
+    (*gui)->b_group = mx_get_widget(builder, "button.group");
+    (*gui)->i_b_group = mx_get_widget(builder, "image.button.group");
     (*gui)->l_chats = mx_get_widget(builder, "list.chats");
     (*gui)->l_messages = mx_get_widget(builder, "list.messages");
     (*gui)->s_w_messages = mx_get_widget(builder, "s.w.messages");
@@ -115,6 +117,7 @@ static void init_images(t_s_glade **gui) {
     mx_rep_img((*gui)->i_b_profile, MX_BUTTON_PROFILE, 32, 32);
     mx_rep_img((*gui)->i_b_logout, MX_BUTTON_LOGOUT, 32, 32);
     mx_rep_img((*gui)->i_b_find, MX_BUTTON_FIND, 25, 25);
+    mx_rep_img((*gui)->i_b_group, MX_BUTTON_GROUP, 25, 25);
     mx_rep_img((*gui)->i_b_settings, MX_BUTTON_SETTINGS, 25, 25);
     mx_rep_img((*gui)->i_b_emoji, MX_BUTTON_EMOJI, 25, 25);
     mx_rep_img((*gui)->i_b_send, MX_BUTTON_SEND, 25, 25);
@@ -182,6 +185,8 @@ static void connect_signals(t_s_glade *gui) {
                     G_CALLBACK(mx_open_window), gui->w_emoji);
     g_signal_connect(gui->l_chats, "row-activated",
                     G_CALLBACK(mx_open_chat), gui);
+    g_signal_connect(gui->l_chats, "row-activated",
+                    G_CALLBACK(mx_open_group), gui);
 
     // Emoji window
     g_signal_connect(gui->b_e_close, "clicked",

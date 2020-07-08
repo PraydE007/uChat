@@ -9,14 +9,18 @@
 #include "../../json/include/json-c/json.h"
 #include <openssl/ssl.h>
 
-// #define MX_AVATAR_MIS "client/res/images/avatar_missing.png"
-#define MX_AVATAR_MIS "client/res/images/meme.png"
+#define MX_G_A_MIS "client/res/images/group_avatar_missing.png"
+#define MX_AVATAR_MIS "client/res/images/avatar_missing.png"
+#define MX_MEME_AVATAR "client/res/images/meme_avatar.png"
 #define MX_BUTTON_PROFILE "client/res/icons/profile.png"
 #define MX_BUTTON_LOGOUT "client/res/icons/logout.png"
 #define MX_BUTTON_FIND "client/res/icons/search.png"
 #define MX_BUTTON_SETTINGS "client/res/icons/settings.png"
 #define MX_BUTTON_EMOJI "client/res/icons/smile.png"
 #define MX_BUTTON_SEND "client/res/icons/send.png"
+#define MX_BUTTON_BAN "client/res/icons/ban.png"
+#define MX_BUTTON_GROUP "client/res/icons/group.png"
+#define MX_BUTTON_RESET "client/res/icons/reset.png"
 
 #define MX_WINDOW_WARNING "client/res/icons/warning.png"
 #define MX_WINDOW_LOGIN "client/res/forms/window.login.glade"
@@ -83,6 +87,8 @@ typedef struct s_s_glade {
     GtkWidget *e_find;
     GtkWidget *b_find;
     GtkWidget *i_b_find;
+    GtkWidget *b_group;
+    GtkWidget *i_b_group;
     GtkWidget *l_chats;
     GtkWidget *l_messages;
     GtkWidget *s_w_messages;
@@ -180,6 +186,7 @@ void mx_change_theme(t_s_glade *gui, bool mode);
 void mx_change_profile(GtkButton *button, gpointer data);
 void mx_anti_resize(GtkWindow *w, GdkEventWindowState *e, gpointer data);
 void mx_open_chat(GtkListBox *box, GtkListBoxRow *row, gpointer data);
+void mx_open_group(GtkButton *btn, gpointer data);
 
 //infinity_recive_from_server
 void *mx_client_recv(void *data);
