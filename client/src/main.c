@@ -33,6 +33,27 @@ int main(int argc, char **argv) {
         perror("ERROR connecting");
         return 1;
     }
+    /*
+    /////////// Затычка для картинок
+    int n = 0;
+    int fd = open("/Users/ozahirnyi/uchat/meme_avatar.png", O_RDONLY);
+    char image[50000];
+    read(fd, image, 50000);
+    close(fd);
+//    json_object *jobj = json_object_new_object();
+    json_object *jobj = json_object_new_object();
+    json_object *j_type = json_object_new_string("Picture");
+    json_object *j_pic = json_object_new_string_len(image, 43388);
+    json_object_object_add(jobj, "Type", j_type);
+    json_object_object_add(jobj, "Data", j_pic);
+//    json_object_set_string_len(jobj, image, 43388);
+//    jobj->_userdata = image;
+    char *result = (char *)json_object_to_json_string(jobj);
+//    write(1, image, 43388);
+//    write(1, result, 43388);
+    n = send(sockfd, result, sizeof(result), 0);
+*/
+
     mx_interface(&argc, &argv, sockfd);
 
 // while(true) {
