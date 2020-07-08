@@ -73,6 +73,20 @@ void *mx_doprocessing (void *data) {
             printf("%s\n", buffer);
             continue;
         } //
+
+        if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Private_chat")) { //
+            // sockbd.login = mx_js_to_str(jobj, "Login"); //
+            // login = mx_strdup(sockbd.login); //
+            printf("%s\n", buffer);
+            continue;
+        } //
+
+        if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Public_group")) { //
+            // sockbd.login = mx_js_to_str(jobj, "Login"); //
+            // login = mx_strdup(sockbd.login); //
+            printf("%s\n", buffer);
+            continue;
+        } //
         ///////// Затычка для профиля
         // json_object *j_test_type = json_object_new_string("Chat");
         // json_object_object_add(jobj,"Type", j_test_type);

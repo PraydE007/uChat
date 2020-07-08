@@ -162,6 +162,8 @@ static void connect_signals(t_s_glade *gui) {
                     G_CALLBACK(mx_anti_resize), gui);
     g_signal_connect(gui->w_password, "window-state-event",
                     G_CALLBACK(mx_anti_resize), gui);
+    g_signal_connect(gui->w_group, "window-state-event",
+                    G_CALLBACK(mx_anti_resize), gui);
 
     // Uchat Quit Signals
     g_signal_connect(gui->w_signin, "destroy",
@@ -171,6 +173,8 @@ static void connect_signals(t_s_glade *gui) {
     g_signal_connect(gui->w_chat, "destroy",
                     G_CALLBACK(exit), (void *)0);
     g_signal_connect(gui->w_profile, "destroy",
+                    G_CALLBACK(exit), (void *)0);
+    g_signal_connect(gui->w_group, "destroy",
                     G_CALLBACK(exit), (void *)0);
 
     // Login Window Signals
@@ -232,6 +236,8 @@ static void connect_signals(t_s_glade *gui) {
                     G_CALLBACK(mx_close_window), gui->w_password);
     g_signal_connect(gui->b_pp_apply, "clicked",
                      G_CALLBACK(mx_change_pass), gui);
+
+
 }
 
 static bool read_mode(void) {
