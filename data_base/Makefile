@@ -20,11 +20,12 @@ FILES = mx_add_arr_to_js.c \
 		mx_dealloc_datab.c \
 		mx_if_change_passwd.c \
 		mx_if_change_profile.c \
-		mx_if_chat.c \
-		mx_if_chat_create.c \
 		mx_if_contact.c \
-		mx_if_logging.c \
+		mx_if_create_chat.c \
 		mx_if_get_profile.c \
+		mx_if_logging.c \
+		mx_if_private_chat.c \
+		mx_if_public_chat.c \
 		mx_if_registr.c \
 		mx_if_send_message.c \
 		mx_is_active.c \

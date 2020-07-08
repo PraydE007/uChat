@@ -36,17 +36,19 @@ static void if_active(json_object *jobj, sqlite3 *db, t_datab *datab) {
             datab->chat_name);
     mx_table_setting(db, sql, mx_cb_chat_id_finder, datab);
     sprintf(sql, "select SENDER_id, MESSAGE_text from MESSAGES where " \
-            "CHAT_id = '%s' order by ID desc limit 10;", datab->chat_id);
+            "CHAT_id = '%s' order by ID;", datab->chat_id);
     mx_table_setting(db, sql, cb_massege_history, datab);
     mx_strdel(&datab->chat_name);
 }
 
-json_object *mx_if_private_chat(json_object *jobj, sqlite3 *db, t_datab *datab) {
+json_object *mx_if_private_chat(json_object *jobj, sqlite3 *db,
+                                                            t_datab *datab) {
     datab->j_result = json_object_new_array();
     datab->db = db;
 
-    if (mx_is_active(jobj, db, datab))
+    if (mx_is_active(jobj, db, datab)) {
         if_active(jobj, db, datab);
+    }
     else
         mx_add_str_to_js(datab->j_result, "Answer", MX_CHEAT_MESSAGE);
 //
@@ -54,6 +56,12 @@ json_object *mx_if_private_chat(json_object *jobj, sqlite3 *db, t_datab *datab) 
 // printf("lenth: %d\n", lenth);
 // for (int i = 0; i < lenth; i++)
 //     printf("mx_if_chat: %s\n", json_object_get_string(json_object_array_get_idx(datab->j_result, i)));
+// enum json_type type;
+// type = json_object_get_type (datab->j_result);
+// printf("type: %u\n", type);
+// type = json_object_get_type (jobj);
+// printf("type: %u\n", type);
+printf("json_object_to_json_string(datab->j_result): %s\n", json_object_to_json_string(datab->j_result));
 //
     mx_strdel(&datab->id);// comment in mx_is_activ
     mx_strdel(&datab->chat_id);

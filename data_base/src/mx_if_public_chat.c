@@ -35,7 +35,8 @@ static void if_active(json_object *jobj, sqlite3 *db, t_datab *datab) {
     mx_table_setting(db, sql, cb_massege_history, datab);
 }
 
-json_object *mx_if_chat(json_object *jobj, sqlite3 *db, t_datab *datab) {
+json_object *mx_if_public_chat(json_object *jobj, sqlite3 *db,
+                                                            t_datab *datab) {
     datab->j_result = json_object_new_array();
     datab->db = db;
 

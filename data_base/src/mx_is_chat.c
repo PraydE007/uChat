@@ -8,7 +8,7 @@ static int cb_chat_name_checking(void *datab, int argc, char **argv,
         t_datab *new_datab = (t_datab *)datab;
 
         if (!mx_strcmp(new_datab->chat_name, argv[0])) {
-            new_datab->logtrigger = 1;
+            new_datab->passtrigger = 1;
             return 1;
         }
     }

@@ -95,11 +95,11 @@ void mx_data_base_creation(sqlite3 **db) {
     // connection_point = sqlite3_exec(*db, sql, callback, 0, NULL);
     // sprintf(sql, "insert into CONTACTS (OWNER_id, FOLLOWER_id) values('1', '3')");
     // connection_point = sqlite3_exec(*db, sql, callback, 0, NULL);
-    // sprintf(sql, "insert into MESSAGES (SENDER_id, CHAT_id, MESSAGE_text) values(1, 2, 'YO, kak dela, Bill?')");
+    // sprintf(sql, "insert into MESSAGES (SENDER_id, CHAT_id, MESSAGE_text) values(1, 1, 'YO, kak dela, Bill?')");
     // connection_point = sqlite3_exec(*db, sql, callback, 0, NULL);
-    // sprintf(sql, "insert into MESSAGES (SENDER_id, CHAT_id, MESSAGE_text) values(2, 2, 'I am still waiting for you')");
+    // sprintf(sql, "insert into MESSAGES (SENDER_id, CHAT_id, MESSAGE_text) values(2, 1, 'I am still waiting for you')");
     // connection_point = sqlite3_exec(*db, sql, callback, 0, NULL);
-    // sprintf(sql, "insert into MESSAGES (SENDER_id, CHAT_id, MESSAGE_text) values(1, 2, 'Where are you?')");
+    // sprintf(sql, "insert into MESSAGES (SENDER_id, CHAT_id, MESSAGE_text) values(1, 1, 'Where are you?')");
     // connection_point = sqlite3_exec(*db, sql, callback, 0, NULL);
     // if (connection_point != SQLITE_OK) {
     //     fprintf(stderr, "error: %s\n", sqlite3_errmsg(*db));

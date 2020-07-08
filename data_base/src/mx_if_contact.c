@@ -29,14 +29,16 @@ static int cb_contact_id_finder(void *datab, int argc, char **argv,
     }
     return 0;
 }
-
+// A LOT OF LINES
 static void insert_contact(json_object *j_result, sqlite3 *db, char *sql,
                                                             t_datab *datab) {
     sprintf(sql, "insert into CONTACTS (OWNER_id, FOLLOWER_id) " \
             "values(%s, %s)", datab->id, datab->second_id);
     mx_table_creation(db, sql, mx_callback);
-    datab->chat_name = mx_strjoin(datab->login_db, datab->login_db2);
+    datab->chat_name = mx_strjoin(datab->login_db2, datab->login_db);
     if (!mx_is_chat(db, sql, datab)) {
+        mx_strdel(&datab->chat_name);
+        datab->chat_name = mx_strjoin(datab->login_db, datab->login_db2);
         sprintf(sql, "insert into CHATS (CHAT_NAME, CHAT_STATUS) " \
                 "values('%s', '%s')", datab->chat_name, "private");
         mx_table_creation(db, sql, mx_callback);

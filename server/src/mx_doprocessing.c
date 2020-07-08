@@ -73,12 +73,12 @@ void *mx_doprocessing (void *data) {
             continue;
         } //
 
-        if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Private_chat")) { //
-            // sockbd.login = mx_js_to_str(jobj, "Login"); //
-            // login = mx_strdup(sockbd.login); //
-            printf("%s\n", buffer);
-            continue;
-        } //
+        // if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Private_chat")) { //
+        //     // sockbd.login = mx_js_to_str(jobj, "Login"); //
+        //     // login = mx_strdup(sockbd.login); //
+        //     printf("%s\n", buffer);
+        //     continue;
+        // } //
 
         if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Public_group")) { //
             // sockbd.login = mx_js_to_str(jobj, "Login"); //
@@ -114,10 +114,9 @@ void *mx_doprocessing (void *data) {
         j_result = mx_dbase_handler(jobj, sockbd.bd); //
         //json_object_put(jobj); //
         //printf("json_object_to_json_string(j_result): %s\n", json_object_to_json_string(j_result)); //
-        answer = json_object_get_string(j_result); //
+        answer = json_object_to_json_string(j_result); //
         printf("ANSWER : %s\n\n", answer);
         n = send(sockbd.sockfd, answer, mx_strlen(answer),  0);
-
 
         // if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), MX_LOG_MES))
         //     n = send(sockbd.sockfd, MX_LOG_MES, mx_strlen(MX_LOG_MES),  0);

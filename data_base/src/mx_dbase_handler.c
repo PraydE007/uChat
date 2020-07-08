@@ -37,12 +37,12 @@ json_object *mx_dbase_handler(json_object *jobj, sqlite3 *db) {
         j_result = mx_if_change_profile(jobj, db, datab);
     else if (!mx_strcmp("Change_passwd", mx_js_to_str(jobj, "Type")))
         j_result = mx_if_change_passwd(jobj, db, datab);
-    else if (!mx_strcmp("Chat_create", mx_js_to_str(jobj, "Type")))
-        j_result = mx_if_chat_create(jobj, db, datab);
+    else if (!mx_strcmp("Create_chat", mx_js_to_str(jobj, "Type")))
+        j_result = mx_if_create_chat(jobj, db, datab);
     else if (!mx_strcmp("Private_chat", mx_js_to_str(jobj, "Type")))
-        j_result = mx_if_chat(jobj, db, datab);
-    else if (!mx_strcmp("Chat", mx_js_to_str(jobj, "Type")))
-        j_result = mx_if_chat(jobj, db, datab);
+        j_result = mx_if_private_chat(jobj, db, datab);
+    else if (!mx_strcmp("Public_chat", mx_js_to_str(jobj, "Type")))
+        j_result = mx_if_public_chat(jobj, db, datab);
     else if (!mx_strcmp("Send_message", mx_js_to_str(jobj, "Type"))) {
         // json_object *j_test_Chat_name = json_object_new_string("Chisto potrindetb");
         // json_object_object_add(jobj,"Chat_name", j_test_Chat_name);

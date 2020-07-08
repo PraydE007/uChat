@@ -10,7 +10,6 @@ void mx_dealloc_datab(t_datab **datab) {
     mx_strdel(&((*datab)->commd));
     mx_strdel(&((*datab)->type));
     mx_strdel(&((*datab)->security_key));
-    json_object_put((*datab)->j_result);
     free(*datab);
     (*datab) = NULL;
 }
