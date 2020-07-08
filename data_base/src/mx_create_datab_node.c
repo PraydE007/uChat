@@ -1,5 +1,5 @@
 #include "dbase.h"
-
+//A LOT OF LINE
 t_datab *mx_create_datab_node(void) {
     t_datab *node = (t_datab*)malloc(sizeof(t_datab));
 
@@ -8,8 +8,9 @@ t_datab *mx_create_datab_node(void) {
         node->passtrigger = 0;
         node->socket = 0;
         node->id = NULL;
-        node->chat_id = NULL;
         node->second_id = NULL;
+        node->chat_id = NULL;
+        node->chat_name = NULL;
         node->email = NULL;
         node->mobile = NULL;
         node->commd = NULL;

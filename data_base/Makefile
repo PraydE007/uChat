@@ -28,6 +28,7 @@ FILES = mx_add_arr_to_js.c \
 		mx_if_registr.c \
 		mx_if_send_message.c \
 		mx_is_active.c \
+		mx_is_chat.c \
 		mx_find_user_login.c \
 		mx_js_arr_to_str.c \
 		mx_js_to_datab.c \

@@ -41,10 +41,11 @@ bool mx_is_active(json_object *jobj, sqlite3 *db, t_datab *datab) {
         mx_table_setting(db, sql, cb_id_finder, datab);
         sprintf(sql, "select USER_id, SECURITY_KEY from ACTIVITY;");
         mx_table_setting(db, sql, cb_check_acty, datab);
-        if (datab->passtrigger == 1)
+        if (datab->passtrigger == 1) {
+            datab->passtrigger = 0;
             result = true;
+        }
     }
     // datab->id must be freed in the fuction where 'mx_is_active' called
-    datab->passtrigger = 0;
     return result;
 }

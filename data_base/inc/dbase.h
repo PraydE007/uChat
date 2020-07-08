@@ -9,8 +9,9 @@ typedef struct s_datab {
     int passtrigger;
     int socket;
     char *id;
-    char *chat_id;
     char *second_id;
+    char *chat_id;
+    char *chat_name;
     char *email;
     char *mobile;
     char *commd;
@@ -29,6 +30,7 @@ typedef struct s_datab {
 }               t_datab;
 
 bool mx_is_active(json_object *jobj, sqlite3 *db, t_datab *datab);
+bool mx_is_chat(sqlite3 *db, char *sql, t_datab *datab);
 bool mx_check_login_on_server(sqlite3 *db, t_datab *datab, const char *login);
 char *mx_find_user_login(sqlite3 *db, char *id);
 char *mx_strjoin_free_js_value(char *s1, const char *s2);

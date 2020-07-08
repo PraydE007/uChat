@@ -35,7 +35,6 @@ static void log_add_info(t_sockbd sockbd, json_object *jobj) {
 //        }
 //        else if (execvp("sendmail", command))
 //    }
-
 // }
 
 void *mx_doprocessing (void *data) {

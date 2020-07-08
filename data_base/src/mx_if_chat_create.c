@@ -59,7 +59,7 @@ json_object *mx_if_chat_create(json_object *jobj, sqlite3 *db, t_datab *datab) {
     }
     else
         mx_add_str_to_js(j_result, "Answer", MX_CHEAT_MESSAGE);
-    printf("mx_if_create_chat(j_result): %s\n", json_object_to_json_string(j_result));//
+printf("mx_if_create_chat(j_result): %s\n", json_object_to_json_string(j_result));//
     mx_strdel(&datab->id);// comment in mx_is_activ
     datab->logtrigger = 0;
     return j_result;

@@ -1,8 +1,5 @@
 #include "dbase.h"
 
-// static void json_profile_add(json_object *j_result, t_datab *datab) {
-// }
-
 static void profile_insert(json_object *j_result, sqlite3 *db, t_datab *datab) {
     char sql[255];
 
@@ -27,20 +24,14 @@ static void profile_insert(json_object *j_result, sqlite3 *db, t_datab *datab) {
 json_object *mx_if_change_profile(json_object *jobj, sqlite3 *db,
                                                             t_datab *datab) {
     json_object *j_result = json_object_new_object();
-    // char sql[255];
 
     datab->socket = mx_js_to_int(jobj, "Socket");
     datab->login_db2 = mx_js_to_str(jobj, "New_login");
     datab->email_db = mx_js_to_str(jobj, "Email");
     datab->mobile_db = mx_js_to_str(jobj, "Mobile");
     if (mx_is_active(jobj, db, datab)) {
-        if (!mx_check_login_on_server(db, datab, datab->login_db2)) {
+        if (!mx_check_login_on_server(db, datab, datab->login_db2))
             profile_insert(j_result, db, datab);
-            // sprintf(sql, "update USERS set LOGIN = '%s', EMAIL = '%s', " \
-            //         "MOBILE = '%s', SOCKET = %d where ID = '%s'", datab->login_db2,
-            //         datab->email_db, datab->mobile_db, datab->socket, datab->id);
-            // mx_table_creation(db, sql, mx_callback);
-        }
         else
             mx_add_str_to_js(j_result, "Answer", MX_REG_ERR);
     }
