@@ -27,6 +27,7 @@
 #define MX_WINDOW_SIGNUP "client/res/forms/window.signup.glade"
 #define MX_WINDOW_CHAT "client/res/forms/window.chat.glade"
 #define MX_WINDOW_PROFILE "client/res/forms/window.profile.glade"
+#define MX_WINDOW_GROUP "client/res/forms/window.group.glade"
 
 #define MX_DEF_THEME "client/res/themes/light.css"
 #define MX_DARK_THEME "client/res/themes/dark.css"
@@ -114,6 +115,22 @@ typedef struct s_s_glade {
     GtkWidget *e_p_newpass1;
     GtkWidget *e_p_newpass2;
 
+    // Group window
+    GtkWidget *w_group;
+    GtkWidget *i_group;
+    GtkWidget *e_image;
+    GtkWidget *e_group_name;
+    GtkWidget *e_g_nickname;
+    GtkWidget *b_g_close;
+    GtkWidget *b_f_image;
+    GtkWidget *i_f_image;
+    GtkWidget *b_i_reset;
+    GtkWidget *i_i_reset;
+    GtkWidget *b_f_user;
+    GtkWidget *i_b_f_user;
+    GtkWidget *b_b_user;
+    GtkWidget *i_b_user;
+
     //key
     char *key;
     GtkWidget *b_pp_apply;
@@ -187,6 +204,7 @@ void mx_change_profile(GtkButton *button, gpointer data);
 void mx_anti_resize(GtkWindow *w, GdkEventWindowState *e, gpointer data);
 void mx_open_chat(GtkListBox *box, GtkListBoxRow *row, gpointer data);
 void mx_open_group(GtkButton *btn, gpointer data);
+void mx_close_group(GtkButton *btn, gpointer data);
 
 //infinity_recive_from_server
 void *mx_client_recv(void *data);

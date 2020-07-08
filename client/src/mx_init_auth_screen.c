@@ -112,6 +112,24 @@ static void init_profile(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->b_pp_close = mx_get_widget(builder, "button.password.close");
 }
 
+static void init_group(GtkBuilder **builder, t_s_glade **gui) {
+    (*builder) = gtk_builder_new_from_file(MX_WINDOW_GROUP);
+    (*gui)->w_group = mx_get_widget(builder, "window.group");
+    (*gui)->i_group = mx_get_widget(builder, "image.group.avatar");
+    (*gui)->e_image = mx_get_widget(builder, "entry.image");
+    (*gui)->e_group_name = mx_get_widget(builder, "entry.group.name");
+    (*gui)->e_g_nickname = mx_get_widget(builder, "entry.nickname");
+    (*gui)->b_g_close = mx_get_widget(builder, "button.close");
+    (*gui)->b_f_image = mx_get_widget(builder, "button.find.image");
+    (*gui)->i_f_image = mx_get_widget(builder, "image.button.find.image");
+    (*gui)->b_i_reset = mx_get_widget(builder, "button.image.reset");
+    (*gui)->i_i_reset = mx_get_widget(builder, "image.button.reset");
+    (*gui)->b_f_user = mx_get_widget(builder, "button.find.user");
+    (*gui)->i_b_f_user = mx_get_widget(builder, "image.button.find.user");
+    (*gui)->b_b_user = mx_get_widget(builder, "button.ban.user");
+    (*gui)->i_b_user = mx_get_widget(builder, "image.button.ban.user");
+}
+
 static void init_images(t_s_glade **gui) {
     mx_rep_img((*gui)->i_avatar, MX_AVATAR_MIS, 225, 225);
     mx_rep_img((*gui)->i_b_profile, MX_BUTTON_PROFILE, 32, 32);
@@ -121,6 +139,11 @@ static void init_images(t_s_glade **gui) {
     mx_rep_img((*gui)->i_b_settings, MX_BUTTON_SETTINGS, 25, 25);
     mx_rep_img((*gui)->i_b_emoji, MX_BUTTON_EMOJI, 25, 25);
     mx_rep_img((*gui)->i_b_send, MX_BUTTON_SEND, 25, 25);
+    mx_rep_img((*gui)->i_group, MX_G_A_MIS, 225, 225);
+    mx_rep_img((*gui)->i_f_image, MX_BUTTON_FIND, 25, 25);
+    mx_rep_img((*gui)->i_i_reset, MX_BUTTON_RESET, 25, 25);
+    mx_rep_img((*gui)->i_b_f_user, MX_BUTTON_FIND, 25, 25);
+    mx_rep_img((*gui)->i_b_user, MX_BUTTON_BAN, 25, 25);
 }
 
 static void connect_signals(t_s_glade *gui) {
@@ -185,8 +208,12 @@ static void connect_signals(t_s_glade *gui) {
                     G_CALLBACK(mx_open_window), gui->w_emoji);
     g_signal_connect(gui->l_chats, "row-activated",
                     G_CALLBACK(mx_open_chat), gui);
-    g_signal_connect(gui->l_chats, "row-activated",
+    g_signal_connect(gui->b_group, "clicked",
                     G_CALLBACK(mx_open_group), gui);
+
+    // Group Window Signals
+    g_signal_connect(gui->b_g_close, "clicked",
+                    G_CALLBACK(mx_close_group), gui);
 
     // Emoji window
     g_signal_connect(gui->b_e_close, "clicked",
@@ -239,6 +266,7 @@ t_s_glade *mx_init_auth_screen(int socket) {
     init_signup(&builder, &gui);
     init_chat(&builder, &gui);
     init_profile(&builder, &gui);
+    init_group(&builder, &gui);
     init_images(&gui);
     mx_load_theme(gui);
     connect_signals(gui);
