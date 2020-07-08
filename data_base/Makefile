@@ -9,8 +9,11 @@ OBJD = obj
 INC = dbase.h
 INCS = $(addprefix $(INCD)/, $(INC))
 
-FILES = mx_callback.c \
+FILES = mx_add_arr_to_js.c \
+		mx_add_str_to_js.c \
+		mx_callback.c \
 		mx_cb_chat_id_finder.c \
+		mx_check_login_on_server.c \
 		mx_create_datab_node.c \
 		mx_data_base_creation.c \
 		mx_dbase_handler.c \
@@ -23,12 +26,13 @@ FILES = mx_callback.c \
 		mx_if_logging.c \
 		mx_if_get_profile.c \
 		mx_if_registr.c \
+		mx_if_send_message.c \
 		mx_is_active.c \
-		mx_js_add_str.c \
-		mx_js_arr_add.c \
-		mx_json_to_datab.c \
-		mx_json_to_int.c \
-		mx_json_to_str.c \
+		mx_find_user_login.c \
+		mx_js_arr_to_str.c \
+		mx_js_to_datab.c \
+		mx_js_to_int.c \
+		mx_js_to_str.c \
 		mx_strjoin_free_js_value.c \
 		mx_table_activity.c \
 		mx_table_creation.c \

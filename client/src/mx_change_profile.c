@@ -9,11 +9,11 @@ static void mx_change_window(t_s_glade *gui) {
 
 static t_change_prof change_prof_buf(t_s_glade *gui) {
     t_change_prof change_prof;
-
     change_prof.login = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_l_login));
     change_prof.email = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_p_email));
     change_prof.mobile = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_p_number));
     change_prof.new_login = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_p_login));
+    change_prof.key= strdup(gui->key);
     return change_prof;
 }
 
@@ -25,12 +25,18 @@ static char *create_send_prof(t_change_prof change_prof) {
     json_object *j_login = json_object_new_string(change_prof.login);
     json_object *j_email = json_object_new_string(change_prof.email);
     json_object *j_number = json_object_new_string(change_prof.mobile);
-    json_object *j_new_login = json_object_new_string(change_prof.new_login);
+    json_object *j_new_login;
+    json_object *j_key = json_object_new_string(change_prof.key);
+    if (!mx_strcmp(change_prof.login, change_prof.new_login))
+        j_new_login = json_object_new_string("");
+    else
+        j_new_login = json_object_new_string(change_prof.new_login);
     json_object_object_add(jobj,"Type", j_type);
     json_object_object_add(jobj,"Login", j_login);
     json_object_object_add(jobj,"Email", j_email);
     json_object_object_add(jobj,"Mobile", j_number);
     json_object_object_add(jobj,"New_login", j_new_login);
+    json_object_object_add(jobj,"Security_key", j_key);
     res = (char *)json_object_to_json_string(jobj);
     return res;
 }
@@ -39,16 +45,12 @@ void mx_change_profile(GtkButton *button, gpointer data) {
     char *send_data = NULL;
     t_s_glade *gui = (t_s_glade *)data;
     t_change_prof change_prof = change_prof_buf(gui);
-    // char buffer[MX_MAX_BYTES];
     int n = 0;
-
     if (mx_strcmp("", change_prof.login)
         && mx_strcmp("", change_prof.email)
         && mx_strcmp("", change_prof.mobile)) {
             send_data = create_send_prof(change_prof);
             n = send(gui->sockfd, send_data, strlen(send_data), 0);
-            // bzero(buffer, MX_MAX_BYTES);
-            // n = recv(gui->sockfd, buffer, MX_MAX_BYTES, 0);
         }
     (void)button;
     mx_change_window(gui);

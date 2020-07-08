@@ -19,6 +19,4 @@ void mx_find_user(GtkButton *button, gpointer data) {
     if (mx_strcmp(name, ""))
         send(gui->sockfd, send_data, strlen(send_data), 0);
     (void)button;
-    mx_push_chat(gui->l_chats, name);
-    gtk_entry_set_text(GTK_ENTRY(gui->e_find), "");
 }
