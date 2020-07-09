@@ -53,7 +53,6 @@ static void insert_contact(json_object *j_result, sqlite3 *db, char *sql,
         mx_table_creation(db, sql, mx_callback);
     }
     mx_add_str_to_js(j_result, "Answer", MX_CONT_MES);
-    mx_strdel(&datab->chat_name);
 }
 
 void condition_for_contact(json_object *j_result, sqlite3 *db, t_datab *datab,
@@ -90,6 +89,7 @@ json_object *mx_if_contact(json_object *jobj, sqlite3 *db, t_datab *datab) {
 printf("if_contact(j_result): %s\n", json_object_to_json_string(j_result));//
     mx_strdel(&datab->id);// comment in mx_is_active
     mx_strdel(&datab->second_id);
+    mx_strdel(&datab->chat_name);
     datab->logtrigger = 0;
     datab->passtrigger = 0;
     return j_result;
