@@ -55,6 +55,7 @@ void mx_add_str_to_js(struct json_object *j_result, char *key, char *value);
 void mx_add_arr_to_js(struct json_object *j_result, struct json_object *j_answer);
 void mx_data_base_creation(sqlite3 **db);
 void mx_dealloc_datab(t_datab **datab);
+void mx_find_chat_name(sqlite3 *db, t_datab *datab, char *sql);
 void mx_js_to_datab(json_object *jobj, t_datab *datab);
 void mx_table_activity(sqlite3 *db, char *sql);
 void mx_table_chats(sqlite3 *db, char *sql);
