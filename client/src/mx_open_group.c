@@ -19,6 +19,7 @@ void mx_open_group(GtkButton *btn, gpointer data) {
             json_object_object_add(jobj,"Chat_name", j_chat_name);
             json_object_object_add(jobj,"Security_key", j_key);
             send_data = (char *)json_object_to_json_string(jobj);
+            printf("SEND_DATA :%s\n", send_data);
             send(gui->sockfd, send_data, strlen(send_data), 0);
         }
         // else {
