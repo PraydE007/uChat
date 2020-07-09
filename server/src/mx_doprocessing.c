@@ -87,12 +87,12 @@ void *mx_doprocessing (void *data) {
             continue;
         } //
 
-        if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Private_chat")) { //
-            // sockbd.login = mx_js_to_str(jobj, "Login"); //
-            // login = mx_strdup(sockbd.login); //
-            printf("%s\n", buffer);
-            continue;
-        } //
+        // if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Private_chat")) { //
+        //     // sockbd.login = mx_js_to_str(jobj, "Login"); //
+        //     // login = mx_strdup(sockbd.login); //
+        //     printf("%s\n", buffer);
+        //     continue;
+        // } //
 
         if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Public_group")) { //
             // sockbd.login = mx_js_to_str(jobj, "Login"); //

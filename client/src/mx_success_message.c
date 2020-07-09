@@ -11,7 +11,10 @@ gboolean mx_success_message(void *data) {
     t_s_glade *gui = (t_s_glade *)data;
     json_object *jobj = json_tokener_parse(gui->recv_data);
     const char *message = json_to_str(jobj, "Message");
-
-    mx_p_owned(gui->l_messages, message);
+    if (gui->send_to) {
+        if (!mx_strcmp(gui->send_to, json_to_str(jobj, "Sender"))) {
+            mx_p_owned(gui->l_messages, message);
+        }
+    }
     return 0;
 }

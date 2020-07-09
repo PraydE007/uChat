@@ -45,6 +45,7 @@ static void init_login(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->b_t_dark = mx_get_widget(builder, "button.theme.dark");
     (*gui)->b_t_custom = mx_get_widget(builder, "button.theme.custom");
     (*gui)->b_t_connect = mx_get_widget(builder, "button.theme.connect");
+    (*gui)->s_anon = mx_get_widget(builder, "switch.anon");
 
     // (*gui)->icon = gdk_pixbuf_new_from_file("client/res/images/icon.ico", NULL);
     // if ((*gui)->icon) {
@@ -90,6 +91,8 @@ static void init_chat(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->i_b_emoji = mx_get_widget(builder, "image.button.emoji");
     (*gui)->b_e_close = mx_get_widget(builder, "button.close");
     (*gui)->l_one = mx_get_widget(builder, "label.one");
+    (*gui)->b_u_file = mx_get_widget(builder, "button.upload.file");
+    (*gui)->i_b_u_file = mx_get_widget(builder, "image.button.upload");
 
     gtk_label_set_text(GTK_LABEL((*gui)->l_one), get_unicode(0x1F150)); // TRYING UNICODE
 }
@@ -144,6 +147,7 @@ static void init_images(t_s_glade **gui) {
     mx_rep_img((*gui)->i_i_reset, MX_BUTTON_RESET, 25, 25);
     mx_rep_img((*gui)->i_b_f_user, MX_BUTTON_FIND, 25, 25);
     mx_rep_img((*gui)->i_b_user, MX_BUTTON_BAN, 25, 25);
+    mx_rep_img((*gui)->i_b_u_file, MX_BUTTON_FILE, 25, 25);
 }
 
 static void connect_signals(t_s_glade *gui) {
@@ -214,6 +218,8 @@ static void connect_signals(t_s_glade *gui) {
                     G_CALLBACK(mx_open_chat), gui);
     g_signal_connect(gui->b_group, "clicked",
                     G_CALLBACK(mx_open_group), gui);
+    g_signal_connect(gui->b_u_file, "clicked",
+                    G_CALLBACK(mx_upload_file), gui);
 
     // Group Window Signals
     g_signal_connect(gui->b_g_close, "clicked",
