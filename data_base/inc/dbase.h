@@ -12,6 +12,7 @@ typedef struct s_datab {
     char *second_id;
     char *chat_id;
     char *chat_name;
+    char *chat_status;
     char *email;
     char *mobile;
     char *commd;
@@ -20,6 +21,7 @@ typedef struct s_datab {
     const char *id_db;
     const char *login_db;
     const char *login_db2;
+    const char *chat_name_db;
     const char *email_db;
     const char *mobile_db;
     const char *password_db;
@@ -37,9 +39,11 @@ char *mx_strjoin_free_js_value(char *s1, const char *s2);
 const char *mx_js_arr_to_str(json_object *jobj, int index);
 const char *mx_js_to_str(json_object *jobj, char *key);
 int mx_callback(void *datab, int argc, char **argv, char **azColName);
-int mx_cb_chat_id_finder(void *datab, int argc, char **argv, char **azColName);
+int mx_cb_find_chat_id(void *datab, int argc, char **argv, char **azColName);
+int mx_cb_find_user_id(void *datab, int argc, char **argv, char **azColName);
 int mx_js_to_int(json_object *jobj, char *key);
 json_object *mx_dbase_handler(json_object *jobj, sqlite3 *db);
+json_object *mx_if_add_contact_to_chat(json_object *jobj, sqlite3 *db, t_datab *datab);
 json_object *mx_if_change_passwd(json_object *jobj, sqlite3 *db, t_datab *datab);
 json_object *mx_if_change_profile(json_object *jobj, sqlite3 *db, t_datab *datab);
 json_object *mx_if_contact(json_object *jobj, sqlite3 *db, t_datab *datab);
