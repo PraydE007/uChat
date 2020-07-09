@@ -36,6 +36,11 @@ void *mx_client_recv(void *data) {
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_add_contact, gui, 0);
         if (!mx_strcmp(answer, "Receive_message"))
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_message, gui, 0);
+        if (!mx_strcmp(answer, "The chat was created!")) {
+            // gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_message, gui, 0);
+            printf("%s\n", answer);
+            continue;
+        }
 
     }
     return NULL;
