@@ -34,7 +34,7 @@ printf("argv[0]: %s\n", argv[0]); //
         new_datab->message_db = json_object_get_string(receive_message);
 printf("new_datab->message_db: %d\n", mx_strlen(new_datab->message_db)); //
         n = send(mx_atoi(argv[0]), new_datab->message_db, mx_strlen(new_datab->message_db),  0);
-        printf("%s\n", "TESTESTESTETSETSETSTE");
+
     }
     return 0;
 }
