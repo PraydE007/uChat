@@ -81,6 +81,8 @@ CL_SRC		=	main.c \
 				mx_open_group.c \
 				mx_close_group.c \
 				mx_success_history.c \
+				mx_upload_file.c \
+				mx_open_file_chooser.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \
