@@ -25,16 +25,17 @@ static int message_sending(void *datab, int argc, char **argv,
     (void)argc;
     (void)azColName;
     if (datab) {
-printf("argv[0]: %s\n", argv[0]); //
         t_datab *new_datab = (t_datab *)datab;
         int n;
         json_object *receive_message = json_object_new_object();
         mx_add_str_to_js(receive_message, "Answer", "Receive_message");
-        mx_add_str_to_js(receive_message, "Message", (char *)new_datab->message_db);
+        mx_add_str_to_js(receive_message, "Sender",
+                                                (char *)new_datab->login_db);
+        mx_add_str_to_js(receive_message, "Message",
+                                                (char *)new_datab->message_db);
         new_datab->message_db = json_object_get_string(receive_message);
-printf("new_datab->message_db: %d\n", mx_strlen(new_datab->message_db)); //
-        n = send(mx_atoi(argv[0]), new_datab->message_db, mx_strlen(new_datab->message_db),  0);
-
+        n = send(mx_atoi(argv[0]), new_datab->message_db,
+                                        mx_strlen(new_datab->message_db),  0);
     }
     return 0;
 }
