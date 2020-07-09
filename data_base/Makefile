@@ -12,12 +12,14 @@ INCS = $(addprefix $(INCD)/, $(INC))
 FILES = mx_add_arr_to_js.c \
 		mx_add_str_to_js.c \
 		mx_callback.c \
-		mx_cb_chat_id_finder.c \
+		mx_cb_find_chat_id.c \
+		mx_cb_find_user_id.c \
 		mx_check_login_on_server.c \
 		mx_create_datab_node.c \
 		mx_data_base_creation.c \
 		mx_dbase_handler.c \
 		mx_dealloc_datab.c \
+		mx_if_add_contact_to_chat.c \
 		mx_if_change_passwd.c \
 		mx_if_change_profile.c \
 		mx_if_contact.c \

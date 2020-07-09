@@ -39,10 +39,6 @@ json_object *mx_if_change_passwd(json_object *jobj, sqlite3 *db,
         mx_table_setting(db, sql, cb_change_psswd, datab);
         if (datab->passtrigger == 1) {
             passwd_update(jobj, db, sql, datab);
-            // datab->password_db = mx_js_to_str(jobj, "New_passwd");
-            // sprintf(sql, "update USERS set PASSWORD = '%s' where ID = '%s'",
-            //         datab->password_db, datab->id);
-            // mx_table_creation(db, sql, mx_callback);
             json_profile_add(j_result, datab);
         }
         else

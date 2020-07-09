@@ -29,7 +29,7 @@ static void if_active(json_object *jobj, sqlite3 *db, t_datab *datab) {
     (datab)->login_db2 = mx_js_to_str(jobj, "Chat_name");
     sprintf(sql, "select ID from CHATS where CHAT_NAME = '%s';",
             (datab)->login_db2);
-    mx_table_setting(db, sql, mx_cb_chat_id_finder, datab);
+    mx_table_setting(db, sql, mx_cb_find_chat_id, datab);
     sprintf(sql, "select SENDER_id, MESSAGE_text from MESSAGES where " \
             "CHAT_id = '%s' order by ID desc limit 10;", datab->chat_id);
     mx_table_setting(db, sql, cb_massege_history, datab);

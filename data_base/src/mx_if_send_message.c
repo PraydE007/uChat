@@ -45,7 +45,7 @@ static void db_handler_for_message(sqlite3 *db, t_datab *datab, char *sql) {
 
     sprintf(sql, "select ID from CHATS where CHAT_NAME = '%s';",
             datab->chat_name);
-    mx_table_setting(db, sql, mx_cb_chat_id_finder, datab);
+    mx_table_setting(db, sql, mx_cb_find_chat_id, datab);
     insert_message(sql, db, datab);
     sprintf(sql, "select USER_id from USERS_CHATS where CHAT_id = '%s' " \
             "AND USER_id != '%s';", datab->chat_id, datab->id);
