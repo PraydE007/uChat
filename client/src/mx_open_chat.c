@@ -9,8 +9,6 @@ void mx_open_chat(GtkListBox *box, GtkListBoxRow *row, gpointer data) {
     const char *login = gtk_entry_get_text(GTK_ENTRY(gui->e_l_login));
 
     (void)box;
-    if (gui->send_to)
-        free(gui->send_to);
     gui->send_to = strdup(gtk_label_get_text(GTK_LABEL(chat_name)));
 
     json_object *jobj = json_object_new_object();

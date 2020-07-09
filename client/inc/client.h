@@ -142,6 +142,8 @@ typedef struct s_s_glade {
 
     //sending
     char *send_to;
+    char **contacts;
+    bool if_contact;
 }              t_s_glade;
 
 // BUFFERS_PROFILE_STRUCTS_FOR_AUDITOR
