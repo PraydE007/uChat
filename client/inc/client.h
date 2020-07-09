@@ -5,6 +5,7 @@
 #include <ctype.h>
 #include <strings.h>
 #include <gtk/gtk.h>
+#include <sys/stat.h>
 #include "../../libmx/inc/libmx.h"
 #include "../../json/include/json-c/json.h"
 #include <openssl/ssl.h>
@@ -186,6 +187,7 @@ void mx_p_owned(GtkWidget *lst, const char *msg);
 void mx_clear_container(GtkWidget *con);
 
 // GUI SIGNALS
+void mx_send_image(const char *file, int sockfd);
 void mx_open_window(GtkButton *button, gpointer data);
 void mx_close_window(GtkButton *button, gpointer data);
 void mx_light_theme(GtkButton *b, gpointer data);

@@ -74,13 +74,16 @@ void *mx_doprocessing (void *data) {
         } //
         //////// Затычка для отправления картинок
         if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Picture")) { //
-            char *bunfer = (char *)json_object_to_json_string(jobj);
-            int potok = open("/Users/ozahirnyi/uchat/test.png", O_RDWR | O_CREAT | O_TRUNC, S_IWRITE | S_IREAD);
-            write(potok, bunfer, 43388);
+            mx_printstr("YA ZASHEL\n");
+            char *bunfer = (char *)mx_js_to_str(jobj, "Data");
+            int size = mx_atoi(mx_js_to_str(jobj, "Size"));
+            int potok = open("/Users/ozahirnyi/uchat/test.png", O_RDWR | O_CREAT | O_APPEND, S_IWRITE | S_IREAD);
+            write(potok, bunfer, (unsigned long)size);
             close(potok);
             // sockbd.login = mx_js_to_str(jobj, "Login"); //
             // login = mx_strdup(sockbd.login); //
-            printf("%s\n", buffer);
+            printf("%s\n", bunfer);
+            printf("SIZE = %d\n", size);
             continue;
         } //
 

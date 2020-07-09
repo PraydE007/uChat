@@ -80,6 +80,7 @@ CL_SRC		=	main.c \
 				mx_success_message.c \
 				mx_open_group.c \
 				mx_close_group.c \
+				mx_send_image.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \
