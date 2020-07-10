@@ -47,6 +47,9 @@ void *mx_doprocessing (void *data) {
     json_object *j_socket = NULL;
     char *login = NULL;
 
+    // sockbd.login = mx_js_to_str(jobj, "Login"); //
+    // login = mx_strdup(sockbd.login); //
+//    printf("SIZE = %d\n", size);
     //send_mail("ozahirny@gmail.com", "DAROVA EPT\n");
     while (true) {
         bzero(buffer,MX_MAX_BYTES);
