@@ -23,7 +23,7 @@ LMXA:=	$(LMXD)/libmx.a
 
 
 DB_MXD	=	data_base
-DB_MXA:=	$(DB_MXD)/uchat_db.a
+DB_MXA:=	$(DB_MXD)/uchat_db
 DB_MXI:=	$(DB_MXD)/$(INCD)
 
 CL_INC		=	client.h

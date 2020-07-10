@@ -16,45 +16,44 @@ static int cb_loganswer(void *datab, int argc, char **argv, char **azColName) {
     return 0;
 }
 
-static int cb_chs_cnts(void *datab, int argc, char **argv,char **colName) {
-    char **new_str = (char **)datab;
+// static int cb_chs_cnts(void *datab, int argc, char **argv,char **colName) {
+//     char **new_str = (char **)datab;
 
-    for(int i = 0; i < argc; i++) {
-        printf("%s = %s\n", colName[i], argv[i] ? argv[i] : "NULL");//
-        *new_str = mx_strjoin_free_js_value(*new_str, argv[i]);
-        printf("new_str = %s\n", *new_str);//
-    }
-    return 0;
-}
+//     for(int i = 0; i < argc; i++) {
+//         printf("%s = %s\n", colName[i], argv[i] ? argv[i] : "NULL");//
+//         *new_str = mx_strjoin_free_js_value(*new_str, argv[i]);
+//         printf("new_str = %s\n", *new_str);//
+//     }
+//     return 0;
+// }
 
-static void call_to_db(json_object *j_result, sqlite3 *db, t_datab *datab,
-                                                                char *sql) {
-    int connection_point;
+// static void call_to_db(json_object *j_result, sqlite3 *db, t_datab *datab,
+//                                                                 char *sql) {
+//     int connection_point;
 
-    connection_point = sqlite3_exec(db, sql, cb_chs_cnts, &datab->commd, NULL);
-    if (connection_point != SQLITE_OK)
-        fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
-    if (datab->commd)
-        mx_add_str_to_js(j_result, datab->type, datab->commd);
-    mx_strdel(&datab->commd);
-    mx_strdel(&datab->type);
-}
+//     connection_point = sqlite3_exec(db, sql, cb_chs_cnts, &datab->commd, NULL);
+//     if (connection_point != SQLITE_OK)
+//         fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
+//     if (datab->commd)
+//         mx_add_str_to_js(j_result, datab->type, datab->commd);
+//     mx_strdel(&datab->commd);
+//     mx_strdel(&datab->type);
+// }
 
-static void js_chts_conts(json_object *j_result, sqlite3 *db, t_datab *datab,
-                                                                   char *sql) {
+// static void js_chts_conts(json_object *j_result, sqlite3 *db, t_datab *datab,
+//                                                                    char *sql) {
 
-    mx_add_str_to_js(j_result, "Answer", MX_LOG_MES);
-    mx_add_str_to_js(j_result, "Security_key", datab->security_key);
-    sprintf(sql, "select CHAT_NAME from CHATS INNER JOIN USERS_CHATS " \
-            "ON ID = CHAT_id WHERE USER_id = %s;", datab->id);
-    datab->type = mx_strdup("Chats");
-    call_to_db(j_result, db, datab, sql);
-    sprintf(sql, "select LOGIN from USERS INNER JOIN CONTACTS " \
-            "ON ID = FOLLOWER_id WHERE OWNER_id = %s;", datab->id);
-    datab->type = mx_strdup("Contacts");
-    call_to_db(j_result, db, datab, sql);
-    mx_strdel(&datab->id);
-}
+//     mx_add_str_to_js(j_result, "Answer", MX_LOG_MES);
+//     mx_add_str_to_js(j_result, "Security_key", datab->security_key);
+//     sprintf(sql, "select CHAT_NAME from CHATS INNER JOIN USERS_CHATS " \
+//             "ON ID = CHAT_id WHERE USER_id = %s;", datab->id);
+//     datab->type = mx_strdup("Chats");
+//     call_to_db(j_result, db, datab, sql);
+//     sprintf(sql, "select LOGIN from USERS INNER JOIN CONTACTS " \
+//             "ON ID = FOLLOWER_id WHERE OWNER_id = %s;", datab->id);
+//     datab->type = mx_strdup("Contacts");
+//     call_to_db(j_result, db, datab, sql);
+// }
 
 json_object *mx_if_logging(json_object *jobj, sqlite3 *db, t_datab *datab) {
     json_object *j_result = json_object_new_object();
@@ -65,12 +64,15 @@ json_object *mx_if_logging(json_object *jobj, sqlite3 *db, t_datab *datab) {
     mx_table_setting(db, sql, cb_loganswer, datab);
     if (datab->logtrigger == 1 && datab->passtrigger == 1) {
         mx_user_activate(db, datab, datab->socket);
-        js_chts_conts(j_result, db, datab, sql);
+        mx_add_str_to_js(j_result, "Answer", MX_LOG_MES);
+        mx_add_str_to_js(j_result, "Security_key", datab->security_key);
+        mx_js_chts_conts(j_result, db, datab, sql);
     }
     else
         mx_add_str_to_js(j_result, "Answer", MX_LOG_ERR);
     datab->logtrigger = 0;
     datab->passtrigger = 0;
+    mx_strdel(&datab->id);
     mx_strdel(&datab->security_key);
     return j_result;
 }
