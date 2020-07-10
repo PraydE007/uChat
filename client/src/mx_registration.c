@@ -25,12 +25,6 @@ void mx_registration(GtkButton *button, gpointer data) {
     int n = 0;
     char *send_data = NULL;
 
-    printf("LOGIN = %s\n", login);
-    printf("MAIL = %s\n", mail);
-    printf("PASS0 = %s\n", pass0);
-    printf("PASS1 = %s\n", pass1);
-    printf("CHECK_PASS = %d\n", check_data(pass0, mail, login, mobile));
-    printf("NUMBER = %s\n", mobile);
     (void)button;
     if (!strcmp(pass0, pass1) && !check_data(pass0, mail, login, mobile)) {
         json_object *jobj = json_object_new_object();
@@ -59,5 +53,5 @@ void mx_registration(GtkButton *button, gpointer data) {
     else if (check_data(pass0, mail, login, mobile) == 3)
         mx_show_dialog(gui->w_signup,"Incorrect password.\n");
     else
-        mx_show_dialog(gui->w_signup, "PAROLY NE SOVPADAYT BLEAT<3\n");
+        mx_show_dialog(gui->w_signup, "Passwords must be identical.\n");
 }
