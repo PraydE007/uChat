@@ -1,4 +1,4 @@
-NAME = uchat_db.a
+NAME = uchat_db
 
 CFLG = -std=c11 $(addprefix -W, all extra error pedantic) -g
 
@@ -24,6 +24,8 @@ FILES = mx_add_arr_to_js.c \
 		mx_if_change_profile.c \
 		mx_if_contact.c \
 		mx_if_create_chat.c \
+		mx_if_delete_chat.c \
+		mx_if_delete_contact.c \
 		mx_if_get_profile.c \
 		mx_if_logging.c \
 		mx_if_private_chat.c \
@@ -35,6 +37,7 @@ FILES = mx_add_arr_to_js.c \
 		mx_find_chat_name.c \
 		mx_find_user_login.c \
 		mx_js_arr_to_str.c \
+		mx_js_chts_conts.c \
 		mx_js_to_datab.c \
 		mx_js_to_int.c \
 		mx_js_to_str.c \

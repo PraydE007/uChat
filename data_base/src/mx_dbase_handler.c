@@ -41,6 +41,8 @@ json_object *mx_dbase_handler(json_object *jobj, sqlite3 *db) {
         j_result = mx_if_change_passwd(jobj, db, datab);
     else if (!mx_strcmp("Create_chat", mx_js_to_str(jobj, "Type")))
         j_result = mx_if_create_chat(jobj, db, datab);
+    else if (!mx_strcmp("Delete_contact", mx_js_to_str(jobj, "Type")))
+        j_result = mx_if_create_chat(jobj, db, datab);
     else if (!mx_strcmp("Private_chat", mx_js_to_str(jobj, "Type")))
         j_result = mx_if_private_chat(jobj, db, datab);
     else if (!mx_strcmp("Public_chat", mx_js_to_str(jobj, "Type")))
