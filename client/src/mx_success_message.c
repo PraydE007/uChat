@@ -25,8 +25,10 @@ gboolean mx_success_message(void *data) {
                 count++;
             }
         }
-        else
+        else {
+            mx_push_chat(gui->l_chats, sender);
             gui->if_contact = true;
+        }
     }
         mx_p_owned(gui->l_messages, message);
     return 0;
