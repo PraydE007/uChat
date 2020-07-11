@@ -5,6 +5,7 @@ json_object *mx_if_chat(json_object *jobj, sqlite3 *db, t_datab *datab) {
     char sql[255];
 
     if (mx_is_active(jobj, db, datab)) {
+        (datab)->login_db = mx_js_to_str(jobj, "Chat_name");
         datab->chat_name = mx_strdup(datab->login_db);
         if (mx_is_chat(db, sql, datab)) {
             mx_strdel(&datab->chat_name);
@@ -26,7 +27,7 @@ json_object *mx_if_chat(json_object *jobj, sqlite3 *db, t_datab *datab) {
     }
     else
         mx_add_str_to_js(j_result, "Answer", MX_CHEAT_MESSAGE);
-printf("mx_if_chat(j_result): %s\n", json_object_to_json_string(j_result));//
+// printf("mx_if_chat(j_result): %s\n", json_object_to_json_string(j_result));//
     mx_strdel(&datab->id);// comment in mx_is_active
     mx_strdel(&datab->chat_id);
     return j_result;
