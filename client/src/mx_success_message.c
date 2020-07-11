@@ -34,8 +34,11 @@ gboolean mx_success_message(void *data) {
     const char *message = json_to_str(jobj, "Message");
     const char *sender = json_to_str(jobj, "Sender");
     int count = 0;
+    printf("%s\n", "TEST1");
     if (!gui->if_contact) {
+        printf("%s\n", "TEST2");
         if (gui->contacts) {
+            printf("%s\n", "TEST3");
             while (gui->contacts[count]) {
                 if (mx_strcmp(gui->contacts[count], sender)) {
                     mx_push_chat(gui->l_chats, sender);
@@ -46,11 +49,14 @@ gboolean mx_success_message(void *data) {
             }
         }
         else {
+            printf("%s\n", "TEST4");
             mx_push_chat(gui->l_chats, sender);
             gui->if_contact = true;
         }
     }
+    printf("ggggg%s\n", gui->send_to);
     if (gui->send_to) {
+        printf("SEND %s\n", json_to_str(jobj, "Sender"));
         if (!mx_strcmp(gui->send_to, json_to_str(jobj, "Sender"))) {
             mx_p_owned(gui->l_messages, message);
         }
