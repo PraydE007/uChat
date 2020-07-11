@@ -1,11 +1,22 @@
 #include "client.h"
 
-gboolean test(void *data) {
+// gboolean test(void *data) {
+//     t_s_glade *gui = (t_s_glade *)data;
+//     char *message = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_message));
+//     mx_p_own(gui->l_messages, message);
+//     gtk_entry_set_text(GTK_ENTRY(gui->e_message), "");
+//     return 0;
+// }
+
+static gint scroll(gpointer data) {
     t_s_glade *gui = (t_s_glade *)data;
-    char *message = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_message));
-    mx_p_own(gui->l_messages, message);
-    gtk_entry_set_text(GTK_ENTRY(gui->e_message), "");
-    return 0;
+    GtkScrolledWindow *w = GTK_SCROLLED_WINDOW(gui->s_w_messages);
+    GtkAdjustment *ad = gtk_scrolled_window_get_vadjustment(w);
+    double l_pos =
+        gtk_adjustment_get_upper(ad) + gtk_adjustment_get_page_increment(ad);
+
+    gtk_adjustment_set_value(ad, l_pos);
+    return false;
 }
 
 void mx_send_message(GtkButton *button, gpointer data) {
@@ -36,12 +47,7 @@ void mx_send_message(GtkButton *button, gpointer data) {
             printf("%s\n", send_data);
             mx_p_own(gui->l_messages, message);
             gtk_entry_set_text(GTK_ENTRY(gui->e_message), "");
-
-            // SCROLL DOWN
-            GtkScrolledWindow *w = GTK_SCROLLED_WINDOW(gui->s_w_messages);
-            GtkAdjustment *ad = gtk_scrolled_window_get_vadjustment(w);
-            double l_pos = gtk_adjustment_get_upper(ad) + gtk_adjustment_get_page_increment(ad);
-            gtk_adjustment_set_value(ad, l_pos);
+            g_timeout_add(100, scroll, gui);
         }
     }
 }
