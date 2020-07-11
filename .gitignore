@@ -14,7 +14,7 @@ src/uls.h
 .idea
 uchat
 uchat_server
-uchat_db.a
+uchat_db
 chat_base.db
 Makefile.nix
 *~

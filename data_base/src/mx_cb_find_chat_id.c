@@ -1,6 +1,6 @@
 #include "dbase.h"
 
-int mx_cb_chat_id_finder(void *datab, int argc, char **argv, char **azColName) {
+int mx_cb_find_chat_id(void *datab, int argc, char **argv, char **azColName) {
     (void)argc;
     (void)azColName;
     if (datab) {

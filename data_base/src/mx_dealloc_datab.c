@@ -5,6 +5,7 @@ void mx_dealloc_datab(t_datab **datab) {
     mx_strdel(&((*datab)->second_id));
     mx_strdel(&((*datab)->chat_id));
     mx_strdel(&((*datab)->chat_name));
+    mx_strdel(&((*datab)->chat_status));
     mx_strdel(&((*datab)->email));
     mx_strdel(&((*datab)->mobile));
     mx_strdel(&((*datab)->commd));

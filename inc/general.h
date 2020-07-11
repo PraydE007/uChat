@@ -35,6 +35,8 @@
 #define MX_CHAT_MES "The chat was created!"
 #define MX_ERRCHAT "8"
 #define MX_CHAT_ERR "The chat with such name already exists!"
+#define MX_PRIVATE_CHAT "You can add contact to private chat!"
+#define MX_CONT_ADD_CHAT "The contact was added to the chat!"
 
 typedef struct s_u_login_info {
     int u_id;

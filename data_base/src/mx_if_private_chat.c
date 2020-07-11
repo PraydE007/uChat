@@ -34,7 +34,7 @@ static void if_active(json_object *jobj, sqlite3 *db, t_datab *datab) {
     }
     sprintf(sql, "select ID from CHATS where CHAT_NAME = '%s';",
             datab->chat_name);
-    mx_table_setting(db, sql, mx_cb_chat_id_finder, datab);
+    mx_table_setting(db, sql, mx_cb_find_chat_id, datab);
     sprintf(sql, "select SENDER_id, MESSAGE_text from MESSAGES where " \
             "CHAT_id = '%s' order by ID;", datab->chat_id);
     mx_table_setting(db, sql, cb_massege_history, datab);
