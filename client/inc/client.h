@@ -153,6 +153,7 @@ typedef struct s_s_glade {
     //sending
     char *send_to;
     char **contacts;
+    char **chats;
     bool if_contact;
 }              t_s_glade;
 
