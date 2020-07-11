@@ -93,6 +93,11 @@ static void init_chat(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->l_one = mx_get_widget(builder, "label.one");
     (*gui)->b_u_file = mx_get_widget(builder, "button.upload.file");
     (*gui)->i_b_u_file = mx_get_widget(builder, "image.button.upload");
+    (*gui)->b_c_pad = mx_get_widget(builder, "box.control.pad");
+    (*gui)->b_u_profile = mx_get_widget(builder, "button.user.profile");
+    (*gui)->i_b_u_profile = mx_get_widget(builder, "image.button.usr.profile");
+    (*gui)->b_r_chat = mx_get_widget(builder, "button.remove.chat");
+    (*gui)->i_b_r_chat = mx_get_widget(builder, "image.button.remove.chat");
 
     gtk_label_set_text(GTK_LABEL((*gui)->l_one), get_unicode(0x1F150)); // TRYING UNICODE
 }
@@ -148,6 +153,8 @@ static void init_images(t_s_glade **gui) {
     mx_rep_img((*gui)->i_b_f_user, MX_BUTTON_FIND, 25, 25);
     mx_rep_img((*gui)->i_b_user, MX_BUTTON_BAN, 25, 25);
     mx_rep_img((*gui)->i_b_u_file, MX_BUTTON_FILE, 25, 25);
+    mx_rep_img((*gui)->i_b_u_profile, MX_BUTTON_PROFILE, 25, 25);
+    mx_rep_img((*gui)->i_b_r_chat, MX_BUTTON_BAN, 25, 25);
 }
 
 static void connect_signals(t_s_glade *gui) {
