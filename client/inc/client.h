@@ -5,6 +5,7 @@
 #include <ctype.h>
 #include <strings.h>
 #include <gtk/gtk.h>
+#include <sys/stat.h>
 #include "../../libmx/inc/libmx.h"
 #include "../../json/include/json-c/json.h"
 #include <openssl/ssl.h>
@@ -21,6 +22,7 @@
 #define MX_BUTTON_BAN "client/res/icons/ban.png"
 #define MX_BUTTON_GROUP "client/res/icons/group.png"
 #define MX_BUTTON_RESET "client/res/icons/reset.png"
+#define MX_BUTTON_FILE "client/res/icons/file.png"
 
 #define MX_WINDOW_WARNING "client/res/icons/warning.png"
 #define MX_WINDOW_LOGIN "client/res/forms/window.login.glade"
@@ -52,6 +54,7 @@ typedef struct s_s_glade {
     GtkWidget *b_l_signin;
     GtkWidget *b_l_signup;
     GtkWidget *b_l_settings;
+    GtkWidget *s_anon;
 
     // Settings window
     GtkWidget *w_settings;
@@ -93,6 +96,8 @@ typedef struct s_s_glade {
     GtkWidget *l_chats;
     GtkWidget *l_messages;
     GtkWidget *s_w_messages;
+    GtkWidget *b_u_file;
+    GtkWidget *i_b_u_file;
 
     // Emoji window
     GtkWidget *w_emoji;
@@ -186,8 +191,10 @@ void mx_show_dialog(GtkWidget *parent, char *message);
 void mx_p_own(GtkWidget *lst, const char *msg);
 void mx_p_owned(GtkWidget *lst, const char *msg);
 void mx_clear_container(GtkWidget *con);
+char *mx_open_file_chooser(GtkWindow *parent);
 
 // GUI SIGNALS
+void mx_send_image(const char *file, int sockfd);
 void mx_open_window(GtkButton *button, gpointer data);
 void mx_close_window(GtkButton *button, gpointer data);
 void mx_light_theme(GtkButton *b, gpointer data);
@@ -207,6 +214,7 @@ void mx_anti_resize(GtkWindow *w, GdkEventWindowState *e, gpointer data);
 void mx_open_chat(GtkListBox *box, GtkListBoxRow *row, gpointer data);
 void mx_open_group(GtkButton *btn, gpointer data);
 void mx_close_group(GtkButton *btn, gpointer data);
+void mx_upload_file(GtkButton *btn, gpointer data);
 
 //infinity_recive_from_server
 void *mx_client_recv(void *data);
