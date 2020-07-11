@@ -50,7 +50,7 @@ static void db_handler_for_message(sqlite3 *db, t_datab *datab, char *sql) {
     sprintf(sql, "select USER_id from USERS_CHATS where CHAT_id = '%s' " \
             "AND USER_id != '%s';", datab->chat_id, datab->id);
     mx_table_setting(db, sql, cb_users_id_for_chat, datab->j_result);
-    lenth = json_object_array_length(datab->j_result);;
+    lenth = json_object_array_length(datab->j_result);
     for (int i = 0; i < lenth; i++) {
         datab->id_db = json_object_get_string(
                                 json_object_array_get_idx(datab->j_result, i));
