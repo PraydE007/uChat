@@ -30,6 +30,21 @@ static int cb_contact_id_finder(void *datab, int argc, char **argv,
     return 0;
 }
 
+static void create_private_chat(sqlite3 *db, char *sql, t_datab *datab) {
+    sprintf(sql, "insert into CHATS (CHAT_NAME, CHAT_STATUS) " \
+            "values('%s', '%s')", datab->chat_name, "private");
+    mx_table_creation(db, sql, mx_callback);
+    sprintf(sql, "select ID from CHATS where CHAT_NAME = '%s';",
+            datab->chat_name);
+    mx_table_setting(db, sql, mx_cb_find_chat_id, datab);
+    sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id)" \
+            "values('%s', '%s')", datab->id, datab->chat_id);
+    mx_table_creation(db, sql, mx_callback);
+    sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id)" \
+            "values('%s', '%s')", datab->second_id, datab->chat_id);
+    mx_table_creation(db, sql, mx_callback);
+}
+
 static void insert_contact(sqlite3 *db, char *sql, t_datab *datab) {
     sprintf(sql, "insert into CONTACTS (OWNER_id, FOLLOWER_id) " \
             "values(%s, %s)", datab->id, datab->second_id);
@@ -39,18 +54,19 @@ static void insert_contact(sqlite3 *db, char *sql, t_datab *datab) {
         mx_strdel(&datab->chat_name);
         datab->chat_name = mx_strjoin(datab->login_db, datab->login_db2);
         if (!mx_is_chat(db, sql, datab)) {
-            sprintf(sql, "insert into CHATS (CHAT_NAME, CHAT_STATUS) " \
-                    "values('%s', '%s')", datab->chat_name, "private");
-            mx_table_creation(db, sql, mx_callback);
-            sprintf(sql, "select ID from CHATS where CHAT_NAME = '%s';",
-                    datab->chat_name);
-            mx_table_setting(db, sql, mx_cb_find_chat_id, datab);
-            sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id)" \
-                    "values('%s', '%s')", datab->id, datab->chat_id);
-            mx_table_creation(db, sql, mx_callback);
-            sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id)" \
-                    "values('%s', '%s')", datab->second_id, datab->chat_id);
-            mx_table_creation(db, sql, mx_callback);
+            create_private_chat(db, sql, datab);
+            // sprintf(sql, "insert into CHATS (CHAT_NAME, CHAT_STATUS) " \
+            //         "values('%s', '%s')", datab->chat_name, "private");
+            // mx_table_creation(db, sql, mx_callback);
+            // sprintf(sql, "select ID from CHATS where CHAT_NAME = '%s';",
+            //         datab->chat_name);
+            // mx_table_setting(db, sql, mx_cb_find_chat_id, datab);
+            // sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id)" \
+            //         "values('%s', '%s')", datab->id, datab->chat_id);
+            // mx_table_creation(db, sql, mx_callback);
+            // sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id)" \
+            //         "values('%s', '%s')", datab->second_id, datab->chat_id);
+            // mx_table_creation(db, sql, mx_callback);
         }
     }
 }
