@@ -236,5 +236,6 @@ gboolean mx_success_history(void *data);
 
 //If_login_render
 gboolean mx_render_contacts(t_s_glade *gui);
+gboolean mx_render_chats(t_s_glade *gui);
 
 #endif
