@@ -49,8 +49,8 @@ json_object *mx_if_create_chat(json_object *jobj, sqlite3 *db, t_datab *datab) {
     if (mx_is_active(jobj, db, datab)) {
         datab->login_db2 = mx_js_to_str(jobj, "Chat_name");
         datab->chat_name = mx_strdup(datab->login_db2);
-        if (mx_is_chat(db, sql, datab))
-            mx_add_str_to_js(j_result, "Answer", MX_CHAT_ERR);
+        if (mx_is_chat(db, sql, datab) || mx_is_contact(db, sql, datab))
+            mx_add_str_to_js(j_result, "Answer", MX_REG_CHAT_ERR);
         else
             insert_chat(j_result, db, datab);
     }
