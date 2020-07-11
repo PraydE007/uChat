@@ -12,6 +12,7 @@ gboolean mx_success_logging(void *data) {
     json_object *jobj = json_tokener_parse(gui->recv_data);
     gui->key = strdup(json_to_str(jobj, "Security_key"));
     gui->contacts = mx_strsplit(json_to_str(jobj, "Contacts"), ',');
+    gui->chats = mx_strsplit(json_to_str(jobj, "Chats"), ',');
     gui->if_contact = false;
     mx_render_contacts(gui);
     mx_render_chats(gui);

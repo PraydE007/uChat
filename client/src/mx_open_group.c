@@ -11,12 +11,14 @@ void mx_open_group(GtkButton *btn, gpointer data) {
 
     (void)btn;
         if (mx_strcmp(group_name, "")) {
+            if (gui->contacts) {
             while (gui->contacts[count]) {
                 if (!mx_strcmp(gui->contacts[count], (char *)group_name)) {
                     success_create = false;
                     break;
                 }
                 count++;
+            }
             }
             if (success_create) {
                 json_object *jobj = json_object_new_object();
