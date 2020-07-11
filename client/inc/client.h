@@ -97,6 +97,9 @@ typedef struct s_s_glade {
     GtkWidget *s_w_messages;
     GtkWidget *b_u_file;
     GtkWidget *i_b_u_file;
+    GtkWidget *b_c_panel;
+    GtkWidget *i_b_u_file;
+    GtkWidget *i_b_u_file;
 
     // Emoji window
     GtkWidget *w_emoji;
