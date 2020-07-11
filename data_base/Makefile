@@ -34,6 +34,7 @@ FILES = mx_add_arr_to_js.c \
 		mx_if_send_message.c \
 		mx_is_active.c \
 		mx_is_chat.c \
+		mx_is_contact.c \
 		mx_find_chat_name.c \
 		mx_find_user_login.c \
 		mx_js_arr_to_str.c \

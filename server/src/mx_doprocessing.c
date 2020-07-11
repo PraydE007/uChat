@@ -143,8 +143,8 @@ void *mx_doprocessing (void *data) {
         //     n = send(sockbd.sockfd, MX_CONT_MES, mx_strlen(MX_CONT_MES),  0);
         // else if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), MX_LOG_ERR))
         //     n = send(sockbd.sockfd, MX_LOG_ERR, mx_strlen(MX_LOG_ERR),  0);
-        // else if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), MX_REG_ERR))
-        //     n = send(sockbd.sockfd, MX_REG_ERR, mx_strlen(MX_REG_ERR),  0);
+        // else if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), MX_REG_CHAT_ERR))
+        //     n = send(sockbd.sockfd, MX_REG_CHAT_ERR, mx_strlen(MX_REG_CHAT_ERR),  0);
         // else if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), MX_CHEAT_MESSAGE))
         //     n = send(sockbd.sockfd, MX_CHEAT_MESSAGE, mx_strlen(MX_CHEAT_MESSAGE),  0);
         // else if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), MX_CONT_ERR))
