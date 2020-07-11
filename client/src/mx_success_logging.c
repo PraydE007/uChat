@@ -14,6 +14,7 @@ gboolean mx_success_logging(void *data) {
     gui->contacts = mx_strsplit(json_to_str(jobj, "Contacts"), ',');
     gui->if_contact = false;
     mx_render_contacts(gui);
+    mx_render_chats(gui);
     mx_logged_in_chat(gui);
     return 0;
 }
