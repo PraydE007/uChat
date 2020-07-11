@@ -1,0 +1,204 @@
+    char *login = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_l_login));
+    char *passwd = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_l_password));
+    const char *old_pass = gtk_entry_get_text(GTK_ENTRY(gui->e_p_oldpass));
+    const char *pass0 = gtk_entry_get_text(GTK_ENTRY(gui->e_p_newpass1));
+    const char *pass1 = gtk_entry_get_text(GTK_ENTRY(gui->e_p_newpass2));
+        json_object *j_security_key = json_object_new_string(gui->key);
+        n = send(gui->sockfd, send_data, strlen(send_data), 0);
+        mx_show_dialog(gui->w_profile, "Incorrect password\n");
+        mx_show_dialog(gui->w_profile, "Password mismatch\n");
+        mx_show_dialog(gui->w_profile, "Wrong password!\n");
+    gtk_entry_set_text(GTK_ENTRY(gui->e_p_oldpass), "");
+    gtk_entry_set_text(GTK_ENTRY(gui->e_p_newpass1), "");
+    gtk_entry_set_text(GTK_ENTRY(gui->e_p_newpass2), "");
+    gtk_window_get_position(mx_gw(gui->w_profile), &(gui->w_x), &(gui->w_y));
+    gtk_widget_hide(gui->w_profile);
+    gtk_widget_show_all(gui->w_chat);
+    gtk_window_move(mx_gw(gui->w_chat), gui->w_x, gui->w_y + 22);
+    change_prof.login = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_l_login));
+    change_prof.email = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_p_email));
+    change_prof.mobile = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_p_number));
+    change_prof.new_login = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_p_login));
+    change_prof.key= strdup(gui->key);
+            n = send(gui->sockfd, send_data, strlen(send_data), 0);
+    gtk_css_provider_load_from_path(gui->css_provider, theme, NULL);
+        gui->if_contact = false;
+        bzero(gui->buffer, MX_MAX_BYTES);
+        n = recv(gui->sockfd, gui->buffer, MX_MAX_BYTES, 0);
+        jobj = json_tokener_parse(gui->buffer);
+        gui->recv_data = strdup(gui->buffer);
+        printf("RECV DATA: %s\n", gui->recv_data);
+            gui->key = (char *)json_object_get_string(json_object_object_get(jobj, "Security_key"));
+            printf("%s\n", gui->recv_data);
+    gtk_window_get_position(mx_gw(gui->w_group), &(gui->w_x), &(gui->w_y));
+    gtk_widget_hide(gui->w_group);
+    gtk_widget_show_all(gui->w_chat);
+    gtk_window_move(mx_gw(gui->w_chat), gui->w_x, gui->w_y + 22);
+    gtk_window_get_position(mx_gw(gui->w_profile), &(gui->w_x), &(gui->w_y));
+    gtk_widget_hide(gui->w_profile);
+    gtk_widget_show_all(gui->w_chat);
+    gtk_window_move(mx_gw(gui->w_chat), gui->w_x, gui->w_y + 22);
+    gtk_window_get_position(mx_gw(gui->w_signup), &(gui->w_x), &(gui->w_y));
+    gtk_widget_hide(gui->w_signup);
+    gtk_widget_show_all(gui->w_signin);
+    gtk_window_move(mx_gw(gui->w_signin), gui->w_x, gui->w_y + 22);
+    gtk_css_provider_load_from_path(gui->css_provider, MX_DARK_THEME, NULL);
+    const gchar *name = gtk_entry_get_text(GTK_ENTRY(gui->e_find));
+    const char *login = gtk_entry_get_text(GTK_ENTRY(gui->e_l_login));
+    json_object *j_key = json_object_new_string(gui->key);
+        send(gui->sockfd, send_data, strlen(send_data), 0);
+    g_signal_connect(gui->w_signin, "window-state-event",
+    g_signal_connect(gui->w_settings, "window-state-event",
+    g_signal_connect(gui->w_signup, "window-state-event",
+    g_signal_connect(gui->w_chat, "window-state-event",
+    g_signal_connect(gui->w_emoji, "window-state-event",
+    g_signal_connect(gui->w_profile, "window-state-event",
+    g_signal_connect(gui->w_password, "window-state-event",
+    g_signal_connect(gui->w_group, "window-state-event",
+    g_signal_connect(gui->w_signin, "destroy",
+    g_signal_connect(gui->w_signup, "destroy",
+    g_signal_connect(gui->w_chat, "destroy",
+    g_signal_connect(gui->w_profile, "destroy",
+    g_signal_connect(gui->w_group, "destroy",
+    g_signal_connect(gui->b_l_signin, "clicked",
+    g_signal_connect(gui->b_l_signup, "clicked",
+    g_signal_connect(gui->b_l_settings, "clicked",
+                    G_CALLBACK(mx_open_window), gui->w_settings);
+    g_signal_connect(gui->b_s_close, "clicked",
+                    G_CALLBACK(mx_close_window), gui->w_settings);
+    g_signal_connect(gui->b_t_light, "clicked",
+    g_signal_connect(gui->b_t_dark, "clicked",
+    g_signal_connect(gui->b_r_signin, "clicked",
+    g_signal_connect(gui->b_r_signup, "clicked",
+    g_signal_connect(gui->b_send, "clicked",
+    g_signal_connect(gui->b_profile, "clicked",
+    g_signal_connect(gui->b_find, "clicked",
+    g_signal_connect(gui->b_c_settings, "clicked",
+                    G_CALLBACK(mx_open_window), gui->w_settings);
+    g_signal_connect(gui->b_emoji, "clicked",
+                    G_CALLBACK(mx_open_window), gui->w_emoji);
+    g_signal_connect(gui->l_chats, "row-activated",
+    g_signal_connect(gui->b_group, "clicked",
+    g_signal_connect(gui->b_g_close, "clicked",
+    g_signal_connect(gui->b_e_close, "clicked",
+                    G_CALLBACK(mx_close_window), gui->w_emoji);
+    g_signal_connect(gui->b_p_close, "clicked",
+    g_signal_connect(gui->b_p_apply, "clicked",
+    g_signal_connect(gui->b_password, "clicked",
+                    G_CALLBACK(mx_open_window), gui->w_password);
+    g_signal_connect(gui->b_pp_close, "clicked",
+                    G_CALLBACK(mx_close_window), gui->w_password);
+    g_signal_connect(gui->b_pp_apply, "clicked",
+    gui->mode = read_mode();
+    gui->sockfd = socket;
+    gtk_widget_show_all(gui->w_signin);
+    // g_object_unref(gui->icon);
+    gtk_css_provider_load_from_path(gui->css_provider, MX_DEF_THEME, NULL);
+    gui->css_provider = gtk_css_provider_new();
+    if (gui->mode == 1)
+        gtk_css_provider_load_from_path(gui->css_provider, theme, NULL);
+        GTK_STYLE_PROVIDER(gui->css_provider),
+    const char *login = gtk_entry_get_text(GTK_ENTRY(gui->e_l_login));
+    const char *pass = gtk_entry_get_text(GTK_ENTRY(gui->e_l_password));
+    n = send(gui->sockfd, send_data, strlen(send_data), 0);
+    gtk_window_get_position(mx_gw(gui->w_signin), &(gui->w_x), &(gui->w_y));
+    gtk_widget_hide(gui->w_signin);
+    gtk_widget_hide(gui->w_settings);
+    gtk_widget_hide(gui->w_signup);
+    gtk_widget_show_all(gui->w_chat);
+    gtk_window_move(mx_gw(gui->w_chat), gui->w_x, gui->w_y + 22);
+    const char *login = gtk_entry_get_text(GTK_ENTRY(gui->e_l_login));
+    gui->send_to = strdup(gtk_label_get_text(GTK_LABEL(chat_name)));
+    json_object *j_chat_name = json_object_new_string(gui->send_to);
+    json_object *j_key = json_object_new_string(gui->key);
+    send(gui->sockfd, send_data, strlen(send_data), 0);
+    mx_clear_container(gui->l_messages);
+    const gchar *group_name = gtk_entry_get_text(GTK_ENTRY(gui->e_find));
+    char *login = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_l_login));
+            json_object *j_key = json_object_new_string(gui->key);
+            send(gui->sockfd, send_data, strlen(send_data), 0);
+        // gtk_window_get_position(mx_gw(gui->w_chat), &(gui->w_x), &(gui->w_y));
+        // gtk_widget_hide(gui->w_chat);
+        // gtk_widget_show_all(gui->w_group);
+        // gtk_window_move(mx_gw(gui->w_group), gui->w_x, gui->w_y + 22);
+        (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_l_login)));
+    json_object *j_key = json_object_new_string(gui->key);
+    n = send(gui->sockfd, send_data, strlen(send_data), 0);
+    gtk_window_get_position(mx_gw(gui->w_signin), &(gui->w_x), &(gui->w_y));
+    gtk_widget_hide(gui->w_signin);
+    gtk_widget_show_all(gui->w_signup);
+    gtk_window_move(mx_gw(gui->w_signup), gui->w_x, gui->w_y + 22);
+    gtk_entry_set_text(GTK_ENTRY(gui->e_email), "");
+    gtk_entry_set_text(GTK_ENTRY(gui->e_r_mobile), "");
+    gtk_entry_set_text(GTK_ENTRY(gui->e_r_login), "");
+    gtk_entry_set_text(GTK_ENTRY(gui->e_r_password), "");
+    gtk_entry_set_text(GTK_ENTRY(gui->e_r_password2), "");
+    const char *login = gtk_entry_get_text(GTK_ENTRY(gui->e_r_login));
+    const char *mail = gtk_entry_get_text(GTK_ENTRY(gui->e_email));
+    const char *pass0 = gtk_entry_get_text(GTK_ENTRY(gui->e_r_password));
+    const char *pass1 = gtk_entry_get_text(GTK_ENTRY(gui->e_r_password2));
+    const char *mobile = gtk_entry_get_text(GTK_ENTRY(gui->e_r_mobile));
+        n = send(gui->sockfd, send_data, strlen(send_data), 0);
+        mx_show_dialog(gui->w_signup, "PAROLY NE SOVPADAYT BLEAT<3\n");
+    json_object *jobj = json_tokener_parse(gui->recv_data);
+            mx_push_chat(gui->l_chats, get_splited_contacts[i]);
+            gtk_entry_set_text(GTK_ENTRY(gui->e_find), "");
+    char *message = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_message));
+    mx_p_own(gui->l_messages, message);
+    gtk_entry_set_text(GTK_ENTRY(gui->e_message), "");
+    char *login = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_l_login));
+    char *message = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_message));
+    if (gui->send_to && mx_strcmp(gui->send_to, "")) {
+        json_object *j_send_to = json_object_new_string(gui->send_to);
+        json_object *j_key = json_object_new_string(gui->key);
+        if (gui->send_to && mx_strcmp(message, "") && mx_strcmp(gui->send_to, "")  && message) {
+            n = send(gui->sockfd, send_data, strlen(send_data), 0);
+            mx_p_own(gui->l_messages, message);
+            gtk_entry_set_text(GTK_ENTRY(gui->e_message), "");
+            GtkScrolledWindow *w = GTK_SCROLLED_WINDOW(gui->s_w_messages);
+    char *contact = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_find));
+    mx_push_chat(gui->l_chats, contact);
+    gtk_entry_set_text(GTK_ENTRY(gui->e_find), "");
+        mx_show_dialog(gui->w_profile, "Password changed!\n");
+        gtk_window_get_position(mx_gw(gui->w_profile), &(gui->w_x), &(gui->w_y));
+        gtk_widget_hide(gui->w_password);
+        gtk_widget_show_all(gui->w_profile);
+        gtk_window_move(mx_gw(gui->w_profile), gui->w_x, gui->w_y + 22);
+    json_object *jobj = json_tokener_parse(gui->recv_data);
+    gtk_entry_set_text(GTK_ENTRY(gui->e_l_login), login);
+    gtk_entry_set_text(GTK_ENTRY(gui->e_p_login), login);
+    gtk_entry_set_text(GTK_ENTRY(gui->e_p_email), email);
+    gtk_entry_set_text(GTK_ENTRY(gui->e_p_number), mobile);
+    json_object *jobj = json_tokener_parse(gui->recv_data);
+            mx_p_own(gui->l_messages, get_message);
+            mx_p_owned(gui->l_messages, get_message);
+    json_object *jobj = json_tokener_parse(gui->recv_data);
+    gui->key = strdup(json_to_str(jobj, "Security_key"));
+    gui->contacts = mx_strsplit(json_to_str(jobj, "Contacts"), ',');
+    gui->if_contact = false;
+//     const char *login = gtk_entry_get_text(GTK_ENTRY(gui->e_l_login));
+//     json_object *j_key = json_object_new_string(gui->key);
+//         send(gui->sockfd, send_data, strlen(send_data), 0);
+    json_object *jobj = json_tokener_parse(gui->recv_data);
+    if (!gui->if_contact) {
+        if (gui->contacts) {
+            while (gui->contacts[count]) {
+                if (mx_strcmp(gui->contacts[count], sender)) {
+                    mx_push_chat(gui->l_chats, sender);
+                    gui->if_contact = true;
+    if (gui->send_to) {
+        if (!mx_strcmp(gui->send_to, json_to_str(jobj, "Sender"))) {
+            mx_p_owned(gui->l_messages, message);
+    json_object *jobj = json_tokener_parse(gui->recv_data);
+    gtk_entry_set_text(GTK_ENTRY(gui->e_p_login), login);
+    gtk_entry_set_text(GTK_ENTRY(gui->e_p_email), email);
+    gtk_entry_set_text(GTK_ENTRY(gui->e_p_number), mobile);
+    gtk_window_get_position(mx_gw(gui->w_chat), &(gui->w_x), &(gui->w_y));
+    gtk_widget_hide(gui->w_chat);
+    gtk_widget_show_all(gui->w_profile);
+    gtk_window_move(mx_gw(gui->w_profile), gui->w_x, gui->w_y + 22);
+    mx_show_dialog(gui->w_signup, "You have registered successfully!\n");
+    gtk_window_get_position(mx_gw(gui->w_signup), &(gui->w_x), &(gui->w_y));
+    gtk_widget_hide(gui->w_signup);
+    gtk_widget_show_all(gui->w_signin);
+    gtk_window_move(mx_gw(gui->w_signin), gui->w_x, gui->w_y + 22);
