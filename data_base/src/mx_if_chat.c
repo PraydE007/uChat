@@ -5,10 +5,15 @@ json_object *mx_if_chat(json_object *jobj, sqlite3 *db, t_datab *datab) {
     char sql[255];
 
     if (mx_is_active(jobj, db, datab)) {
-        if (mx_is_chat(db, sql, datab))
+        datab->chat_name = mx_strdup(datab->login_db);
+        if (mx_is_chat(db, sql, datab)) {
+            mx_strdel(&datab->chat_name);
             j_result = mx_if_public_chat(jobj, db, datab);
-        else
+        }
+        else {
+            mx_strdel(&datab->chat_name);
             j_result = mx_if_private_chat(jobj, db, datab);
+        }
         // datab->login_db2 = mx_js_to_str(jobj, "Chat_name");
         // sprintf(sql, "select ID from CHATS where CHAT_NAME = '%s';",
         //         datab->login_db2);
@@ -24,6 +29,5 @@ json_object *mx_if_chat(json_object *jobj, sqlite3 *db, t_datab *datab) {
 printf("mx_if_chat(j_result): %s\n", json_object_to_json_string(j_result));//
     mx_strdel(&datab->id);// comment in mx_is_active
     mx_strdel(&datab->chat_id);
-    mx_strdel(&datab->chat_name);
     return j_result;
 }

@@ -15,7 +15,7 @@
 // }
 
 static void insert_user(json_object *jobj, json_object *j_reslt, sqlite3 *db,
-                                                                    char sql) {
+                                                                    char *sql) {
     // int connection_point;
 
     sprintf(sql, "insert into USERS (LOGIN, PASSWORD, EMAIL, MOBILE)" \

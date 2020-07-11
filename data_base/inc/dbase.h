@@ -47,6 +47,7 @@ json_object *mx_dbase_handler(json_object *jobj, sqlite3 *db);
 json_object *mx_if_add_contact_to_chat(json_object *jobj, sqlite3 *db, t_datab *datab);
 json_object *mx_if_change_passwd(json_object *jobj, sqlite3 *db, t_datab *datab);
 json_object *mx_if_change_profile(json_object *jobj, sqlite3 *db, t_datab *datab);
+json_object *mx_if_chat(json_object *jobj, sqlite3 *db, t_datab *datab);
 json_object *mx_if_contact(json_object *jobj, sqlite3 *db, t_datab *datab);
 json_object *mx_if_create_chat(json_object *jobj, sqlite3 *db, t_datab *datab);
 json_object *mx_if_delete_chat(json_object *jobj, sqlite3 *db, t_datab *datab);

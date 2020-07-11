@@ -22,6 +22,7 @@ FILES = mx_add_arr_to_js.c \
 		mx_if_add_contact_to_chat.c \
 		mx_if_change_passwd.c \
 		mx_if_change_profile.c \
+		mx_if_chat.c \
 		mx_if_contact.c \
 		mx_if_create_chat.c \
 		mx_if_delete_chat.c \
