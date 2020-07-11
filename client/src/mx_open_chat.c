@@ -1,17 +1,5 @@
 #include "client.h"
 
-static bool what_chat(t_s_glade *gui) {
-    int count = 0;
-
-    if (gui->chats)
-        while (gui->chats[count]) {
-            if(!mx_strcmp(gui->chats[count], gui->send_to))
-                return true;
-            count++;
-        }
-        return false;
-}
-
 void mx_open_chat(GtkListBox *box, GtkListBoxRow *row, gpointer data) {
     const char *send_data = NULL;
     t_s_glade *gui = (t_s_glade *)data;
@@ -24,10 +12,7 @@ void mx_open_chat(GtkListBox *box, GtkListBoxRow *row, gpointer data) {
     gui->send_to = strdup(gtk_label_get_text(GTK_LABEL(chat_name)));
 
     json_object *jobj = json_object_new_object();
-    if (what_chat(gui))
-        j_type = json_object_new_string("Public_chat");
-    else
-        j_type = json_object_new_string("Private_chat");
+    j_type = json_object_new_string("Chat");
     json_object *j_login = json_object_new_string(login);
     json_object *j_chat_name = json_object_new_string(gui->send_to);
     json_object *j_key = json_object_new_string(gui->key);
