@@ -47,7 +47,7 @@ void mx_send_message(GtkButton *button, gpointer data) {
             printf("%s\n", send_data);
             mx_p_own(gui->l_messages, message);
             gtk_entry_set_text(GTK_ENTRY(gui->e_message), "");
-            g_timeout_add(100, scroll, gui);
+            g_timeout_add(10, scroll, gui);
         }
     }
 }

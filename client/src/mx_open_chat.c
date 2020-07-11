@@ -23,6 +23,6 @@ void mx_open_chat(GtkListBox *box, GtkListBoxRow *row, gpointer data) {
     send_data = json_object_to_json_string(jobj);
     send(gui->sockfd, send_data, strlen(send_data), 0);
     mx_clear_container(gui->l_messages);
-    gtk_widget_hide(gui->b_c_pad);
+    gtk_widget_show(gui->b_c_pad);
     // gtk_bin_get_child(GTK_BIN(gtk_list_box_get_selected_row(GTK_LIST_BOX(listbox))));
 }
