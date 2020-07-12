@@ -222,7 +222,7 @@ void mx_open_group(GtkButton *btn, gpointer data);
 void mx_close_group(GtkButton *btn, gpointer data);
 void mx_upload_file(GtkButton *btn, gpointer data);
 void mx_add_user_to_group(GtkButton *btn, gpointer data);
-
+void mx_delete_contact(GtkButton *btn, gpointer data);
 //infinity_recive_from_server
 void *mx_client_recv(void *data);
 
@@ -235,7 +235,7 @@ gboolean mx_success_change_passwd(void *data);
 gboolean mx_success_add_contact(void *data);
 gboolean mx_success_message(void *data);
 gboolean mx_success_history(void *data);
-
+gboolean mx_success_invited(void *data);
 //If_login_render
 gboolean mx_render_contacts(t_s_glade *gui);
 gboolean mx_render_chats(t_s_glade *gui);
