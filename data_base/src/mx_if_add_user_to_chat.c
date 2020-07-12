@@ -46,12 +46,37 @@ static int cb_find_contact_id_in_chat(void *datab, int argc, char **argv,
     }
     return 0;
 }
+
+// static int chat_notification(void *datab, int argc, char **argv,
+//                                                             char **azColName) {
+//     (void)argc;
+//     (void)azColName;
+//     if (datab) {
+//         t_datab *new_datab = (t_datab *)datab;
+//         int n;
+//         json_object *receive_notification = json_object_new_object();
+//         mx_add_str_to_js(receive_notification, "Answer", "You were added to the chat");
+//         mx_add_str_to_js(receive_notification, "Chat_name",
+//                                                 (char *)new_datab->chat_name_db);
+//         mx_add_str_to_js(receive_notification, "Inviter",
+//                                                 (char *)new_datab->login_db);
+//         new_datab->message_db = json_object_get_string(receive_notification);
+//         n = send(mx_atoi(argv[0]), new_datab->message_db,
+//                                         mx_strlen(new_datab->message_db),  0);
+//         printf("new_datab->message_db: %s\n", new_datab->message_db);//
+//     }
+//     return 0;
+// }
+
 static void insert_contact_in_to_chat(json_object *j_result, sqlite3 *db,
                                                 char *sql, t_datab *datab) {
     sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id)" \
             "values('%s', '%s')", datab->second_id, datab->chat_id);
     mx_table_creation(db, sql, mx_callback);
     mx_add_str_to_js(j_result, "Answer", MX_CONT_ADD_CHAT);
+    sprintf(sql, "select SOCKET from ACTIVITY where USER_id = '%s';",
+                                                            datab->second_id);
+        mx_table_setting(db, sql, mx_cb_chat_notification, datab);
     mx_strdel(&datab->second_id);
 }
 
@@ -63,15 +88,15 @@ void condition_for_chat(json_object *j_result, sqlite3 *db, t_datab *datab,
         sprintf(sql, "select USER_id, CHAT_id from USERS_CHATS " \
                 "where CHAT_id = %s;", datab->chat_id);
         mx_table_setting(db, sql, cb_find_contact_id_in_chat, datab);
+        if (!mx_strcmp(datab->login_db, datab->login_db2))
+            mx_add_str_to_js(j_result, "Answer", "You can not add yourself " \
+                        "into chat!");
+        else if (datab->passtrigger == 1)
+            mx_add_str_to_js(j_result, "Answer", "You have already this contact " \
+                        "in the chat!");
+        else if (datab->logtrigger == 1)
+            insert_contact_in_to_chat(j_result, db, sql, datab);
     }
-    if (!mx_strcmp(datab->login_db, datab->login_db2))
-        mx_add_str_to_js(j_result, "Answer", "You can not add yourself " \
-                      "into chat!");
-    else if (datab->passtrigger == 1)
-        mx_add_str_to_js(j_result, "Answer", "You have already this contact " \
-                      "in the chat!");
-    else if (datab->logtrigger == 1)
-        insert_contact_in_to_chat(j_result, db, sql, datab);
     else
         mx_add_str_to_js(j_result, "Answer", MX_CONT_ERR);
     mx_strdel(&datab->chat_id);
