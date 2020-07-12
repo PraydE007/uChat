@@ -75,7 +75,7 @@ void condition_for_chat(json_object *j_result, sqlite3 *db, t_datab *datab,
     datab->passtrigger = 0;
 }
 
-json_object *mx_if_add_contact_to_chat(json_object *jobj, sqlite3 *db,
+json_object *mx_if_add_user_to_chat(json_object *jobj, sqlite3 *db,
                                                             t_datab *datab) {
     json_object *j_result = json_object_new_object();
     char sql[255];
@@ -84,7 +84,7 @@ json_object *mx_if_add_contact_to_chat(json_object *jobj, sqlite3 *db,
         datab->login_db2 = mx_js_to_str(jobj, "Contact_login");
         datab->chat_name_db = mx_js_to_str(jobj, "Chat_name");
         sprintf(sql, "select ID, CHAT_STATUS from CHATS where CHAT_NAME = %s;",
-                                                            datab->chat_name_db);
+                                                        datab->chat_name_db);
         mx_table_setting(db, sql, cb_find_chat_id_and_status, datab);
         if (!mx_strcmp(datab->chat_status, "public"))
             condition_for_chat(j_result, db, datab, sql);
