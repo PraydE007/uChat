@@ -154,7 +154,7 @@ typedef struct s_s_glade {
     char *send_to;
     char **contacts;
     char **chats;
-    bool if_contact;
+    int if_contact;
 }              t_s_glade;
 
 // BUFFERS_PROFILE_STRUCTS_FOR_AUDITOR
@@ -221,6 +221,7 @@ void mx_open_chat(GtkListBox *box, GtkListBoxRow *row, gpointer data);
 void mx_open_group(GtkButton *btn, gpointer data);
 void mx_close_group(GtkButton *btn, gpointer data);
 void mx_upload_file(GtkButton *btn, gpointer data);
+void mx_add_user_to_group(GtkButton *btn, gpointer data);
 
 //infinity_recive_from_server
 void *mx_client_recv(void *data);

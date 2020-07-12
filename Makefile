@@ -85,6 +85,7 @@ CL_SRC		=	main.c \
 				mx_upload_file.c \
 				mx_open_file_chooser.c \
 				mx_render_chats.c \
+				mx_add_user_to_group.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \

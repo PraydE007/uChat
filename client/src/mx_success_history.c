@@ -10,10 +10,12 @@ static const char *json_to_str(json_object *jobj, char *key) {
 gboolean mx_success_history(void *data) {
     t_s_glade *gui = (t_s_glade *)data;
     json_object *jobj = json_tokener_parse(gui->recv_data);
-    int size_messages = json_object_array_length(jobj);
+    const char *array = json_to_str(jobj, "Array");
+    json_object *j_arr = json_tokener_parse(array);
+    int size_messages = json_object_array_length(j_arr);
     const char *get_message = NULL;
     for (int i = 1; i < size_messages; i++) {
-        json_object *arr_idx = json_object_array_get_idx(jobj, i);
+        json_object *arr_idx = json_object_array_get_idx(j_arr, i);
             get_message = json_to_str(arr_idx, "Message");
         if (!get_message) {
             get_message = json_to_str(arr_idx, "Own_message");

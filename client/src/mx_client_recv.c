@@ -13,13 +13,16 @@ void *mx_client_recv(void *data) {
         gui->recv_data = strdup(gui->buffer);
         printf("RECV DATA: %s\n", gui->recv_data);
         answer = (char *)json_object_get_string(json_object_object_get(jobj, "Answer"));
-        if (!answer) {
-            json_object *j_arr = json_object_array_get_idx(jobj, 0);
-            answer = (char *)json_object_get_string(json_object_object_get(j_arr, "Answer"));
-            if (!mx_strcmp(answer, "Message history!"))
-                gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_history, gui, 0);
+        if (!mx_strcmp(answer, "Private message history!")) {
+            gui->if_contact = 1;
+            gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_history, gui, 0);
+        }
+        if (!mx_strcmp(answer, "Public message history!")) {
+            gui->if_contact = 0;
+            gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_history, gui, 0);
         }
         if (!mx_strcmp(answer, "You have logged in!")) {
+            gui->if_contact = 2;
             gui->key = (char *)json_object_get_string(json_object_object_get(jobj, "Security_key"));
             printf("%s\n", gui->recv_data);
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_logging, gui, 0);
