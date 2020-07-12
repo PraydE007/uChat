@@ -40,6 +40,7 @@ char *mx_strjoin_free_js_value(char *s1, const char *s2);
 const char *mx_js_arr_to_str(json_object *jobj, int index);
 const char *mx_js_to_str(json_object *jobj, char *key);
 int mx_callback(void *datab, int argc, char **argv, char **azColName);
+int mx_cb_chat_notification(void *datab, int argc, char **argv, char **azColName);
 int mx_cb_find_chat_id(void *datab, int argc, char **argv, char **azColName);
 int mx_cb_find_user_id(void *datab, int argc, char **argv, char **azColName);
 int mx_js_to_int(json_object *jobj, char *key);
