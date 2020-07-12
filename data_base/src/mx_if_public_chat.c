@@ -27,14 +27,14 @@ static void if_active(json_object *jobj, json_object *j_answer, sqlite3 *db,
 
     mx_add_str_to_js(j_answer, "Answer", "Public message history!");
     // mx_add_arr_to_js((datab)->j_result, j_answer);
-    (datab)->login_db2 = mx_js_to_str(jobj, "Chat_name");
+    datab->login_db2 = mx_js_to_str(jobj, "Chat_name");
     sprintf(sql, "select ID from CHATS where CHAT_NAME = '%s';",
-            (datab)->login_db2);
+            datab->login_db2);
     mx_table_setting(db, sql, mx_cb_find_chat_id, datab);
     sprintf(sql, "select SENDER_id, MESSAGE_text from MESSAGES where " \
-            "CHAT_id = '%s' order by ID desc limit 10;", datab->chat_id);
+            "CHAT_id = '%s' order by ID;", datab->chat_id);
     mx_table_setting(db, sql, cb_massege_history, datab);
-    json_object_object_add(j_answer, "Array", (datab)->j_result);
+    json_object_object_add(j_answer, "Array", datab->j_result);
 }
 
 json_object *mx_if_public_chat(json_object *jobj, sqlite3 *db,
