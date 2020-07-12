@@ -12,7 +12,6 @@ gboolean mx_success_history(void *data) {
     json_object *jobj = json_tokener_parse(gui->recv_data);
     int size_messages = json_object_array_length(jobj);
     const char *get_message = NULL;
-    // printf("SIZE :%d\n", size_messages);
     for (int i = 1; i < size_messages; i++) {
         json_object *arr_idx = json_object_array_get_idx(jobj, i);
             get_message = json_to_str(arr_idx, "Message");
