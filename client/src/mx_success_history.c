@@ -24,7 +24,6 @@ gboolean mx_success_history(void *data) {
         else {
             mx_p_owned(gui->l_messages, get_message);
         }
-
     }
     return 0;
 }
