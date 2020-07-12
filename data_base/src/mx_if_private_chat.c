@@ -27,7 +27,7 @@ static void if_active(json_object *jobj, json_object *j_answer, sqlite3 *db,
 
     mx_add_str_to_js(j_answer, "Answer", "Private message history!");
     // mx_add_arr_to_js((datab)->j_result, j_answer);
-    (datab)->login_db2 = mx_js_to_str(jobj, "Chat_name");
+    datab->login_db2 = mx_js_to_str(jobj, "Chat_name");
     datab->chat_name = mx_strjoin(datab->login_db, datab->login_db2);
     if (!mx_is_chat(db, sql, datab)) {
         mx_strdel(&datab->chat_name);

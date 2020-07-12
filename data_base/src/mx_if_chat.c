@@ -5,7 +5,7 @@ json_object *mx_if_chat(json_object *jobj, sqlite3 *db, t_datab *datab) {
     char sql[255];
 
     if (mx_is_active(jobj, db, datab)) {
-        (datab)->login_db = mx_js_to_str(jobj, "Chat_name");
+        datab->login_db = mx_js_to_str(jobj, "Chat_name");
         datab->chat_name = mx_strdup(datab->login_db);
         if (mx_is_chat(db, sql, datab)) {
             mx_strdel(&datab->chat_name);
