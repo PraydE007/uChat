@@ -22,12 +22,8 @@ static int cb_find_chat_id_and_status(void *datab, int argc, char **argv,
     if (datab) {
         t_datab *new_datab = (t_datab *)datab;
 
-printf("argv[0]: %s\n", argv[0]);
-printf("argv[1]: %s\n", argv[1]);
         new_datab->chat_id = mx_strdup(argv[0]);
         new_datab->chat_status = mx_strdup(argv[1]);
-printf("new_datab->chat_id: %s\n", new_datab->chat_id);
-printf("new_datab->chat_status: %s\n", new_datab->chat_status);
     }
     return 0;
 }
@@ -92,8 +88,8 @@ void condition_for_chat(json_object *j_result, sqlite3 *db, t_datab *datab,
             mx_add_str_to_js(j_result, "Answer", "You can not add yourself " \
                         "into chat!");
         else if (datab->passtrigger == 1)
-            mx_add_str_to_js(j_result, "Answer", "You have already this contact " \
-                        "in the chat!");
+            mx_add_str_to_js(j_result, "Answer", "You have already this " \
+                            "contact in the chat!");
         else if (datab->logtrigger == 1)
             insert_contact_in_to_chat(j_result, db, sql, datab);
     }
@@ -110,24 +106,15 @@ json_object *mx_if_add_user_to_chat(json_object *jobj, sqlite3 *db,
     char sql[255];
 
     if (mx_is_active(jobj, db, datab)) {
-printf("1\n");
         datab->login_db2 = mx_js_to_str(jobj, "Contact_login");
         datab->chat_name_db = mx_js_to_str(jobj, "Chat_name");
-printf("datab->chat_name_db1: %s\n", datab->chat_name_db);
         sprintf(sql, "select ID, CHAT_STATUS from CHATS " \
                 "where CHAT_NAME = '%s';", datab->chat_name_db);
         mx_table_setting(db, sql, cb_find_chat_id_and_status, datab);
-printf("3\n");
-printf("datab->chat_name_db2: %s\n", datab->chat_name_db);
-printf("datab->chat_status: %s\n", datab->chat_status);
-        if (!mx_strcmp(datab->chat_status, "public")) {
-printf("4\n");
+        if (!mx_strcmp(datab->chat_status, "public"))
             condition_for_chat(j_result, db, datab, sql);
-        }
-        else {
-printf("5\n");
+        else
             mx_add_str_to_js(j_result, "Answer", MX_PRIVATE_CHAT);
-        }
     }
     else
         mx_add_str_to_js(j_result, "Answer", MX_CHEAT_MESSAGE);
