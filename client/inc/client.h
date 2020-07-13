@@ -54,7 +54,6 @@ typedef struct s_s_glade {
     GtkWidget *b_l_signin;
     GtkWidget *b_l_signup;
     GtkWidget *b_l_settings;
-    GtkWidget *s_anon;
 
     // Settings window
     GtkWidget *w_settings;
@@ -103,6 +102,7 @@ typedef struct s_s_glade {
     GtkWidget *i_b_u_profile;
     GtkWidget *b_r_chat;
     GtkWidget *i_b_r_chat;
+    GtkWidget *s_filter;
 
     // Emoji window
     GtkWidget *w_emoji;

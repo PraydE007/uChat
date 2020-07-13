@@ -45,7 +45,6 @@ static void init_login(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->b_t_dark = mx_get_widget(builder, "button.theme.dark");
     (*gui)->b_t_custom = mx_get_widget(builder, "button.theme.custom");
     (*gui)->b_t_connect = mx_get_widget(builder, "button.theme.connect");
-    (*gui)->s_anon = mx_get_widget(builder, "switch.anon");
 
     // (*gui)->icon = gdk_pixbuf_new_from_file("client/res/images/icon.ico", NULL);
     // if ((*gui)->icon) {
@@ -98,6 +97,7 @@ static void init_chat(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->i_b_u_profile = mx_get_widget(builder, "image.button.usr.profile");
     (*gui)->b_r_chat = mx_get_widget(builder, "button.remove.chat");
     (*gui)->i_b_r_chat = mx_get_widget(builder, "image.button.remove.chat");
+    (*gui)->s_filter = mx_get_widget(builder, "switch.filter");
 
     gtk_label_set_text(GTK_LABEL((*gui)->l_one), get_unicode(0x1F150)); // TRYING UNICODE
 }

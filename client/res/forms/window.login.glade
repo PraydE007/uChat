@@ -146,19 +146,6 @@
             <property name="y">708</property>
           </packing>
         </child>
-        <child>
-          <object class="GtkSwitch" id="switch.anon">
-            <property name="width_request">90</property>
-            <property name="height_request">50</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="tooltip_text" translatable="yes">Anonymous Mode</property>
-          </object>
-          <packing>
-            <property name="x">572</property>
-            <property name="y">500</property>
-          </packing>
-        </child>
       </object>
     </child>
   </object>
