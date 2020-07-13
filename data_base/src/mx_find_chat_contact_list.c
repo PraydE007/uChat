@@ -17,9 +17,12 @@ static int cb_get_chat_contact_list(void *datab, int argc, char **argv,
 }
 
 void mx_find_chat_contact_list(sqlite3 *db, t_datab *datab, char *sql) {
+    datab->db = db;
+
     sprintf(sql, "select USER_id from USERS_CHATS where CHAT_id = '%s';",
             datab->chat_id);
     mx_table_setting(db, sql, cb_get_chat_contact_list, datab);
+
 
 printf("find_chat_contact_list: %s\n", json_object_to_json_string(datab->j_result));//
 }

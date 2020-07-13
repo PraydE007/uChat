@@ -11,6 +11,14 @@ void mx_dealloc_datab(t_datab **datab) {
     mx_strdel(&((*datab)->commd));
     mx_strdel(&((*datab)->type));
     mx_strdel(&((*datab)->security_key));
+    (*datab)->chat_name_db = NULL;
+    (*datab)->email_db = NULL;
+    (*datab)->mobile_db = NULL;
+    (*datab)->password_db = NULL;
+    (*datab)->security_db = NULL;
+    (*datab)->message_db = NULL;
+    (*datab)->db = NULL;
+    (*datab)->j_result = NULL;
     free(*datab);
     (*datab) = NULL;
 }
