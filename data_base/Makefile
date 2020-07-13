@@ -20,6 +20,9 @@ FILES = mx_add_arr_to_js.c \
 		mx_data_base_creation.c \
 		mx_dbase_handler.c \
 		mx_dealloc_datab.c \
+		mx_find_chat_contact_list.c \
+		mx_find_chat_name.c \
+		mx_find_user_login.c \
 		mx_if_add_user_to_chat.c \
 		mx_if_change_passwd.c \
 		mx_if_change_profile.c \
@@ -28,6 +31,7 @@ FILES = mx_add_arr_to_js.c \
 		mx_if_create_chat.c \
 		mx_if_delete_chat.c \
 		mx_if_delete_contact.c \
+		mx_if_get_chat_profile.c \
 		mx_if_get_profile.c \
 		mx_if_logging.c \
 		mx_if_private_chat.c \
@@ -37,8 +41,6 @@ FILES = mx_add_arr_to_js.c \
 		mx_is_active.c \
 		mx_is_chat.c \
 		mx_is_contact.c \
-		mx_find_chat_name.c \
-		mx_find_user_login.c \
 		mx_js_arr_to_str.c \
 		mx_js_chts_conts.c \
 		mx_js_to_datab.c \
