@@ -18,7 +18,7 @@ void mx_dealloc_datab(t_datab **datab) {
     (*datab)->security_db = NULL;
     (*datab)->message_db = NULL;
     (*datab)->db = NULL;
-    // (*datab)->j_result = NULL;
+    (*datab)->j_result = NULL;
     free(*datab);
     (*datab) = NULL;
 }

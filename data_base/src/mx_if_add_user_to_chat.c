@@ -35,7 +35,7 @@ static int cb_find_contact_id_in_chat(void *datab, int argc, char **argv,
     if (datab) {
         t_datab *new_datab = (t_datab *)datab;
 
-        if (!mx_strcmp(new_datab->second_id, argv[1])) {
+        if (!mx_strcmp(new_datab->second_id, argv[0])) {
             new_datab->passtrigger = 1;
             return 1;
         }
@@ -81,7 +81,7 @@ void condition_for_chat(json_object *j_result, sqlite3 *db, t_datab *datab,
     sprintf(sql, "select ID, LOGIN from USERS;");
     mx_table_setting(db, sql, mx_cb_find_user_id, datab);
     if (datab->second_id) {
-        sprintf(sql, "select USER_id, CHAT_id from USERS_CHATS " \
+        sprintf(sql, "select USER_id from USERS_CHATS " \
                 "where CHAT_id = %s;", datab->chat_id);
         mx_table_setting(db, sql, cb_find_contact_id_in_chat, datab);
         if (!mx_strcmp(datab->login_db, datab->login_db2))

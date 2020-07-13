@@ -37,6 +37,7 @@
 #define MX_CONT_ADD_CHAT "The user was added to the chat!"
 #define MX_DEL_CHAT_MES "The contact was deleted from the chat!"
 #define MX_ERR_DEL_CHAT "You can not delete users from this chat!"
+#define MX_ERR_CHAT_MEMBER "There is no such user in this chat!"
 
 typedef struct s_u_login_info {
     int u_id;

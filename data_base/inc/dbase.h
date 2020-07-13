@@ -34,6 +34,7 @@ typedef struct s_datab {
 bool mx_is_active(json_object *jobj, sqlite3 *db, t_datab *datab);
 bool mx_is_admin(sqlite3 *db, t_datab *datab, char *sql);
 bool mx_is_chat(sqlite3 *db, char *sql, t_datab *datab);
+bool mx_is_chat_member(sqlite3 *db, t_datab *datab, char *sql);
 bool mx_is_contact(sqlite3 *db, char *sql, t_datab *datab);
 bool mx_check_login_on_server(sqlite3 *db, t_datab *datab, const char *login);
 char *mx_find_user_login(sqlite3 *db, char *id);
@@ -47,6 +48,7 @@ int mx_cb_find_user_id(void *datab, int argc, char **argv, char **azColName);
 int mx_js_to_int(json_object *jobj, char *key);
 json_object *mx_dbase_handler(json_object *jobj, sqlite3 *db);
 json_object *mx_if_add_user_to_chat(json_object *jobj, sqlite3 *db, t_datab *datab);
+json_object *mx_if_change_chat(json_object *jobj, sqlite3 *db, t_datab *datab);
 json_object *mx_if_change_passwd(json_object *jobj, sqlite3 *db, t_datab *datab);
 json_object *mx_if_change_profile(json_object *jobj, sqlite3 *db, t_datab *datab);
 json_object *mx_if_chat(json_object *jobj, sqlite3 *db, t_datab *datab);
