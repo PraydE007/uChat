@@ -8,7 +8,7 @@ void mx_delete_user_from_chat(GtkButton *btn, gpointer data) {
 
     if (mx_strcmp(user_name, "")) {
         json_object *jobj = json_object_new_object();
-        json_object *j_type = json_object_new_string("Delete_user_to_chat");
+        json_object *j_type = json_object_new_string("Delete_user_from_chat");
         json_object *j_login = json_object_new_string(login);
         json_object *j_user_name = json_object_new_string(user_name);
         json_object *j_chat_name = json_object_new_string(gui->send_to);
