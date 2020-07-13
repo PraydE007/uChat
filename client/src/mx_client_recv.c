@@ -39,18 +39,20 @@ void *mx_client_recv(void *data) {
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_add_contact, gui, 0);
         if (!mx_strcmp(answer, "Receive_message"))
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_message, gui, 0);
-        if (!mx_strcmp(answer, "The chat was created!")) {
+        if (!mx_strcmp(answer, "The chat was created!"))
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_add_contact, gui, 0);
-        }
-        if (!mx_strcmp(answer, "The user was added to the chat!")) {
+        if (!mx_strcmp(answer, "The user was added to the chat!"))
             printf("%s\n", gui->recv_data);
-        }
-        if (!mx_strcmp(answer, "You were added to the chat")) {
+        if (!mx_strcmp(answer, "You were added to the chat"))
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_invited, gui, 0);
-        }
-        if (!mx_strcmp(answer, "The contact was deleted!")) {
+        if (!mx_strcmp(answer, "The contact was deleted!"))
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_update_contacts, gui, 0);
-        }
+        if (!mx_strcmp(answer, "Login or password is incorrect!"))
+            gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_error_logging, gui, 0);
+        if (!mx_strcmp(answer, "A chat or an user with such name already exists!!"))
+            gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_error_create_chat, gui, 0);
+        if (!mx_strcmp(answer, "There is no such user in the uchat!"))
+            gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_error_find_user, gui, 0);
     }
     return NULL;
 }
