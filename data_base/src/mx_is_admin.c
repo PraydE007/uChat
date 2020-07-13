@@ -21,8 +21,9 @@ bool mx_is_admin(sqlite3 *db, t_datab *datab, char *sql) {
     sprintf(sql, "select ID from CHATS where CHAT_NAME = '%s';",
             datab->chat_name_db);
     mx_table_setting(db, sql, mx_cb_find_chat_id, datab);
-    sprintf(sql, "select USER_status from USERS_CHATS where USER_id = '%s';",
-            datab->chat_id);
+printf("datab->chat_id: %s\n", datab->chat_id);
+    sprintf(sql, "select USER_status from USERS_CHATS where CHAT_id = '%s' " \
+            "and USER_id = '%s';", datab->chat_id, datab->id);
     mx_table_setting(db, sql, cb_chat_status_checking, datab);
     if (datab->passtrigger == 1) {
         datab->passtrigger = 0;
