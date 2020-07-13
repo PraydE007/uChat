@@ -88,6 +88,8 @@ CL_SRC		=	main.c \
 				mx_add_user_to_group.c \
 				mx_success_invited.c \
 				mx_delete_contact.c \
+				mx_apply_group.c \
+				mx_delete_user_from_chat.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \

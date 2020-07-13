@@ -140,6 +140,7 @@ typedef struct s_s_glade {
     GtkWidget *i_b_f_user;
     GtkWidget *b_b_user;
     GtkWidget *i_b_user;
+    GtkWidget *b_g_apply;
 
     //key
     char *key;
@@ -155,6 +156,8 @@ typedef struct s_s_glade {
     char **contacts;
     char **chats;
     int if_contact;
+
+    //group
 }              t_s_glade;
 
 // BUFFERS_PROFILE_STRUCTS_FOR_AUDITOR
@@ -223,6 +226,8 @@ void mx_close_group(GtkButton *btn, gpointer data);
 void mx_upload_file(GtkButton *btn, gpointer data);
 void mx_add_user_to_group(GtkButton *btn, gpointer data);
 void mx_delete_contact(GtkButton *btn, gpointer data);
+void mx_apply_group(GtkButton *btn, gpointer data);
+void mx_delete_user_from_chat(GtkButton *btn, gpointer data);
 //infinity_recive_from_server
 void *mx_client_recv(void *data);
 
