@@ -33,6 +33,8 @@ json_object *mx_dbase_handler(json_object *jobj, sqlite3 *db) {
         j_result = mx_if_contact(jobj, db, datab);
     else if (!mx_strcmp("Add_user_to_chat", mx_js_to_str(jobj, "Type")))
         j_result = mx_if_add_user_to_chat(jobj, db, datab);
+    else if (!mx_strcmp("Get_chat_profile", mx_js_to_str(jobj, "Type")))
+        j_result = mx_if_get_chat_profile(jobj, db, datab);
     else if (!mx_strcmp("Get_profile", mx_js_to_str(jobj, "Type")))
         j_result = mx_if_get_profile(jobj, db, datab);
     else if (!mx_strcmp("Change_profile", mx_js_to_str(jobj, "Type")))

@@ -24,7 +24,7 @@ void mx_open_group(GtkButton *btn, gpointer data) {
         else if (!gui->if_contact) {
             // OPEN GROUP CONTROL FOR SELECTED GROUP
             json_object *jobj = json_object_new_object();
-            json_object *j_type = json_object_new_string("Chat_contact_list");
+            json_object *j_type = json_object_new_string("Chat_profile");
             json_object *j_login = json_object_new_string(login);
             json_object *j_chat_name = json_object_new_string(gui->send_to);
             json_object *j_key = json_object_new_string(gui->key);
