@@ -49,7 +49,7 @@ void *mx_client_recv(void *data) {
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_invited, gui, 0);
         }
         if (!mx_strcmp(answer, "The contact was deleted!")) {
-            gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_add_contact, gui, 0);
+            gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_update_contacts, gui, 0);
         }
     }
     return NULL;
