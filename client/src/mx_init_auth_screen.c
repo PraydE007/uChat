@@ -230,6 +230,8 @@ static void connect_signals(t_s_glade *gui) {
                     G_CALLBACK(mx_upload_file), gui);
     g_signal_connect(gui->b_r_chat, "clicked",
                     G_CALLBACK(mx_delete_contact), gui);
+    g_signal_connect(gui->b_u_profile, "clicked",
+                    G_CALLBACK(mx_view_profile), gui);
 
     // Group Window Signals
     g_signal_connect(gui->b_g_close, "clicked",

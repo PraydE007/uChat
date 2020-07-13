@@ -14,6 +14,7 @@ void mx_delete_contact(GtkButton *btn, gpointer data) {
     json_object_object_add(jobj,"Contact_login", j_contact_login);
     json_object_object_add(jobj,"Security_key", j_key);
     send_data = json_object_to_json_string(jobj);
+    printf("SEND_DATA :%s\n", send_data);
     send(gui->sockfd, send_data, strlen(send_data), 0);
     (void)btn;
 }
