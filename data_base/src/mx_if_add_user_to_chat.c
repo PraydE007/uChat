@@ -66,8 +66,8 @@ static int cb_find_contact_id_in_chat(void *datab, int argc, char **argv,
 
 static void insert_contact_in_to_chat(json_object *j_result, sqlite3 *db,
                                                 char *sql, t_datab *datab) {
-    sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id)" \
-            "values('%s', '%s')", datab->second_id, datab->chat_id);
+    sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id, USER_status)" \
+            "values('%s', '%s', 'member')", datab->second_id, datab->chat_id);
     mx_table_creation(db, sql, mx_callback);
     mx_add_str_to_js(j_result, "Answer", MX_CONT_ADD_CHAT);
     sprintf(sql, "select SOCKET from ACTIVITY where USER_id = '%s';",

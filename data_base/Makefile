@@ -40,6 +40,7 @@ FILES = mx_add_arr_to_js.c \
 		mx_if_registr.c \
 		mx_if_send_message.c \
 		mx_is_active.c \
+		mx_is_admin.c \
 		mx_is_chat.c \
 		mx_is_contact.c \
 		mx_js_arr_to_str.c \

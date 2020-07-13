@@ -32,6 +32,7 @@ typedef struct s_datab {
 }               t_datab;
 
 bool mx_is_active(json_object *jobj, sqlite3 *db, t_datab *datab);
+bool mx_is_admin(sqlite3 *db, t_datab *datab, char *sql);
 bool mx_is_chat(sqlite3 *db, char *sql, t_datab *datab);
 bool mx_is_contact(sqlite3 *db, char *sql, t_datab *datab);
 bool mx_check_login_on_server(sqlite3 *db, t_datab *datab, const char *login);
