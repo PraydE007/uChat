@@ -1,17 +1,17 @@
 #include "dbase.h"
 
-static int cb_users_id_for_chat(void *datab, int argc, char **argv,
-                                                            char **azColName) {
-    (void)argc;
-    (void)azColName;
-    if (datab) {
-        json_object *j_users_id = json_object_new_object();
-        json_object *new_datab = (json_object *)datab;
-        j_users_id = json_object_new_string(argv[0]);
-        mx_add_arr_to_js(new_datab, j_users_id);
-    }
-    return 0;
-}
+// static int cb_find_user_id_for_chat(void *datab, int argc, char **argv,
+//                                                             char **azColName) {
+//     (void)argc;
+//     (void)azColName;
+//     if (datab) {
+//         json_object *j_users_id = json_object_new_object();
+//         json_object *new_datab = (json_object *)datab;
+//         j_users_id = json_object_new_string(argv[0]);
+//         mx_add_arr_to_js(new_datab, j_users_id);
+//     }
+//     return 0;
+// }
 
 static void insert_message(json_object *receive_message, sqlite3 *db,
                                                     t_datab *datab, char *sql) {
@@ -30,19 +30,19 @@ static void insert_message(json_object *receive_message, sqlite3 *db,
     datab->logtrigger = 0;
 }
 
-static int message_sending(void *datab, int argc, char **argv,
-                                                            char **azColName) {
-    (void)argc;
-    (void)azColName;
-    if (datab) {
-        t_datab *new_datab = (t_datab *)datab;
-        int n;
+// static int message_sending(void *datab, int argc, char **argv,
+//                                                             char **azColName) {
+//     (void)argc;
+//     (void)azColName;
+//     if (datab) {
+//         t_datab *new_datab = (t_datab *)datab;
+//         int n;
 
-        n = send(mx_atoi(argv[0]), new_datab->message_db,
-                                        mx_strlen(new_datab->message_db), 0);
-    }
-    return 0;
-}
+//         n = send(mx_atoi(argv[0]), new_datab->message_db,
+//                                         mx_strlen(new_datab->message_db), 0);
+//     }
+//     return 0;
+// }
 
 static void db_handler_for_message(json_object *receive_message, sqlite3 *db,
                                                     t_datab *datab, char *sql) {
@@ -53,8 +53,8 @@ static void db_handler_for_message(json_object *receive_message, sqlite3 *db,
     mx_table_setting(db, sql, mx_cb_find_chat_id, datab);
     insert_message(receive_message, db, datab, sql);
     sprintf(sql, "select USER_id from USERS_CHATS where CHAT_id = '%s' " \
-            "AND USER_id != '%s';", datab->chat_id, datab->id);
-    mx_table_setting(db, sql, cb_users_id_for_chat, datab->j_result);
+            "and USER_id != '%s';", datab->chat_id, datab->id);
+    mx_table_setting(db, sql, mx_cb_find_user_id_for_chat, datab->j_result);
     datab->message_db = json_object_get_string(receive_message);
 printf("datab->message_db: %s\n", datab->message_db);
     lenth = json_object_array_length(datab->j_result);
@@ -62,7 +62,7 @@ printf("datab->message_db: %s\n", datab->message_db);
         datab->id_db = mx_js_arr_to_str(datab->j_result, i);
         sprintf(sql, "select SOCKET from ACTIVITY where USER_id = '%s';",
                                                                 datab->id_db);
-        mx_table_setting(db, sql, message_sending, datab);
+        mx_table_setting(db, sql, mx_cb_message_sending, datab);
     }
 }
 
