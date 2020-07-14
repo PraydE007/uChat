@@ -246,6 +246,7 @@ gboolean mx_success_message(void *data);
 gboolean mx_success_history(void *data);
 gboolean mx_success_invited(void *data);
 gboolean mx_success_update_contacts(void *data);
+gboolean mx_success_public_message(void *data);
 
 //If_login_render
 gboolean mx_render_contacts(t_s_glade *gui);

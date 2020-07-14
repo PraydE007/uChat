@@ -12,6 +12,7 @@ gboolean mx_success_message(void *data) {
     json_object *jobj = json_tokener_parse(gui->recv_data);
     const char *message = json_to_str(jobj, "Message");
     const char *sender = json_to_str(jobj, "Sender");
+    // printf("SENT_TO :%s\n", gui->send_to);
     int count = 0;
     if (!gui->if_contact) {
         if (gui->contacts) {
@@ -29,6 +30,10 @@ gboolean mx_success_message(void *data) {
             gui->if_contact = true;
         }
     }
+    if (gui->send_to != NULL) {
+        printf("SENT_TO :%s\n", gui->send_to);
         mx_p_owned(gui->l_messages, message);
+    }
+        // if(mx_strcmp(gui->send_to, ""))
     return 0;
 }
