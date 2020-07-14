@@ -64,20 +64,19 @@ static int cb_find_contact_id_in_chat(void *datab, int argc, char **argv,
 //     return 0;
 // }
 
-static void insert_contact_in_to_chat(json_object *j_result, sqlite3 *db,
-                                                char *sql, t_datab *datab) {
+static void insert_contact_in_to_chat(sqlite3 *db, char *sql, t_datab *datab) {
     sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id, USER_status)" \
             "values('%s', '%s', 'member')", datab->second_id, datab->chat_id);
     mx_table_creation(db, sql, mx_callback);
-    mx_add_str_to_js(j_result, "Answer", MX_CONT_ADD_CHAT);
+    mx_add_str_to_js(datab->j_result, "Answer", MX_CONT_ADD_CHAT);
+    mx_find_chat_contact_list(db, datab, sql);
     sprintf(sql, "select SOCKET from ACTIVITY where USER_id = '%s';",
                                                             datab->second_id);
-        mx_table_setting(db, sql, mx_cb_chat_notification, datab);
+    mx_table_setting(db, sql, mx_cb_chat_notification, datab);
     mx_strdel(&datab->second_id);
 }
 
-void condition_for_chat(json_object *j_result, sqlite3 *db, t_datab *datab,
-                                                                   char *sql) {
+void condition_for_chat(sqlite3 *db, t_datab *datab, char *sql) {
     sprintf(sql, "select ID, LOGIN from USERS;");
     mx_table_setting(db, sql, mx_cb_find_user_id, datab);
     if (datab->second_id) {
@@ -85,16 +84,16 @@ void condition_for_chat(json_object *j_result, sqlite3 *db, t_datab *datab,
                 "where CHAT_id = %s;", datab->chat_id);
         mx_table_setting(db, sql, cb_find_contact_id_in_chat, datab);
         if (!mx_strcmp(datab->login_db, datab->login_db2))
-            mx_add_str_to_js(j_result, "Answer", "You can not add yourself " \
-                        "into chat!");
+            mx_add_str_to_js(datab->j_result, "Answer", "You can not add " \
+                            "yourself into chat!");
         else if (datab->passtrigger == 1)
-            mx_add_str_to_js(j_result, "Answer", "You have already this " \
-                            "contact in the chat!");
+            mx_add_str_to_js(datab->j_result, "Answer", "You have already " \
+                            "this contact in the chat!");
         else if (datab->logtrigger == 1)
-            insert_contact_in_to_chat(j_result, db, sql, datab);
+            insert_contact_in_to_chat(db, sql, datab);
     }
     else
-        mx_add_str_to_js(j_result, "Answer", MX_CONT_ERR);
+        mx_add_str_to_js(datab->j_result, "Answer", MX_CONT_ERR);
     mx_strdel(&datab->chat_id);
     datab->logtrigger = 0;
     datab->passtrigger = 0;
@@ -102,7 +101,7 @@ void condition_for_chat(json_object *j_result, sqlite3 *db, t_datab *datab,
 
 json_object *mx_if_add_user_to_chat(json_object *jobj, sqlite3 *db,
                                                             t_datab *datab) {
-    json_object *j_result = json_object_new_object();
+    datab->j_result = json_object_new_object();
     char sql[255];
 
     if (mx_is_active(jobj, db, datab)) {
@@ -112,14 +111,14 @@ json_object *mx_if_add_user_to_chat(json_object *jobj, sqlite3 *db,
                 "where CHAT_NAME = '%s';", datab->chat_name_db);
         mx_table_setting(db, sql, cb_find_chat_id_and_status, datab);
         if (!mx_strcmp(datab->chat_status, "public"))
-            condition_for_chat(j_result, db, datab, sql);
+            condition_for_chat(db, datab, sql);
         else
-            mx_add_str_to_js(j_result, "Answer", MX_PRIVATE_CHAT);
+            mx_add_str_to_js(datab->j_result, "Answer", MX_PRIVATE_CHAT);
     }
     else
-        mx_add_str_to_js(j_result, "Answer", MX_CHEAT_MESSAGE);
-printf("if_add_contact(j_result): %s\n", json_object_to_json_string(j_result));//
+        mx_add_str_to_js(datab->j_result, "Answer", MX_CHEAT_MESSAGE);
+printf("if_add_contact(j_result): %s\n", json_object_to_json_string(datab->j_result));//
     mx_strdel(&datab->id);// comment in mx_is_active
     mx_strdel(&datab->chat_status);
-    return j_result;
+    return datab->j_result;
 }
