@@ -55,6 +55,6 @@ json_object *mx_if_public_chat(json_object *jobj, sqlite3 *db,
 //
     mx_strdel(&datab->id);// comment in mx_is_activ
     mx_strdel(&datab->chat_id);
-    datab->logtrigger = 0;
+    // datab->logtrigger = 0;*
     return j_answer;
 }

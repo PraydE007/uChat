@@ -21,8 +21,10 @@ static void insert_message(json_object *receive_message, sqlite3 *db,
     mx_table_creation(db, sql, mx_callback);
     if (datab->logtrigger == 1)
         mx_add_str_to_js(receive_message, "Answer", "Receive_message");
-    else
+    else {
         mx_add_str_to_js(receive_message, "Answer", "Public_receive_message");
+        mx_add_str_to_js(receive_message, "Chat_name", datab->chat_name);
+    }
     mx_add_str_to_js(receive_message, "Sender", (char *)datab->login_db);
     mx_add_str_to_js(receive_message, "Message", (char *)datab->message_db);
     datab->logtrigger = 0;
@@ -54,6 +56,7 @@ static void db_handler_for_message(json_object *receive_message, sqlite3 *db,
             "AND USER_id != '%s';", datab->chat_id, datab->id);
     mx_table_setting(db, sql, cb_users_id_for_chat, datab->j_result);
     datab->message_db = json_object_get_string(receive_message);
+printf("datab->message_db: %s\n", datab->message_db);
     lenth = json_object_array_length(datab->j_result);
     for (int i = 0; i < lenth; i++) {
         datab->id_db = mx_js_arr_to_str(datab->j_result, i);
