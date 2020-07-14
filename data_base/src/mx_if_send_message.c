@@ -13,11 +13,19 @@ static int cb_users_id_for_chat(void *datab, int argc, char **argv,
     return 0;
 }
 
-static void insert_message(char *sql, sqlite3 *db, t_datab *datab) {
+static void insert_message(json_object *receive_message, sqlite3 *db,
+                                                    t_datab *datab, char *sql) {
     sprintf(sql, "insert into MESSAGES (SENDER_id, CHAT_id, MESSAGE_text)" \
             "values('%s', '%s', '%s')", datab->id, datab->chat_id,
             datab->message_db);
     mx_table_creation(db, sql, mx_callback);
+    if (datab->logtrigger == 1)
+        mx_add_str_to_js(receive_message, "Answer", "Receive_message");
+    else
+        mx_add_str_to_js(receive_message, "Answer", "Public_receive_message");
+    mx_add_str_to_js(receive_message, "Sender", (char *)datab->login_db);
+    mx_add_str_to_js(receive_message, "Message", (char *)datab->message_db);
+    datab->logtrigger = 0;
 }
 
 static int message_sending(void *datab, int argc, char **argv,
@@ -49,13 +57,10 @@ static void db_handler_for_message(json_object *receive_message, sqlite3 *db,
     sprintf(sql, "select ID from CHATS where CHAT_NAME = '%s';",
             datab->chat_name);
     mx_table_setting(db, sql, mx_cb_find_chat_id, datab);
-    insert_message(sql, db, datab);
+    insert_message(receive_message, db, datab, sql);
     sprintf(sql, "select USER_id from USERS_CHATS where CHAT_id = '%s' " \
             "AND USER_id != '%s';", datab->chat_id, datab->id);
     mx_table_setting(db, sql, cb_users_id_for_chat, datab->j_result);
-    mx_add_str_to_js(receive_message, "Answer", "Receive_message");
-    mx_add_str_to_js(receive_message, "Sender", (char *)datab->login_db);
-    mx_add_str_to_js(receive_message, "Message", (char *)datab->message_db);
     datab->message_db = json_object_get_string(receive_message);
     lenth = json_object_array_length(datab->j_result);
     for (int i = 0; i < lenth; i++) {
