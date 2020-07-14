@@ -49,6 +49,6 @@ gboolean mx_success_message(void *data) {
         else
             gui->if_contact = true;
     }
-        mx_p_owned(gui->l_messages, message);
+    mx_p_owned(gui->l_messages, message, sender);
     return 0;
 }

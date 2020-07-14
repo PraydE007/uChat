@@ -39,6 +39,12 @@ list grid grid {
     border-radius: 15px;
 }
 
+#user_name_label {
+    color: #085060;
+    font-size: 75%;
+    padding-top: 4px;
+}
+
 list {
     background-color: white;
 }
@@ -47,7 +53,7 @@ list label {
     color: #101010;
     padding-left: 15px;
     padding-right: 15px;
-    padding-top: 10px;
+    padding-top: 12px;
     padding-bottom: 10px;
 }
 
