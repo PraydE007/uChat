@@ -8,6 +8,7 @@ void mx_p_own(GtkWidget *lst, const char *msg, const char *name) {
     GtkWidget *grid = gtk_grid_new();
 
     gtk_label_set_line_wrap(GTK_LABEL(text1), TRUE);
+    gtk_label_set_selectable(GTK_LABEL(text1), TRUE);
     gtk_widget_set_name(lol, "user_name_label");
     gtk_widget_set_halign(lol, GTK_ALIGN_END);
     gtk_widget_set_hexpand(align, TRUE);
