@@ -97,7 +97,6 @@ static void init_chat(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->i_b_u_profile = mx_get_widget(builder, "image.button.usr.profile");
     (*gui)->b_r_chat = mx_get_widget(builder, "button.remove.chat");
     (*gui)->i_b_r_chat = mx_get_widget(builder, "image.button.remove.chat");
-    (*gui)->s_filter = mx_get_widget(builder, "switch.filter");
 
     gtk_label_set_text(GTK_LABEL((*gui)->l_one), get_unicode(0x1F150)); // TRYING UNICODE
 }

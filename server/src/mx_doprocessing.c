@@ -47,6 +47,7 @@ void *mx_doprocessing (void *data) {
     json_object *j_socket = NULL;
     char *login = NULL;
 
+    // pthread_mutex_lock(&(sockbd.mutex));
     // sockbd.login = mx_js_to_str(jobj, "Login"); //
     // login = mx_strdup(sockbd.login); //
 //    printf("SIZE = %d\n", size);
@@ -160,5 +161,6 @@ void *mx_doprocessing (void *data) {
         }
     }
     mx_strdel(&login);
+    // pthread_mutex_unlock(&(sockbd.mutex));
     return 0;
 }

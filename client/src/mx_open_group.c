@@ -1,3 +1,4 @@
+
 #include "client.h"
 
 void mx_open_group(GtkButton *btn, gpointer data) {

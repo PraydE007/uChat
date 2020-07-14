@@ -156,8 +156,8 @@ typedef struct s_s_glade {
     char **contacts;
     char **chats;
     int if_contact;
+    pthread_mutex_t mutex;
 
-    //group
 }              t_s_glade;
 
 // BUFFERS_PROFILE_STRUCTS_FOR_AUDITOR

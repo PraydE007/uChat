@@ -34,6 +34,7 @@ static int message_sending(void *datab, int argc, char **argv,
         mx_add_str_to_js(receive_message, "Message",
                                                 (char *)new_datab->message_db);
         new_datab->message_db = json_object_get_string(receive_message);
+        printf("ANSWER : %s\n", new_datab->message_db);
         n = send(mx_atoi(argv[0]), new_datab->message_db,
                                         mx_strlen(new_datab->message_db),  0);
     }

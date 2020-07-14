@@ -5,7 +5,6 @@ void *mx_client_recv(void *data) {
     t_s_glade *gui = *(t_s_glade **)data;
     char *answer = NULL;
     json_object *jobj;
-
     while (true) {
         bzero(gui->buffer, MX_MAX_BYTES);
         n = recv(gui->sockfd, gui->buffer, MX_MAX_BYTES, 0);
@@ -46,6 +45,8 @@ void *mx_client_recv(void *data) {
         if (!mx_strcmp(answer, "You were added to the chat"))
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_invited, gui, 0);
         if (!mx_strcmp(answer, "The contact was deleted!"))
+            gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_update_contacts, gui, 0);
+        if (!mx_strcmp(answer, "The chat was deleted!"))
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_update_contacts, gui, 0);
         if (!mx_strcmp(answer, "Login or password is incorrect!"))
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_error_logging, gui, 0);

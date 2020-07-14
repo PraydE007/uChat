@@ -13,7 +13,6 @@ gboolean mx_success_message(void *data) {
     const char *message = json_to_str(jobj, "Message");
     const char *sender = json_to_str(jobj, "Sender");
     int count = 0;
-
     if (!gui->if_contact) {
         if (gui->contacts) {
             while (gui->contacts[count]) {
