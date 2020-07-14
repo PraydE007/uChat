@@ -3,11 +3,9 @@
 static int cb_chs_cnts(void *datab, int argc, char **argv,char **colName) {
     char **new_str = (char **)datab;
 
-    for(int i = 0; i < argc; i++) {
-        printf("%s = %s\n", colName[i], argv[i] ? argv[i] : "NULL");//
-        *new_str = mx_strjoin_free_js_value(*new_str, argv[i]);
-        printf("new_str = %s\n", *new_str);//
-    }
+    (void)argc;
+    (void)colName;
+    *new_str = mx_strjoin_free_js_value(*new_str, argv[0]);
     return 0;
 }
 

@@ -22,12 +22,14 @@
     change_prof.key= strdup(gui->key);
             n = send(gui->sockfd, send_data, strlen(send_data), 0);
     gtk_css_provider_load_from_path(gui->css_provider, theme, NULL);
-        gui->if_contact = false;
         bzero(gui->buffer, MX_MAX_BYTES);
         n = recv(gui->sockfd, gui->buffer, MX_MAX_BYTES, 0);
         jobj = json_tokener_parse(gui->buffer);
         gui->recv_data = strdup(gui->buffer);
         printf("RECV DATA: %s\n", gui->recv_data);
+            gui->if_contact = 1;
+            gui->if_contact = 0;
+            gui->if_contact = 2;
             gui->key = (char *)json_object_get_string(json_object_object_get(jobj, "Security_key"));
             printf("%s\n", gui->recv_data);
     gtk_window_get_position(mx_gw(gui->w_group), &(gui->w_x), &(gui->w_y));
@@ -79,6 +81,7 @@
                     G_CALLBACK(mx_open_window), gui->w_emoji);
     g_signal_connect(gui->l_chats, "row-activated",
     g_signal_connect(gui->b_group, "clicked",
+    g_signal_connect(gui->b_u_file, "clicked",
     g_signal_connect(gui->b_g_close, "clicked",
     g_signal_connect(gui->b_e_close, "clicked",
                     G_CALLBACK(mx_close_window), gui->w_emoji);
@@ -106,6 +109,7 @@
     gtk_widget_hide(gui->w_settings);
     gtk_widget_hide(gui->w_signup);
     gtk_widget_show_all(gui->w_chat);
+    gtk_widget_hide(gui->b_c_pad);
     gtk_window_move(mx_gw(gui->w_chat), gui->w_x, gui->w_y + 22);
     const char *login = gtk_entry_get_text(GTK_ENTRY(gui->e_l_login));
     gui->send_to = strdup(gtk_label_get_text(GTK_LABEL(chat_name)));
@@ -113,8 +117,10 @@
     json_object *j_key = json_object_new_string(gui->key);
     send(gui->sockfd, send_data, strlen(send_data), 0);
     mx_clear_container(gui->l_messages);
+    gtk_widget_show(gui->b_c_pad);
     const gchar *group_name = gtk_entry_get_text(GTK_ENTRY(gui->e_find));
     char *login = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_l_login));
+    printf("%d\n", gui->if_contact);
             json_object *j_key = json_object_new_string(gui->key);
             send(gui->sockfd, send_data, strlen(send_data), 0);
         // gtk_window_get_position(mx_gw(gui->w_chat), &(gui->w_x), &(gui->w_y));
@@ -139,13 +145,21 @@
     const char *pass1 = gtk_entry_get_text(GTK_ENTRY(gui->e_r_password2));
     const char *mobile = gtk_entry_get_text(GTK_ENTRY(gui->e_r_mobile));
         n = send(gui->sockfd, send_data, strlen(send_data), 0);
-        mx_show_dialog(gui->w_signup, "PAROLY NE SOVPADAYT BLEAT<3\n");
+        mx_show_dialog(gui->w_signup, "Incorrect email adress. Example - *********@****.***\n");
+        mx_show_dialog(gui->w_signup,"Incorrect number. Example - +X (XXX) XXX - XXXX\n");
+        mx_show_dialog(gui->w_signup,"Incorrect login.\n");
+        mx_show_dialog(gui->w_signup,"Incorrect password.\n");
+        mx_show_dialog(gui->w_signup, "Passwords must be identical.\n");
+    json_object *jobj = json_tokener_parse(gui->recv_data);
+            mx_push_chat(gui->l_chats, get_splited_chats[i]);
+            gtk_entry_set_text(GTK_ENTRY(gui->e_find), "");
     json_object *jobj = json_tokener_parse(gui->recv_data);
             mx_push_chat(gui->l_chats, get_splited_contacts[i]);
             gtk_entry_set_text(GTK_ENTRY(gui->e_find), "");
-    char *message = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_message));
-    mx_p_own(gui->l_messages, message);
-    gtk_entry_set_text(GTK_ENTRY(gui->e_message), "");
+//     char *message = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_message));
+//     mx_p_own(gui->l_messages, message);
+//     gtk_entry_set_text(GTK_ENTRY(gui->e_message), "");
+    GtkScrolledWindow *w = GTK_SCROLLED_WINDOW(gui->s_w_messages);
     char *login = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_l_login));
     char *message = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_message));
     if (gui->send_to && mx_strcmp(gui->send_to, "")) {
@@ -155,7 +169,6 @@
             n = send(gui->sockfd, send_data, strlen(send_data), 0);
             mx_p_own(gui->l_messages, message);
             gtk_entry_set_text(GTK_ENTRY(gui->e_message), "");
-            GtkScrolledWindow *w = GTK_SCROLLED_WINDOW(gui->s_w_messages);
     char *contact = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_find));
     mx_push_chat(gui->l_chats, contact);
     gtk_entry_set_text(GTK_ENTRY(gui->e_find), "");
@@ -175,10 +188,8 @@
     json_object *jobj = json_tokener_parse(gui->recv_data);
     gui->key = strdup(json_to_str(jobj, "Security_key"));
     gui->contacts = mx_strsplit(json_to_str(jobj, "Contacts"), ',');
+    gui->chats = mx_strsplit(json_to_str(jobj, "Chats"), ',');
     gui->if_contact = false;
-//     const char *login = gtk_entry_get_text(GTK_ENTRY(gui->e_l_login));
-//     json_object *j_key = json_object_new_string(gui->key);
-//         send(gui->sockfd, send_data, strlen(send_data), 0);
     json_object *jobj = json_tokener_parse(gui->recv_data);
     if (!gui->if_contact) {
         if (gui->contacts) {
@@ -186,9 +197,9 @@
                 if (mx_strcmp(gui->contacts[count], sender)) {
                     mx_push_chat(gui->l_chats, sender);
                     gui->if_contact = true;
-    if (gui->send_to) {
-        if (!mx_strcmp(gui->send_to, json_to_str(jobj, "Sender"))) {
-            mx_p_owned(gui->l_messages, message);
+            mx_push_chat(gui->l_chats, sender);
+            gui->if_contact = true;
+        mx_p_owned(gui->l_messages, message);
     json_object *jobj = json_tokener_parse(gui->recv_data);
     gtk_entry_set_text(GTK_ENTRY(gui->e_p_login), login);
     gtk_entry_set_text(GTK_ENTRY(gui->e_p_email), email);
@@ -202,3 +213,6 @@
     gtk_widget_hide(gui->w_signup);
     gtk_widget_show_all(gui->w_signin);
     gtk_window_move(mx_gw(gui->w_signin), gui->w_x, gui->w_y + 22);
+    char *filepath = mx_open_file_chooser(GTK_WINDOW(gui->w_chat));
+    mx_send_image(filepath, gui->sockfd);
+    // gtk_widget_show_all(gui->f_chooser);

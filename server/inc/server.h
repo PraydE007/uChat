@@ -15,6 +15,7 @@ typedef struct s_sockbd {
     int log_sescr;
     const char *login;
     sqlite3 *bd;
+    pthread_mutex_t mutex;
 } t_sockbd;
 
 void *mx_doprocessing(void *data);

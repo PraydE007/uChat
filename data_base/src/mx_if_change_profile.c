@@ -33,7 +33,7 @@ json_object *mx_if_change_profile(json_object *jobj, sqlite3 *db,
         if (!mx_check_login_on_server(db, datab, datab->login_db2))
             profile_insert(j_result, db, datab);
         else
-            mx_add_str_to_js(j_result, "Answer", MX_REG_ERR);
+            mx_add_str_to_js(j_result, "Answer", MX_REG_CHAT_ERR);
     }
     else
         mx_add_str_to_js(j_result, "Answer", MX_CHEAT_MESSAGE);

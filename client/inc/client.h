@@ -54,7 +54,6 @@ typedef struct s_s_glade {
     GtkWidget *b_l_signin;
     GtkWidget *b_l_signup;
     GtkWidget *b_l_settings;
-    GtkWidget *s_anon;
 
     // Settings window
     GtkWidget *w_settings;
@@ -103,6 +102,7 @@ typedef struct s_s_glade {
     GtkWidget *i_b_u_profile;
     GtkWidget *b_r_chat;
     GtkWidget *i_b_r_chat;
+    GtkWidget *s_filter;
 
     // Emoji window
     GtkWidget *w_emoji;
@@ -140,6 +140,7 @@ typedef struct s_s_glade {
     GtkWidget *i_b_f_user;
     GtkWidget *b_b_user;
     GtkWidget *i_b_user;
+    GtkWidget *b_g_apply;
 
     //key
     char *key;
@@ -153,7 +154,10 @@ typedef struct s_s_glade {
     //sending
     char *send_to;
     char **contacts;
-    bool if_contact;
+    char **chats;
+    int if_contact;
+    pthread_mutex_t mutex;
+
 }              t_s_glade;
 
 // BUFFERS_PROFILE_STRUCTS_FOR_AUDITOR
@@ -220,11 +224,18 @@ void mx_open_chat(GtkListBox *box, GtkListBoxRow *row, gpointer data);
 void mx_open_group(GtkButton *btn, gpointer data);
 void mx_close_group(GtkButton *btn, gpointer data);
 void mx_upload_file(GtkButton *btn, gpointer data);
-
+void mx_add_user_to_group(GtkButton *btn, gpointer data);
+void mx_delete_contact(GtkButton *btn, gpointer data);
+void mx_apply_group(GtkButton *btn, gpointer data);
+void mx_delete_user_from_chat(GtkButton *btn, gpointer data);
+void mx_view_profile(GtkButton *btn, gpointer data);
 //infinity_recive_from_server
 void *mx_client_recv(void *data);
 
 //successes
+gboolean mx_error_create_chat(void *data);
+gboolean mx_error_find_user(void *data);
+gboolean mx_error_logging(void *data);
 gboolean mx_success_logging(void *data);
 gboolean mx_success_registr(void *data);
 gboolean mx_success_profile(void *data);
@@ -233,8 +244,12 @@ gboolean mx_success_change_passwd(void *data);
 gboolean mx_success_add_contact(void *data);
 gboolean mx_success_message(void *data);
 gboolean mx_success_history(void *data);
+gboolean mx_success_invited(void *data);
+gboolean mx_success_update_contacts(void *data);
+gboolean mx_success_public_message(void *data);
 
 //If_login_render
 gboolean mx_render_contacts(t_s_glade *gui);
+gboolean mx_render_chats(t_s_glade *gui);
 
 #endif

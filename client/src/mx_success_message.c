@@ -1,26 +1,5 @@
 #include "client.h"
 
-// void find_user(t_s_glade *gui, const char *sender) {
-//     printf("%s\n", "TEST");
-//     const char *login = gtk_entry_get_text(GTK_ENTRY(gui->e_l_login));
-//     char *send_data = NULL;
-//     json_object *jobj = json_object_new_object();
-//     json_object *j_type = json_object_new_string("Add_contact");
-//     json_object *j_login = json_object_new_string(login);
-//     json_object *j_passwd = json_object_new_string(sender);
-//     json_object *j_key = json_object_new_string(gui->key);
-//     json_object_object_add(jobj,"Type", j_type);
-//     json_object_object_add(jobj,"Login", j_login);
-//     json_object_object_add(jobj,"Contact_login", j_passwd);
-//     json_object_object_add(jobj,"Security_key", j_key);
-
-//     send_data = (char *)json_object_to_json_string(jobj);
-//     if (mx_strcmp(sender, "")) {
-//         printf("SUPER_TEST %s\n", send_data);
-//         send(gui->sockfd, send_data, strlen(send_data), 0);
-//     }
-// }
-
 static const char *json_to_str(json_object *jobj, char *key) {
     const char *value = NULL;
 
@@ -34,7 +13,7 @@ gboolean mx_success_message(void *data) {
     const char *message = json_to_str(jobj, "Message");
     const char *sender = json_to_str(jobj, "Sender");
     int count = 0;
-
+    // printf("%s\n", "!!!TEST!!!");
     if (!gui->if_contact) {
         if (gui->contacts) {
             while (gui->contacts[count]) {
@@ -46,9 +25,14 @@ gboolean mx_success_message(void *data) {
                 count++;
             }
         }
-        else
+        else {
+            mx_push_chat(gui->l_chats, sender);
             gui->if_contact = true;
+        }
     }
-    mx_p_owned(gui->l_messages, message, sender);
+    if (gui->send_to) {
+        mx_p_owned(gui->l_messages, message, sender);
+    }
+        // if(mx_strcmp(gui->send_to, ""))
     return 0;
 }

@@ -62,7 +62,7 @@ json_object *mx_if_message(json_object *jobj, sqlite3 *db, t_datab *datab) {
             fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
     }
     if (datab->logtrigger == 1)
-        mx_add_str_to_js(j_result, "Answer", MX_CHAT_ERR);
+        mx_add_str_to_js(j_result, "Answer", MX_REG_CHAT_ERR);
     else
         insert_chat(jobj, j_result, db);
     printf("answer: %s\n", mx_js_to_str(j_result, "Answer")); //

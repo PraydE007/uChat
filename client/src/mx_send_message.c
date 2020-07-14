@@ -1,13 +1,5 @@
 #include "client.h"
 
-// gboolean test(void *data) {
-//     t_s_glade *gui = (t_s_glade *)data;
-//     char *message = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_message));
-//     mx_p_own(gui->l_messages, message);
-//     gtk_entry_set_text(GTK_ENTRY(gui->e_message), "");
-//     return 0;
-// }
-
 static gint scroll(gpointer data) {
     t_s_glade *gui = (t_s_glade *)data;
     GtkScrolledWindow *w = GTK_SCROLLED_WINDOW(gui->s_w_messages);

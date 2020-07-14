@@ -84,6 +84,18 @@ CL_SRC		=	main.c \
 				mx_success_history.c \
 				mx_upload_file.c \
 				mx_open_file_chooser.c \
+				mx_render_chats.c \
+				mx_add_user_to_group.c \
+				mx_success_invited.c \
+				mx_delete_contact.c \
+				mx_apply_group.c \
+				mx_delete_user_from_chat.c \
+				mx_view_profile.c \
+				mx_success_update_contacts.c \
+				mx_error_logging.c \
+				mx_error_create_chat.c \
+				mx_error_find_user.c \
+				mx_success_public_message.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \
@@ -107,7 +119,7 @@ install_db:
 install_client: $(LMXA) $(CL_NAME)
 
 $(CL_NAME): $(CL_OBJS)
-	@clang $(CFLG) $(CL_OBJS) $(CL_GTK_FLAGS) -L$(LMXD) -fsanitize=address -L/usr/local/opt/openssl/lib/ -lssl -lcrypto -lmx -rdynamic -o $@ libjson-c.a
+	@clang $(CFLG) $(CL_OBJS) $(CL_GTK_FLAGS) -L$(LMXD) -L/usr/local/opt/openssl/lib/ -lssl -lcrypto -lmx -rdynamic -o $@ libjson-c.a
 	@printf "\r\33[2K$@ \033[32;1mcreated\033[0m\n"
 
 $(CL_OBJD)/%.o: $(CL_SRCD)/%.c $(CL_INCS)

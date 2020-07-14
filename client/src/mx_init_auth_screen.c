@@ -45,7 +45,6 @@ static void init_login(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->b_t_dark = mx_get_widget(builder, "button.theme.dark");
     (*gui)->b_t_custom = mx_get_widget(builder, "button.theme.custom");
     (*gui)->b_t_connect = mx_get_widget(builder, "button.theme.connect");
-    (*gui)->s_anon = mx_get_widget(builder, "switch.anon");
 
     // (*gui)->icon = gdk_pixbuf_new_from_file("client/res/images/icon.ico", NULL);
     // if ((*gui)->icon) {
@@ -136,6 +135,7 @@ static void init_group(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->i_b_f_user = mx_get_widget(builder, "image.button.find.user");
     (*gui)->b_b_user = mx_get_widget(builder, "button.ban.user");
     (*gui)->i_b_user = mx_get_widget(builder, "image.button.ban.user");
+    (*gui)->b_g_apply = mx_get_widget(builder, "button.apply");
 }
 
 static void init_images(t_s_glade **gui) {
@@ -227,14 +227,23 @@ static void connect_signals(t_s_glade *gui) {
                     G_CALLBACK(mx_open_group), gui);
     g_signal_connect(gui->b_u_file, "clicked",
                     G_CALLBACK(mx_upload_file), gui);
+    g_signal_connect(gui->b_r_chat, "clicked",
+                    G_CALLBACK(mx_delete_contact), gui);
+    g_signal_connect(gui->b_u_profile, "clicked",
+                    G_CALLBACK(mx_view_profile), gui);
 
     // Group Window Signals
     g_signal_connect(gui->b_g_close, "clicked",
                     G_CALLBACK(mx_close_group), gui);
-
+    g_signal_connect(gui->b_f_user, "clicked",
+                    G_CALLBACK(mx_add_user_to_group), gui);
+    g_signal_connect(gui->b_g_apply, "clicked",
+                    G_CALLBACK(mx_apply_group), gui);
+    g_signal_connect(gui->b_b_user, "clicked",
+                    G_CALLBACK(mx_delete_user_from_chat), gui);
     // Emoji window
     g_signal_connect(gui->b_e_close, "clicked",
-                    G_CALLBACK(mx_close_window), gui->w_emoji);
+                    G_CALLBACK(mx_add_user_to_group), gui->w_emoji);
 
     // Profile Window Signals
     g_signal_connect(gui->b_p_close, "clicked",
