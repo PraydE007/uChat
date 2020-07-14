@@ -1,5 +1,13 @@
 #include "dbase.h"
 
+void chat_deleting(sqlite3 *db, t_datab *datab, char *sql) {
+
+        sprintf(sql, "delete from CHATS where ID = %s;", datab->chat_id);
+        mx_table_creation(db, sql, mx_callback);
+        mx_add_str_to_js(datab->j_result, "Answer", "The last member " \
+                        "and the chat were deleted!");
+}
+
 static void condition_for_admin(json_object *jobj, sqlite3 *db,
                                                     t_datab *datab, char *sql) {
     datab->login_db2 = mx_js_to_str(jobj, "Contact_login");
@@ -12,8 +20,12 @@ static void condition_for_admin(json_object *jobj, sqlite3 *db,
         sprintf(sql, "delete from USERS_CHATS where USER_id = %s " \
                 "and CHAT_id = %s;", datab->second_id, datab->chat_id);
         mx_table_creation(db, sql, mx_callback);
-        mx_add_str_to_js(datab->j_result, "Answer", MX_DEL_CHAT_MES);
-        mx_find_chat_contact_list(db, datab, sql);
+        if(!mx_is_active_chat(db, datab, sql))
+            chat_deleting(db, datab, sql);
+        else {
+            mx_add_str_to_js(datab->j_result, "Answer", MX_DEL_CHAT_MES);
+            mx_find_chat_contact_list(db, datab, sql);
+        }
     }
     else
         mx_add_str_to_js(datab->j_result, "Answer", MX_ERR_CHAT_MEMBER);
