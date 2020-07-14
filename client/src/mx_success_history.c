@@ -14,7 +14,7 @@ gboolean mx_success_history(void *data) {
     json_object *j_arr = json_tokener_parse(array);
     int size_messages = json_object_array_length(j_arr);
     const char *get_message = NULL;
-    for (int i = 1; i < size_messages; i++) {
+    for (int i = 0; i < size_messages; i++) {
         json_object *arr_idx = json_object_array_get_idx(j_arr, i);
             get_message = json_to_str(arr_idx, "Message");
         if (!get_message) {
