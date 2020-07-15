@@ -38,10 +38,7 @@ void mx_registration(GtkButton *button, gpointer data) {
         json_object_object_add(jobj, "Passwd", j_passwd);
         json_object_object_add(jobj, "Email", j_email);
         json_object_object_add(jobj, "Mobile", j_mobile);
-
         send_data = (char *) json_object_to_json_string(jobj);
-
-        printf("SEND_DATA = %s\n", send_data);
         n = send(gui->sockfd, send_data, strlen(send_data), 0);
     }
     else if (check_data(pass0, mail, login, mobile) == 1)
