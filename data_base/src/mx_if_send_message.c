@@ -14,7 +14,9 @@
 // }
 
 static void insert_message(json_object *receive_message, sqlite3 *db,
-                                                    t_datab *datab, char *sql) {
+                                                            t_datab *datab) {
+    char sql[4096];
+
     sprintf(sql, "insert into MESSAGES (SENDER_id, CHAT_id, MESSAGE_text)" \
             "values('%s', '%s', '%s')", datab->id, datab->chat_id,
             datab->message_db);
@@ -51,12 +53,12 @@ static void db_handler_for_message(json_object *receive_message, sqlite3 *db,
     sprintf(sql, "select ID from CHATS where CHAT_NAME = '%s';",
             datab->chat_name);
     mx_table_setting(db, sql, mx_cb_find_chat_id, datab);
-    insert_message(receive_message, db, datab, sql);
+    insert_message(receive_message, db, datab);
     sprintf(sql, "select USER_id from USERS_CHATS where CHAT_id = '%s' " \
             "and USER_id != '%s';", datab->chat_id, datab->id);
     mx_table_setting(db, sql, mx_cb_find_user_id_for_chat, datab->j_result);
     datab->message_db = json_object_get_string(receive_message);
-printf("datab->message_db: %s\n", datab->message_db);
+printf("datab->message_db: %s\n", datab->message_db); //
     lenth = json_object_array_length(datab->j_result);
     for (int i = 0; i < lenth; i++) {
         datab->id_db = mx_js_arr_to_str(datab->j_result, i);
@@ -77,6 +79,7 @@ json_object *mx_if_send_message(json_object *jobj, sqlite3 *db,
         mx_add_str_to_js(j_answer, "Answer", "Message is sent!");
         datab->message_db = mx_js_to_str(jobj, "Message");
         datab->login_db2 = mx_js_to_str(jobj, "Chat_name");
+printf("datab->message_db: %s\n", datab->message_db); //
         datab->chat_name = mx_strdup(datab->login_db2);
         mx_find_chat_name(db, datab, sql);
         db_handler_for_message(receive_message, db, datab, sql);
@@ -86,6 +89,6 @@ json_object *mx_if_send_message(json_object *jobj, sqlite3 *db,
     mx_strdel(&datab->id);// comment in mx_is_activ
     mx_strdel(&datab->chat_id);
     mx_strdel(&datab->chat_name);
-    return j_answer;
     json_object_put(receive_message);
+    return j_answer;
 }
