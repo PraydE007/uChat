@@ -97,7 +97,6 @@ static void init_chat(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->i_b_u_profile = mx_get_widget(builder, "image.button.usr.profile");
     (*gui)->b_r_chat = mx_get_widget(builder, "button.remove.chat");
     (*gui)->i_b_r_chat = mx_get_widget(builder, "image.button.remove.chat");
-    (*gui)->s_filter = mx_get_widget(builder, "switch.filter");
 
     gtk_label_set_text(GTK_LABEL((*gui)->l_one), get_unicode(0x1F150)); // TRYING UNICODE
 }
@@ -137,6 +136,7 @@ static void init_group(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->b_b_user = mx_get_widget(builder, "button.ban.user");
     (*gui)->i_b_user = mx_get_widget(builder, "image.button.ban.user");
     (*gui)->b_g_apply = mx_get_widget(builder, "button.apply");
+    (*gui)->l_g_group = mx_get_widget(builder, "list.group.users");
 }
 
 static void init_images(t_s_glade **gui) {

@@ -15,6 +15,8 @@ FILES = mx_add_arr_to_js.c \
 		mx_cb_chat_notification.c \
 		mx_cb_find_chat_id.c \
 		mx_cb_find_user_id.c \
+		mx_cb_message_sending.c \
+		mx_chat_deleting.c \
 		mx_check_login_on_server.c \
 		mx_create_datab_node.c \
 		mx_data_base_creation.c \
@@ -23,10 +25,13 @@ FILES = mx_add_arr_to_js.c \
 		mx_find_chat_contact_list.c \
 		mx_find_chat_name.c \
 		mx_find_user_login.c \
+		mx_cb_find_user_id_for_chat.c \
 		mx_if_add_user_to_chat.c \
+		mx_if_chage_chat.c \
 		mx_if_change_passwd.c \
 		mx_if_change_profile.c \
 		mx_if_chat.c \
+		mx_is_chat_member.c \
 		mx_if_contact.c \
 		mx_if_create_chat.c \
 		mx_if_delete_chat.c \
@@ -40,6 +45,7 @@ FILES = mx_add_arr_to_js.c \
 		mx_if_registr.c \
 		mx_if_send_message.c \
 		mx_is_active.c \
+		mx_is_active_chat.c \
 		mx_is_admin.c \
 		mx_is_chat.c \
 		mx_is_contact.c \

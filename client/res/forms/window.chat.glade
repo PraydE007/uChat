@@ -210,6 +210,7 @@
                 <child>
                   <object class="GtkBox" id="box.control.pad">
                     <property name="name">#control-pad</property>
+                    <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
                       <object class="GtkButton" id="button.user.profile">
@@ -233,20 +234,6 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkSwitch" id="switch.filter">
-                        <property name="width_request">90</property>
-                        <property name="height_request">50</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="tooltip_text" translatable="yes">Filter</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                    <child>
                       <object class="GtkButton" id="button.remove.chat">
                         <property name="width_request">50</property>
                         <property name="height_request">50</property>
@@ -265,7 +252,7 @@
                         <property name="expand">False</property>
                         <property name="fill">True</property>
                         <property name="pack_type">end</property>
-                        <property name="position">2</property>
+                        <property name="position">1</property>
                       </packing>
                     </child>
                   </object>
@@ -342,7 +329,7 @@
                         </child>
                       </object>
                       <packing>
-                        <property name="left_attach">3</property>
+                        <property name="left_attach">4</property>
                         <property name="top_attach">0</property>
                       </packing>
                     </child>
@@ -356,10 +343,10 @@
                         <property name="margin_top">5</property>
                         <property name="margin_bottom">5</property>
                         <property name="hexpand">True</property>
-                        <property name="text" translatable="yes">I love you bitch!</property>
+                        <property name="text" translatable="yes"></property>
                       </object>
                       <packing>
-                        <property name="left_attach">2</property>
+                        <property name="left_attach">3</property>
                         <property name="top_attach">0</property>
                       </packing>
                     </child>
@@ -400,7 +387,27 @@
                         </child>
                       </object>
                       <packing>
-                        <property name="left_attach">4</property>
+                        <property name="left_attach">5</property>
+                        <property name="top_attach">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="button.edit">
+                        <property name="width_request">50</property>
+                        <property name="height_request">50</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <child>
+                          <object class="GtkImage" id="image.button.edit">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="stock">gtk-missing-image</property>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">2</property>
                         <property name="top_attach">0</property>
                       </packing>
                     </child>
