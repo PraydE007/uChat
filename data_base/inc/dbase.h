@@ -61,6 +61,7 @@ json_object *mx_if_delete_chat(json_object *jobj, sqlite3 *db, t_datab *datab);
 json_object *mx_if_delete_contact(json_object *jobj, sqlite3 *db, t_datab *datab);
 json_object *mx_if_delete_contact_from_chat(json_object *jobj, sqlite3 *db, t_datab *datab);
 json_object *mx_if_get_chat_profile(json_object *jobj, sqlite3 *db, t_datab *datab);
+json_object *mx_if_get_contact_profile(json_object *jobj, sqlite3 *db, t_datab *datab);
 json_object *mx_if_get_profile(json_object *jobj, sqlite3 *db, t_datab *datab);
 json_object *mx_if_logging(json_object *jobj, sqlite3 *db, t_datab *datab);
 json_object *mx_if_private_chat(json_object *jobj, sqlite3 *db, t_datab *datab);
