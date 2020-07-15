@@ -76,7 +76,7 @@ static void insert_contact_in_to_chat(sqlite3 *db, char *sql, t_datab *datab) {
     mx_strdel(&datab->second_id);
 }
 
-void condition_for_chat(sqlite3 *db, t_datab *datab, char *sql) {
+static void condition_for_chat(sqlite3 *db, t_datab *datab, char *sql) {
     sprintf(sql, "select ID, LOGIN from USERS;");
     mx_table_setting(db, sql, mx_cb_find_user_id, datab);
     if (datab->second_id) {
