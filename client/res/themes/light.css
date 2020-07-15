@@ -49,7 +49,7 @@ list grid grid label {
 #user_name_label {
     color: #085060;
     font-size: 10px;
-    padding-top: px;
+    padding-top: 4px;
 }
 
 list {
@@ -118,6 +118,10 @@ textview text {
     color: #101010;
 }
 
+#list_lines_count label {
+    font-size: 8px;
+}
+
 button {
     border-radius: 0%;
     background-image: linear-gradient(#1b92d1, #1b92d1);
@@ -139,4 +143,3 @@ button label {
 button:active label {
     color: #1b92d1;
 }
-

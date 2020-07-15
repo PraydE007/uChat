@@ -37,9 +37,26 @@ static void log_add_info(t_sockbd sockbd, json_object *jobj) {
 //    }
 // }
 
+//void *mx_doprocessing (void *data) {
+//    t_sockbd sockbd = *(t_sockbd *)data;
+//    char buffer[43388];
+//    int n = 0;
+//
+//    bzero(buffer, 43388);
+//    n = recv(sockbd.sockfd, buffer, 43388, 0);
+//    mx_printstr("YA ZASHEL\n");
+//    write(1, buffer, 43388);
+//    int potok = open("/Users/ozahirnyi/uchat/test.png", O_RDWR | O_CREAT | O_APPEND, S_IWRITE | S_IREAD);
+//    write(potok, buffer, 43388);
+//    close(potok);
+//    return NULL;
+//}
+
+//static int recv_image(int size, )
+
 void *mx_doprocessing (void *data) {
     t_sockbd sockbd = *(t_sockbd *)data;
-    int n;
+    int n = 0;
     char buffer[MX_MAX_BYTES];
     const char *answer = NULL;
     json_object *jobj = json_object_new_object();
@@ -53,9 +70,9 @@ void *mx_doprocessing (void *data) {
 //    printf("SIZE = %d\n", size);
     //send_mail("ozahirny@gmail.com", "DAROVA EPT\n");
     while (true) {
-        bzero(buffer,MX_MAX_BYTES);
+//        bzero(buffer,MX_MAX_BYTES);
         n = recv(sockbd.sockfd, buffer, sizeof(buffer), 0);
-        printf("GET %s\n\n", buffer);
+//        printf("GET %s\n\n", buffer);
 
         //printf("%s\n", buffer);
         j_socket = json_object_new_int(sockbd.sockfd);
@@ -79,15 +96,15 @@ void *mx_doprocessing (void *data) {
         //////// Затычка для отправления картинок
         if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Picture")) { //
             mx_printstr("YA ZASHEL\n");
-            char *bunfer = (char *)mx_js_to_str(jobj, "Data");
             int size = mx_atoi(mx_js_to_str(jobj, "Size"));
-            int potok = open("/Users/ozahirnyi/uchat/test.png", O_RDWR | O_CREAT | O_APPEND, S_IWRITE | S_IREAD);
-            write(potok, bunfer, (unsigned long)size);
-            close(potok);
-            // sockbd.login = mx_js_to_str(jobj, "Login"); //
-            // login = mx_strdup(sockbd.login); //
-            printf("%s\n", bunfer);
             printf("SIZE = %d\n", size);
+            char *bunfer = mx_strnew(size);
+//            recv(sockbd.sockfd, bunfer, size, 0);
+            int potok = open("/Users/ozahirnyi/uchat/test.png", O_RDWR | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+            read(sockbd.sockfd, bunfer, size);
+            write(potok, bunfer, size);
+//            while (recv(sockbd.sockfd, bunfer, size, MSG_WAITALL))
+            close(potok);
             continue;
         } //
 
@@ -138,7 +155,7 @@ void *mx_doprocessing (void *data) {
 
         // if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), MX_LOG_MES))
         //     n = send(sockbd.sockfd, MX_LOG_MES, mx_strlen(MX_LOG_MES),  0);
-        // /*else*/ if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), MX_REG_MES))
+        // else if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), MX_REG_MES))
         //     n = send(sockbd.sockfd, MX_REG_MES, mx_strlen(MX_REG_MES),  0);
         // else if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), MX_CONT_MES))
         //     n = send(sockbd.sockfd, MX_CONT_MES, mx_strlen(MX_CONT_MES),  0);

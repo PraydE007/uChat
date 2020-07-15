@@ -1,5 +1,5 @@
 #include "client.h"
-
+/*
 static void write_file(int socket, char *path, int size) {
     char *image = mx_strnew(size);
     int bytes = 0;
@@ -17,13 +17,13 @@ static void write_file(int socket, char *path, int size) {
 //    printf("TEST = %s\n", test);
     printf("open file- %d, size §- %d\n", fd_open, buf_size);
     memset(image, 0, 1024);
-    while ( buf_size > 0) {
-//        size = read(fd_open, image, bytes);
+    while (buf_size > 0) {
+        size = read(fd_open, image, bytes);
 
         json_object *jobj = json_object_new_object();
         json_object *j_type = json_object_new_string("Picture");
 //        json_object *j_pic = json_object_new_string_len(image, bytes);
-        json_object *j_pic = json_object_new_string_len("s", 1);
+        json_object *j_pic = json_object_new_string_len(image, 1024);
         json_object *j_size = json_object_new_string(mx_itoa(bytes));
         json_object_object_add(jobj, "Type", j_type);
         json_object_object_add(jobj, "Data", j_pic);
@@ -45,28 +45,40 @@ static void write_file(int socket, char *path, int size) {
     }
     printf("now here\n");
     close(fd_open);
+}*/
+static void write_file(int sockfd, char *file, int size) {
+    char image[size];
+    int status = 0;
+    int fd_open = open(file, O_RDONLY);
+
+    status = read(fd_open, image, size);
+    printf("SIZE = %d\n", size);
+    json_object *jobj = json_object_new_object();
+    json_object *j_type = json_object_new_string("Picture");
+    json_object *j_size = json_object_new_string(mx_itoa(size));
+    json_object_object_add(jobj, "Type", j_type);
+    json_object_object_add(jobj, "Size", j_size);
+    char *result = (char *)json_object_to_json_string(jobj);
+
+//    printf("ReSULT = %s\n", result);
+    send(sockfd, result, strlen(result), 0);
+    printf("OTPRAVIL\n");
+    send(sockfd, image, size, 0);
+    close(fd_open);
 }
+
 
 //static void write_file(int sockfd, char *file, int size) {
 //    char *image = mx_strnew(size);
 //    int status = 0;
 //    int fd_open = open(file, O_RDONLY);
 //
-//    status = read(fd_open, image, size);
 //    printf("SIZE = %d\n", size);
-//    json_object *jobj = json_object_new_object();
-//    json_object *j_type = json_object_new_string("Picture");
-//    json_object *j_pic = json_object_new_string_len(image, size);
-//    json_object *j_size = json_object_new_string(mx_itoa(size));
-//    json_object_object_add(jobj, "Type", j_type);
-//    json_object_object_add(jobj, "Data", j_pic);
-//    json_object_object_add(jobj, "Size", j_size);
-//    char *result = (char *)json_object_to_json_string(jobj);
-//
-//    printf("ReSULT = %s\n", result);
-//    send(sockfd, result, strlen(result), 0);
+//    status = read(fd_open, image, size);
+//    write(1, image, 43388);
+//    send(sockfd, image, size, 0);
 //}
-//
+
 void mx_send_image(const char *file, int sockfd) {
     struct stat lt;
     int file_size = 0;

@@ -1,5 +1,5 @@
 #include "dbase.h"
-
+// CHECK IF WE NEED THIS FUNCTION
 static int cb_chat_id_checking(void *datab, int argc, char **argv,
                                                             char **azColName) {
     (void)argc;

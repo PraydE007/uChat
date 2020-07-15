@@ -37,6 +37,8 @@ json_object *mx_dbase_handler(json_object *jobj, sqlite3 *db) {
         j_result = mx_if_get_chat_profile(jobj, db, datab);
     else if (!mx_strcmp("Get_profile", mx_js_to_str(jobj, "Type")))
         j_result = mx_if_get_profile(jobj, db, datab);
+        else if (!mx_strcmp("Get_contact_profile", mx_js_to_str(jobj, "Type")))
+        j_result = mx_if_get_contact_profile(jobj, db, datab);
     else if (!mx_strcmp("Change_chat", mx_js_to_str(jobj, "Type")))
         j_result = mx_if_change_chat(jobj, db, datab);
     else if (!mx_strcmp("Change_profile", mx_js_to_str(jobj, "Type")))
@@ -53,12 +55,8 @@ json_object *mx_dbase_handler(json_object *jobj, sqlite3 *db) {
         j_result = mx_if_delete_contact_from_chat(jobj, db, datab);
     else if (!mx_strcmp("Chat", mx_js_to_str(jobj, "Type")))
         j_result = mx_if_chat(jobj, db, datab);
-    else if (!mx_strcmp("Send_message", mx_js_to_str(jobj, "Type"))) {
-        // json_object *j_test_Chat_name = json_object_new_string("Chisto potrindetb");
-        // json_object_object_add(jobj,"Chat_name", j_test_Chat_name);
-        // printf("BUFFER: %s\n", json_object_get_string(jobj));
+    else if (!mx_strcmp("Send_message", mx_js_to_str(jobj, "Type")))
         j_result = mx_if_send_message(jobj, db, datab);
-    }
     else
         mx_add_str_to_js(j_result, "Answer", MX_CHEAT_MESSAGE);
     mx_dealloc_datab(&datab);
