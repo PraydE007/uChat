@@ -97,8 +97,19 @@ static void init_chat(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->i_b_u_profile = mx_get_widget(builder, "image.button.usr.profile");
     (*gui)->b_r_chat = mx_get_widget(builder, "button.remove.chat");
     (*gui)->i_b_r_chat = mx_get_widget(builder, "image.button.remove.chat");
+    (*gui)->b_edit = mx_get_widget(builder, "button.edit");
+    (*gui)->i_b_edit = mx_get_widget(builder, "image.button.edit");
 
     gtk_label_set_text(GTK_LABEL((*gui)->l_one), get_unicode(0x1F150)); // TRYING UNICODE
+}
+
+static void init_edit(GtkBuilder **builder, t_s_glade **gui) {
+    (*builder) = gtk_builder_new_from_file(MX_WINDOW_EDIT);
+    (*gui)->w_edit = mx_get_widget(builder, "window.edit");
+    (*gui)->l_l_count = mx_get_widget(builder, "list.lines.count");
+    (*gui)->tv_editor = mx_get_widget(builder, "tv.editor");
+    (*gui)->b_e_apply = mx_get_widget(builder, "button.apply");
+    (*gui)->i_b_e_apply = mx_get_widget(builder, "image.button.apply");
 }
 
 static void init_profile(GtkBuilder **builder, t_s_glade **gui) {
@@ -155,6 +166,8 @@ static void init_images(t_s_glade **gui) {
     mx_rep_img((*gui)->i_b_u_file, MX_BUTTON_FILE, 25, 25);
     mx_rep_img((*gui)->i_b_u_profile, MX_BUTTON_PROFILE, 25, 25);
     mx_rep_img((*gui)->i_b_r_chat, MX_BUTTON_BAN, 25, 25);
+    mx_rep_img((*gui)->i_b_edit, MX_BUTTON_EDIT, 25, 25);
+    mx_rep_img((*gui)->i_b_e_apply, MX_BUTTON_APPLY, 25, 25);
 }
 
 static void connect_signals(t_s_glade *gui) {
@@ -175,6 +188,8 @@ static void connect_signals(t_s_glade *gui) {
                     G_CALLBACK(mx_anti_resize), gui);
     g_signal_connect(gui->w_group, "window-state-event",
                     G_CALLBACK(mx_anti_resize), gui);
+    g_signal_connect(gui->w_edit, "window-state-event",
+                    G_CALLBACK(mx_anti_resize), gui);
 
     // Uchat Quit Signals
     g_signal_connect(gui->w_signin, "destroy",
@@ -186,6 +201,8 @@ static void connect_signals(t_s_glade *gui) {
     g_signal_connect(gui->w_profile, "destroy",
                     G_CALLBACK(exit), (void *)0);
     g_signal_connect(gui->w_group, "destroy",
+                    G_CALLBACK(exit), (void *)0);
+    g_signal_connect(gui->w_edit, "destroy",
                     G_CALLBACK(exit), (void *)0);
 
     // Login Window Signals
@@ -231,6 +248,8 @@ static void connect_signals(t_s_glade *gui) {
                     G_CALLBACK(mx_delete_contact), gui);
     g_signal_connect(gui->b_u_profile, "clicked",
                     G_CALLBACK(mx_view_profile), gui);
+    g_signal_connect(gui->b_edit, "clicked",
+                    G_CALLBACK(mx_open_editor), gui);
 
     // Group Window Signals
     g_signal_connect(gui->b_g_close, "clicked",
@@ -241,9 +260,14 @@ static void connect_signals(t_s_glade *gui) {
                     G_CALLBACK(mx_apply_group), gui);
     g_signal_connect(gui->b_b_user, "clicked",
                     G_CALLBACK(mx_delete_user_from_chat), gui);
+
     // Emoji window
     g_signal_connect(gui->b_e_close, "clicked",
-                    G_CALLBACK(mx_add_user_to_group), gui->w_emoji);
+                    G_CALLBACK(mx_close_window), gui->w_emoji);
+
+    // Editor window
+    g_signal_connect(gui->b_e_apply, "clicked",
+                    G_CALLBACK(mx_editor_apply), gui);
 
     // Profile Window Signals
     g_signal_connect(gui->b_p_close, "clicked",
@@ -293,6 +317,7 @@ t_s_glade *mx_init_auth_screen(int socket) {
     init_login(&builder, &gui);
     init_signup(&builder, &gui);
     init_chat(&builder, &gui);
+    init_edit(&builder, &gui);
     init_profile(&builder, &gui);
     init_group(&builder, &gui);
     init_images(&gui);

@@ -10,7 +10,6 @@ box text colour             bt               #ffffff
 
 */
 
-
 window {
     background-image: linear-gradient(to bottom right, #211927, #131313);
 }
@@ -40,9 +39,16 @@ list grid grid {
     border-radius: 15px;
 }
 
+list grid grid label {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
 #user_name_label {
     color: #4e4e4e;
-    font-size: 75%;
+    font-size: 10px;
     padding-top: 4px;
 }
 
@@ -52,10 +58,6 @@ list {
 
 list label {
     color: #ffffff;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 12px;
-    padding-bottom: 10px;
 }
 
 list image {
@@ -115,6 +117,10 @@ textview.view {
 textview text {
     background-color: #3e3e3e;
     color: #ffffff;
+}
+
+#list_lines_count label {
+    font-size: 8px;
 }
 
 button {

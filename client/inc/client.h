@@ -23,6 +23,8 @@
 #define MX_BUTTON_GROUP "client/res/icons/group.png"
 #define MX_BUTTON_RESET "client/res/icons/reset.png"
 #define MX_BUTTON_FILE "client/res/icons/file.png"
+#define MX_BUTTON_EDIT "client/res/icons/edit.png"
+#define MX_BUTTON_APPLY "client/res/icons/mark.png"
 
 #define MX_WINDOW_WARNING "client/res/icons/warning.png"
 #define MX_WINDOW_LOGIN "client/res/forms/window.login.glade"
@@ -30,6 +32,7 @@
 #define MX_WINDOW_CHAT "client/res/forms/window.chat.glade"
 #define MX_WINDOW_PROFILE "client/res/forms/window.profile.glade"
 #define MX_WINDOW_GROUP "client/res/forms/window.group.glade"
+#define MX_WINDOW_EDIT "client/res/forms/window.edit.glade"
 
 #define MX_DEF_THEME "client/res/themes/light.css"
 #define MX_DARK_THEME "client/res/themes/dark.css"
@@ -103,6 +106,16 @@ typedef struct s_s_glade {
     GtkWidget *b_r_chat;
     GtkWidget *i_b_r_chat;
     GtkWidget *s_filter;
+    GtkWidget *b_edit;
+    GtkWidget *i_b_edit;
+
+    // Edit window
+    gint tag;
+    GtkWidget *w_edit;
+    GtkWidget *l_l_count;
+    GtkWidget *tv_editor;
+    GtkWidget *b_e_apply;
+    GtkWidget *i_b_e_apply;
 
     // Emoji window
     GtkWidget *w_emoji;
@@ -201,6 +214,7 @@ void mx_p_own(GtkWidget *lst, const char *msg, const char *name);
 void mx_p_owned(GtkWidget *lst, const char *msg, const char *name);
 void mx_clear_container(GtkWidget *con);
 char *mx_open_file_chooser(GtkWindow *parent);
+gint mx_editor_update_lst(gpointer data);
 
 // GUI SIGNALS
 void mx_send_image(const char *file, int sockfd);
@@ -231,6 +245,8 @@ void mx_delete_user_from_chat(GtkButton *btn, gpointer data);
 void mx_view_profile(GtkButton *btn, gpointer data);
 //infinity_recive_from_server
 void *mx_client_recv(void *data);
+void mx_open_editor(GtkButton *button, gpointer data);
+void mx_editor_apply(GtkButton *button, gpointer data);
 
 //successes
 gboolean mx_error_create_chat(void *data);

@@ -45,6 +45,7 @@
                     <property name="shadow_type">none</property>
                     <child>
                       <object class="GtkListBox" id="list.lines.count">
+                        <property name="name">list_lines_count</property>
                         <property name="width_request">40</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>

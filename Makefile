@@ -96,6 +96,9 @@ CL_SRC		=	main.c \
 				mx_error_create_chat.c \
 				mx_error_find_user.c \
 				mx_success_public_message.c \
+				mx_open_editor.c \
+				mx_editor_apply.c \
+				mx_editor_update_lst.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \
