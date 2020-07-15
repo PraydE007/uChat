@@ -1,6 +1,6 @@
 #include "dbase.h"
 
-static void condition_or_chat_delete(sqlite3 *db, t_datab *datab, char *sql) {
+static void condition_for_chat_delete(sqlite3 *db, t_datab *datab, char *sql) {
     if (mx_is_admin(db, datab, sql)) {
         mx_chat_deleting(db, datab, sql);
     }
@@ -21,7 +21,7 @@ json_object *mx_if_delete_chat(json_object *jobj, sqlite3 *db, t_datab *datab) {
         sprintf(sql, "select ID from CHATS where CHAT_NAME = '%s';",
                 datab->chat_name_db);
         mx_table_setting(db, sql, mx_cb_find_chat_id, datab);
-        condition_or_chat_delete(db, datab, sql);
+        condition_for_chat_delete(db, datab, sql);
         mx_js_chts_conts(datab->j_result, db, datab, sql);
     }
     else
