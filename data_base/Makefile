@@ -38,6 +38,7 @@ FILES = mx_add_arr_to_js.c \
 		mx_if_delete_contact.c \
 		mx_if_delete_contact_from_chat.c \
 		mx_if_get_chat_profile.c \
+		mx_if_get_contact_profile.c \
 		mx_if_get_profile.c \
 		mx_if_logging.c \
 		mx_if_private_chat.c \
