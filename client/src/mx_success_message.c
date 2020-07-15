@@ -31,7 +31,7 @@ gboolean mx_success_message(void *data) {
         }
     }
     if (gui->send_to) {
-        mx_p_owned(gui->l_messages, message);
+        mx_p_owned(gui->l_messages, message, sender);
     }
         // if(mx_strcmp(gui->send_to, ""))
     return 0;

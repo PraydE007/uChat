@@ -15,7 +15,7 @@ gboolean mx_success_public_message(void *data) {
 
     if (gui->send_to) {
         if(!mx_strcmp(gui->send_to, group))
-            mx_p_owned(gui->l_messages, message);
+            mx_p_owned(gui->l_messages, message, "Хто сендер !?!? 8==o:");
     }
     return 0;
 }

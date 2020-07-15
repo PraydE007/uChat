@@ -197,8 +197,8 @@ void mx_push_chat(GtkWidget *lst, const char *user_name);
 void mx_find_user(GtkButton *button, gpointer data);
 void mx_rep_img(GtkWidget *image, const char *filename, int w, int h);
 void mx_show_dialog(GtkWidget *parent, char *message);
-void mx_p_own(GtkWidget *lst, const char *msg);
-void mx_p_owned(GtkWidget *lst, const char *msg);
+void mx_p_own(GtkWidget *lst, const char *msg, const char *name);
+void mx_p_owned(GtkWidget *lst, const char *msg, const char *name);
 void mx_clear_container(GtkWidget *con);
 char *mx_open_file_chooser(GtkWindow *parent);
 

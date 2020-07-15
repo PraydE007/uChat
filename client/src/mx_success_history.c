@@ -19,10 +19,10 @@ gboolean mx_success_history(void *data) {
             get_message = json_to_str(arr_idx, "Message");
         if (!get_message) {
             get_message = json_to_str(arr_idx, "Own_message");
-            mx_p_own(gui->l_messages, get_message);
+            mx_p_own(gui->l_messages, get_message, "Хто овнер блеать?");
         }
         else {
-            mx_p_owned(gui->l_messages, get_message);
+            mx_p_owned(gui->l_messages, get_message, "Хто овнер блеать?");
         }
     }
     return 0;
