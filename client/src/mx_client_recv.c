@@ -8,6 +8,8 @@ void *mx_client_recv(void *data) {
     while (true) {
         bzero(gui->buffer, MX_MAX_BYTES);
         n = recv(gui->sockfd, gui->buffer, MX_MAX_BYTES, 0);
+        if (n <= 0)
+            continue;
         jobj = json_tokener_parse(gui->buffer);
         gui->recv_data = strdup(gui->buffer);
         printf("RECV DATA: %s\n", gui->recv_data);
