@@ -136,6 +136,7 @@ static void init_group(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->b_b_user = mx_get_widget(builder, "button.ban.user");
     (*gui)->i_b_user = mx_get_widget(builder, "image.button.ban.user");
     (*gui)->b_g_apply = mx_get_widget(builder, "button.apply");
+    (*gui)->l_g_group = mx_get_widget(builder, "list.group.users");
 }
 
 static void init_images(t_s_glade **gui) {

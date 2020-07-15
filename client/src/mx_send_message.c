@@ -20,6 +20,7 @@ void mx_send_message(GtkButton *button, gpointer data) {
 
     (void)button;
     if (gui->send_to && mx_strcmp(gui->send_to, "")) {
+        message = mx_cat_message(message);
         json_object *jobj = json_object_new_object();
         json_object *j_type = json_object_new_string("Send_message");
         json_object *j_login = json_object_new_string(login);

@@ -141,6 +141,7 @@ typedef struct s_s_glade {
     GtkWidget *b_b_user;
     GtkWidget *i_b_user;
     GtkWidget *b_g_apply;
+    GtkWidget *l_g_group;
 
     //key
     char *key;
@@ -184,6 +185,9 @@ int mx_check_mail(const char *mail, int i);
 // HASH
 char *mx_hash_to_string(unsigned char *hash);
 char *mx_hash(char *pass);
+
+//cat_message
+char *mx_cat_message(char *message);
 
 // GUI
 void mx_interface(int *argc, char ***argv, int socket);
@@ -247,6 +251,7 @@ gboolean mx_success_history(void *data);
 gboolean mx_success_invited(void *data);
 gboolean mx_success_update_contacts(void *data);
 gboolean mx_success_public_message(void *data);
+gboolean mx_success_members_list(void *data);
 
 //If_login_render
 gboolean mx_render_contacts(t_s_glade *gui);
