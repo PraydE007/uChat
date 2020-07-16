@@ -1,5 +1,4 @@
 #include "client.h"
-
 static const char *json_to_str(json_object *jobj, char *key) {
     const char *value = NULL;
 
@@ -21,19 +20,18 @@ static void fill_profile(t_s_glade *gui) {
 
 static void change_window(t_s_glade *gui) {
     gtk_window_get_position(mx_gw(gui->w_chat), &(gui->w_x), &(gui->w_y));
-    gtk_widget_hide(gui->w_chat);
+    gtk_editable_set_editable (GTK_EDITABLE(gui->e_p_login), FALSE);
+    gtk_editable_set_editable (GTK_EDITABLE(gui->e_p_email), FALSE);
+    gtk_editable_set_editable (GTK_EDITABLE(gui->e_p_number), FALSE);
     gtk_widget_show_all(gui->w_profile);
+    gtk_widget_hide(gui->w_chat);
+    gtk_widget_hide(gui->b_password);
+    gtk_widget_hide(gui->b_p_apply);
     gtk_window_move(mx_gw(gui->w_profile), gui->w_x, gui->w_y + 22);
+
 }
-
-gboolean mx_success_profile(void *data) {
+gboolean mx_success_profile_info(void *data) {
     t_s_glade *gui = (t_s_glade *)data;
-    // json_object *jobj = json_tokener_parse(gui->recv_data);
-
-    // const char *login = json_to_str(jobj, "Login");
-    // const char *email = json_to_str(jobj, "Email");
-    // const char *mobile = json_to_str(jobj, "Mobile");
-
     fill_profile(gui);
     change_window(gui);
     return 0;

@@ -282,7 +282,7 @@ gboolean mx_success_invited(void *data);
 gboolean mx_success_update_contacts(void *data);
 gboolean mx_success_public_message(void *data);
 gboolean mx_success_members_list(void *data);
-
+gboolean mx_success_profile_info(void *data);
 //If_login_render
 gboolean mx_render_contacts(t_s_glade *gui);
 gboolean mx_render_chats(t_s_glade *gui);
