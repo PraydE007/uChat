@@ -101,6 +101,7 @@ CL_SRC		=	main.c \
 				mx_editor_update_lst.c \
 				mx_success_members_list.c \
 				mx_cat_message.c \
+				mx_init_filter.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \

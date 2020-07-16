@@ -17,7 +17,7 @@ void mx_send_message(GtkButton *button, gpointer data) {
     char *send_data = NULL;
     char *login = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_l_login));
     char *message = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_message));
-
+    message = mx_init_filter(message);
     (void)button;
     if (gui->send_to && mx_strcmp(gui->send_to, "")) {
         message = mx_cat_message(message);

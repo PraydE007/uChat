@@ -189,6 +189,19 @@ typedef struct s_change_prof {
     char *key;
 }   t_change_prof;
 
+typedef struct s_verbs {
+    char *bad_verbs;
+    char *bad_words;
+    char *good_verbs;
+    char *good_words;
+}   t_verbs;
+
+typedef struct s_splited_verbs {
+    char **bad_verbs;
+    char **bad_words;
+    char **good_verbs;
+    char **good_words;
+}   t_splitetd_verbs;
 // VALIDATION
 int mx_check_number(const char *number, int j);
 int mx_check_pass(const char *pass, int j);
@@ -247,6 +260,7 @@ void mx_delete_contact(GtkButton *btn, gpointer data);
 void mx_apply_group(GtkButton *btn, gpointer data);
 void mx_delete_user_from_chat(GtkButton *btn, gpointer data);
 void mx_view_profile(GtkButton *btn, gpointer data);
+char *mx_init_filter(char *message);
 //infinity_recive_from_server
 void *mx_client_recv(void *data);
 void mx_open_editor(GtkButton *button, gpointer data);
