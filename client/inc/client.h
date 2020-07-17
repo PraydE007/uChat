@@ -87,8 +87,8 @@ typedef struct s_s_glade {
     GtkWidget *i_b_logout;
     GtkWidget *b_c_settings;
     GtkWidget *i_b_settings;
-    GtkWidget *b_emoji;
-    GtkWidget *i_b_emoji;
+    // GtkWidget *b_emoji;
+    // GtkWidget *i_b_emoji;
     GtkWidget *e_message;
     GtkWidget *e_find;
     GtkWidget *b_find;
@@ -131,6 +131,8 @@ typedef struct s_s_glade {
     GtkWidget *b_password;
     GtkWidget *b_p_apply;
     GtkWidget *b_p_close;
+    GtkWidget *b_p_f_image;
+    GtkWidget *i_p_f_image;
 
     // Password window
     GtkWidget *w_password;
@@ -141,14 +143,14 @@ typedef struct s_s_glade {
     // Group window
     GtkWidget *w_group;
     GtkWidget *i_group;
-    GtkWidget *e_image;
+    // GtkWidget *e_image;
     GtkWidget *e_group_name;
     GtkWidget *e_g_nickname;
     GtkWidget *b_g_close;
     GtkWidget *b_f_image;
     GtkWidget *i_f_image;
-    GtkWidget *b_i_reset;
-    GtkWidget *i_i_reset;
+    // GtkWidget *b_i_reset;
+    // GtkWidget *i_i_reset;
     GtkWidget *b_f_user;
     GtkWidget *i_b_f_user;
     GtkWidget *b_b_user;
