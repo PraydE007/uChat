@@ -171,6 +171,8 @@ typedef struct s_s_glade {
     char **chats;
     int if_contact;
     pthread_mutex_t mutex;
+    char *file_path;
+
 }              t_s_glade;
 
 // BUFFERS_PROFILE_STRUCTS_FOR_AUDITOR
