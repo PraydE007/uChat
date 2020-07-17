@@ -260,6 +260,7 @@ void mx_apply_group(GtkButton *btn, gpointer data);
 void mx_delete_user_from_chat(GtkButton *btn, gpointer data);
 void mx_view_profile(GtkButton *btn, gpointer data);
 char *mx_init_filter(char *message);
+void mx_set_group_img(GtkButton *button, gpointer data);
 //infinity_recive_from_server
 void *mx_client_recv(void *data);
 void mx_open_editor(GtkButton *button, gpointer data);

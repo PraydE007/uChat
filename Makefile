@@ -105,6 +105,7 @@ CL_SRC		=	main.c \
 				mx_success_profile_info.c \
 				mx_logout.c \
 				mx_reconecting.c \
+				mx_set_group_img.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \
