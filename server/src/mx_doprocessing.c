@@ -69,6 +69,7 @@ void *mx_doprocessing (void *data) {
     // login = mx_strdup(sockbd.login); //
 //    printf("SIZE = %d\n", size);
     //send_mail("ozahirny@gmail.com", "DAROVA EPT\n");
+    printf("SOCKET SERVER = %d\n", sockbd.sockfd);
     while (true) {
 //        bzero(buffer,MX_MAX_BYTES);
         n = recv(sockbd.sockfd, buffer, sizeof(buffer), 0);
@@ -103,7 +104,6 @@ void *mx_doprocessing (void *data) {
             int potok = open("server/test.png", O_RDWR | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
             read(sockbd.sockfd, bunfer, size);
             write(potok, bunfer, size);
-//            while (recv(sockbd.sockfd, bunfer, size, MSG_WAITALL))
             close(potok);
             continue;
         } //
