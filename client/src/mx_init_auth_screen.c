@@ -285,6 +285,8 @@ static void connect_signals(t_s_glade *gui) {
                      G_CALLBACK(mx_change_pass), gui);
     g_signal_connect(gui->b_logout, "clicked",
                      G_CALLBACK(mx_logout), gui);
+    g_signal_connect(gui->b_f_image, "clicked",
+                     G_CALLBACK(mx_set_group_img), gui);
 }
 static bool read_mode(void) {
     int file = open("settings.json", O_RDONLY);

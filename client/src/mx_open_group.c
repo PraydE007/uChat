@@ -8,6 +8,7 @@ void mx_open_group(GtkButton *btn, gpointer data) {
     const char *send_data = NULL;
     char *login = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_l_login));
     (void)btn;
+    if(gui->send_to) {
         if (mx_strcmp(group_name, "")) {
             json_object *jobj = json_object_new_object();
             json_object *j_type = json_object_new_string("Create_chat");
@@ -42,6 +43,7 @@ void mx_open_group(GtkButton *btn, gpointer data) {
             gtk_window_move(mx_gw(gui->w_group), gui->w_x, gui->w_y + 22);
             gtk_entry_set_text(GTK_ENTRY(gui->e_group_name), gui->send_to);
         }
+    }
         // else {
 
     // }

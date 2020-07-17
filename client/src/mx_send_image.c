@@ -74,6 +74,7 @@ static void write_file(int sockfd, char *file, int size, t_s_glade *gui) {
     char *file_name = get_file_name(file);
     char *result = NULL;
     char *login = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_l_login));
+
     printf("NAME : %s\n", file_name);
     status = read(fd_open, image, size);
     printf("SIZE = %d\n", size);
