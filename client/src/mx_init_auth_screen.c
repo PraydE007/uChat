@@ -72,7 +72,7 @@ static void init_chat(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->i_b_send = mx_get_widget(builder, "image.button.send");
     (*gui)->b_profile = mx_get_widget(builder, "button.profile");
     (*gui)->i_b_profile = mx_get_widget(builder, "image.button.profile");
-    (*gui)->b_logout = mx_get_widget(builder, "button.profile");
+    (*gui)->b_logout = mx_get_widget(builder, "button.logout");
     (*gui)->i_b_logout = mx_get_widget(builder, "image.button.logout");
     (*gui)->b_c_settings = mx_get_widget(builder, "button.settings");
     (*gui)->i_b_settings = mx_get_widget(builder, "image.button.settings");
@@ -283,10 +283,9 @@ static void connect_signals(t_s_glade *gui) {
                     G_CALLBACK(mx_close_window), gui->w_password);
     g_signal_connect(gui->b_pp_apply, "clicked",
                      G_CALLBACK(mx_change_pass), gui);
-
-
+    g_signal_connect(gui->b_logout, "clicked",
+                     G_CALLBACK(mx_logout), gui);
 }
-
 static bool read_mode(void) {
     int file = open("settings.json", O_RDONLY);
     char *json = mx_strnew(1024);

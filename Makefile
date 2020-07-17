@@ -103,6 +103,8 @@ CL_SRC		=	main.c \
 				mx_cat_message.c \
 				mx_init_filter.c \
 				mx_success_profile_info.c \
+				mx_logout.c \
+				mx_reconecting.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \

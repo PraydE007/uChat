@@ -24,7 +24,7 @@ gboolean mx_success_history(void *data) {
             mx_p_own(gui->l_messages, get_message, get_owner);
         }
         else
-            mx_p_owned(gui->l_messages, get_message, "Хто овнер блеать?");
+            mx_p_owned(gui->l_messages, get_message, gui->send_to);
     }
     return 0;
 }

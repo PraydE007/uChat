@@ -1,7 +1,8 @@
 #include "client.h"
 
 int main(int argc, char **argv) {
-    int sockfd, portno;
+    int sockfd;
+    int portno;
     struct sockaddr_in serv_addr;
     struct hostent *server;
     int rc = 0;
@@ -35,7 +36,6 @@ int main(int argc, char **argv) {
     }
     /////////// Затычка для картинок
 //    mx_send_image("/Users/ozahirnyi/uchat/meme_avatar.png", sockfd);
-
     mx_interface(&argc, &argv, sockfd);
 
 // while(true) {

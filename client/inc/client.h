@@ -171,7 +171,6 @@ typedef struct s_s_glade {
     char **chats;
     int if_contact;
     pthread_mutex_t mutex;
-
 }              t_s_glade;
 
 // BUFFERS_PROFILE_STRUCTS_FOR_AUDITOR
@@ -234,7 +233,7 @@ char *mx_open_file_chooser(GtkWindow *parent);
 gint mx_editor_update_lst(gpointer data);
 
 // GUI SIGNALS
-void mx_send_image(const char *file, int sockfd);
+void mx_send_image(const char *file, int sockfd, t_s_glade *gui);
 void mx_open_window(GtkButton *button, gpointer data);
 void mx_close_window(GtkButton *button, gpointer data);
 void mx_light_theme(GtkButton *b, gpointer data);
@@ -265,7 +264,7 @@ char *mx_init_filter(char *message);
 void *mx_client_recv(void *data);
 void mx_open_editor(GtkButton *button, gpointer data);
 void mx_editor_apply(GtkButton *button, gpointer data);
-
+void mx_logout(GtkButton *button, gpointer data);
 //successes
 gboolean mx_error_create_chat(void *data);
 gboolean mx_error_find_user(void *data);
@@ -283,6 +282,7 @@ gboolean mx_success_update_contacts(void *data);
 gboolean mx_success_public_message(void *data);
 gboolean mx_success_members_list(void *data);
 gboolean mx_success_profile_info(void *data);
+gboolean mx_reconecting(void *data);
 //If_login_render
 gboolean mx_render_contacts(t_s_glade *gui);
 gboolean mx_render_chats(t_s_glade *gui);

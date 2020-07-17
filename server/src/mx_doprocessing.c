@@ -94,13 +94,13 @@ void *mx_doprocessing (void *data) {
             continue;
         } //
         //////// Затычка для отправления картинок
-        if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Picture")) { //
+        if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "File")) { //
             mx_printstr("YA ZASHEL\n");
             int size = mx_atoi(mx_js_to_str(jobj, "Size"));
             printf("SIZE = %d\n", size);
             char *bunfer = mx_strnew(size);
 //            recv(sockbd.sockfd, bunfer, size, 0);
-            int potok = open("/Users/ozahirnyi/uchat/test.png", O_RDWR | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+            int potok = open("server/test.png", O_RDWR | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
             read(sockbd.sockfd, bunfer, size);
             write(potok, bunfer, size);
 //            while (recv(sockbd.sockfd, bunfer, size, MSG_WAITALL))
