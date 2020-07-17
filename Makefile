@@ -96,8 +96,20 @@ CL_SRC		=	main.c \
 				mx_error_create_chat.c \
 				mx_error_find_user.c \
 				mx_success_public_message.c \
+				mx_open_editor.c \
+				mx_editor_apply.c \
+				mx_editor_update_lst.c \
 				mx_success_members_list.c \
 				mx_cat_message.c \
+				mx_init_filter.c \
+				mx_success_profile_info.c \
+				mx_logout.c \
+				mx_reconecting.c \
+				mx_set_group_img.c \
+				mx_p_owned_img.c \
+				mx_p_own_img.c \
+				mx_rep_img_auto.c \
+				mx_set_profile_img.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \

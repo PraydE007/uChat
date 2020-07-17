@@ -32,5 +32,6 @@ gboolean mx_success_update_contacts(void *data) {
             count++;
         }
     }
+    mx_clear_container(gui->l_messages);
     return 0;
 }

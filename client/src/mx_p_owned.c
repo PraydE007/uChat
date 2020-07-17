@@ -11,6 +11,8 @@ void mx_p_owned(GtkWidget *lst, const char *msg, const char *name) {
     gtk_label_set_selectable(GTK_LABEL(text1), TRUE);
     gtk_widget_set_name(lol, "user_name_label");
     gtk_widget_set_halign(lol, GTK_ALIGN_START);
+    gtk_widget_set_valign(lol, GTK_ALIGN_START);
+    gtk_widget_set_halign(text1, GTK_ALIGN_START);
     gtk_widget_set_hexpand(align, TRUE);
     // GRID INSIDE GRID (BOX)
     gtk_grid_insert_row(GTK_GRID(grid_box), 0);

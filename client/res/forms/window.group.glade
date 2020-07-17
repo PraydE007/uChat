@@ -56,7 +56,7 @@
             <property name="y">175</property>
           </packing>
         </child>
-        <child>
+        <!-- <child>
           <object class="GtkEntry" id="entry.image">
             <property name="width_request">220</property>
             <property name="height_request">50</property>
@@ -69,7 +69,7 @@
             <property name="x">402</property>
             <property name="y">410</property>
           </packing>
-        </child>
+        </child> -->
         <child>
           <object class="GtkEntry" id="entry.group.name">
             <property name="width_request">320</property>
@@ -128,7 +128,7 @@
         </child>
         <child>
           <object class="GtkButton" id="button.find.image">
-            <property name="width_request">50</property>
+            <property name="width_request">320</property>
             <property name="height_request">50</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -142,11 +142,11 @@
             </child>
           </object>
           <packing>
-            <property name="x">622</property>
+            <property name="x">352</property>
             <property name="y">410</property>
           </packing>
         </child>
-        <child>
+        <!-- <child>
           <object class="GtkButton" id="button.image.reset">
             <property name="width_request">50</property>
             <property name="height_request">50</property>
@@ -165,7 +165,7 @@
             <property name="x">352</property>
             <property name="y">410</property>
           </packing>
-        </child>
+        </child> -->
         <child>
           <object class="GtkButton" id="button.find.user">
             <property name="width_request">50</property>

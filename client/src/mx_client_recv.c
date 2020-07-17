@@ -9,8 +9,11 @@ void *mx_client_recv(void *data) {
     while (true) {
         bzero(gui->buffer, MX_MAX_BYTES);
         n = recv(gui->sockfd, gui->buffer, MX_MAX_BYTES, 0);
-        if (n <= 0)
-            continue;
+        if (n <= 0) {
+            gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_reconecting, gui, 0);
+            sleep(3);
+            exit(0);
+        }
         jobj = json_tokener_parse(gui->buffer);
         gui->recv_data = strdup(gui->buffer);
         printf("RECV DATA: %s\n", gui->recv_data);
@@ -64,6 +67,8 @@ void *mx_client_recv(void *data) {
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_members_list, gui, 0);
         if (!mx_strcmp(answer, "The contact was deleted from the chat!"))
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_members_list, gui, 0);
+        if (!mx_strcmp(answer, "Contact profile info!"))
+            gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_profile_info, gui, 0);
     }
     return NULL;
 }
