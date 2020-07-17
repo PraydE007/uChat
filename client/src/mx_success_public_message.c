@@ -12,10 +12,11 @@ gboolean mx_success_public_message(void *data) {
     json_object *jobj = json_tokener_parse(gui->recv_data);
     const char *message = json_to_str(jobj, "Message");
     const char *group = json_to_str(jobj, "Chat_name");
+    const char *sender = json_to_str(jobj, "Sender");
 
     if (gui->send_to) {
         if(!mx_strcmp(gui->send_to, group))
-            mx_p_owned(gui->l_messages, message, "");
+            mx_p_owned(gui->l_messages, message, sender);
     }
     return 0;
 }

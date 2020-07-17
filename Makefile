@@ -109,6 +109,7 @@ CL_SRC		=	main.c \
 				mx_p_owned_img.c \
 				mx_p_own_img.c \
 				mx_rep_img_auto.c \
+				mx_set_profile_img.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \
