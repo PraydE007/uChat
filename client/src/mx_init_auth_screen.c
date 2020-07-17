@@ -128,6 +128,8 @@ static void init_profile(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->e_p_newpass2 = mx_get_widget(builder, "entry.newpass2");
     (*gui)->b_pp_apply = mx_get_widget(builder, "button.password.apply");
     (*gui)->b_pp_close = mx_get_widget(builder, "button.password.close");
+    (*gui)->b_p_f_image = mx_get_widget(builder, "button.find.image");
+    (*gui)->i_p_f_image = mx_get_widget(builder, "image.button.find.image");
 }
 
 static void init_group(GtkBuilder **builder, t_s_glade **gui) {
@@ -161,6 +163,7 @@ static void init_images(t_s_glade **gui) {
     mx_rep_img((*gui)->i_b_send, MX_BUTTON_SEND, 25, 25);
     mx_rep_img((*gui)->i_group, MX_G_A_MIS, 225, 225);
     mx_rep_img((*gui)->i_f_image, MX_BUTTON_FIND, 25, 25);
+    mx_rep_img((*gui)->i_p_f_image, MX_BUTTON_FIND, 25, 25);
     // mx_rep_img((*gui)->i_i_reset, MX_BUTTON_RESET, 25, 25);
     mx_rep_img((*gui)->i_b_f_user, MX_BUTTON_FIND, 25, 25);
     mx_rep_img((*gui)->i_b_user, MX_BUTTON_BAN, 25, 25);
