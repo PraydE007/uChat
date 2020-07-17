@@ -350,7 +350,7 @@
                         <property name="top_attach">0</property>
                       </packing>
                     </child>
-                    <child>
+                    <!-- <child>
                       <object class="GtkButton" id="button.emoji">
                         <property name="width_request">50</property>
                         <property name="height_request">50</property>
@@ -369,7 +369,7 @@
                         <property name="left_attach">1</property>
                         <property name="top_attach">0</property>
                       </packing>
-                    </child>
+                    </child> -->
                     <child>
                       <object class="GtkButton" id="button.upload.file">
                         <property name="name">btn-profil</property>
