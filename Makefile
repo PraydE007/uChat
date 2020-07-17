@@ -106,6 +106,9 @@ CL_SRC		=	main.c \
 				mx_logout.c \
 				mx_reconecting.c \
 				mx_set_group_img.c \
+				mx_p_owned_img.c \
+				mx_p_own_img.c \
+				mx_rep_img_auto.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \

@@ -46,6 +46,13 @@ list grid grid label {
     padding-bottom: 10px;
 }
 
+list grid grid image {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
 #user_name_label {
     color: #085060;
     font-size: 10px;

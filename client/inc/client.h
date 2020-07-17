@@ -235,6 +235,9 @@ void mx_p_owned(GtkWidget *lst, const char *msg, const char *name);
 void mx_clear_container(GtkWidget *con);
 char *mx_open_file_chooser(GtkWindow *parent);
 gint mx_editor_update_lst(gpointer data);
+void mx_p_own_img(GtkWidget *lst, const char *filename, const char *name);
+void mx_p_owned_img(GtkWidget *lst, const char *filename, const char *name);
+void mx_rep_img_auto(GtkWidget *image, const char *filename, int w, int h);
 
 // GUI SIGNALS
 void mx_send_image(const char *file, int sockfd, t_s_glade *gui);
