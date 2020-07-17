@@ -47,7 +47,7 @@ static void write_file(int socket, char *path, int size) {
     close(fd_open);
 }*/
 static void write_file(int sockfd, char *file, int size) {
-    char image[size];
+    char *image = mx_strnew(size);
     int status = 0;
     int fd_open = open(file, O_RDONLY);
 
@@ -61,9 +61,11 @@ static void write_file(int sockfd, char *file, int size) {
     char *result = (char *)json_object_to_json_string(jobj);
 
 //    printf("ReSULT = %s\n", result);
-    send(sockfd, result, strlen(result), 0);
-    printf("OTPRAVIL\n");
-    send(sockfd, image, size, 0);
+//    while (status != mx_strlen(result))
+    write(sockfd, result, 4096);
+    printf("OTPRAVIL | Status = %d | STRLEN = %d\n", status, mx_strlen(result));
+//    if (status == size)
+    write(sockfd, image, size);
     close(fd_open);
 }
 
