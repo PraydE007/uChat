@@ -10,8 +10,12 @@ static int cb_massege_history(void *datab, int argc, char **argv,
         char *login = mx_find_user_login(new_datab->db, argv[0]);
 
         mx_add_str_to_js(j_message, "Login", login);
-        if (!mx_strcmp(new_datab->id, argv[0]))
+        if (!mx_strcmp(new_datab->id, argv[0]) && !mx_strcmp("true", argv[2]))
+            mx_add_str_to_js(j_message, "Own_file", argv[1]);
+        else if (!mx_strcmp(new_datab->id, argv[0]))
             mx_add_str_to_js(j_message, "Own_message", argv[1]);
+        else if (!mx_strcmp("true", argv[2]))
+            mx_add_str_to_js(j_message, "File", argv[1]);
         else
             mx_add_str_to_js(j_message, "Message", argv[1]);
         mx_add_arr_to_js(new_datab->j_result, j_message);
@@ -36,8 +40,8 @@ static void if_active(json_object *jobj, json_object *j_answer, sqlite3 *db,
     sprintf(sql, "select ID from CHATS where CHAT_NAME = '%s';",
             datab->chat_name);
     mx_table_setting(db, sql, mx_cb_find_chat_id, datab);
-    sprintf(sql, "select SENDER_id, MESSAGE_text from MESSAGES where " \
-            "CHAT_id = '%s' order by ID limit 15;", datab->chat_id);
+    sprintf(sql, "select SENDER_id, MESSAGE_text, IS_file from MESSAGES where" \
+            " CHAT_id = '%s' order by ID limit 15;", datab->chat_id);
     mx_table_setting(db, sql, cb_massege_history, datab);
     json_object_object_add(j_answer, "Array", (datab)->j_result);
     mx_strdel(&datab->chat_name);

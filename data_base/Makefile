@@ -22,6 +22,7 @@ FILES = mx_add_arr_to_js.c \
 		mx_data_base_creation.c \
 		mx_dbase_handler.c \
 		mx_dealloc_datab.c \
+		mx_cb_file_sending.c \
 		mx_find_chat_contact_list.c \
 		mx_find_chat_name.c \
 		mx_find_user_login.c \

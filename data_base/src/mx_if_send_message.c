@@ -17,12 +17,27 @@ static void insert_message(json_object *jobj, json_object *receive_message,
                                                 sqlite3 *db, t_datab *datab) {
     char sql[4096];
 
+    if (datab->logtrigger == 1) {
+        if (!mx_strcmp("File", mx_js_to_str(jobj, "Type")))
+            mx_add_str_to_js(receive_message, "Answer", "Receive_file");
+        else
+            mx_add_str_to_js(receive_message, "Answer", "Receive_message");
+    }
+    else {
+        if (!mx_strcmp("File", mx_js_to_str(jobj, "Type")))
+            mx_add_str_to_js(receive_message, "Answer", "Public_receive_file");
+        else
+            mx_add_str_to_js(receive_message, "Answer", "Public_receive_message");
+        mx_add_str_to_js(receive_message, "Chat_name", datab->chat_name);
+    }
+    mx_add_str_to_js(receive_message, "Sender", (char *)datab->login_db);
     if (!mx_strcmp("File", mx_js_to_str(jobj, "Type"))) {
-        datab->fsize_db = mx_js_to_str(jobj, "File_size");
+        datab->fsize_db = mx_js_to_str(jobj, "Size");
         sprintf(sql, "insert into MESSAGES (SENDER_id, CHAT_id, MESSAGE_text," \
-                " IS_file, FILE_size) values('%s', '%s', '%s', true', '%s')",
+                " IS_file, FILE_size) values('%s', '%s', '%s', 'true', '%s')",
                 datab->id, datab->chat_id, datab->message_db, datab->fsize_db);
         mx_add_str_to_js(receive_message, "File_message", (char *)datab->message_db);
+        mx_add_str_to_js(receive_message, "File_size", (char *)datab->fsize_db);
     }
     else {
 printf ("datab->chat_id: %s\n", datab->chat_id);
@@ -32,13 +47,6 @@ printf ("datab->chat_id: %s\n", datab->chat_id);
         mx_add_str_to_js(receive_message, "Message", (char *)datab->message_db);
     }
     mx_table_creation(db, sql, mx_callback);
-    if (datab->logtrigger == 1)
-        mx_add_str_to_js(receive_message, "Answer", "Receive_message");
-    else {
-        mx_add_str_to_js(receive_message, "Answer", "Public_receive_message");
-        mx_add_str_to_js(receive_message, "Chat_name", datab->chat_name);
-    }
-    mx_add_str_to_js(receive_message, "Sender", (char *)datab->login_db);
     datab->logtrigger = 0;
 }
 
@@ -69,6 +77,8 @@ printf ("datab->chat_id1: %s\n", datab->chat_id);
     sprintf(sql, "select USER_id from USERS_CHATS where CHAT_id = '%s' " \
             "and USER_id != '%s';", datab->chat_id, datab->id);
     mx_table_setting(db, sql, mx_cb_find_user_ids_for_chat, datab->j_result);
+    if (!mx_strcmp("File", mx_js_to_str(jobj, "Type")))
+        datab->fpath_db = mx_strjoin("server/tmp/", datab->message_db);
     datab->message_db = json_object_get_string(receive_message);
 printf("datab->message_db: %s\n", datab->message_db); //
     lenth = json_object_array_length(datab->j_result);
@@ -76,6 +86,9 @@ printf("datab->message_db: %s\n", datab->message_db); //
         datab->id_db = mx_js_arr_to_str(datab->j_result, i);
         sprintf(sql, "select SOCKET from ACTIVITY where USER_id = '%s';",
                                                                 datab->id_db);
+        // if (!mx_strcmp("File", mx_js_to_str(jobj, "Type")))
+        //     mx_table_setting(db, sql, mx_cb_file_sending, datab);
+        // else
         mx_table_setting(db, sql, mx_cb_message_sending, datab);
     }
 }
