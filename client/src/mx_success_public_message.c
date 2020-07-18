@@ -17,6 +17,7 @@ gboolean mx_success_public_message(void *data) {
     if (gui->send_to) {
         if(!mx_strcmp(gui->send_to, group))
             mx_p_owned(gui->l_messages, message, sender);
+            g_timeout_add(10, scroll, gui);
     }
     return 0;
 }
