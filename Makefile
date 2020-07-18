@@ -113,6 +113,7 @@ CL_SRC		=	main.c \
 				mx_error_add_contact.c \
 				mx_success_delete_chat.c \
 				mx_error_delete_user.c \
+				mx_success_delete_member.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \
