@@ -11,22 +11,22 @@ static t_change_prof change_prof_buf(t_s_glade *gui) {
     t_change_prof change_prof;
     change_prof.login = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_l_login));
     change_prof.email = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_p_email));
-    change_prof.mobile = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_p_number));
-    change_prof.new_login = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_p_login));
+    change_prof.mobile =
+        (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_p_number));
+    change_prof.new_login =
+        (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_p_login));
     change_prof.key= strdup(gui->key);
     return change_prof;
 }
 
-static char *create_send_prof(t_change_prof change_prof) {
-    char *res = NULL;
-
-    json_object *jobj = json_object_new_object();
-    json_object *j_type = json_object_new_string("Change_profile");
+static void init_json_pass(json_object *jobj, json_object *j_type,
+                            t_change_prof change_prof) {
     json_object *j_login = json_object_new_string(change_prof.login);
     json_object *j_email = json_object_new_string(change_prof.email);
     json_object *j_number = json_object_new_string(change_prof.mobile);
     json_object *j_new_login;
     json_object *j_key = json_object_new_string(change_prof.key);
+
     if (!mx_strcmp(change_prof.login, change_prof.new_login))
         j_new_login = json_object_new_string("");
     else
@@ -37,6 +37,14 @@ static char *create_send_prof(t_change_prof change_prof) {
     json_object_object_add(jobj,"Mobile", j_number);
     json_object_object_add(jobj,"New_login", j_new_login);
     json_object_object_add(jobj,"Security_key", j_key);
+}
+
+static char *create_send_prof(t_change_prof change_prof) {
+    char *res = NULL;
+    json_object *jobj = json_object_new_object();
+    json_object *j_type = json_object_new_string("Change_profile");
+
+    init_json_pass(jobj, j_type, change_prof);
     res = (char *)json_object_to_json_string(jobj);
     return res;
 }
@@ -46,6 +54,7 @@ void mx_change_profile(GtkButton *button, gpointer data) {
     t_s_glade *gui = (t_s_glade *)data;
     t_change_prof change_prof = change_prof_buf(gui);
     int n = 0;
+
     if (mx_strcmp("", change_prof.login)
         && mx_strcmp("", change_prof.email)
         && mx_strcmp("", change_prof.mobile)) {

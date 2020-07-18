@@ -27,6 +27,7 @@ typedef struct s_datab {
     const char *password_db;
     const char *security_db;
     const char *message_db;
+    const char *fsize_db;
     struct sqlite3 *db;
     struct json_object *j_result;
 }               t_datab;

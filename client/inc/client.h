@@ -205,6 +205,39 @@ typedef struct s_splited_verbs {
     char **good_verbs;
     char **good_words;
 }   t_splitetd_verbs;
+
+typedef struct s_buf_add_user_to_group {
+    char *send_data;
+    const char *user_name;
+    char *login;
+}   t_buf_add_user_to_group;
+
+typedef struct s_buf_apply_group {
+    const char *send_data;
+    const char *new_name;
+    const char *login;
+}   t_buf_apply_group;
+
+typedef struct s_buf_change_pass {
+    char *login;
+    char *passwd;
+    const char *old_pass;
+    const char *pass0;
+    const char *pass1;
+    char *send_data;
+}   t_buf_change_pass;
+
+typedef struct s_buf_find_user {
+    const gchar *name;
+    const char *login;
+    char *send_data;
+}   t_buf_find_user;
+
+typedef struct s_buf_open_chat {
+    const char *send_data;
+    const char *login;
+}   t_buf_open_chat;
+
 // VALIDATION
 int mx_check_number(const char *number, int j);
 int mx_check_pass(const char *pass, int j);

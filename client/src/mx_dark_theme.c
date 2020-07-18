@@ -3,7 +3,7 @@
 static void rewrite(struct json_object *obj) {
     int file = open("settings.json", O_RDWR | O_TRUNC);
     const char *json = json_object_to_json_string_ext(obj,
-                                                      JSON_C_TO_STRING_PRETTY);
+        JSON_C_TO_STRING_PRETTY);
 
     write(file, json, mx_strlen(json));
     close(file);
