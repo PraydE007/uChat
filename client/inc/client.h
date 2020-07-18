@@ -279,6 +279,7 @@ gboolean mx_error_create_chat(void *data);
 gboolean mx_error_find_user(void *data);
 gboolean mx_error_logging(void *data);
 gboolean mx_error_add_user(void *data);
+gboolean mx_error_delete_user(void *data);
 //successes
 gboolean mx_success_logging(void *data);
 gboolean mx_success_registr(void *data);

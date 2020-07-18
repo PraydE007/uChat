@@ -71,10 +71,10 @@ void *mx_client_recv(void *data) {
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_profile_info, gui, 0);
         if (!mx_strcmp(answer, "You have already this contact in the list!"))
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_error_add_user, gui, 0);
-        if (strstr(answer, "The admin has deleted the chat"))
+        if (!mx_strcmp(answer, "The admin has deleted the chat!"))
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_delete_chat, gui, 0);
+        if (!mx_strcmp(answer, "You can not delete users from this chat!"))
+            gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_error_delete_user, gui, 0);
     }
-
-
     return NULL;
 }
