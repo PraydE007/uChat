@@ -278,6 +278,7 @@ void mx_logout(GtkButton *button, gpointer data);
 gboolean mx_error_create_chat(void *data);
 gboolean mx_error_find_user(void *data);
 gboolean mx_error_logging(void *data);
+gboolean mx_error_add_user(void *data);
 gboolean mx_success_logging(void *data);
 gboolean mx_success_registr(void *data);
 gboolean mx_success_profile(void *data);
@@ -291,6 +292,7 @@ gboolean mx_success_update_contacts(void *data);
 gboolean mx_success_public_message(void *data);
 gboolean mx_success_members_list(void *data);
 gboolean mx_success_profile_info(void *data);
+gboolean mx_success_delete_chat(void *data);
 gboolean mx_reconecting(void *data);
 //If_login_render
 gboolean mx_render_contacts(t_s_glade *gui);

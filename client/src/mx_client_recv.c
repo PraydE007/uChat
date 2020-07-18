@@ -11,7 +11,7 @@ void *mx_client_recv(void *data) {
         n = recv(gui->sockfd, gui->buffer, MX_MAX_BYTES, 0);
         if (n <= 0) {
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_reconecting, gui, 0);
-            sleep(3);
+            sleep(5);
             exit(0);
         }
         jobj = json_tokener_parse(gui->buffer);
@@ -69,6 +69,10 @@ void *mx_client_recv(void *data) {
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_members_list, gui, 0);
         if (!mx_strcmp(answer, "Contact profile info!"))
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_profile_info, gui, 0);
+        if (!mx_strcmp(answer, "You have already this contact in the list!"))
+            gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_error_add_user, gui, 0);
+        if (strstr(answer, "The admin has deleted the chat"))
+            gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_delete_chat, gui, 0);
     }
     return NULL;
 }
