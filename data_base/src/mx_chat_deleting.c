@@ -37,16 +37,16 @@ static void js_chts_conts(json_object *j_result, sqlite3 *db, t_datab *datab,
 
 static void notification_sending(sqlite3 *db, t_datab *datab, char *sql) {
     json_object *receive_message = NULL;
-    // datab->j_result = json_object_new_array();
     int lenth = 0;
 
     lenth = json_object_array_length(datab->j_result);
     for (int i = 0; i < lenth; i++) {
         receive_message = json_object_new_object();
         datab->id_db = mx_js_arr_to_str(datab->j_result, i);
-        sprintf(sql, "The admin has deleted the chat (%s)!",
-                datab->chat_name_db);
-        mx_add_str_to_js(receive_message, "Answer", sql);
+        mx_add_str_to_js(receive_message, "Answer", "The admin has deleted " \
+                    "the chat!");
+        mx_add_str_to_js(receive_message, "Chat_name",
+                                                (char *)datab->chat_name_db);
         js_chts_conts(receive_message, db, datab, sql);
         datab->message_db = json_object_get_string(receive_message);
 printf("datab->message_db: %s\n", datab->message_db);//
@@ -62,7 +62,7 @@ void mx_chat_deleting(sqlite3 *db, t_datab *datab, char *sql) {
 
     sprintf(sql, "select USER_id from USERS_CHATS where CHAT_id = '%s' " \
             "and USER_id != '%s';", datab->chat_id, datab->id);
-    mx_table_setting(db, sql, mx_cb_find_user_id_for_chat, datab->j_result);
+    mx_table_setting(db, sql, mx_cb_find_user_ids_for_chat, datab->j_result);
     sprintf(sql, "delete from CHATS where ID = %s;", datab->chat_id);
     mx_table_creation(db, sql, mx_callback);
     // sprintf(sql, "delete from USERS_CHATS where CHAT_id = %s;",
@@ -71,7 +71,10 @@ void mx_chat_deleting(sqlite3 *db, t_datab *datab, char *sql) {
     notification_sending(db, datab, sql);
     json_object_put(datab->j_result);
     datab->j_result = json_object_new_object();
-    sprintf(sql, "The admin has deleted the chat (%s)!",
-            datab->chat_name_db);
-    mx_add_str_to_js(datab->j_result, "Answer", sql);
+    // sprintf(sql, "The admin has deleted the chat (%s)!",
+    //         datab->chat_name_db);
+    mx_add_str_to_js(datab->j_result, "Answer", "The admin has deleted " \
+                    "the chat!");
+    mx_add_str_to_js(datab->j_result, "Chat_name",
+                                                (char *)datab->chat_name_db);
 }

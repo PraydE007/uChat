@@ -218,6 +218,26 @@ char *mx_hash(char *pass);
 //cat_message
 char *mx_cat_message(char *message);
 
+// GUI INIT
+void mx_init_login(GtkBuilder **builder, t_s_glade **gui);
+void mx_init_signup(GtkBuilder **builder, t_s_glade **gui);
+void mx_init_chat(GtkBuilder **builder, t_s_glade **gui);
+void mx_init_edit(GtkBuilder **builder, t_s_glade **gui);
+void mx_init_profile(GtkBuilder **builder, t_s_glade **gui);
+void mx_init_group(GtkBuilder **builder, t_s_glade **gui);
+void mx_init_images(t_s_glade **gui);
+void mx_init_signal_1(t_s_glade *gui);
+void mx_init_signal_2(t_s_glade *gui);
+void mx_init_signal_3(t_s_glade *gui);
+void mx_init_signal_4(t_s_glade *gui);
+void mx_init_signal_5(t_s_glade *gui);
+void mx_init_signal_6(t_s_glade *gui);
+void mx_init_signal_7(t_s_glade *gui);
+void mx_init_signal_8(t_s_glade *gui);
+void mx_init_signal_9(t_s_glade *gui);
+void mx_init_signal_10(t_s_glade *gui);
+void mx_init_signal_11(t_s_glade *gui);
+
 // GUI
 void mx_interface(int *argc, char ***argv, int socket);
 t_s_glade *mx_init_auth_screen(int socket);
@@ -274,10 +294,13 @@ void *mx_client_recv(void *data);
 void mx_open_editor(GtkButton *button, gpointer data);
 void mx_editor_apply(GtkButton *button, gpointer data);
 void mx_logout(GtkButton *button, gpointer data);
-//successes
+//errors
 gboolean mx_error_create_chat(void *data);
 gboolean mx_error_find_user(void *data);
 gboolean mx_error_logging(void *data);
+gboolean mx_error_add_user(void *data);
+gboolean mx_error_delete_user(void *data);
+//successes
 gboolean mx_success_logging(void *data);
 gboolean mx_success_registr(void *data);
 gboolean mx_success_profile(void *data);
@@ -291,9 +314,10 @@ gboolean mx_success_update_contacts(void *data);
 gboolean mx_success_public_message(void *data);
 gboolean mx_success_members_list(void *data);
 gboolean mx_success_profile_info(void *data);
+gboolean mx_success_delete_chat(void *data);
+gboolean mx_success_delete_member(void *data);
 gboolean mx_reconecting(void *data);
 //If_login_render
 gboolean mx_render_contacts(t_s_glade *gui);
 gboolean mx_render_chats(t_s_glade *gui);
-
 #endif

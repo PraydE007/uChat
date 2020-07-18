@@ -51,7 +51,7 @@ static int cb_find_contact_id_in_chat(void *datab, int argc, char **argv,
 //         t_datab *new_datab = (t_datab *)datab;
 //         int n;
 //         json_object *receive_notification = json_object_new_object();
-//         mx_add_str_to_js(receive_notification, "Answer", "You were added to the chat");
+//         mx_add_str_to_js(receive_notification, "Answer", "You were added to the chat!");
 //         mx_add_str_to_js(receive_notification, "Chat_name",
 //                                                 (char *)new_datab->chat_name_db);
 //         mx_add_str_to_js(receive_notification, "Inviter",
@@ -70,6 +70,7 @@ static void insert_contact_in_to_chat(sqlite3 *db, char *sql, t_datab *datab) {
     mx_table_creation(db, sql, mx_callback);
     mx_add_str_to_js(datab->j_result, "Answer", MX_CONT_ADD_CHAT);
     mx_find_chat_contact_list(db, datab, sql);
+    datab->message_db = "You were added to the chat!";
     sprintf(sql, "select SOCKET from ACTIVITY where USER_id = '%s';",
                                                             datab->second_id);
     mx_table_setting(db, sql, mx_cb_chat_notification, datab);

@@ -25,7 +25,7 @@ FILES = mx_add_arr_to_js.c \
 		mx_find_chat_contact_list.c \
 		mx_find_chat_name.c \
 		mx_find_user_login.c \
-		mx_cb_find_user_id_for_chat.c \
+		mx_cb_find_user_ids_for_chat.c \
 		mx_if_add_user_to_chat.c \
 		mx_if_chage_chat.c \
 		mx_if_change_passwd.c \

@@ -110,11 +110,34 @@ CL_SRC		=	main.c \
 				mx_p_own_img.c \
 				mx_rep_img_auto.c \
 				mx_set_profile_img.c \
+				mx_error_add_contact.c \
+				mx_success_delete_chat.c \
+				mx_error_delete_user.c \
+				mx_success_delete_member.c \
+				mx_init_login.c \
+				mx_init_signup.c \
+				mx_init_chat.c \
+				mx_init_edit.c \
+				mx_init_profile.c \
+				mx_init_group.c \
+				mx_init_images.c \
+				mx_init_signal_1.c \
+				mx_init_signal_2.c \
+				mx_init_signal_3.c \
+				mx_init_signal_4.c \
+				mx_init_signal_5.c \
+				mx_init_signal_6.c \
+				mx_init_signal_7.c \
+				mx_init_signal_8.c \
+				mx_init_signal_9.c \
+				mx_init_signal_10.c \
+				mx_init_signal_11.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \
 				mx_demonize.c \
 				mx_create_log.c \
+				mx_send_image.c \
 
 
 CL_SRCS	=	$(addprefix $(CL_SRCD)/, $(CL_SRC))
@@ -149,7 +172,7 @@ $(CL_OBJD):
 install_server: $(LMXA) $(DB_MXA) $(SV_NAME)
 
 $(SV_NAME): $(SV_OBJS)
-	@clang $(CFLG) $(SV_OBJS) -L$(LMXD) -fsanitize=address -L/usr/local/opt/openssl/lib/ -lssl -lcrypto -lmx -o $@ libjson-c.a $(DB_MXA) -lsqlite3
+	@clang $(CFLG) $(SV_OBJS) -L$(LMXD) -L/usr/local/opt/openssl/lib/ -lssl -lcrypto -lmx -o $@ libjson-c.a $(DB_MXA) -lsqlite3
 	@printf "\r\33[2K$@ \033[32;1mcreated\033[0m\n"
 
 $(SV_OBJD)/%.o: $(SV_SRCD)/%.c $(SV_INCS)

@@ -69,7 +69,10 @@ void *mx_doprocessing (void *data) {
     // login = mx_strdup(sockbd.login); //
 //    printf("SIZE = %d\n", size);
     //send_mail("ozahirny@gmail.com", "DAROVA EPT\n");
+    printf("SOCKET SERVER = %d\n", sockbd.sockfd);
     while (true) {
+        // mx_send_image("server/meme_avatar.png", sockbd.sockfd);
+        // exit(0);
 //        bzero(buffer,MX_MAX_BYTES);
         n = recv(sockbd.sockfd, buffer, sizeof(buffer), 0);
 //        printf("GET %s\n\n", buffer);
@@ -97,17 +100,17 @@ void *mx_doprocessing (void *data) {
         if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "File")) { //
             mx_printstr("YA ZASHEL\n");
             int size = mx_atoi(mx_js_to_str(jobj, "Size"));
+            const char *name_file = mx_js_to_str(jobj, "Message");
+            char *recv_name = mx_strjoin("server/", name_file);
             printf("SIZE = %d\n", size);
             char *bunfer = mx_strnew(size);
 //            recv(sockbd.sockfd, bunfer, size, 0);
-            int potok = open("server/test.png", O_RDWR | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+            int potok = open(recv_name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
             read(sockbd.sockfd, bunfer, size);
             write(potok, bunfer, size);
-//            while (recv(sockbd.sockfd, bunfer, size, MSG_WAITALL))
             close(potok);
             continue;
         } //
-
         // if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Private_chat")) { //
         //     // sockbd.login = mx_js_to_str(jobj, "Login"); //
         //     // login = mx_strdup(sockbd.login); //
