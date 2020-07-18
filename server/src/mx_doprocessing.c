@@ -101,12 +101,12 @@ void *mx_doprocessing (void *data) {
             mx_printstr("YA ZASHEL\n");
             int size = mx_atoi(mx_js_to_str(jobj, "Size"));
             const char *name_file = mx_js_to_str(jobj, "Message");
-            char *recv_name = mx_strjoin("server/", name_file);
+            char *recv_name = mx_strjoin("/Users/Shared/qw/", name_file);
             printf("SIZE = %d\n", size);
             char *bunfer = mx_strnew(size);
 //            recv(sockbd.sockfd, bunfer, size, 0);
             int potok = open(recv_name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-            read(sockbd.sockfd, bunfer, size);
+            recv(sockbd.sockfd, bunfer, size, MSG_WAITALL);
             write(potok, bunfer, size);
             close(potok);
             continue;
