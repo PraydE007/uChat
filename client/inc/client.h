@@ -274,10 +274,12 @@ void *mx_client_recv(void *data);
 void mx_open_editor(GtkButton *button, gpointer data);
 void mx_editor_apply(GtkButton *button, gpointer data);
 void mx_logout(GtkButton *button, gpointer data);
-//successes
+//errors
 gboolean mx_error_create_chat(void *data);
 gboolean mx_error_find_user(void *data);
 gboolean mx_error_logging(void *data);
+gboolean mx_error_add_user(void *data);
+//successes
 gboolean mx_success_logging(void *data);
 gboolean mx_success_registr(void *data);
 gboolean mx_success_profile(void *data);
@@ -295,5 +297,4 @@ gboolean mx_reconecting(void *data);
 //If_login_render
 gboolean mx_render_contacts(t_s_glade *gui);
 gboolean mx_render_chats(t_s_glade *gui);
-
 #endif
