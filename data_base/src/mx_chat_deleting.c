@@ -62,7 +62,7 @@ void mx_chat_deleting(sqlite3 *db, t_datab *datab, char *sql) {
 
     sprintf(sql, "select USER_id from USERS_CHATS where CHAT_id = '%s' " \
             "and USER_id != '%s';", datab->chat_id, datab->id);
-    mx_table_setting(db, sql, mx_cb_find_user_id_for_chat, datab->j_result);
+    mx_table_setting(db, sql, mx_cb_find_user_ids_for_chat, datab->j_result);
     sprintf(sql, "delete from CHATS where ID = %s;", datab->chat_id);
     mx_table_creation(db, sql, mx_callback);
     // sprintf(sql, "delete from USERS_CHATS where CHAT_id = %s;",
