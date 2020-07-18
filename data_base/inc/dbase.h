@@ -3,6 +3,7 @@
 
 #include "../../inc/general.h"
 #include <sqlite3.h>
+#include "../../server/inc/server.h"
 
 typedef struct s_datab {
     int logtrigger;
@@ -27,6 +28,7 @@ typedef struct s_datab {
     const char *password_db;
     const char *security_db;
     const char *message_db;
+    const char *fpath_db;
     const char *fsize_db;
     struct sqlite3 *db;
     struct json_object *j_result;
@@ -45,6 +47,7 @@ const char *mx_js_arr_to_str(json_object *jobj, int index);
 const char *mx_js_to_str(json_object *jobj, char *key);
 int mx_callback(void *datab, int argc, char **argv, char **azColName);
 int mx_cb_chat_notification(void *datab, int argc, char **argv, char **azColName);
+int mx_cb_file_sending(void *datab, int argc, char **argv, char **azColName);
 int mx_cb_find_chat_id(void *datab, int argc, char **argv, char **azColName);
 int mx_cb_find_user_id(void *datab, int argc, char **argv, char **azColName);
 int mx_cb_find_user_ids_for_chat(void *datab, int argc, char **argv, char **azColName);

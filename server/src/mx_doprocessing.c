@@ -101,7 +101,7 @@ void *mx_doprocessing (void *data) {
             mx_printstr("YA ZASHEL\n");
             int size = mx_atoi(mx_js_to_str(jobj, "Size"));
             const char *name_file = mx_js_to_str(jobj, "Message");
-            char *recv_name = mx_strjoin("/Users/Shared/qw/", name_file);
+            char *recv_name = mx_strjoin("server/tmp/", name_file);
             printf("SIZE = %d\n", size);
             char *bunfer = mx_strnew(size);
 //            recv(sockbd.sockfd, bunfer, size, 0);
@@ -109,7 +109,7 @@ void *mx_doprocessing (void *data) {
             recv(sockbd.sockfd, bunfer, size, MSG_WAITALL);
             write(potok, bunfer, size);
             close(potok);
-            continue;
+            // continue;
         } //
         // if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Private_chat")) { //
         //     // sockbd.login = mx_js_to_str(jobj, "Login"); //
