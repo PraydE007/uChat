@@ -1,7 +1,7 @@
 #ifndef GENERAL_H
 #define GENERAL_H
 
-#define MX_MAX_BYTES 8192
+#define MX_MAX_BYTES 16384
 
 #include <stdio.h>
 #include <stdlib.h>
