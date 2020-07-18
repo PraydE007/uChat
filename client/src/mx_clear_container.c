@@ -7,7 +7,6 @@ void mx_clear_container(GtkWidget *con) {
     while (node) {
         // GtkWidget *grid = gtk_bin_get_child(GTK_BIN(node->data));
         // GtkWidget *label = gtk_grid_get_child_at(GTK_GRID(grid), 1, 0);
-
         gtk_widget_destroy(GTK_WIDGET(node->data));
         node = g_list_next(node);
     }

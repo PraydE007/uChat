@@ -2,6 +2,7 @@
 
 static t_verbs init_struct_verbs(){
     t_verbs verbs;
+
     verbs.bad_verbs = mx_file_to_str("client/res/bad_verbs.txt");
     verbs.bad_words = mx_file_to_str("client/res/bad_words.txt");
     verbs.good_verbs = mx_file_to_str("client/res/good_verbs.txt");
@@ -21,13 +22,15 @@ char *mx_init_filter(char *message) {
 
     while(splitetd_verbs.bad_verbs[count]) {
         if(strstr(message, splitetd_verbs.bad_verbs[count]))
-            message = mx_replace_substr(message, splitetd_verbs.bad_verbs[count], splitetd_verbs.good_verbs[count]);
+            message = mx_replace_substr(message,
+                splitetd_verbs.bad_verbs[count], splitetd_verbs.good_verbs[count]);
         count++;
     }
     count = 0;
     while(splitetd_verbs.bad_words[count]) {
         if(strstr(message, splitetd_verbs.bad_words[count]))
-            message = mx_replace_substr(message, splitetd_verbs.bad_words[count], splitetd_verbs.good_words[count]);
+            message = mx_replace_substr(message,
+                splitetd_verbs.bad_words[count], splitetd_verbs.good_words[count]);
         count++;
     }
     return message;
