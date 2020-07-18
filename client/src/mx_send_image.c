@@ -68,13 +68,18 @@ static char *get_file_name(char *file) {
 }
 
 static void write_file(int sockfd, char *file, int size, t_s_glade *gui) {
-    char image[size];
+    mx_printstr(file);
+    mx_printstr("\n");
+    char *image = malloc(sizeof(char) * size);
     int status = 0;
+    mx_printstr("xzcxz\n");
     int fd_open = open(file, O_RDONLY);
+    mx_printstr("PPPPPP\n");
     char *file_name = get_file_name(file);
     char *result = NULL;
     char *login = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_l_login));
 
+    memset(image, '\0', size);
     printf("NAME : %s\n", file_name);
     status = read(fd_open, image, size);
     printf("gui-login = %s\n", (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_l_login)));
@@ -103,6 +108,10 @@ static void write_file(int sockfd, char *file, int size, t_s_glade *gui) {
         printf("OTPRAVIL\n");
         send(sockfd, image, size, 0);
     }
+    free(image);
+    free(file_name);
+    free(result);
+    free(login);
     close(fd_open);
 }
 
