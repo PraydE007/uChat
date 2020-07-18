@@ -11,7 +11,7 @@ void *mx_client_recv(void *data) {
         n = recv(gui->sockfd, gui->buffer, MX_MAX_BYTES, 0);
         if (n <= 0) {
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_reconecting, gui, 0);
-            sleep(3);
+            sleep(5);
             exit(0);
         }
         jobj = json_tokener_parse(gui->buffer);

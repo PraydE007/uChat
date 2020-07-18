@@ -37,7 +37,7 @@ json_object *mx_if_get_contact_profile(json_object *jobj, sqlite3 *db,
 printf("if_get_contact_profile: %s\n", json_object_to_json_string(j_result));//
     mx_strdel(&datab->id);// comment in mx_is_active
     mx_strdel(&datab->second_id);
-    mx_strdel(&datab->email);
-    mx_strdel(&datab->mobile);
+    // mx_strdel(&datab->email); - it can be freed in dealloc
+    // mx_strdel(&datab->mobile);
     return j_result;
 }
