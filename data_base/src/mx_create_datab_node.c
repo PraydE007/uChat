@@ -17,6 +17,7 @@ t_datab *mx_create_datab_node(void) {
         node->password_db = NULL;
         node->security_db = NULL;
         node->message_db = NULL;
+        node->fsize_db = NULL;
         node->db = NULL;
         node->j_result = NULL;
     }

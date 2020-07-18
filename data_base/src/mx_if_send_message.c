@@ -13,13 +13,24 @@
 //     return 0;
 // }
 
-static void insert_message(json_object *receive_message, sqlite3 *db,
-                                                            t_datab *datab) {
+static void insert_message(json_object *jobj, json_object *receive_message,
+                                                sqlite3 *db, t_datab *datab) {
     char sql[4096];
 
-    sprintf(sql, "insert into MESSAGES (SENDER_id, CHAT_id, MESSAGE_text)" \
-            "values('%s', '%s', '%s')", datab->id, datab->chat_id,
-            datab->message_db);
+    if (!mx_strcmp("File", mx_js_to_str(jobj, "Type"))) {
+        datab->fsize_db = mx_js_to_str(jobj, "File_size");
+        sprintf(sql, "insert into MESSAGES (SENDER_id, CHAT_id, MESSAGE_text," \
+                " IS_file, FILE_size) values('%s', '%s', '%s', true', '%s')",
+                datab->id, datab->chat_id, datab->message_db, datab->fsize_db);
+        mx_add_str_to_js(receive_message, "File_message", (char *)datab->message_db);
+    }
+    else {
+printf ("datab->chat_id: %s\n", datab->chat_id);
+        sprintf(sql, "insert into MESSAGES (SENDER_id, CHAT_id, MESSAGE_text, "\
+                "IS_file) values('%s', '%s', '%s', 'false')", datab->id,
+                datab->chat_id, datab->message_db);
+        mx_add_str_to_js(receive_message, "Message", (char *)datab->message_db);
+    }
     mx_table_creation(db, sql, mx_callback);
     if (datab->logtrigger == 1)
         mx_add_str_to_js(receive_message, "Answer", "Receive_message");
@@ -28,7 +39,6 @@ static void insert_message(json_object *receive_message, sqlite3 *db,
         mx_add_str_to_js(receive_message, "Chat_name", datab->chat_name);
     }
     mx_add_str_to_js(receive_message, "Sender", (char *)datab->login_db);
-    mx_add_str_to_js(receive_message, "Message", (char *)datab->message_db);
     datab->logtrigger = 0;
 }
 
@@ -46,14 +56,16 @@ static void insert_message(json_object *receive_message, sqlite3 *db,
 //     return 0;
 // }
 
-static void db_handler_for_message(json_object *receive_message, sqlite3 *db,
-                                                    t_datab *datab, char *sql) {
+static void db_handler_for_message
+(json_object *jobj, json_object *receive_message, sqlite3 *db, t_datab *datab) {
     int lenth = 0;
+    char sql[255];
 
     sprintf(sql, "select ID from CHATS where CHAT_NAME = '%s';",
             datab->chat_name);
     mx_table_setting(db, sql, mx_cb_find_chat_id, datab);
-    insert_message(receive_message, db, datab);
+printf ("datab->chat_id1: %s\n", datab->chat_id);
+    insert_message(jobj, receive_message, db, datab);
     sprintf(sql, "select USER_id from USERS_CHATS where CHAT_id = '%s' " \
             "and USER_id != '%s';", datab->chat_id, datab->id);
     mx_table_setting(db, sql, mx_cb_find_user_ids_for_chat, datab->j_result);
@@ -82,7 +94,7 @@ json_object *mx_if_send_message(json_object *jobj, sqlite3 *db,
 printf("datab->message_db: %s\n", datab->message_db); //
         datab->chat_name = mx_strdup(datab->login_db2);
         mx_find_chat_name(db, datab, sql);
-        db_handler_for_message(receive_message, db, datab, sql);
+        db_handler_for_message(jobj, receive_message, db, datab);
     }
     else
         mx_add_str_to_js(datab->j_result, "Answer", MX_CHEAT_MESSAGE);
