@@ -46,7 +46,7 @@ int mx_callback(void *datab, int argc, char **argv, char **azColName);
 int mx_cb_chat_notification(void *datab, int argc, char **argv, char **azColName);
 int mx_cb_find_chat_id(void *datab, int argc, char **argv, char **azColName);
 int mx_cb_find_user_id(void *datab, int argc, char **argv, char **azColName);
-int mx_cb_find_user_id_for_chat(void *datab, int argc, char **argv, char **azColName);
+int mx_cb_find_user_ids_for_chat(void *datab, int argc, char **argv, char **azColName);
 int mx_cb_message_sending(void *datab, int argc, char **argv, char **azColName);
 int mx_js_to_int(json_object *jobj, char *key);
 json_object *mx_dbase_handler(json_object *jobj, sqlite3 *db);

@@ -56,7 +56,7 @@ static void db_handler_for_message(json_object *receive_message, sqlite3 *db,
     insert_message(receive_message, db, datab);
     sprintf(sql, "select USER_id from USERS_CHATS where CHAT_id = '%s' " \
             "and USER_id != '%s';", datab->chat_id, datab->id);
-    mx_table_setting(db, sql, mx_cb_find_user_id_for_chat, datab->j_result);
+    mx_table_setting(db, sql, mx_cb_find_user_ids_for_chat, datab->j_result);
     datab->message_db = json_object_get_string(receive_message);
 printf("datab->message_db: %s\n", datab->message_db); //
     lenth = json_object_array_length(datab->j_result);

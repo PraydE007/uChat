@@ -12,6 +12,20 @@
 //     mx_add_str_to_js(datab->j_result, "Answer", sql);
 // }
 
+static void delete_contact_rfom_the_chat(sqlite3 *db, char *sql,
+                                                            t_datab *datab) {
+    sprintf(sql, "delete from USERS_CHATS where USER_id = %s " \
+            "and CHAT_id = %s;", datab->second_id, datab->chat_id);
+    mx_table_creation(db, sql, mx_callback);
+    mx_add_str_to_js(datab->j_result, "Answer", MX_DEL_CHAT_MES);
+    mx_find_chat_contact_list(db, datab, sql);
+    datab->message_db = "You were deleted from the chat!";
+    sprintf(sql, "select SOCKET from ACTIVITY where USER_id = '%s';",
+                                                            datab->second_id);
+    mx_table_setting(db, sql, mx_cb_chat_notification, datab);
+    mx_strdel(&datab->second_id);
+}
+
 static void condition_for_admin(json_object *jobj, sqlite3 *db,
                                                     t_datab *datab, char *sql) {
     datab->login_db2 = mx_js_to_str(jobj, "Contact_login");
@@ -24,11 +38,12 @@ static void condition_for_admin(json_object *jobj, sqlite3 *db,
         if(!mx_strcmp(datab->id, datab->second_id))
             mx_chat_deleting(db, datab, sql);
         else {
-            sprintf(sql, "delete from USERS_CHATS where USER_id = %s " \
-                    "and CHAT_id = %s;", datab->second_id, datab->chat_id);
-            mx_table_creation(db, sql, mx_callback);
-            mx_add_str_to_js(datab->j_result, "Answer", MX_DEL_CHAT_MES);
-            mx_find_chat_contact_list(db, datab, sql);
+            delete_contact_rfom_the_chat(db, sql, datab);
+            // sprintf(sql, "delete from USERS_CHATS where USER_id = %s " \
+            //         "and CHAT_id = %s;", datab->second_id, datab->chat_id);
+            // mx_table_creation(db, sql, mx_callback);
+            // mx_add_str_to_js(datab->j_result, "Answer", MX_DEL_CHAT_MES);
+            // mx_find_chat_contact_list(db, datab, sql);
         }
     }
     else
