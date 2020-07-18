@@ -72,8 +72,7 @@ void *mx_client_recv(void *data) {
         if (!mx_strcmp(answer, "You have already this contact in the list!"))
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_error_add_user, gui, 0);
         if (strstr(answer, "The admin has deleted the chat"))
-            gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_d, gui, 0);
-
+            gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_delete_chat, gui, 0);
     }
 
 
