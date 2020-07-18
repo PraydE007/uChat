@@ -5,6 +5,7 @@ void mx_view_profile(GtkButton *btn, gpointer data) {
     char *login = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_l_login));
     const char *send_data = NULL;
 
+    (void)btn;
     if(gui->if_contact == 1) {
         json_object *jobj = json_object_new_object();
         json_object *j_type = json_object_new_string("Get_contact_profile");
@@ -18,8 +19,5 @@ void mx_view_profile(GtkButton *btn, gpointer data) {
         send_data = json_object_to_json_string(jobj);
         printf("SEND_DATA :%s\n", send_data);
         send(gui->sockfd, send_data, strlen(send_data), 0);
-        (void)btn;
     }
-
-    (void)btn;
 }

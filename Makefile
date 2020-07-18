@@ -106,6 +106,9 @@ CL_SRC		=	main.c \
 				mx_logout.c \
 				mx_reconecting.c \
 				mx_set_group_img.c \
+				mx_p_owned_img.c \
+				mx_p_own_img.c \
+				mx_rep_img_auto.c \
 				mx_set_profile_img.c \
 
 SV_SRC		=	main.c \
@@ -130,7 +133,7 @@ install_db:
 install_client: $(LMXA) $(CL_NAME)
 
 $(CL_NAME): $(CL_OBJS)
-	@clang $(CFLG) $(CL_OBJS) $(CL_GTK_FLAGS) -L$(LMXD) -L/usr/local/opt/openssl/lib/ -lssl -lcrypto -lmx -rdynamic -o $@ libjson-c.a
+	@clang $(CFLG) $(CL_OBJS) $(CL_GTK_FLAGS) -L$(LMXD) -fsanitize=address -L/usr/local/opt/openssl/lib/ -lssl -lcrypto -lmx -rdynamic -o $@ libjson-c.a
 	@printf "\r\33[2K$@ \033[32;1mcreated\033[0m\n"
 
 $(CL_OBJD)/%.o: $(CL_SRCD)/%.c $(CL_INCS)

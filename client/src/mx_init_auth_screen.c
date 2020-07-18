@@ -1,35 +1,35 @@
 #include "client.h"
 
-static char *get_unicode(wchar_t c) {
-    // char wc[] = {0, 0, 0, 0, 0};
-    char *wc = (char *)malloc(sizeof(char) * 5);
+// static char *get_unicode(wchar_t c) {
+//     // char wc[] = {0, 0, 0, 0, 0};
+//     char *wc = (char *)malloc(sizeof(char) * 5);
 
-    wc[0] = 0;
-    wc[1] = 0;
-    wc[2] = 0;
-    wc[3] = 0;
-    wc[4] = 0;
+//     wc[0] = 0;
+//     wc[1] = 0;
+//     wc[2] = 0;
+//     wc[3] = 0;
+//     wc[4] = 0;
 
-    if (c < 0x80) {
-        wc[0] = (c >> 0) & 0x7F;
-    }
-    else if (c < 0x800) {
-        wc[0] = ((c >> 6) & 0x1F) | 0xC0;
-        wc[1] = ((c >> 0) & 0x3F) | 0x80;
-    }
-    else if (c < 0x10000) {
-        wc[0] = ((c >> 12) & 0x0F) | 0xE0;
-        wc[1] = ((c >> 6) & 0x3F) | 0x80;
-        wc[2] = ((c >> 0) & 0x3F) | 0x80;
-    }
-    else if (c < 0x110000) {
-        wc[0] = ((c >> 18) & 0x7) | 0xF0;
-        wc[1] = ((c >> 12) & 0x3F) | 0x80;
-        wc[2] = ((c >> 6) & 0x3F) | 0x80;
-        wc[3] = ((c >> 0) & 0x3F) | 0x80;
-    }
-    return wc;
-}
+//     if (c < 0x80) {
+//         wc[0] = (c >> 0) & 0x7F;
+//     }
+//     else if (c < 0x800) {
+//         wc[0] = ((c >> 6) & 0x1F) | 0xC0;
+//         wc[1] = ((c >> 0) & 0x3F) | 0x80;
+//     }
+//     else if (c < 0x10000) {
+//         wc[0] = ((c >> 12) & 0x0F) | 0xE0;
+//         wc[1] = ((c >> 6) & 0x3F) | 0x80;
+//         wc[2] = ((c >> 0) & 0x3F) | 0x80;
+//     }
+//     else if (c < 0x110000) {
+//         wc[0] = ((c >> 18) & 0x7) | 0xF0;
+//         wc[1] = ((c >> 12) & 0x3F) | 0x80;
+//         wc[2] = ((c >> 6) & 0x3F) | 0x80;
+//         wc[3] = ((c >> 0) & 0x3F) | 0x80;
+//     }
+//     return wc;
+// }
 
 static void init_login(GtkBuilder **builder, t_s_glade **gui) {
     (*builder) = gtk_builder_new_from_file(MX_WINDOW_LOGIN);
@@ -100,7 +100,7 @@ static void init_chat(GtkBuilder **builder, t_s_glade **gui) {
     (*gui)->b_edit = mx_get_widget(builder, "button.edit");
     (*gui)->i_b_edit = mx_get_widget(builder, "image.button.edit");
 
-    gtk_label_set_text(GTK_LABEL((*gui)->l_one), get_unicode(0x1F150)); // TRYING UNICODE
+    // gtk_label_set_text(GTK_LABEL((*gui)->l_one), get_unicode(0x1F150)); // TRYING UNICODE
 }
 
 static void init_edit(GtkBuilder **builder, t_s_glade **gui) {
@@ -294,6 +294,7 @@ static void connect_signals(t_s_glade *gui) {
     g_signal_connect(gui->b_f_image, "clicked",
                      G_CALLBACK(mx_set_group_img), gui);
 }
+
 static bool read_mode(void) {
     int file = open("settings.json", O_RDONLY);
     char *json = mx_strnew(1024);
