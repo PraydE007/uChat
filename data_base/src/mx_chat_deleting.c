@@ -43,9 +43,8 @@ static void notification_sending(sqlite3 *db, t_datab *datab, char *sql) {
     for (int i = 0; i < lenth; i++) {
         receive_message = json_object_new_object();
         datab->id_db = mx_js_arr_to_str(datab->j_result, i);
-        sprintf(sql, "The admin has deleted the chat (%s)!",
-                datab->chat_name_db);
-        mx_add_str_to_js(receive_message, "Answer", sql);
+        mx_add_str_to_js(receive_message, "Answer", "The admin has deleted " \
+                    "the chat!");
         mx_add_str_to_js(receive_message, "Chat_name",
                                                 (char *)datab->chat_name_db);
         js_chts_conts(receive_message, db, datab, sql);
@@ -72,9 +71,10 @@ void mx_chat_deleting(sqlite3 *db, t_datab *datab, char *sql) {
     notification_sending(db, datab, sql);
     json_object_put(datab->j_result);
     datab->j_result = json_object_new_object();
-    sprintf(sql, "The admin has deleted the chat (%s)!",
-            datab->chat_name_db);
-    mx_add_str_to_js(datab->j_result, "Answer", sql);
+    // sprintf(sql, "The admin has deleted the chat (%s)!",
+    //         datab->chat_name_db);
+    mx_add_str_to_js(datab->j_result, "Answer", "The admin has deleted " \
+                    "the chat!");
     mx_add_str_to_js(datab->j_result, "Chat_name",
                                                 (char *)datab->chat_name_db);
 }
