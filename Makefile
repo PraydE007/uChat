@@ -111,6 +111,7 @@ CL_SRC		=	main.c \
 				mx_rep_img_auto.c \
 				mx_set_profile_img.c \
 				mx_error_add_contact.c \
+				mx_success_delete_chat.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \
