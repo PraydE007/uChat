@@ -106,14 +106,14 @@ void *mx_doprocessing (void *data) {
                 // mkdir("server/tmp", );
                 char *recv_name = mx_strjoin("server/tmp/", name_file);
                 printf("SIZE = %d\n", size);
-                char *bunfer = mx_strnew(size);
+                char *bunfer = (char *)malloc(sizeof(char) * size);
     //            recv(sockbd.sockfd, bunfer, size, 0);
                 int potok = open(recv_name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
                 recv(sockbd.sockfd, bunfer, size, MSG_WAITALL);
                 write(potok, bunfer, size);
                 close(potok);
 // printf("json_object_to_json_string(jobj): %s\n", json_object_to_json_string(jobj));//
-                // continue;
+                continue;
             } //
 
             // if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Private_chat")) { //
@@ -153,7 +153,7 @@ void *mx_doprocessing (void *data) {
             ///////// Конец затычки для профиля
 
             //printf("char *login: %s\n", login); //
-printf("json_object_to_json_string(jobj): %s\n", json_object_to_json_string(jobj));
+// printf("json_object_to_json_string(jobj): %s\n", json_object_to_json_string(jobj));
             j_result = mx_dbase_handler(jobj, sockbd.bd); //
         // }
         // else
@@ -163,6 +163,7 @@ printf("json_object_to_json_string(jobj): %s\n", json_object_to_json_string(jobj
         answer = json_object_to_json_string(j_result); //
 printf("ANSWER(doproc) : %s\n\n", answer);
         n = send(sockbd.sockfd, answer, mx_strlen(answer),  0);
+printf("1\n");
 
         // if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), MX_LOG_MES))
         //     n = send(sockbd.sockfd, MX_LOG_MES, mx_strlen(MX_LOG_MES),  0);
@@ -182,7 +183,7 @@ printf("ANSWER(doproc) : %s\n\n", answer);
         //     n = send(sockbd.sockfd, "Profile info!", mx_strlen("Profile info!"),  0);
         // else if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), "Profile data is changed!"))
         //     n = send(sockbd.sockfd, "Profile data is changed!", mx_strlen("Profile data is changed!"),  0);
-        // json_object_put(j_result);
+        json_object_put(j_result);
         if (n <= 0) {
             mx_user_deactivate(sockbd.bd, sockbd.sockfd);
             break;
