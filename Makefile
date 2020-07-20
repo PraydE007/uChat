@@ -134,6 +134,7 @@ CL_SRC		=	main.c \
 				mx_init_signal_11.c \
 				mx_recieve_image.c \
 				mx_render_img.c \
+				mx_error_add_yourself.c \
 
 SV_SRC		=	main.c \
 				mx_doprocessing.c \

@@ -17,7 +17,6 @@ static char *get_file_name(char *file) {
         }
     }
     return res;
-
 }
 
 static void write_file(int sockfd, char *file, int size, t_s_glade *gui) {
@@ -57,7 +56,7 @@ static void write_file(int sockfd, char *file, int size, t_s_glade *gui) {
         /// ВАЖНО ДЕЛАТЬ ПЕРВЫЙ СЕНД НА ВСЮ ПАМЯТЬ СТЕКА(БУФФЕРА В ДУПРОЦЕССИНГЕ), ЧТО БЫ ПАМЯТЬ НЕ ПЕРЕКРАИВАЛАСЬ
         /// И ФАЙЛЫ ПЕРЕДАВАЛИСЬ ПОЛНОСТЬЮ. НА КЛИНТЕ СОКЕТ = 3 А НА СЕРВЕРЕ СОКЕТ = 6. ТАК И ДОЛЖНО БЫТЬ?
         /// ПИШИТЕ НЕ СТЕСНЯЙТЕСЬ  =*
-        send(sockfd, result, MX_MAX_BYTES, 0);
+        send(sockfd, result, mx_strlen(result), 0);
         printf("OTPRAVIL\n");
         send(sockfd, image, size, 0);
 

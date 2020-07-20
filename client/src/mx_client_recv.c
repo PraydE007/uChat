@@ -84,6 +84,8 @@ void *mx_client_recv(void *data) {
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_error_delete_user, gui, 0);
         if (!mx_strcmp(answer, "You were deleted from the chat!"))
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_delete_member, gui, 0);
+        if (!mx_strcmp(answer, "You can not add yourself into contacts!"))
+            gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_error_add_yourself, gui, 0);
     }
     return NULL;
 }
