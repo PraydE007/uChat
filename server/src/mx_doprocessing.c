@@ -59,10 +59,9 @@ void *mx_doprocessing (void *data) {
     int n = 0;
     char buffer[MX_MAX_BYTES];
     const char *answer = NULL;
-    json_object *jobj = json_object_new_object();
+    json_object *jobj = NULL;
     json_object *j_result = json_object_new_object();
     json_object *j_socket = NULL;
-    char *login = NULL;
 
     // pthread_mutex_lock(&(sockbd.mutex));
     // sockbd.login = mx_js_to_str(jobj, "Login"); //
@@ -86,75 +85,79 @@ void *mx_doprocessing (void *data) {
             mx_user_deactivate(sockbd.bd, sockbd.sockfd);
             break;
         }
-        jobj = json_tokener_parse(buffer);
-        json_object_object_add(jobj,"Socket", j_socket);
-        log_add_info(sockbd, jobj);
-        ///////// Затычка для добавления контактов
-        if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Sending")) { //
-            // sockbd.login = mx_js_to_str(jobj, "Login"); //
-            // login = mx_strdup(sockbd.login); //
-            printf("%s\n", buffer);
-            continue;
-        } //
-        //////// Затычка для отправления картинок
-        if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "File")) { //
-            mx_printstr("YA ZASHEL\n");
-            int size = mx_atoi(mx_js_to_str(jobj, "Size"));
-            const char *name_file = mx_js_to_str(jobj, "Message");
-            // mkdir("server/tmp", );
-            char *recv_name = mx_strjoin("server/tmp/", name_file);
-            printf("SIZE = %d\n", size);
-            char *bunfer = mx_strnew(size);
-//            recv(sockbd.sockfd, bunfer, size, 0);
-            int potok = open(recv_name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-            recv(sockbd.sockfd, bunfer, size, MSG_WAITALL);
-            write(potok, bunfer, size);
-            close(potok);
-            // continue;
-        } //
-        // if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Private_chat")) { //
-        //     // sockbd.login = mx_js_to_str(jobj, "Login"); //
-        //     // login = mx_strdup(sockbd.login); //
-        //     printf("%s\n", buffer);
-        //     continue;
-        // } //
+        // if (mx_is_json(jobj, buffer)) {
+            jobj = json_tokener_parse(buffer);
+            json_object_object_add(jobj,"Socket", j_socket);
+            log_add_info(sockbd, jobj);
+            ///////// Затычка для добавления контактов
+            if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Sending")) { //
+                // sockbd.login = mx_js_to_str(jobj, "Login"); //
+                // login = mx_strdup(sockbd.login); //
+                printf("%s\n", buffer);
+                continue;
+            } //
+            //////// Затычка для отправления картинок
+            if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "File")) { //
+                mx_printstr("YA ZASHEL\n");
+                int size = mx_atoi(mx_js_to_str(jobj, "Size"));
+                const char *name_file = mx_js_to_str(jobj, "Message");
+                // mkdir("server/tmp", );
+                char *recv_name = mx_strjoin("server/tmp/", name_file);
+                printf("SIZE = %d\n", size);
+                char *bunfer = mx_strnew(size);
+    //            recv(sockbd.sockfd, bunfer, size, 0);
+                int potok = open(recv_name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+                recv(sockbd.sockfd, bunfer, size, MSG_WAITALL);
+                write(potok, bunfer, size);
+                close(potok);
+                // continue;
+            } //
+            // if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Private_chat")) { //
+            //     // sockbd.login = mx_js_to_str(jobj, "Login"); //
+            //     // login = mx_strdup(sockbd.login); //
+            //     printf("%s\n", buffer);
+            //     continue;
+            // } //
 
-        if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Public_group")) { //
-            // sockbd.login = mx_js_to_str(jobj, "Login"); //
-            // login = mx_strdup(sockbd.login); //
-            printf("%s\n", buffer);
-            continue;
-        } //
-        ///////// Затычка для профиля
-        // json_object *j_test_type = json_object_new_string("Chat");
-        // json_object_object_add(jobj,"Type", j_test_type);
-        // if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Chat")) { //
-        //     // sockbd.login = mx_js_to_str(jobj, "Login"); //
-        //     // login = mx_strdup(sockbd.login); //
-        //     // json_object *j_test_jobj = json_object_new_object();
-        //     // json_object *j_test_Answer = json_object_new_string("Sucsess");
-        //     json_object *j_test_Login = json_object_new_string("AAA");
-        //     json_object *j_test_Chat_name = json_object_new_string("Chisto potrindetb");
-        //     // json_object *j_test_Mobile = json_object_new_string("TEST_MOBILE");
-        // json_object *j_test_Security_key = json_object_new_string("cdef9e974ae775ea9b1472cedb108607127607e538b5c1ff8f9e461234");
-        //     // json_object_object_add(jobj,"Answer", j_test_Answer);
-        //     json_object_object_add(jobj,"Login", j_test_Login);
-        //     // json_object_object_add(jobj,"Email", j_test_Email);
-        //     // json_object_object_add(jobj,"Mobile", j_test_Mobile);
-        //     json_object_object_add(jobj,"Chat_name", j_test_Chat_name);
-        // json_object_object_add(jobj,"Security_key", j_test_Security_key);
-        //     // n = send(sockbd.sockfd, json_object_to_json_string(jobj), mx_strlen(json_object_to_json_string(jobj)), 0); //
-        //     // continue;
-        // } //
-        ///////// Конец затычки для профиля
+            if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Public_group")) { //
+                // sockbd.login = mx_js_to_str(jobj, "Login"); //
+                // login = mx_strdup(sockbd.login); //
+                printf("%s\n", buffer);
+                continue;
+            } //
+            ///////// Затычка для профиля
+            // json_object *j_test_type = json_object_new_string("Chat");
+            // json_object_object_add(jobj,"Type", j_test_type);
+            // if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Chat")) { //
+            //     // sockbd.login = mx_js_to_str(jobj, "Login"); //
+            //     // login = mx_strdup(sockbd.login); //
+            //     // json_object *j_test_jobj = json_object_new_object();
+            //     // json_object *j_test_Answer = json_object_new_string("Sucsess");
+            //     json_object *j_test_Login = json_object_new_string("AAA");
+            //     json_object *j_test_Chat_name = json_object_new_string("Chisto potrindetb");
+            //     // json_object *j_test_Mobile = json_object_new_string("TEST_MOBILE");
+            // json_object *j_test_Security_key = json_object_new_string("cdef9e974ae775ea9b1472cedb108607127607e538b5c1ff8f9e461234");
+            //     // json_object_object_add(jobj,"Answer", j_test_Answer);
+            //     json_object_object_add(jobj,"Login", j_test_Login);
+            //     // json_object_object_add(jobj,"Email", j_test_Email);
+            //     // json_object_object_add(jobj,"Mobile", j_test_Mobile);
+            //     json_object_object_add(jobj,"Chat_name", j_test_Chat_name);
+            // json_object_object_add(jobj,"Security_key", j_test_Security_key);
+            //     // n = send(sockbd.sockfd, json_object_to_json_string(jobj), mx_strlen(json_object_to_json_string(jobj)), 0); //
+            //     // continue;
+            // } //
+            ///////// Конец затычки для профиля
 
-        //printf("char *login: %s\n", login); //
-        printf("json_object_to_json_string(jobj): %s\n", json_object_to_json_string(jobj));
-        j_result = mx_dbase_handler(jobj, sockbd.bd); //
+            //printf("char *login: %s\n", login); //
+printf("json_object_to_json_string(jobj): %s\n", json_object_to_json_string(jobj));
+            j_result = mx_dbase_handler(jobj, sockbd.bd); //
+        // }
+        // else
+        //     mx_add_str_to_js(j_result, "Answer", MX_CHEAT_MESSAGE);
         //json_object_put(jobj); //
         //printf("json_object_to_json_string(j_result): %s\n", json_object_to_json_string(j_result)); //
         answer = json_object_to_json_string(j_result); //
-        printf("ANSWER : %s\n\n", answer);
+printf("ANSWER : %s\n\n", answer);
         n = send(sockbd.sockfd, answer, mx_strlen(answer),  0);
 
         // if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), MX_LOG_MES))
@@ -181,7 +184,6 @@ void *mx_doprocessing (void *data) {
             break;
         }
     }
-    mx_strdel(&login);
     // pthread_mutex_unlock(&(sockbd.mutex));
     return 0;
 }
