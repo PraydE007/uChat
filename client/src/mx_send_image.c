@@ -66,6 +66,10 @@ static void write_file(int sockfd, char *file, int size, t_s_glade *gui) {
     // free(file_name);
     // free(result);
     // free(login);
+    mx_strdel(&image);
+    mx_strdel(&file_name);
+    mx_strdel(&result);
+    mx_strdel(&login);
     close(fd_open);
 }
 

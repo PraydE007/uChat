@@ -16,7 +16,7 @@ void *mx_client_recv(void *data) {
         }
         jobj = json_tokener_parse(gui->buffer);
         gui->recv_data = strdup(gui->buffer);
-        printf("RECV DATA: %s\n", gui->recv_data);
+        printf("RECV DATA!!!: %s\n", gui->recv_data);
         answer = (char *)json_object_get_string(json_object_object_get(jobj, "Answer"));
         if (!mx_strcmp(answer, "Private message history!")) {
             gui->if_contact = 1;

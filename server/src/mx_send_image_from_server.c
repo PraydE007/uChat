@@ -2,12 +2,15 @@
 
 static void write_file(int sockfd, char *file, int size) {
     char *image = mx_strnew(size);
+printf("file!!! = %s\n", file);
     int fd_open = open(file, O_RDONLY);
     int status = 0;
 
     status = read(fd_open, image, size);
-    printf("SIZE = %d\n", size);
-    printf("status = %d\n", status);
+printf("SIZE = %d\n", size);//
+printf("status = %d\n", status);//
+printf("SOCKET = %d\n", sockfd);//
+printf("image = %s\n", image);//
     if (status >= 0)
         send(sockfd, image, size, 0);
     close(fd_open);
@@ -22,9 +25,8 @@ void mx_send_image_from_server(const char *file, int sockfd, int size) {
 
     stat(file, &lt);
     file_size = lt.st_size;
-    printf("SOCKET = %d\n", sockfd);
-    printf("file_size = %d\n", file_size);
-    printf("size = %d\n", size);
+printf("file_size = %d\n", file_size);
+printf("size = %d\n", size);
     if (file_size == size)
         write_file(sockfd, (char *)file, file_size);
     else {
