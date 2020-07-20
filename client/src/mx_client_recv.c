@@ -47,9 +47,9 @@ void *mx_client_recv(void *data) {
         if (!mx_strcmp(answer, "Public_receive_message"))
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_public_message, gui, 0);
         if (!mx_strcmp(answer, "Receive_file"))
-            gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_file, gui, 0);
+            gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_recieve_image, gui, 0);
         if (!mx_strcmp(answer, "Public_receive_file"))
-            gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_public_file, gui, 0);
+            gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_recieve_image, gui, 0);
         if (!mx_strcmp(answer, "The chat was created!"))
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_add_contact, gui, 0);
         if (!mx_strcmp(answer, "The user was added to the chat!"))
@@ -80,8 +80,6 @@ void *mx_client_recv(void *data) {
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_error_delete_user, gui, 0);
         if (!mx_strcmp(answer, "You were deleted from the chat!"))
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_delete_member, gui, 0);
-        if (!mx_strcmp(answer, "Receive_file"))
-            // gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_delete_member, gui, 0);
     }
     return NULL;
 }

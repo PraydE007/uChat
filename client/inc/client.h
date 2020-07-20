@@ -358,6 +358,7 @@ gboolean mx_success_profile_info(void *data);
 gboolean mx_success_delete_chat(void *data);
 gboolean mx_success_delete_member(void *data);
 gboolean mx_reconecting(void *data);
+gboolean mx_recieve_image(void *data);
 //If_login_render
 gboolean mx_render_contacts(t_s_glade *gui);
 gboolean mx_render_chats(t_s_glade *gui);
