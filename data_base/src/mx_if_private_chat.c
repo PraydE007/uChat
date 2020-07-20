@@ -41,7 +41,7 @@ static void if_active(json_object *jobj, json_object *j_answer, sqlite3 *db,
             datab->chat_name);
     mx_table_setting(db, sql, mx_cb_find_chat_id, datab);
     sprintf(sql, "select SENDER_id, MESSAGE_text, IS_file from MESSAGES where" \
-            " CHAT_id = '%s' order by ID limit 15;", datab->chat_id);
+            " CHAT_id = '%s' order by ID limit 10;", datab->chat_id);
     mx_table_setting(db, sql, cb_massege_history, datab);
     json_object_object_add(j_answer, "Array", (datab)->j_result);
     mx_strdel(&datab->chat_name);

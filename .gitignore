@@ -20,3 +20,6 @@ Makefile.nix
 *~
 uchat_server.log
 tmp
+modified:   server/tmp/meme_avatar.png
+*.jpg
+*.png
