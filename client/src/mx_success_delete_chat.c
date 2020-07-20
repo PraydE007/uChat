@@ -7,6 +7,19 @@ static const char *json_to_str(json_object *jobj, char *key) {
     return value;
 }
 
+static void count_loop(t_s_glade *gui, int count) {
+    while(gui->contacts[count]) {
+        mx_push_chat(gui->l_chats, gui->contacts[count]);
+         count++;
+    }
+}
+
+static void count_second_loop(t_s_glade *gui, int count) {
+    while(gui->chats[count]) {
+        mx_push_chat(gui->l_chats, gui->chats[count]);
+        count++;
+    }
+}
 gboolean mx_success_delete_chat(void *data) {
     t_s_glade *gui = (t_s_glade *)data;
     mx_clear_container(gui->l_chats);
@@ -19,19 +32,11 @@ gboolean mx_success_delete_chat(void *data) {
     chats = (char *)json_to_str(jobj, "Chats");
     gui->contacts = mx_strsplit(contacts, ',');
     gui->chats = mx_strsplit(chats, ',');
-    if (gui->contacts) {
-        while(gui->contacts[count]) {
-            mx_push_chat(gui->l_chats, gui->contacts[count]);
-            count++;
-        }
-    }
+    if (gui->contacts)
+        count_loop(gui, count);
     count = 0;
-    if (gui->chats) {
-        while(gui->chats[count]) {
-            mx_push_chat(gui->l_chats, gui->chats[count]);
-            count++;
-        }
-    }
+    if (gui->chats)
+        count_second_loop(gui, count);
     mx_clear_container(gui->l_messages);
     return 0;
 }

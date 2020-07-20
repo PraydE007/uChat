@@ -16,7 +16,6 @@ static void fill_profile(t_s_glade *gui) {
     gtk_entry_set_text(GTK_ENTRY(gui->e_p_login), login);
     gtk_entry_set_text(GTK_ENTRY(gui->e_p_email), email);
     gtk_entry_set_text(GTK_ENTRY(gui->e_p_number), mobile);
-
 }
 
 static void change_window(t_s_glade *gui) {
@@ -28,11 +27,6 @@ static void change_window(t_s_glade *gui) {
 
 gboolean mx_success_profile(void *data) {
     t_s_glade *gui = (t_s_glade *)data;
-    // json_object *jobj = json_tokener_parse(gui->recv_data);
-
-    // const char *login = json_to_str(jobj, "Login");
-    // const char *email = json_to_str(jobj, "Email");
-    // const char *mobile = json_to_str(jobj, "Mobile");
 
     fill_profile(gui);
     change_window(gui);

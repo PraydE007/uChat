@@ -238,6 +238,14 @@ typedef struct s_buf_open_chat {
     const char *login;
 }   t_buf_open_chat;
 
+typedef struct s_buf_registration {
+    const char *login;
+    const char *mail;
+    const char *pass0;
+    const char *pass1;
+    const char *mobile;
+}   t_buf_registration;
+
 // VALIDATION
 int mx_check_number(const char *number, int j);
 int mx_check_pass(const char *pass, int j);
