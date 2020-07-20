@@ -14,10 +14,12 @@ gboolean mx_recieve_image(void *data) {
     // const char *sender = json_to_str(jobj, "Sender");
 
     int file_size = json_object_get_int(json_object_object_get(jobj, "File_size"));
-    char *bunfer = malloc(sizeof(char) * file_size);
-    printf("%s\n", "TEST1");
+    printf("FILE_SIZE :%d\n", file_size);
+    char *bunfer = malloc(sizeof(char *) * file_size);
+    memset(bunfer, '\0', file_size);
+    mx_printstr("TEST1");
     recv(gui->sockfd, bunfer, file_size, MSG_WAITALL);
-    printf("%s\n", "TEST2");
+    mx_printstr("TEST2");
 
     int potok = open(name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
             // recv(sockbd.sockfd, bunfer, size, MSG_WAITALL);
