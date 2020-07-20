@@ -8,7 +8,6 @@ void mx_open_editor(GtkButton *button, gpointer data) {
     gtk_text_buffer_set_text(b, text, -1);
     gtk_text_view_set_buffer(GTK_TEXT_VIEW(gui->tv_editor), b);
     gui->tag = mx_editor_update_lst(gui);
-    // gui->tag = g_timeout_add(1000, mx_editor_update_lst, gui);
     (void)button;
     gtk_window_get_position(mx_gw(gui->w_chat), &(gui->w_x), &(gui->w_y));
     gtk_widget_hide(gui->w_chat);

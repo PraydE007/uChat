@@ -10,7 +10,6 @@ void mx_editor_apply(GtkButton *button, gpointer data) {
     gtk_text_buffer_get_bounds(b, &start, &end);
     text = gtk_text_buffer_get_text(b, &start, &end, FALSE);
     gtk_entry_set_text(GTK_ENTRY(gui->e_message), text);
-    // g_source_remove(gui->tag);
     (void)button;
     gtk_window_get_position(mx_gw(gui->w_edit), &(gui->w_x), &(gui->w_y));
     gtk_widget_hide(gui->w_edit);

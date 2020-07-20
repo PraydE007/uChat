@@ -35,7 +35,6 @@ void mx_apply_group(GtkButton *btn, gpointer data) {
     jobj = json_object_new_object();
     init_json(jobj, buf_apply_group, gui);
     buf_apply_group.send_data = (char *)json_object_to_json_string(jobj);
-    printf("SEND_DATA :%s\n", buf_apply_group.send_data);
     send(gui->sockfd,
         buf_apply_group.send_data, strlen(buf_apply_group.send_data), 0);
 }

@@ -7,7 +7,6 @@ void mx_push_chat(GtkWidget *lst, const char *user_name) {
         GtkWidget *grid1 = gtk_grid_new();
         GtkWidget *image1 = mx_load_img(MX_AVATAR_MIS, 48, 48);
         GtkWidget *text1 = gtk_label_new(user_name);
-
         gtk_widget_set_hexpand(text1, TRUE);
         gtk_grid_insert_column(GTK_GRID(grid1), 0);
         gtk_grid_insert_column(GTK_GRID(grid1), 1);
