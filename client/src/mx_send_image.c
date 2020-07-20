@@ -108,10 +108,10 @@ static void write_file(int sockfd, char *file, int size, t_s_glade *gui) {
         printf("OTPRAVIL\n");
         send(sockfd, image, size, 0);
     }
-    free(image);
-    free(file_name);
-    free(result);
-    free(login);
+    // free(image);
+    // free(file_name);
+    // free(result);
+    // free(login);
     close(fd_open);
 }
 
