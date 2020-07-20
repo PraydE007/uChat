@@ -11,7 +11,6 @@ gboolean mx_recieve_image(void *data) {
     t_s_glade *gui = (t_s_glade *) data;
     json_object *jobj = json_tokener_parse(gui->recv_data);
     const char *name = json_to_str(jobj, "File_message");
-    // const char *sender = json_to_str(jobj, "Sender");
 
     int file_size = json_object_get_int(json_object_object_get(jobj, "File_size"));
     printf("FILE_SIZE :%d\n", file_size);
@@ -20,7 +19,6 @@ gboolean mx_recieve_image(void *data) {
     recv(gui->sockfd, bunfer, file_size, MSG_WAITALL);
     gui->file_path = mx_strdup(name);
     int potok = open(name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-            // recv(sockbd.sockfd, bunfer, size, MSG_WAITALL);
     write(potok, bunfer, file_size);
     close(potok);
     return 0;

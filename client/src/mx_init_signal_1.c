@@ -1,7 +1,6 @@
 #include "client.h"
 
 void mx_init_signal_1(t_s_glade *gui) {
-    // Uchat Anti Resize Signals
     g_signal_connect(gui->w_signin, "window-state-event",
                     G_CALLBACK(mx_anti_resize), gui);
     g_signal_connect(gui->w_settings, "window-state-event",

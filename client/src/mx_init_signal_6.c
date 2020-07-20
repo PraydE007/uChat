@@ -9,8 +9,6 @@ static void init1(t_s_glade *gui) {
                     G_CALLBACK(mx_find_user), gui);
     g_signal_connect(gui->b_c_settings, "clicked",
                     G_CALLBACK(mx_open_window), gui->w_settings);
-    // g_signal_connect(gui->b_emoji, "clicked",
-    //                 G_CALLBACK(mx_open_window), gui->w_emoji);
     g_signal_connect(gui->l_chats, "row-activated",
                     G_CALLBACK(mx_open_chat), gui);
     g_signal_connect(gui->b_group, "clicked",
@@ -22,7 +20,6 @@ static void init1(t_s_glade *gui) {
 }
 
 void mx_init_signal_6(t_s_glade *gui) {
-    // Chat Window Signals
     init1(gui);
     g_signal_connect(gui->b_u_profile, "clicked",
                     G_CALLBACK(mx_view_profile), gui);
