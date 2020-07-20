@@ -15,7 +15,6 @@ static void fill_profile(t_s_glade *gui) {
     gtk_entry_set_text(GTK_ENTRY(gui->e_p_login), login);
     gtk_entry_set_text(GTK_ENTRY(gui->e_p_email), email);
     gtk_entry_set_text(GTK_ENTRY(gui->e_p_number), mobile);
-
 }
 
 static void change_window(t_s_glade *gui) {

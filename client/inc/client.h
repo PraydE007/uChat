@@ -205,6 +205,47 @@ typedef struct s_splited_verbs {
     char **good_verbs;
     char **good_words;
 }   t_splitetd_verbs;
+
+typedef struct s_buf_add_user_to_group {
+    char *send_data;
+    const char *user_name;
+    char *login;
+}   t_buf_add_user_to_group;
+
+typedef struct s_buf_apply_group {
+    const char *send_data;
+    const char *new_name;
+    const char *login;
+}   t_buf_apply_group;
+
+typedef struct s_buf_change_pass {
+    char *login;
+    char *passwd;
+    const char *old_pass;
+    const char *pass0;
+    const char *pass1;
+    char *send_data;
+}   t_buf_change_pass;
+
+typedef struct s_buf_find_user {
+    const gchar *name;
+    const char *login;
+    char *send_data;
+}   t_buf_find_user;
+
+typedef struct s_buf_open_chat {
+    const char *send_data;
+    const char *login;
+}   t_buf_open_chat;
+
+typedef struct s_buf_registration {
+    const char *login;
+    const char *mail;
+    const char *pass0;
+    const char *pass1;
+    const char *mobile;
+}   t_buf_registration;
+
 // VALIDATION
 int mx_check_number(const char *number, int j);
 int mx_check_pass(const char *pass, int j);
@@ -217,6 +258,26 @@ char *mx_hash(char *pass);
 
 //cat_message
 char *mx_cat_message(char *message);
+
+// GUI INIT
+void mx_init_login(GtkBuilder **builder, t_s_glade **gui);
+void mx_init_signup(GtkBuilder **builder, t_s_glade **gui);
+void mx_init_chat(GtkBuilder **builder, t_s_glade **gui);
+void mx_init_edit(GtkBuilder **builder, t_s_glade **gui);
+void mx_init_profile(GtkBuilder **builder, t_s_glade **gui);
+void mx_init_group(GtkBuilder **builder, t_s_glade **gui);
+void mx_init_images(t_s_glade **gui);
+void mx_init_signal_1(t_s_glade *gui);
+void mx_init_signal_2(t_s_glade *gui);
+void mx_init_signal_3(t_s_glade *gui);
+void mx_init_signal_4(t_s_glade *gui);
+void mx_init_signal_5(t_s_glade *gui);
+void mx_init_signal_6(t_s_glade *gui);
+void mx_init_signal_7(t_s_glade *gui);
+void mx_init_signal_8(t_s_glade *gui);
+void mx_init_signal_9(t_s_glade *gui);
+void mx_init_signal_10(t_s_glade *gui);
+void mx_init_signal_11(t_s_glade *gui);
 
 // GUI
 void mx_interface(int *argc, char ***argv, int socket);

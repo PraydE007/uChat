@@ -24,6 +24,6 @@ char *mx_hash_to_string(unsigned char *hash);
 char *mx_hash(char *pass);
 int mx_create_log();
 void mx_demonize();
-void mx_send_image(const char *file, int sockfd);
+void mx_send_image_from_server(const char *file, int sockfd, int size);
 
 #endif

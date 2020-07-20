@@ -110,7 +110,7 @@ void *mx_doprocessing (void *data) {
             recv(sockbd.sockfd, bunfer, size, MSG_WAITALL);
             write(potok, bunfer, size);
             close(potok);
-            continue;
+            // continue;
         } //
         // if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Private_chat")) { //
         //     // sockbd.login = mx_js_to_str(jobj, "Login"); //

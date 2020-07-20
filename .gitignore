@@ -19,3 +19,4 @@ chat_base.db
 Makefile.nix
 *~
 uchat_server.log
+tmp

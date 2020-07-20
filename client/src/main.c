@@ -1,5 +1,12 @@
 #include "client.h"
 
+static void errors(int sockfd) {
+    if (sockfd < 0) {
+        perror("ERROR opening socket");
+        exit(1);
+    }
+}
+
 int main(int argc, char **argv) {
     int sockfd;
     int portno;
@@ -16,13 +23,10 @@ int main(int argc, char **argv) {
     /* Create a socket point */
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, (char *)&rc, sizeof(int));
-    if (sockfd < 0) {
-        perror("ERROR opening socket");
-        exit(1);
-    }
+    errors(sockfd);
     server = gethostbyname(argv[1]);
     if (server == NULL) {
-        fprintf(stderr,"ERROR, no suczh host\n");
+        fprintf(stderr,"ERROR, no such host\n");
         exit(0);
     }
     bzero((char *) &serv_addr, sizeof(serv_addr));

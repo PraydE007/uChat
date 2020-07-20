@@ -52,7 +52,7 @@ static void write_file(int sockfd, char *file, int size, t_s_glade *gui) {
     json_object_object_add(jobj, "Security_key", j_key);
     result = (char *)json_object_to_json_string(jobj);
     if (file) {
-        mx_p_own(gui->l_messages, "!!FILE!!", login);
+        mx_p_own_img(gui->l_messages, file, gui->send_to);
         printf("ReSULT = %s\n", result);
         /// ВАЖНО ДЕЛАТЬ ПЕРВЫЙ СЕНД НА ВСЮ ПАМЯТЬ СТЕКА(БУФФЕРА В ДУПРОЦЕССИНГЕ), ЧТО БЫ ПАМЯТЬ НЕ ПЕРЕКРАИВАЛАСЬ
         /// И ФАЙЛЫ ПЕРЕДАВАЛИСЬ ПОЛНОСТЬЮ. НА КЛИНТЕ СОКЕТ = 3 А НА СЕРВЕРЕ СОКЕТ = 6. ТАК И ДОЛЖНО БЫТЬ?
@@ -60,11 +60,12 @@ static void write_file(int sockfd, char *file, int size, t_s_glade *gui) {
         send(sockfd, result, MX_MAX_BYTES, 0);
         printf("OTPRAVIL\n");
         send(sockfd, image, size, 0);
+
     }
-    free(image);
-    free(file_name);
-    free(result);
-    free(login);
+    // free(image);
+    // free(file_name);
+    // free(result);
+    // free(login);
     close(fd_open);
 }
 

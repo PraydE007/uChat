@@ -11,6 +11,7 @@ gboolean mx_render_contacts(t_s_glade *gui) {
     json_object *jobj = json_tokener_parse(gui->recv_data);
     char **get_splited_contacts = NULL;
     char *get_all_contacts = (char *)json_to_str(jobj, "Contacts");
+
     if (get_all_contacts) {
         get_splited_contacts = mx_strsplit(get_all_contacts, ',');
         for (int i = 0; get_splited_contacts[i]; i++)

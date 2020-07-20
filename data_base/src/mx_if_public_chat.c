@@ -10,8 +10,12 @@ static int cb_massege_history(void *datab, int argc, char **argv,
         char *login = mx_find_user_login(new_datab->db, argv[0]);
 
         mx_add_str_to_js(j_message, "Login", login);
-        if (!mx_strcmp(new_datab->id, argv[0]))
+        if (!mx_strcmp(new_datab->id, argv[0]) && !mx_strcmp("true", argv[2]))
+            mx_add_str_to_js(j_message, "Own_file", argv[1]);
+        else if (!mx_strcmp(new_datab->id, argv[0]))
             mx_add_str_to_js(j_message, "Own_message", argv[1]);
+        else if (!mx_strcmp("true", argv[2]))
+            mx_add_str_to_js(j_message, "File", argv[1]);
         else
             mx_add_str_to_js(j_message, "Message", argv[1]);
         mx_add_arr_to_js(new_datab->j_result, j_message);

@@ -18,6 +18,11 @@ static const char *json_to_str(json_object *jobj, char *key) {
     return value;
 }
 
+static void display_chat(t_s_glade *gui, const char *sender) {
+    mx_push_chat(gui->l_chats, sender);
+    gui->if_contact = true;
+}
+
 gboolean mx_success_message(void *data) {
     t_s_glade *gui = (t_s_glade *)data;
     json_object *jobj = json_tokener_parse(gui->recv_data);
@@ -29,17 +34,14 @@ gboolean mx_success_message(void *data) {
         if (gui->contacts) {
             while (gui->contacts[count]) {
                 if (mx_strcmp(gui->contacts[count], sender)) {
-                    mx_push_chat(gui->l_chats, sender);
-                    gui->if_contact = true;
+                    display_chat(gui, sender);
                     break;
                 }
                 count++;
             }
         }
-        else {
-            mx_push_chat(gui->l_chats, sender);
-            gui->if_contact = true;
-        }
+        else
+            display_chat(gui, sender);
     }
     if (gui->send_to)
         mx_p_owned(gui->l_messages, message, sender);
