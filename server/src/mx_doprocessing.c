@@ -106,7 +106,7 @@ void *mx_doprocessing (void *data) {
                 // mkdir("server/tmp", );
                 char *recv_name = mx_strjoin("server/tmp/", name_file);
                 printf("SIZE = %d\n", size);
-                char *bunfer = mx_strnew(size);
+                char *bunfer = (char *)malloc(size);
     //            recv(sockbd.sockfd, bunfer, size, 0);
                 int potok = open(recv_name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
                 recv(sockbd.sockfd, bunfer, size, MSG_WAITALL);
