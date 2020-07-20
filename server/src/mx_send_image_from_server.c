@@ -22,9 +22,9 @@ void mx_send_image_from_server(const char *file, int sockfd, int size) {
 
     stat(file, &lt);
     file_size = lt.st_size;
-printf("SOCKET = %d\n", sockfd);
-printf("file_size = %d\n", file_size);
-printf("size = %d\n", size);
+    printf("SOCKET = %d\n", sockfd);
+    printf("file_size = %d\n", file_size);
+    printf("size = %d\n", size);
     if (file_size == size)
         write_file(sockfd, (char *)file, file_size);
     else {
