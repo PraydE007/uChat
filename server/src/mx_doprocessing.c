@@ -161,7 +161,7 @@ printf("json_object_to_json_string(jobj): %s\n", json_object_to_json_string(jobj
         //json_object_put(jobj); //
         //printf("json_object_to_json_string(j_result): %s\n", json_object_to_json_string(j_result)); //
         answer = json_object_to_json_string(j_result); //
-printf("ANSWER : %s\n\n", answer);
+printf("ANSWER(doproc) : %s\n\n", answer);
         n = send(sockbd.sockfd, answer, mx_strlen(answer),  0);
 
         // if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), MX_LOG_MES))
@@ -182,7 +182,7 @@ printf("ANSWER : %s\n\n", answer);
         //     n = send(sockbd.sockfd, "Profile info!", mx_strlen("Profile info!"),  0);
         // else if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), "Profile data is changed!"))
         //     n = send(sockbd.sockfd, "Profile data is changed!", mx_strlen("Profile data is changed!"),  0);
-        json_object_put(j_result);
+        // json_object_put(j_result);
         if (n <= 0) {
             mx_user_deactivate(sockbd.bd, sockbd.sockfd);
             break;
