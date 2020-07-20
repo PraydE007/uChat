@@ -114,6 +114,8 @@ printf("datab->message_db: %s\n", datab->message_db); //
     mx_strdel(&datab->id);// comment in mx_is_activ
     mx_strdel(&datab->chat_id);
     mx_strdel(&datab->chat_name);
+printf("receive_message!!!: %s\n", json_object_to_json_string(receive_message)); //
     json_object_put(receive_message);
+printf("j_answer!!!: %s\n", json_object_to_json_string(j_answer)); //
     return j_answer;
 }
