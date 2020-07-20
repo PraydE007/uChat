@@ -101,6 +101,7 @@ void *mx_doprocessing (void *data) {
             mx_printstr("YA ZASHEL\n");
             int size = mx_atoi(mx_js_to_str(jobj, "Size"));
             const char *name_file = mx_js_to_str(jobj, "Message");
+            mkdir("server/tmp", )
             char *recv_name = mx_strjoin("server/tmp/", name_file);
             printf("SIZE = %d\n", size);
             char *bunfer = mx_strnew(size);
