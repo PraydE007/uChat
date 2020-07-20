@@ -9,7 +9,7 @@ static void write_file(int sockfd, char *file, int size) {
     printf("SIZE = %d\n", size);
     printf("status = %d\n", status);
     if (status >= 0)
-        send(sockfd, image, MX_MAX_BYTES, 0);
+        send(sockfd, image, size, 0);
     close(fd_open);
     mx_strdel(&image);
 }
