@@ -68,9 +68,9 @@ void *mx_doprocessing (void *data) {
     // login = mx_strdup(sockbd.login); //
 //    printf("SIZE = %d\n", size);
     //send_mail("ozahirny@gmail.com", "DAROVA EPT\n");
-    bzero(buffer, MX_MAX_BYTES);
     printf("SOCKET SERVER = %d\n", sockbd.sockfd);
     while (true) {
+        bzero(buffer, MX_MAX_BYTES);
         // mx_send_image("server/meme_avatar.png", sockbd.sockfd);
         // exit(0);
 //        bzero(buffer,MX_MAX_BYTES);
