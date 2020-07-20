@@ -69,12 +69,13 @@ void *mx_doprocessing (void *data) {
     // login = mx_strdup(sockbd.login); //
 //    printf("SIZE = %d\n", size);
     //send_mail("ozahirny@gmail.com", "DAROVA EPT\n");
+    bzero(buffer, MX_MAX_BYTES);
     printf("SOCKET SERVER = %d\n", sockbd.sockfd);
     while (true) {
         // mx_send_image("server/meme_avatar.png", sockbd.sockfd);
         // exit(0);
 //        bzero(buffer,MX_MAX_BYTES);
-        n = recv(sockbd.sockfd, buffer, sizeof(buffer), 0);
+        n = recv(sockbd.sockfd, buffer, MX_MAX_BYTES, 0);
 //        printf("GET %s\n\n", buffer);
 
         //printf("%s\n", buffer);
@@ -98,6 +99,7 @@ void *mx_doprocessing (void *data) {
         } //
         //////// Затычка для отправления картинок
         if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "File")) { //
+            bzero(buffer, MX_MAX_BYTES);
             mx_printstr("YA ZASHEL\n");
             int size = mx_atoi(mx_js_to_str(jobj, "Size"));
             const char *name_file = mx_js_to_str(jobj, "Message");
