@@ -102,18 +102,21 @@ void *mx_doprocessing (void *data) {
                 bzero(buffer, MX_MAX_BYTES);
                 mx_printstr("YA ZASHEL\n");
                 int size = mx_atoi(mx_js_to_str(jobj, "Size"));
+                printf("SIZE :%d\n", size);
                 const char *name_file = mx_js_to_str(jobj, "Message");
                 // mkdir("server/tmp", );
                 char *recv_name = mx_strjoin("server/tmp/", name_file);
                 printf("SIZE = %d\n", size);
                 char *bunfer = (char *)malloc(size);
     //            recv(sockbd.sockfd, bunfer, size, 0);
-                int potok = open(recv_name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
                 recv(sockbd.sockfd, bunfer, size, MSG_WAITALL);
+                int potok = open(recv_name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
                 write(potok, bunfer, size);
                 close(potok);
-// printf("json_object_to_json_string(jobj): %s\n", json_object_to_json_string(jobj));//
+                free(bunfer);
                 // continue;
+// printf("json_object_to_json_string(jobj): %s\n", json_object_to_json_string(jobj));//
+
             } //
 
             // if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Private_chat")) { //
@@ -153,15 +156,17 @@ void *mx_doprocessing (void *data) {
             ///////// Конец затычки для профиля
 
             //printf("char *login: %s\n", login); //
-printf("json_object_to_json_string(jobj): %s\n", json_object_to_json_string(jobj));
+// printf("json_object_to_json_string(jobj): %s\n", json_object_to_json_string(jobj));
+            // printf("%s\n", "TEST1");
             j_result = mx_dbase_handler(jobj, sockbd.bd); //
+            // printf("%s\n", "TEST");
         // }
         // else
         //     mx_add_str_to_js(j_result, "Answer", MX_CHEAT_MESSAGE);
         //json_object_put(jobj); //
         //printf("json_object_to_json_string(j_result): %s\n", json_object_to_json_string(j_result)); //
         answer = json_object_to_json_string(j_result); //
-printf("ANSWER(doproc) : %s\n\n", answer);
+// printf("ANSWER(doproc) : %s\n\n", answer);
         n = send(sockbd.sockfd, answer, mx_strlen(answer),  0);
 
         // if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), MX_LOG_MES))
