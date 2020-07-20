@@ -15,7 +15,7 @@
 
 static void insert_message(json_object *jobj, json_object *receive_message,
                                                 sqlite3 *db, t_datab *datab) {
-    char sql[16384];
+    char sql[4096];
 
     if (datab->logtrigger == 1) {
         if (!mx_strcmp("File", mx_js_to_str(jobj, "Type")))

@@ -16,7 +16,7 @@ void *mx_client_recv(void *data) {
         }
         jobj = json_tokener_parse(gui->buffer);
         gui->recv_data = strdup(gui->buffer);
-        printf("RECV DATA!!!: %s\n", gui->recv_data);
+        printf("RECV DATA: %s\n", gui->recv_data);
         answer = (char *)json_object_get_string(json_object_object_get(jobj, "Answer"));
         if (!mx_strcmp(answer, "Private message history!")) {
             gui->if_contact = 1;
@@ -47,13 +47,6 @@ void *mx_client_recv(void *data) {
         }
         if (!mx_strcmp(answer, "Public_receive_message"))
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_public_message, gui, 0);
-        if (!mx_strcmp(answer, "Receive_file")) {
-            mx_recieve_image(gui);
-            gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_render_img, gui, 0);
-        }
-        if (!mx_strcmp(answer, "Public_receive_file"))
-            mx_recieve_image(gui);
-            //gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_render_img, gui, 0);
         if (!mx_strcmp(answer, "The chat was created!"))
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_add_contact, gui, 0);
         if (!mx_strcmp(answer, "The user was added to the chat!"))
