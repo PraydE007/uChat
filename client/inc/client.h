@@ -246,6 +246,13 @@ typedef struct s_buf_registration {
     const char *mobile;
 }   t_buf_registration;
 
+typedef struct s_buf_history {
+    const char *array;
+    int size_messages;
+    char *get_message;
+    char *get_owner;
+}   t_buf_history;
+
 // VALIDATION
 int mx_check_number(const char *number, int j);
 int mx_check_pass(const char *pass, int j);

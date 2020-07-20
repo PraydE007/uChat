@@ -112,11 +112,10 @@ void *mx_doprocessing (void *data) {
                 recv(sockbd.sockfd, bunfer, size, MSG_WAITALL);
                 write(potok, bunfer, size);
                 close(potok);
-printf("json_object_to_json_string(jobj): %s\n", json_object_to_json_string(jobj));//
+// printf("json_object_to_json_string(jobj): %s\n", json_object_to_json_string(jobj));//
                 // continue;
-                exit(0);
             } //
-            
+
             // if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Private_chat")) { //
             //     // sockbd.login = mx_js_to_str(jobj, "Login"); //
             //     // login = mx_strdup(sockbd.login); //
