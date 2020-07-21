@@ -51,11 +51,8 @@ void *mx_doprocessing (void *data) {
         }
         if (mx_is_json(&jobj, buffer)) {
             // jobj = json_tokener_parse(buffer);
-printf("3\n");
             json_object_object_add(jobj,"Socket", j_socket);
-printf("4\n");
             log_add_info(sockbd, jobj);
-printf("5\n");
             ///////// Затычка для добавления контактов
             if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Sending")) { //
                 // sockbd.login = mx_js_to_str(jobj, "Login"); //
@@ -122,17 +119,14 @@ printf("5\n");
 
             //printf("char *login: %s\n", login); //
             // printf("%s\n", "TEST1");
+            printf("json_object_to_json_string(jobj): %s\n", json_object_to_json_string(jobj)); //
             j_result = mx_dbase_handler(jobj, sockbd.bd); //
             // printf("%s\n", "TEST");
         }
-        else {
-printf("6\n");
+        else
             mx_add_str_to_js(j_result, "Answer", MX_CHEAT_MESSAGE);
-printf("7\n");
-        }
-        //printf("json_object_to_json_string(j_result): %s\n", json_object_to_json_string(j_result)); //
+        printf("json_object_to_json_string(j_result): %s\n", json_object_to_json_string(j_result)); //
         answer = json_object_to_json_string(j_result); //
-printf("8\n");
         printf("ANSWER(DOPROC) = %s\n", answer);
         n = send(sockbd.sockfd, answer, mx_strlen(answer),  0);
         json_object_put(jobj); //

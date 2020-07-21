@@ -37,7 +37,6 @@ typedef struct s_datab {
 }               t_datab;
 
 bool mx_is_active(json_object *jobj, sqlite3 *db, t_datab *datab);
-bool mx_is_active_chat(sqlite3 *db, t_datab *datab, char *sql);
 bool mx_is_admin(sqlite3 *db, t_datab *datab, char *sql);
 bool mx_is_chat(sqlite3 *db, char *sql, t_datab *datab);
 bool mx_is_chat_member(sqlite3 *db, t_datab *datab, char *sql);
@@ -50,7 +49,6 @@ const char *mx_js_arr_to_str(json_object *jobj, int index);
 const char *mx_js_to_str(json_object *jobj, char *key);
 int mx_callback(void *datab, int argc, char **argv, char **azColName);
 int mx_cb_chat_notification(void *datab, int argc, char **argv, char **azColName);
-int mx_cb_file_sending(void *datab, int argc, char **argv, char **azColName);
 int mx_cb_find_chat_id(void *datab, int argc, char **argv, char **azColName);
 int mx_cb_find_user_id(void *datab, int argc, char **argv, char **azColName);
 int mx_cb_find_user_ids_for_chat(void *datab, int argc, char **argv, char **azColName);

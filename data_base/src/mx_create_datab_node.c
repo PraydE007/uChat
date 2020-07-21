@@ -1,5 +1,5 @@
 #include "dbase.h"
-//A LOT OF LINE
+
 t_datab *mx_create_datab_node(void) {
     t_datab *node = (t_datab*)malloc(sizeof(t_datab));
 

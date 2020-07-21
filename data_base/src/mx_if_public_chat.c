@@ -26,11 +26,9 @@ static int cb_massege_history(void *datab, int argc, char **argv,
 
 static void if_active(json_object *jobj, json_object *j_answer, sqlite3 *db,
                                                             t_datab *datab) {
-    // json_object *j_answer = json_object_new_object();
     char sql[255];
 
     mx_add_str_to_js(j_answer, "Answer", "Public message history!");
-    // mx_add_arr_to_js((datab)->j_result, j_answer);
     datab->login_db2 = mx_js_to_str(jobj, "Chat_name");
     sprintf(sql, "select ID from CHATS where CHAT_NAME = '%s';",
             datab->login_db2);
@@ -50,14 +48,7 @@ json_object *mx_if_public_chat(json_object *jobj, sqlite3 *db,
         if_active(jobj, j_answer, db, datab);
     else
         mx_add_str_to_js(datab->j_result, "Answer", MX_CHEAT_MESSAGE);
-//
-// int lenth = json_object_array_length(datab->j_result);
-// printf("lenth: %d\n", lenth);
-// for (int i = 0; i < lenth; i++)
-    printf("mx_if_chat: %s\n", json_object_get_string(j_answer));
-//
     mx_strdel(&datab->id);// comment in mx_is_activ
     mx_strdel(&datab->chat_id);
-    // datab->logtrigger = 0;*
     return j_answer;
 }
