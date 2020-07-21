@@ -66,7 +66,7 @@ json_object *mx_if_logging(json_object *jobj, sqlite3 *db, t_datab *datab) {
         mx_user_activate(db, datab, datab->socket);
         mx_add_str_to_js(j_result, "Answer", MX_LOG_MES);
         mx_add_str_to_js(j_result, "Security_key", datab->security_key);
-        mx_js_chts_conts(j_result, db, datab, sql);
+        mx_js_chts_conts_for_sender(j_result, db, datab, sql);
     }
     else
         mx_add_str_to_js(j_result, "Answer", MX_LOG_ERR);
