@@ -3,7 +3,6 @@
 json_object *mx_if_chat(json_object *jobj, sqlite3 *db, t_datab *datab) {
     json_object *j_result = json_object_new_object();
     char sql[255];
-
     if (mx_is_active(jobj, db, datab)) {
         datab->login_db = mx_js_to_str(jobj, "Chat_name");
         datab->chat_name = mx_strdup(datab->login_db);

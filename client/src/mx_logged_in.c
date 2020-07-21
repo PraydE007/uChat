@@ -17,6 +17,7 @@ void mx_logged_in(GtkButton *button, gpointer data) {
     const char *pass = gtk_entry_get_text(GTK_ENTRY(gui->e_l_password));
     json_object *jobj = json_object_new_object();
 
+    pass = mx_hash((char *)pass);
     (void)button;
     init_json(jobj, login, pass);
     send_data = (char *)json_object_to_json_string(jobj);
