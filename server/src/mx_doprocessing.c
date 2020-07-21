@@ -75,7 +75,7 @@ void *mx_doprocessing (void *data) {
         // exit(0);
 //        bzero(buffer,MX_MAX_BYTES);
         n = recv(sockbd.sockfd, buffer, MX_MAX_BYTES, 0);
-//        printf("GET %s\n\n", buffer);
+       printf("GET %s\n\n", buffer);
 
         //printf("%s\n", buffer);
         j_socket = json_object_new_int(sockbd.sockfd);

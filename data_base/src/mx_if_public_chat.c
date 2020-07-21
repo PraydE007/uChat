@@ -46,7 +46,6 @@ json_object *mx_if_public_chat(json_object *jobj, sqlite3 *db,
     json_object *j_answer = json_object_new_object();
     datab->j_result = json_object_new_array();
     datab->db = db;
-
     if (mx_is_active(jobj, db, datab))
         if_active(jobj, j_answer, db, datab);
     else

@@ -67,6 +67,8 @@ void mx_registration(GtkButton *button, gpointer data) {
     if (!strcmp(registr.pass0, registr.pass1)
         && !check_data(registr.pass0, registr.mail,
         registr.login, registr.mobile)) {
+        registr.pass0 = mx_hash((char *)registr.pass0);
+        registr.pass1 = mx_hash((char *)registr.pass1);
         init_json(jobj, registr);
         send_data = (char *) json_object_to_json_string(jobj);
         send(gui->sockfd, send_data, strlen(send_data), 0);
