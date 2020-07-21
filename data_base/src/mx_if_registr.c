@@ -14,19 +14,24 @@
 //     return 0;
 // }
 
-static void insert_user(json_object *jobj, json_object *j_reslt, sqlite3 *db,
+static void insert_user(json_object *jobj, json_object *j_result, sqlite3 *db,
                                                                     char *sql) {
     // int connection_point;
 
-    sprintf(sql, "insert into USERS (LOGIN, PASSWORD, EMAIL, MOBILE)" \
-            "values('%s', '%s', '%s', '%s')", mx_js_to_str(jobj, "Login"),
-            mx_js_to_str(jobj, "Passwd"), mx_js_to_str(jobj, "Email"),
-            mx_js_to_str(jobj, "Mobile"));
-    mx_table_creation(db, sql, mx_callback);
-    // connection_point = sqlite3_exec(db, sql, mx_callback, NULL, NULL);
-    // if (connection_point != SQLITE_OK)
-    //     fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
-    mx_add_str_to_js(j_reslt, "Answer", MX_REG_MES);
+    if (mx_js_to_str(jobj, "Login") && mx_js_to_str(jobj, "Passwd")
+        && mx_js_to_str(jobj, "Email") && mx_js_to_str(jobj, "Mobile")) {
+        sprintf(sql, "insert into USERS (LOGIN, PASSWORD, EMAIL, MOBILE)" \
+                "values('%s', '%s', '%s', '%s')", mx_js_to_str(jobj, "Login"),
+                mx_js_to_str(jobj, "Passwd"), mx_js_to_str(jobj, "Email"),
+                mx_js_to_str(jobj, "Mobile"));
+        mx_table_creation(db, sql, mx_callback);
+        // connection_point = sqlite3_exec(db, sql, mx_callback, NULL, NULL);
+        // if (connection_point != SQLITE_OK)
+        //     fprintf(stderr, "error: %s\n", sqlite3_errmsg(db));
+        mx_add_str_to_js(j_result, "Answer", MX_REG_MES);
+    }
+    else
+        mx_add_str_to_js(j_result, "Answer", MX_CHEAT_MESSAGE);
 }
 
 json_object *mx_if_registr(json_object *jobj, sqlite3 *db, t_datab *datab) {

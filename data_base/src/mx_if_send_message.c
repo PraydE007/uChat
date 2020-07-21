@@ -66,8 +66,8 @@ printf ("datab->chat_id: %s\n", datab->chat_id);
 
 static void db_handler_for_message
 (json_object *jobj, json_object *receive_message, sqlite3 *db, t_datab *datab) {
-    int lenth = 0;
     char sql[255];
+    json_object *message_for_user = NULL;
 
     sprintf(sql, "select ID from CHATS where CHAT_NAME = '%s';",
             datab->chat_name);
@@ -79,13 +79,14 @@ static void db_handler_for_message
     if (!mx_strcmp("File", mx_js_to_str(jobj, "Type")))
         datab->fpath_db = mx_strjoin("server/tmp/", datab->message_db);
 // printf("datab->message_db: %s\n", datab->message_db); //
-    lenth = json_object_array_length(datab->j_result);
-    for (int i = 0; i < lenth; i++) {
-        receive_message = json_object_new_object();
-        insert_message(jobj, receive_message, db, datab);
+    insert_message(jobj, receive_message, db, datab);
+    datab->buffer_db = json_object_get_string(receive_message);
+    datab->lenth = json_object_array_length(datab->j_result);
+    for (int i = 0; i < datab->lenth; i++) {
+        message_for_user = json_tokener_parse(datab->buffer_db);
         datab->id_db = mx_js_arr_to_str(datab->j_result, i);
-        mx_js_chts_conts_for_receiver(receive_message, db, datab, sql);
-        datab->message_db = json_object_get_string(receive_message);
+        mx_js_chts_conts_for_receiver(message_for_user, db, datab, sql);
+        datab->message_db = json_object_get_string(message_for_user);
         sprintf(sql, "select SOCKET from ACTIVITY where USER_id = '%s';",
                                                                 datab->id_db);
         // if (!mx_strcmp("File", mx_js_to_str(jobj, "Type")))
@@ -93,7 +94,7 @@ static void db_handler_for_message
         // else
         mx_table_setting(db, sql, mx_cb_message_sending, datab);
         datab->message_db = mx_js_to_str(jobj, "Message");
-        json_object_put(receive_message);
+        json_object_put(message_for_user);
     }
 }
 
@@ -118,6 +119,7 @@ json_object *mx_if_send_message(json_object *jobj, sqlite3 *db,
     mx_strdel(&datab->id);// comment in mx_is_activ
     mx_strdel(&datab->chat_id);
     mx_strdel(&datab->chat_name);
+    json_object_put(receive_message);
 // printf("j_answer!!!: %s\n", json_object_to_json_string(j_answer)); //
     return j_answer;
 }
