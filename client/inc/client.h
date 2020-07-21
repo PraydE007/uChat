@@ -174,6 +174,7 @@ typedef struct s_s_glade {
     int if_contact;
     pthread_mutex_t mutex;
     char *file_path;
+    char *sender;
 
 }              t_s_glade;
 
@@ -252,6 +253,14 @@ typedef struct s_buf_history {
     char *get_message;
     char *get_owner;
 }   t_buf_history;
+
+typedef struct s_buf_suc_mess {
+    const char *message;
+    const char *sender;
+    char **chats;
+    char **contacts;
+    int count;
+}   t_buf_suc_mess;
 
 // VALIDATION
 int mx_check_number(const char *number, int j);

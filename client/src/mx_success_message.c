@@ -28,12 +28,15 @@ gboolean mx_success_message(void *data) {
     json_object *jobj = json_tokener_parse(gui->recv_data);
     const char *message = json_to_str(jobj, "Message");
     const char *sender = json_to_str(jobj, "Sender");
+    char *contacts = (char *)json_to_str(jobj, "Contacts");
+    char **sp_cont = mx_strsplit(contacts, ',');
+    gui->sender = mx_strdup(sender);
     int count = 0;
 
     if (!gui->if_contact) {
-        if (gui->contacts) {
-            while (gui->contacts[count]) {
-                if (mx_strcmp(gui->contacts[count], sender)) {
+        if (sp_cont) {
+            while (sp_cont[count]) {
+                if (mx_strcmp(sp_cont[count], sender)) {
                     display_chat(gui, sender);
                     break;
                 }
