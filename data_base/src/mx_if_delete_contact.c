@@ -19,7 +19,7 @@ static void contact_deleting(json_object *jobj, json_object *j_result,
             "and CHAT_id = %s;", datab->id, datab->chat_id);
     mx_table_creation(db, sql, mx_callback);
     mx_add_str_to_js(j_result, "Answer", "The contact was deleted!");
-    mx_js_chts_conts(j_result, db, datab, sql);
+    mx_js_chts_conts_for_sender(j_result, db, datab, sql);
     datab->logtrigger = 0;
 }
 
@@ -45,7 +45,7 @@ json_object *mx_if_delete_contact(json_object *jobj, sqlite3 *db,
         //         "and CHAT_id = %s;", datab->id, datab->chat_id);
         // mx_table_creation(db, sql, mx_callback);
         // mx_add_str_to_js(j_result, "Answer", "The contact was deleted!");
-        // mx_js_chts_conts(j_result, db, datab, sql);
+        // mx_js_chts_conts_for_sender(j_result, db, datab, sql);
     }
     else
         mx_add_str_to_js(j_result, "Answer", MX_CHEAT_MESSAGE);

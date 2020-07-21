@@ -19,6 +19,8 @@ static void delete_contact_rfom_the_chat(sqlite3 *db, char *sql,
     mx_table_creation(db, sql, mx_callback);
     mx_add_str_to_js(datab->j_result, "Answer", MX_DEL_CHAT_MES);
     mx_find_chat_contact_list(db, datab, sql);
+    datab->db = db;
+    datab->id_db = datab->second_id;
     datab->message_db = "You were deleted from the chat!";
     sprintf(sql, "select SOCKET from ACTIVITY where USER_id = '%s';",
                                                             datab->second_id);

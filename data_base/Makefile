@@ -53,7 +53,8 @@ FILES = mx_add_arr_to_js.c \
 		mx_is_contact.c \
 		mx_is_json.c \
 		mx_js_arr_to_str.c \
-		mx_js_chts_conts.c \
+		mx_js_chts_conts_for_receiver.c \
+		mx_js_chts_conts_for_sender.c \
 		mx_js_to_datab.c \
 		mx_js_to_int.c \
 		mx_js_to_str.c \

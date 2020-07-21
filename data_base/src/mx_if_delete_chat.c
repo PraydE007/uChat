@@ -22,7 +22,7 @@ json_object *mx_if_delete_chat(json_object *jobj, sqlite3 *db, t_datab *datab) {
                 datab->chat_name_db);
         mx_table_setting(db, sql, mx_cb_find_chat_id, datab);
         condition_for_chat_delete(db, datab, sql);
-        mx_js_chts_conts(datab->j_result, db, datab, sql);
+        mx_js_chts_conts_for_sender(datab->j_result, db, datab, sql);
     }
     else
         mx_add_str_to_js(datab->j_result, "Answer", MX_CHEAT_MESSAGE);

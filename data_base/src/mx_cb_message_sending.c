@@ -9,7 +9,7 @@ int mx_cb_message_sending(void *datab, int argc, char **argv,
         int n;
 
 printf("argv[0]!!! = %s\n", argv[0]);
-printf("new_datab->message_db = %s\n", new_datab->message_db);
+printf("new_datab->message_db!!! = %s\n", new_datab->message_db);
         n = send(mx_atoi(argv[0]), new_datab->message_db,
                                         mx_strlen(new_datab->message_db), 0);
         if (new_datab->fpath_db) {
