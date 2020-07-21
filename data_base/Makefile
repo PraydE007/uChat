@@ -85,7 +85,7 @@ $(NAME): $(OBJS)
 	@printf "\r\33[2K$@ \033[32;1mcreated\033[0m\n"
 
 $(OBJD)/%.o: $(SRCD)/%.c $(INCS)
-	@clang $(CFLG) -c $< -o $@ -I$(INCD)
+	@clang $(CFLG) -c $< -o $@ -I$(INCD) -fsanitize=address
 	@printf "\r\33[2K$(NAME) \033[33;1mcompile \033[0m$(<:$(SRCD)/%.c=%) "
 
 $(OBJS): | $(OBJD)
