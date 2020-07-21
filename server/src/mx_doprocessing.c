@@ -16,6 +16,23 @@ static void log_add_info(t_sockbd sockbd, json_object *jobj) {
     write (sockbd.log_sescr, "\n", 1);
 }
 
+static bool error_one(t_sockbd sockbd, int n) {
+    if (n <= 0) {
+        if_disconnect(sockbd);
+        mx_user_deactivate(sockbd.bd, sockbd.sockfd);
+        return false;
+    }
+    return true;
+}
+
+static bool error_two(t_sockbd sockbd, int n) {
+        if (n <= 0) {
+            mx_user_deactivate(sockbd.bd, sockbd.sockfd);
+            return false;
+        }
+    return true;
+}
+
 void *mx_doprocessing (void *data) {
     t_sockbd sockbd = *(t_sockbd *)data;
     int n = 0;
@@ -30,11 +47,8 @@ void *mx_doprocessing (void *data) {
         bzero(buffer, MX_MAX_BYTES);
         n = recv(sockbd.sockfd, buffer, MX_MAX_BYTES, 0);
         j_socket = json_object_new_int(sockbd.sockfd);
-        if (n <= 0) {
-            if_disconnect(sockbd);
-            mx_user_deactivate(sockbd.bd, sockbd.sockfd);
+        if (!error_one(sockbd, n))
             break;
-        }
         if (mx_is_json(&jobj, buffer)) {
             json_object_object_add(jobj,"Socket", j_socket);
             log_add_info(sockbd, jobj);
@@ -46,10 +60,8 @@ void *mx_doprocessing (void *data) {
         n = send(sockbd.sockfd, answer, mx_strlen(answer),  0);
         json_object_put(jobj);
         json_object_put(j_result);
-        if (n <= 0) {
-            mx_user_deactivate(sockbd.bd, sockbd.sockfd);
+        if (!error_two(sockbd, n))
             break;
-        }
     }
     return 0;
 }

@@ -22,7 +22,6 @@ FILES = mx_add_arr_to_js.c \
 		mx_data_base_creation.c \
 		mx_dbase_handler.c \
 		mx_dealloc_datab.c \
-		mx_cb_file_sending.c \
 		mx_find_chat_contact_list.c \
 		mx_find_chat_name.c \
 		mx_find_user_login.c \
@@ -47,7 +46,6 @@ FILES = mx_add_arr_to_js.c \
 		mx_if_registr.c \
 		mx_if_send_message.c \
 		mx_is_active.c \
-		mx_is_active_chat.c \
 		mx_is_admin.c \
 		mx_is_chat.c \
 		mx_is_contact.c \

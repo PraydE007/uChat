@@ -23,6 +23,7 @@ static void display_chat(t_s_glade *gui, const char *sender) {
     gui->if_contact = true;
 }
 
+
 gboolean mx_success_message(void *data) {
     t_s_glade *gui = (t_s_glade *)data;
     json_object *jobj = json_tokener_parse(gui->recv_data);
@@ -30,8 +31,8 @@ gboolean mx_success_message(void *data) {
     const char *sender = json_to_str(jobj, "Sender");
     char *contacts = (char *)json_to_str(jobj, "Contacts");
     char **sp_cont = mx_strsplit(contacts, ',');
-    gui->sender = mx_strdup(sender);
     int count = 0;
+    gui->sender = mx_strdup(sender);
 
     if (!gui->if_contact) {
         if (sp_cont) {
