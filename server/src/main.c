@@ -64,7 +64,6 @@ int main(int argc, char **argv) {
    listen(sockfd, 5);
    clilen = sizeof(cli_addr);
    mx_data_base_creation(&sockbd->bd);
-
    while (true) {
       sockbd->sockfd = accept(sockfd, (struct sockaddr *) &cli_addr, (socklen_t *)&clilen);
       accepting(sockbd);
