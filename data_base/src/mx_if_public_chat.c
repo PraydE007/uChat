@@ -35,7 +35,7 @@ static void if_active(json_object *jobj, json_object *j_answer, sqlite3 *db,
     sprintf(sql, "select ID from CHATS where CHAT_NAME = '%s';",
             datab->login_db2);
     mx_table_setting(db, sql, mx_cb_find_chat_id, datab);
-    sprintf(sql, "select SENDER_id, MESSAGE_text from MESSAGES where " \
+    sprintf(sql, "select SENDER_id, MESSAGE_text, IS_file from MESSAGES where " \
             "CHAT_id = '%s' order by ID limit 10;", datab->chat_id);
     mx_table_setting(db, sql, cb_massege_history, datab);
     json_object_object_add(j_answer, "Array", datab->j_result);
@@ -54,7 +54,7 @@ json_object *mx_if_public_chat(json_object *jobj, sqlite3 *db,
 // int lenth = json_object_array_length(datab->j_result);
 // printf("lenth: %d\n", lenth);
 // for (int i = 0; i < lenth; i++)
-//     printf("mx_if_chat: %s\n", json_object_get_string(json_object_array_get_idx(j_answer, i)));
+    printf("mx_if_chat: %s\n", json_object_get_string(j_answer));
 //
     mx_strdel(&datab->id);// comment in mx_is_activ
     mx_strdel(&datab->chat_id);
