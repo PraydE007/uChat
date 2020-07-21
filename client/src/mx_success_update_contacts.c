@@ -39,5 +39,7 @@ gboolean mx_success_update_contacts(void *data) {
     if (gui->chats)
         do_second_loop(gui, count);
     mx_clear_container(gui->l_messages);
+    if(gui->send_to)
+        free(gui->send_to);
     return 0;
 }
