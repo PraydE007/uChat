@@ -12,7 +12,7 @@ printf("status = %d\n", status);//
 printf("SOCKET = %d\n", sockfd);//
 printf("image = %s\n", image);//
     if (status >= 0)
-        send(sockfd, image, size, MSG_WAITALL);
+        write(sockfd, image, size);
     close(fd_open);
     mx_strdel(&image);
 }
