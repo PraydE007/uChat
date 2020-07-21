@@ -16,7 +16,6 @@ gboolean mx_recieve_image(void *data) {
     char *bunfer = malloc(sizeof(char *) * file_size);
     memset(bunfer, '\0', file_size);
     recv(gui->sockfd, bunfer, file_size, MSG_WAITALL);
-    printf("RECIEVE_IMAGE = %s\n", bunfer);
     gui->file_path = mx_strdup(name);
     int potok = open(name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
     write(potok, bunfer, file_size);

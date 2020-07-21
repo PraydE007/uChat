@@ -12,7 +12,6 @@ static void first_handle(char *answer, t_s_glade *gui, json_object *jobj) {
     if (!mx_strcmp(answer, "You have logged in!")) {
         gui->if_contact = 2;
         gui->key = (char *)json_object_get_string(json_object_object_get(jobj, "Security_key"));
-        printf("%s\n", gui->recv_data);
         gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_logging, gui, 0);
     }
     if (!mx_strcmp(answer, "You have registered successfully!"))
@@ -34,7 +33,6 @@ static void second_handle(char *answer, t_s_glade *gui) {
     if (!mx_strcmp(answer, "Public_receive_message"))
         gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_public_message, gui, 0);
     if (!mx_strcmp(answer, "Receive_file")) {
-        printf("\nYA ZASHEL V RECIEVE_IMAGE\n");
         mx_recieve_image(gui);
         gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_render_img, gui, 0);
     }
@@ -94,7 +92,6 @@ void *mx_client_recv(void *data) {
         }
         jobj = json_tokener_parse(gui->buffer);
         gui->recv_data = strdup(gui->buffer);
-        printf("RECV DATA: %s\n", gui->recv_data);
         answer = (char *)json_object_get_string(json_object_object_get(jobj, "Answer"));
         first_handle(answer, gui, jobj);
         second_handle(answer, gui);
