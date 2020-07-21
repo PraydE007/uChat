@@ -22,7 +22,7 @@ void *mx_doprocessing (void *data) {
     char buffer[MX_MAX_BYTES];
     const char *answer = NULL;
     json_object *jobj = NULL;
-    json_object *j_result = json_object_new_object();
+    json_object *j_result = NULL;
     json_object *j_socket = NULL;
 
     // pthread_mutex_lock(&(sockbd.mutex));
@@ -32,6 +32,7 @@ void *mx_doprocessing (void *data) {
     //send_mail("ozahirny@gmail.com", "DAROVA EPT\n");
     printf("SOCKET SERVER = %d\n", sockbd.sockfd);
     while (true) {
+        j_result = json_object_new_object();
         bzero(buffer, MX_MAX_BYTES);
         // mx_send_image("server/meme_avatar.png", sockbd.sockfd);
         // exit(0);
@@ -48,10 +49,13 @@ void *mx_doprocessing (void *data) {
             mx_user_deactivate(sockbd.bd, sockbd.sockfd);
             break;
         }
-        // if (mx_is_json(jobj, buffer)) {
-            jobj = json_tokener_parse(buffer);
+        if (mx_is_json(&jobj, buffer)) {
+            // jobj = json_tokener_parse(buffer);
+printf("3\n");
             json_object_object_add(jobj,"Socket", j_socket);
+printf("4\n");
             log_add_info(sockbd, jobj);
+printf("5\n");
             ///////// Затычка для добавления контактов
             if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Sending")) { //
                 // sockbd.login = mx_js_to_str(jobj, "Login"); //
@@ -120,14 +124,18 @@ void *mx_doprocessing (void *data) {
             // printf("%s\n", "TEST1");
             j_result = mx_dbase_handler(jobj, sockbd.bd); //
             // printf("%s\n", "TEST");
-        // }
-        // else
-        //     mx_add_str_to_js(j_result, "Answer", MX_CHEAT_MESSAGE);
-        //json_object_put(jobj); //
+        }
+        else {
+printf("6\n");
+            mx_add_str_to_js(j_result, "Answer", MX_CHEAT_MESSAGE);
+printf("7\n");
+        }
         //printf("json_object_to_json_string(j_result): %s\n", json_object_to_json_string(j_result)); //
         answer = json_object_to_json_string(j_result); //
+printf("8\n");
         printf("ANSWER(DOPROC) = %s\n", answer);
         n = send(sockbd.sockfd, answer, mx_strlen(answer),  0);
+        json_object_put(jobj); //
 
         // if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), MX_LOG_MES))
         //     n = send(sockbd.sockfd, MX_LOG_MES, mx_strlen(MX_LOG_MES),  0);
