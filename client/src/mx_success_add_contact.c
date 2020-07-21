@@ -7,7 +7,6 @@ gboolean mx_success_add_contact(void *data) {
     if (gui->sender) {
         if(mx_strcmp(gui->sender, contact)) {
             mx_push_chat(gui->l_chats, contact);
-            free(gui->sender);
         }
         else {
             mx_show_dialog(gui->w_chat,
