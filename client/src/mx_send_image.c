@@ -20,21 +20,15 @@ static char *get_file_name(char *file) {
 }
 
 static void write_file(int sockfd, char *file, int size, t_s_glade *gui) {
-    mx_printstr(file);
-    mx_printstr("\n");
     char *image = malloc(sizeof(char) * size);
     int status = 0;
-    mx_printstr("xzcxz\n");
     int fd_open = open(file, O_RDONLY);
-    mx_printstr("PPPPPP\n");
     char *file_name = get_file_name(file);
     char *result;
     char *login = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_l_login));
+
     memset(image, '\0', size);
-    printf("NAME : %s\n", file_name);
     status = read(fd_open, image, size);
-    printf("gui-login = %s\n", (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_l_login)));
-    printf("SIZE = %d\n", size);
     json_object *jobj = json_object_new_object();
     json_object *j_type = json_object_new_string("File");
     json_object *j_name = json_object_new_string(file_name);
@@ -52,14 +46,8 @@ static void write_file(int sockfd, char *file, int size, t_s_glade *gui) {
 
     if (file) {
         mx_p_own_img(gui->l_messages, file, gui->send_to);
-        printf("ReSULT = %s\n", result);
-        /// ВАЖНО ДЕЛАТЬ ПЕРВЫЙ СЕНД НА ВСЮ ПАМЯТЬ СТЕКА(БУФФЕРА В ДУПРОЦЕССИНГЕ), ЧТО БЫ ПАМЯТЬ НЕ ПЕРЕКРАИВАЛАСЬ
-        /// И ФАЙЛЫ ПЕРЕДАВАЛИСЬ ПОЛНОСТЬЮ. НА КЛИНТЕ СОКЕТ = 3 А НА СЕРВЕРЕ СОКЕТ = 6. ТАК И ДОЛЖНО БЫТЬ?
-        /// ПИШИТЕ НЕ СТЕСНЯЙТЕСЬ  =*
-        write(sockfd, result, mx_strlen(result));
-        printf("OTPRAVIL\n");
+        write(sockfd, result, MX_MAX_BYTES);
         send(sockfd, image, size, MSG_WAITALL);
-
     }
     close(fd_open);
 }
@@ -70,6 +58,5 @@ void mx_send_image(const char *file, int sockfd, t_s_glade *gui) {
 
     stat(file, &lt);
     file_size = lt.st_size;
-    printf("SOCKET = %d\n", sockfd);
     write_file(sockfd, (char *)file, file_size, gui);
 }

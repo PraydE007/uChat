@@ -16,44 +16,6 @@ static void log_add_info(t_sockbd sockbd, json_object *jobj) {
     write (sockbd.log_sescr, "\n", 1);
 }
 
-// static void send_mail(char *email, char *message) {
-//     int fd = open("MAIL", O_CREAT | O_RDWR);
-//     char cmd[1024];
-//     // char *command[] = {"sendmail", email, NULL};
-
-//     printf("SENDENDND !11!!1!!!!!\n");
-//     write(fd, message, strlen(message));
-//     sprintf(cmd, "zsh send.sh \"%s\" \"%s\"", message, email);
-//     system(cmd);
-//     system("rm -rf MAIL");
-//     close(fd);
-//    if (wpid == 0) {
-//        close(pipe_des[0]);
-//        dup2(pipe_des[1], 1);
-//        if (execvp("sendmail", command) != -1) {
-//            fprintf(stderr, "123\n");
-//        }
-//        else if (execvp("sendmail", command))
-//    }
-// }
-
-//void *mx_doprocessing (void *data) {
-//    t_sockbd sockbd = *(t_sockbd *)data;
-//    char buffer[43388];
-//    int n = 0;
-//
-//    bzero(buffer, 43388);
-//    n = recv(sockbd.sockfd, buffer, 43388, 0);
-//    mx_printstr("YA ZASHEL\n");
-//    write(1, buffer, 43388);
-//    int potok = open("/Users/ozahirnyi/uchat/test.png", O_RDWR | O_CREAT | O_APPEND, S_IWRITE | S_IREAD);
-//    write(potok, buffer, 43388);
-//    close(potok);
-//    return NULL;
-//}
-
-//static int recv_image(int size, )
-
 void *mx_doprocessing (void *data) {
     t_sockbd sockbd = *(t_sockbd *)data;
     int n = 0;
@@ -102,19 +64,20 @@ void *mx_doprocessing (void *data) {
                 bzero(buffer, MX_MAX_BYTES);
                 mx_printstr("YA ZASHEL\n");
                 int size = mx_atoi(mx_js_to_str(jobj, "Size"));
-                printf("SIZE :%d\n", size);
                 const char *name_file = mx_js_to_str(jobj, "Message");
                 // mkdir("server/tmp", );
-                // char *recv_name = mx_strjoin("server/tmp/", name_file);
+                 char *recv_name = mx_strjoin("server/tmp/", name_file);
                 printf("SIZE = %d\n", size);
                 char *bunfer = (char *)malloc(size);
     //            recv(sockbd.sockfd, bunfer, size, 0);
+                printf("YA UHOZHU1\n");
                 recv(sockbd.sockfd, bunfer, size, MSG_WAITALL);
-                int potok = open(name_file, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+                printf("YA UHOZHU2\n");
+                int potok = open(recv_name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
                 write(potok, bunfer, size);
                 close(potok);
-                free(bunfer);
-                continue;
+                mx_strdel(&bunfer);
+                printf("YA UHOZHU3\n");
             } //
             printf("%s\n", "TEST");
             // if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Private_chat")) { //
@@ -154,7 +117,6 @@ void *mx_doprocessing (void *data) {
             ///////// Конец затычки для профиля
 
             //printf("char *login: %s\n", login); //
-printf("json_object_to_json_string(jobj): %s\n", json_object_to_json_string(jobj));
             // printf("%s\n", "TEST1");
             j_result = mx_dbase_handler(jobj, sockbd.bd); //
             // printf("%s\n", "TEST");
@@ -164,7 +126,7 @@ printf("json_object_to_json_string(jobj): %s\n", json_object_to_json_string(jobj
         //json_object_put(jobj); //
         //printf("json_object_to_json_string(j_result): %s\n", json_object_to_json_string(j_result)); //
         answer = json_object_to_json_string(j_result); //
-printf("ANSWER(doproc) : %s\n\n", answer);
+        printf("ANSWER(DOPROC) = %s\n", answer);
         n = send(sockbd.sockfd, answer, mx_strlen(answer),  0);
 
         // if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), MX_LOG_MES))
