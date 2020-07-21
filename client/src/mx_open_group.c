@@ -44,13 +44,11 @@ void mx_open_group(GtkButton *btn, gpointer data) {
     if (mx_strcmp(group_name, "")) {
         init_json(jobj, group_name, gui, login);
         send_data = (char *)json_object_to_json_string(jobj);
-        printf("SEND_DATA :%s\n", send_data);
         send(gui->sockfd, send_data, strlen(send_data), 0);
     }
     else if (!gui->if_contact && gui->send_to) {
         init_sec_json(jobj, gui, login);
     send_data = (char *)json_object_to_json_string(jobj);
-            printf("SEND_DATA :%s\n", send_data);
         send(gui->sockfd, send_data, strlen(send_data), 0);
         do_wiget(gui);
     }

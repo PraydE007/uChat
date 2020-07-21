@@ -1,7 +1,6 @@
 #include "client.h"
 
 void mx_init_signal_7(t_s_glade *gui) {
-    // Group Window Signals
     g_signal_connect(gui->b_g_close, "clicked",
                     G_CALLBACK(mx_close_group), gui);
     g_signal_connect(gui->b_f_user, "clicked",
