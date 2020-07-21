@@ -13,6 +13,7 @@ gboolean mx_success_members_list(void *data) {
     const char *members_list = json_to_str(jobj, "Members_list");
     char **splited_list = mx_strsplit(members_list, ',');
     int count = 0;
+
     mx_clear_container(gui->l_g_group);
     while(splited_list[count]) {
         mx_push_chat(gui->l_g_group, splited_list[count]);

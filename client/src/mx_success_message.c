@@ -44,7 +44,8 @@ gboolean mx_success_message(void *data) {
             display_chat(gui, sender);
     }
     if (gui->send_to)
-        mx_p_owned(gui->l_messages, message, sender);
+        if (!mx_strcmp(gui->send_to, sender))
+            mx_p_owned(gui->l_messages, message, sender);
     g_timeout_add(10, scroll, gui);
     return 0;
 }
