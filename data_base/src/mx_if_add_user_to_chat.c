@@ -1,20 +1,5 @@
 #include "dbase.h"
 
-// static int cb_id_finder(void *datab, int argc, char **argv, char **azColName) {
-//     (void)argc;
-//     (void)azColName;
-//     if (datab) {
-//         t_datab *new_datab = (t_datab *)datab;
-
-//         if (!mx_strcmp(new_datab->login_db2, argv[1])) {
-//             new_datab->second_id = mx_strdup(argv[0]);
-//             new_datab->logtrigger = 1;
-//             return 1;
-//         }
-//     }
-//     return 0;
-// }
-
 static int cb_find_chat_id_and_status(void *datab, int argc, char **argv,
                                                             char **azColName) {
     (void)argc;
@@ -42,27 +27,6 @@ static int cb_find_contact_id_in_chat(void *datab, int argc, char **argv,
     }
     return 0;
 }
-
-// static int chat_notification(void *datab, int argc, char **argv,
-//                                                             char **azColName) {
-//     (void)argc;
-//     (void)azColName;
-//     if (datab) {
-//         t_datab *new_datab = (t_datab *)datab;
-//         int n;
-//         json_object *receive_notification = json_object_new_object();
-//         mx_add_str_to_js(receive_notification, "Answer", "You were added to the chat!");
-//         mx_add_str_to_js(receive_notification, "Chat_name",
-//                                                 (char *)new_datab->chat_name_db);
-//         mx_add_str_to_js(receive_notification, "Inviter",
-//                                                 (char *)new_datab->login_db);
-//         new_datab->message_db = json_object_get_string(receive_notification);
-//         n = send(mx_atoi(argv[0]), new_datab->message_db,
-//                                         mx_strlen(new_datab->message_db),  0);
-//         printf("new_datab->message_db: %s\n", new_datab->message_db);//
-//     }
-//     return 0;
-// }
 
 static void insert_contact_in_to_chat(sqlite3 *db, char *sql, t_datab *datab) {
     sprintf(sql, "insert into USERS_CHATS (USER_id, CHAT_id, USER_status)" \
@@ -118,7 +82,6 @@ json_object *mx_if_add_user_to_chat(json_object *jobj, sqlite3 *db,
     }
     else
         mx_add_str_to_js(datab->j_result, "Answer", MX_CHEAT_MESSAGE);
-// printf("if_add_contact(j_result): %s\n", json_object_to_json_string(datab->j_result));//
     mx_strdel(&datab->id);// comment in mx_is_active
     mx_strdel(&datab->chat_status);
     return datab->j_result;

@@ -20,7 +20,6 @@ int mx_cb_chat_notification(void *datab, int argc, char **argv,
         new_datab->message_db = json_object_get_string(rciv_not);
         n = send(mx_atoi(argv[0]), new_datab->message_db,
                                         mx_strlen(new_datab->message_db),  0);
-printf("new_datab->message_db!!!: %s\n", new_datab->message_db);//
     }
     return 0;
 }

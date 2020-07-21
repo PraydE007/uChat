@@ -6,7 +6,6 @@ static int cb_login_checking(void *datab, int argc, char **argv,
     (void)azColName;
     if (datab) {
         t_datab *new_datab = (t_datab *)datab;
-// printf("new_datab->login_db: %s\n", new_datab->login_db2); //
         if (!mx_strcmp(new_datab->login_db2, argv[0])) {
             new_datab->logtrigger = 1;
             return 1;
@@ -26,6 +25,5 @@ bool mx_check_login_on_server(sqlite3 *db, t_datab *datab, const char *login) {
         datab->logtrigger = 0;
         result = true;
     }
-// printf("answer: %d\n", result); //
     return result;
 }

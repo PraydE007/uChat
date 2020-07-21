@@ -46,7 +46,6 @@ json_object *mx_if_change_passwd(json_object *jobj, sqlite3 *db,
     }
     else
         mx_add_str_to_js(j_result, "Answer", MX_CHEAT_MESSAGE);
-// printf("mx_if_change_passwd(j_result): %s\n", json_object_to_json_string(j_result));//
     mx_strdel(&datab->id);// comment in mx_is_active
     datab->passtrigger = 0;
     return j_result;
