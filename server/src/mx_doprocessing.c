@@ -105,20 +105,18 @@ void *mx_doprocessing (void *data) {
                 printf("SIZE :%d\n", size);
                 const char *name_file = mx_js_to_str(jobj, "Message");
                 // mkdir("server/tmp", );
-                char *recv_name = mx_strjoin("server/tmp/", name_file);
+                // char *recv_name = mx_strjoin("server/tmp/", name_file);
                 printf("SIZE = %d\n", size);
                 char *bunfer = (char *)malloc(size);
     //            recv(sockbd.sockfd, bunfer, size, 0);
                 recv(sockbd.sockfd, bunfer, size, MSG_WAITALL);
-                int potok = open(recv_name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+                int potok = open(name_file, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
                 write(potok, bunfer, size);
                 close(potok);
                 free(bunfer);
-                // continue;
-// printf("json_object_to_json_string(jobj): %s\n", json_object_to_json_string(jobj));//
-
+                continue;
             } //
-
+            printf("%s\n", "TEST");
             // if (!mx_strcmp(mx_js_to_str(jobj, "Type"), "Private_chat")) { //
             //     // sockbd.login = mx_js_to_str(jobj, "Login"); //
             //     // login = mx_strdup(sockbd.login); //

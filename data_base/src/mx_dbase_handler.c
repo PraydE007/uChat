@@ -60,7 +60,6 @@ json_object *mx_dbase_handler(json_object *jobj, sqlite3 *db) {
         j_result = mx_if_send_message(jobj, db, datab);
     else
         mx_add_str_to_js(j_result, "Answer", MX_CHEAT_MESSAGE);
-// printf("db_handler(j_result): %s\n", json_object_to_json_string(j_result));//
     mx_dealloc_datab(&datab);
     return j_result;
 }
