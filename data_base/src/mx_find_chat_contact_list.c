@@ -23,6 +23,6 @@ void mx_find_chat_contact_list(sqlite3 *db, t_datab *datab, char *sql) {
     mx_table_setting(db, sql, cb_get_chat_contact_list, datab);
     if (datab->commd)
         mx_add_str_to_js(datab->j_result, "Members_list", datab->commd);
-printf("find_chat_contact_list: %s\n", json_object_to_json_string(datab->j_result));//
+// printf("find_chat_contact_list: %s\n", json_object_to_json_string(datab->j_result));//
     mx_strdel(&datab->commd);
 }

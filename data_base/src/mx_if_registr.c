@@ -46,7 +46,7 @@ json_object *mx_if_registr(json_object *jobj, sqlite3 *db, t_datab *datab) {
         mx_add_str_to_js(j_result, "Answer", MX_REG_CHAT_ERR);
     else
         insert_user(jobj, j_result, db, sql);
-printf("answer: %s\n", mx_js_to_str(j_result, "Answer")); //
+// printf("answer: %s\n", mx_js_to_str(j_result, "Answer")); //
     datab->logtrigger = 0;
     mx_strdel(&datab->chat_name);
     return j_result;

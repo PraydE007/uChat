@@ -62,7 +62,7 @@ json_object *mx_if_private_chat(json_object *jobj, sqlite3 *db,
 int lenth = json_object_array_length(datab->j_result);
 printf("lenth: %d\n", lenth);
 for (int i = 0; i < lenth; i++)
-    printf("mx_if_private_chat: %s\n", json_object_get_string(json_object_array_get_idx(datab->j_result, i)));
+    // printf("mx_if_private_chat: %s\n", json_object_get_string(json_object_array_get_idx(datab->j_result, i)));
 // enum json_type type;
 // type = json_object_get_type (datab->j_result);
 // printf("type: %u\n", type);

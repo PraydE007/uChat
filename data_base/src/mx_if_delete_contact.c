@@ -49,7 +49,7 @@ json_object *mx_if_delete_contact(json_object *jobj, sqlite3 *db,
     }
     else
         mx_add_str_to_js(j_result, "Answer", MX_CHEAT_MESSAGE);
-printf("if_delete_contact(j_result): %s\n", json_object_to_json_string(j_result));//
+// printf("if_delete_contact(j_result): %s\n", json_object_to_json_string(j_result));//
     mx_strdel(&datab->id);// comment in mx_is_active
     mx_strdel(&datab->chat_id);
     mx_strdel(&datab->chat_name);

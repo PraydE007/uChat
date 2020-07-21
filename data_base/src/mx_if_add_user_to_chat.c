@@ -118,7 +118,7 @@ json_object *mx_if_add_user_to_chat(json_object *jobj, sqlite3 *db,
     }
     else
         mx_add_str_to_js(datab->j_result, "Answer", MX_CHEAT_MESSAGE);
-printf("if_add_contact(j_result): %s\n", json_object_to_json_string(datab->j_result));//
+// printf("if_add_contact(j_result): %s\n", json_object_to_json_string(datab->j_result));//
     mx_strdel(&datab->id);// comment in mx_is_active
     mx_strdel(&datab->chat_status);
     return datab->j_result;
