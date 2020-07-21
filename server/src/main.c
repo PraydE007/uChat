@@ -51,8 +51,10 @@ int main(int argc, char **argv) {
    pthread_t x = 0;
    t_sockbd *sockbd = (t_sockbd *)malloc(sizeof(t_sockbd));
 
+
    usage_port(argc, argv);
-   // mx_demonize();
+   mx_demonize();
+   sockbd->log_sescr = mx_create_log();
    sockfd = socket(AF_INET, SOCK_STREAM, 0);
    usage_socket(sockfd, sockbd);
    portno = atoi(argv[1]);
