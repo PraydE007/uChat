@@ -86,7 +86,7 @@ void *mx_client_recv(void *data) {
 
     while (true) {
         bzero(gui->buffer, MX_MAX_BYTES);
-        n = read(gui->sockfd, gui->buffer, MX_MAX_BYTES);
+        n = recv(gui->sockfd, gui->buffer, MX_MAX_BYTES, 0);
         if (n <= 0) {
             gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_reconecting, gui, 0);
             sleep(5);
