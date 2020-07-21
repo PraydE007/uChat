@@ -56,8 +56,10 @@ json_object *mx_dbase_handler(json_object *jobj, sqlite3 *db) {
     else if (!mx_strcmp("Chat", mx_js_to_str(jobj, "Type")))
         j_result = mx_if_chat(jobj, db, datab);
     else if (!mx_strcmp("Send_message", mx_js_to_str(jobj, "Type"))
-            || !mx_strcmp("File", mx_js_to_str(jobj, "Type")))
+            || !mx_strcmp("File", mx_js_to_str(jobj, "Type"))) {
+        printf("YA ZASHEL(MX_DBASE_HANDLER\n");
         j_result = mx_if_send_message(jobj, db, datab);
+    }
     else
         mx_add_str_to_js(j_result, "Answer", MX_CHEAT_MESSAGE);
     mx_dealloc_datab(&datab);

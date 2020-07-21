@@ -34,6 +34,7 @@ static void second_handle(char *answer, t_s_glade *gui) {
     if (!mx_strcmp(answer, "Public_receive_message"))
         gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_public_message, gui, 0);
     if (!mx_strcmp(answer, "Receive_file")) {
+        printf("\nYA ZASHEL V RECIEVE_IMAGE\n");
         mx_recieve_image(gui);
         gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_render_img, gui, 0);
     }
