@@ -156,7 +156,7 @@ void *mx_doprocessing (void *data) {
             ///////// Конец затычки для профиля
 
             //printf("char *login: %s\n", login); //
-// printf("json_object_to_json_string(jobj): %s\n", json_object_to_json_string(jobj));
+printf("json_object_to_json_string(jobj): %s\n", json_object_to_json_string(jobj));
             // printf("%s\n", "TEST1");
             j_result = mx_dbase_handler(jobj, sockbd.bd); //
             // printf("%s\n", "TEST");
@@ -166,9 +166,8 @@ void *mx_doprocessing (void *data) {
         //json_object_put(jobj); //
         //printf("json_object_to_json_string(j_result): %s\n", json_object_to_json_string(j_result)); //
         answer = json_object_to_json_string(j_result); //
-// printf("ANSWER(doproc) : %s\n\n", answer);
+printf("ANSWER(doproc) : %s\n\n", answer);
         n = send(sockbd.sockfd, answer, mx_strlen(answer),  0);
-printf("1\n");
 
         // if (!mx_strcmp(mx_js_to_str(j_result, "Answer"), MX_LOG_MES))
         //     n = send(sockbd.sockfd, MX_LOG_MES, mx_strlen(MX_LOG_MES),  0);
