@@ -23,32 +23,40 @@ static void display_chat(t_s_glade *gui, const char *sender) {
     gui->if_contact = true;
 }
 
+static t_buf_suc_mess suc_message(json_object *jobj) {
+    t_buf_suc_mess suc_mess;
+
+    suc_mess.message = json_to_str(jobj, "Message");
+    suc_mess.sender = json_to_str(jobj, "Sender");
+    suc_mess.contacts = (char *)json_to_str(jobj, "Contacts");
+    suc_mess.sp_cont = mx_strsplit(suc_mess.contacts, ',');
+
+    return suc_mess;
+}
+
 gboolean mx_success_message(void *data) {
     t_s_glade *gui = (t_s_glade *)data;
     json_object *jobj = json_tokener_parse(gui->recv_data);
-    const char *message = json_to_str(jobj, "Message");
-    const char *sender = json_to_str(jobj, "Sender");
-    char *contacts = (char *)json_to_str(jobj, "Contacts");
-    char **sp_cont = mx_strsplit(contacts, ',');
-    gui->sender = mx_strdup(sender);
+    t_buf_suc_mess suc_mess = suc_message(jobj);
     int count = 0;
 
+    gui->sender = mx_strdup(suc_mess.sender);
     if (!gui->if_contact) {
-        if (sp_cont) {
-            while (sp_cont[count]) {
-                if (mx_strcmp(sp_cont[count], sender)) {
-                    display_chat(gui, sender);
+        if (suc_mess.sp_cont) {
+            while (suc_mess.sp_cont[count]) {
+                if (mx_strcmp(suc_mess.sp_cont[count], suc_mess.sender)) {
+                    display_chat(gui, suc_mess.sender);
                     break;
                 }
                 count++;
             }
         }
         else
-            display_chat(gui, sender);
+            display_chat(gui, suc_mess.sender);
     }
     if (gui->send_to)
-        if (!mx_strcmp(gui->send_to, sender))
-            mx_p_owned(gui->l_messages, message, sender);
+        if (!mx_strcmp(gui->send_to, suc_mess.sender))
+            mx_p_owned(gui->l_messages, suc_mess.message, suc_mess.sender);
     g_timeout_add(10, scroll, gui);
     return 0;
 }

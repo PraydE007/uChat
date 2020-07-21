@@ -258,9 +258,12 @@ typedef struct s_buf_suc_mess {
     const char *message;
     const char *sender;
     char **chats;
-    char **contacts;
+    char *contacts;
+    char **sp_cont;
     int count;
 }   t_buf_suc_mess;
+
+
 
 // VALIDATION
 int mx_check_number(const char *number, int j);
