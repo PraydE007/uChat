@@ -14,6 +14,7 @@ static t_buf_change_pass buf_change_pass(t_s_glade *gui) {
     change_pass.passwd =
         (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_l_password));
     change_pass.old_pass = gtk_entry_get_text(GTK_ENTRY(gui->e_p_oldpass));
+    change_pass.old_pass = mx_hash(change_pass.old_pass);
     change_pass.pass0 = gtk_entry_get_text(GTK_ENTRY(gui->e_p_newpass1));
     change_pass.pass1 = gtk_entry_get_text(GTK_ENTRY(gui->e_p_newpass2));
     return change_pass;
