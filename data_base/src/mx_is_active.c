@@ -15,7 +15,7 @@ static int cb_id_finder(void *datab, int argc, char **argv, char **azColName) {
 }
 
 static int cb_check_acty(void *datab, int argc, char **argv,
-                                                            char **azColName) {
+                         char **azColName) {
     (void)argc;
     (void)azColName;
     if (datab) {

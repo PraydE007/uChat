@@ -1,7 +1,7 @@
 #include "dbase.h"
 
 static void contact_deleting(json_object *jobj, json_object *j_result,
-                                                sqlite3 *db, t_datab *datab) {
+                             sqlite3 *db, t_datab *datab) {
     char sql[255];
 
     datab->login_db2 = mx_js_to_str(jobj, "Contact_login");

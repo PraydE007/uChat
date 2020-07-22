@@ -1,7 +1,7 @@
 #include "dbase.h"
 
 static int cb_login_finder(void *login, int argc, char **argv,
-                                                            char **azColName) {
+                           char **azColName) {
     (void)argc;
     (void)azColName;
 

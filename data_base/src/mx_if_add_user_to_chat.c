@@ -1,7 +1,7 @@
 #include "dbase.h"
 
 static int cb_find_chat_id_and_status(void *datab, int argc, char **argv,
-                                                            char **azColName) {
+                                      char **azColName) {
     (void)argc;
     (void)azColName;
     if (datab) {
@@ -14,7 +14,7 @@ static int cb_find_chat_id_and_status(void *datab, int argc, char **argv,
 }
 
 static int cb_find_contact_id_in_chat(void *datab, int argc, char **argv,
-                                                            char **azColName) {
+                                      char **azColName) {
     (void)argc;
     (void)azColName;
     if (datab) {
@@ -65,7 +65,7 @@ static void condition_for_chat(sqlite3 *db, t_datab *datab, char *sql) {
 }
 
 json_object *mx_if_add_user_to_chat(json_object *jobj, sqlite3 *db,
-                                                            t_datab *datab) {
+                                    t_datab *datab) {
     datab->j_result = json_object_new_object();
     char sql[255];
 

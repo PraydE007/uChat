@@ -1,7 +1,7 @@
 #include "dbase.h"
 
 static int cb_massege_history(void *datab, int argc, char **argv,
-                                                            char **azColName) {
+                              char **azColName) {
     (void)argc;
     (void)azColName;
     if (datab) {
@@ -25,7 +25,7 @@ static int cb_massege_history(void *datab, int argc, char **argv,
 }
 
 static void if_active(json_object *jobj, json_object *j_answer, sqlite3 *db,
-                                                            t_datab *datab) {
+                      t_datab *datab) {
     char sql[255];
 
     mx_add_str_to_js(j_answer, "Answer", "Public message history!");
@@ -40,7 +40,7 @@ static void if_active(json_object *jobj, json_object *j_answer, sqlite3 *db,
 }
 
 json_object *mx_if_public_chat(json_object *jobj, sqlite3 *db,
-                                                            t_datab *datab) {
+                               t_datab *datab) {
     json_object *j_answer = json_object_new_object();
     datab->j_result = json_object_new_array();
     datab->db = db;

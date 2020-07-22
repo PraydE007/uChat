@@ -1,7 +1,7 @@
 #include "dbase.h"
 
 static void insert_message(json_object *jobj, json_object *receive_message,
-                                                sqlite3 *db, t_datab *datab) {
+                           sqlite3 *db, t_datab *datab) {
     char sql[4096];
 
     if (!mx_strcmp("File", mx_js_to_str(jobj, "Type"))) {
@@ -79,7 +79,7 @@ static void db_handler_for_message
 }
 
 json_object *mx_if_send_message(json_object *jobj, sqlite3 *db,
-                                                            t_datab *datab) {
+                                t_datab *datab) {
     json_object *receive_message = json_object_new_object();
     json_object *j_answer = json_object_new_object();
     datab->j_result = json_object_new_array();

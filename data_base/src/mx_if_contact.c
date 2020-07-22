@@ -1,7 +1,7 @@
 #include "dbase.h"
 
 static int cb_contact_id_finder(void *datab, int argc, char **argv,
-                                                            char **azColName) {
+                                char **azColName) {
     (void)argc;
     (void)azColName;
     if (datab) {
@@ -45,7 +45,7 @@ static void insert_contact(sqlite3 *db, char *sql, t_datab *datab) {
 }
 
 void condition_for_contact(json_object *j_result, sqlite3 *db, t_datab *datab,
-                                                                   char *sql) {
+                           char *sql) {
     sprintf(sql, "select ID, LOGIN from USERS;");
     mx_table_setting(db, sql, mx_cb_find_user_id, datab);
     if (datab->second_id) {

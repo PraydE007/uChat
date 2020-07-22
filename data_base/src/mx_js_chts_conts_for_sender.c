@@ -10,7 +10,7 @@ static int cb_chs_cnts(void *datab, int argc, char **argv,char **colName) {
 }
 
 static void call_to_db(json_object *j_result, sqlite3 *db, t_datab *datab,
-                                                                char *sql) {
+                       char *sql) {
     int connection_point;
 
     connection_point = sqlite3_exec(db, sql, cb_chs_cnts, &datab->commd, NULL);
@@ -23,7 +23,7 @@ static void call_to_db(json_object *j_result, sqlite3 *db, t_datab *datab,
 }
 
 void mx_js_chts_conts_for_sender(json_object *j_result, sqlite3 *db,
-                                                    t_datab *datab, char *sql) {
+                                 t_datab *datab, char *sql) {
     sprintf(sql, "select CHAT_NAME from CHATS INNER JOIN USERS_CHATS " \
             "ON ID = CHAT_id where CHAT_STATUS = 'public' and USER_id = %s;",
             datab->id);
