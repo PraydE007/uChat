@@ -19,6 +19,4 @@ chat_base.db
 Makefile.nix
 *~
 uchat_server.log
-modified:   server/tmp/meme_avatar.png
-*.jpg
-*.png
+*.gch
