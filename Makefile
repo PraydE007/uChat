@@ -142,7 +142,7 @@ SV_SRC		=	main.c \
 				mx_demonize.c \
 				mx_create_log.c \
 				mx_send_image_from_server.c \
-
+				mx_buf_doprocessing.c \
 
 CL_SRCS	=	$(addprefix $(CL_SRCD)/, $(CL_SRC))
 SV_SRCS =	$(addprefix $(SV_SRCD)/, $(SV_SRC))
