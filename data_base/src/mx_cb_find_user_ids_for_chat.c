@@ -1,7 +1,7 @@
 #include "dbase.h"
 
 int mx_cb_find_user_ids_for_chat(void *datab, int argc, char **argv,
-                                                            char **azColName) {
+                                 char **azColName) {
     (void)argc;
     (void)azColName;
     if (datab) {

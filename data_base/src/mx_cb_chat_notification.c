@@ -1,7 +1,7 @@
 #include "dbase.h"
 
 int mx_cb_chat_notification(void *datab, int argc, char **argv,
-                                                            char **azColName) {
+                            char **azColName) {
     (void)argc;
     (void)azColName;
     if (datab) {

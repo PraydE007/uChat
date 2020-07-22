@@ -1,7 +1,7 @@
 #include "dbase.h"
 
 static int cb_chat_status_checking(void *datab, int argc, char **argv,
-                                                            char **azColName) {
+                                   char **azColName) {
     (void)argc;
     (void)azColName;
     if (datab) {

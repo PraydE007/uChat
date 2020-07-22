@@ -1,7 +1,7 @@
 #include "dbase.h"
 
 static void insert_user(json_object *jobj, json_object *j_result, sqlite3 *db,
-                                                                    char *sql) {
+                        char *sql) {
     if (mx_js_to_str(jobj, "Login") && mx_js_to_str(jobj, "Passwd")
         && mx_js_to_str(jobj, "Email") && mx_js_to_str(jobj, "Mobile")) {
         sprintf(sql, "insert into USERS (LOGIN, PASSWORD, EMAIL, MOBILE)" \

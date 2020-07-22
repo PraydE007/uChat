@@ -22,7 +22,7 @@ static void profile_insert(json_object *j_result, sqlite3 *db, t_datab *datab) {
 }
 
 json_object *mx_if_change_profile(json_object *jobj, sqlite3 *db,
-                                                            t_datab *datab) {
+                                  t_datab *datab) {
     json_object *j_result = json_object_new_object();
 
     datab->socket = mx_js_to_int(jobj, "Socket");

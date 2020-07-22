@@ -1,7 +1,7 @@
 #include "dbase.h"
 
 json_object *mx_if_get_chat_profile(json_object *jobj, sqlite3 *db,
-                                                            t_datab *datab) {
+                                    t_datab *datab) {
     datab->j_result = json_object_new_object();
     char sql[255];
 

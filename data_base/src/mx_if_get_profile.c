@@ -1,7 +1,7 @@
 #include "dbase.h"
 
 static int cb_get_profile(void *datab, int argc, char **argv,
-                                                            char **azColName) {
+                          char **azColName) {
     (void)argc;
     (void)azColName;
     if (datab) {

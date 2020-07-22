@@ -13,6 +13,7 @@
 typedef struct s_sockbd {
     int n;
     int sockfd;
+    int sockfd2;
     int log_sescr;
     const char *login;
     sqlite3 *bd;

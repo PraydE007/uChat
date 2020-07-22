@@ -1,7 +1,7 @@
 #include "dbase.h"
 
 static void chat_changing(json_object *j_result, sqlite3 *db, t_datab *datab,
-                                                                    char *sql) {
+                          char *sql) {
 
     mx_add_str_to_js(j_result, "Answer", "Chat name is changed!");
     sprintf(sql, "update CHATS set CHAT_NAME = '%s' where ID = '%s'",
@@ -11,7 +11,7 @@ static void chat_changing(json_object *j_result, sqlite3 *db, t_datab *datab,
 }
 
 json_object *mx_if_change_chat(json_object *jobj, sqlite3 *db,
-                                                            t_datab *datab) {
+                               t_datab *datab) {
     datab->j_result = json_object_new_object();
     char sql[255];
 

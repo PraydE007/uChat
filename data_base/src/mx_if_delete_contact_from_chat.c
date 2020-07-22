@@ -1,7 +1,7 @@
 #include "dbase.h"
 
 static void delete_contact_rfom_the_chat(sqlite3 *db, char *sql,
-                                                            t_datab *datab) {
+                                         t_datab *datab) {
     sprintf(sql, "delete from USERS_CHATS where USER_id = %s " \
             "and CHAT_id = %s;", datab->second_id, datab->chat_id);
     mx_table_creation(db, sql, mx_callback);
@@ -11,13 +11,13 @@ static void delete_contact_rfom_the_chat(sqlite3 *db, char *sql,
     datab->id_db = datab->second_id;
     datab->message_db = "You were deleted from the chat!";
     sprintf(sql, "select SOCKET from ACTIVITY where USER_id = '%s';",
-                                                            datab->second_id);
+            datab->second_id);
     mx_table_setting(db, sql, mx_cb_chat_notification, datab);
     mx_strdel(&datab->second_id);
 }
 
 static void condition_for_admin(json_object *jobj, sqlite3 *db,
-                                                    t_datab *datab, char *sql) {
+                                t_datab *datab, char *sql) {
     datab->login_db2 = mx_js_to_str(jobj, "Contact_login");
     sprintf(sql, "select ID, LOGIN from USERS");
     mx_table_setting(db, sql, mx_cb_find_user_id, datab);
@@ -35,7 +35,7 @@ static void condition_for_admin(json_object *jobj, sqlite3 *db,
 }
 
 json_object *mx_if_delete_contact_from_chat(json_object *jobj, sqlite3 *db,
-                                                            t_datab *datab) {
+                                            t_datab *datab) {
     datab->j_result = json_object_new_object();
     char sql[255];
 

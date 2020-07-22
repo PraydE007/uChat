@@ -1,7 +1,7 @@
 #include "dbase.h"
 
 static int cb_get_profile(void *datab, int argc, char **argv,
-                                                            char **azColName) {
+                          char **azColName) {
     (void)argc;
     (void)azColName;
     if (datab) {
@@ -17,7 +17,7 @@ static int cb_get_profile(void *datab, int argc, char **argv,
 }
 
 json_object *mx_if_get_contact_profile(json_object *jobj, sqlite3 *db,
-                                                            t_datab *datab) {
+                                       t_datab *datab) {
     json_object *j_result = json_object_new_object();
     char sql[255];
 
