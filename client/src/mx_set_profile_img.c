@@ -4,7 +4,7 @@ void mx_set_profile_img(GtkButton *button, gpointer data) {
     t_s_glade *gui = (t_s_glade *)data;
     char *group_img = mx_open_file_chooser(GTK_WINDOW(gui->w_profile));
     char *login = (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_l_login));
-    mx_rep_img(gui->i_avatar, group_img, 250, 250);
+    mx_rep_img(gui->i_avatar, group_img, 225, 225);
 
     GList *head = gtk_container_get_children(GTK_CONTAINER(gui->l_chats));
     GList *node = head;
