@@ -24,8 +24,8 @@ static void condition_for_admin(json_object *jobj, sqlite3 *db,
     sprintf(sql, "select ID from CHATS where CHAT_NAME = '%s';",
             datab->chat_name_db);
     mx_table_setting(db, sql, mx_cb_find_chat_id, datab);
-    if (mx_is_chat_member(db, datab, sql)) {
-        if(!mx_strcmp(datab->id, datab->second_id))
+    if (datab->second_id && mx_is_chat_member(db, datab, sql)) {
+        if (!mx_strcmp(datab->id, datab->second_id))
             mx_chat_deleting(db, datab, sql);
         else
             delete_contact_rfom_the_chat(db, sql, datab);
