@@ -14,9 +14,11 @@ static t_buf_change_pass buf_change_pass(t_s_glade *gui) {
     change_pass.passwd =
         (char *)gtk_entry_get_text(GTK_ENTRY(gui->e_l_password));
     change_pass.old_pass = gtk_entry_get_text(GTK_ENTRY(gui->e_p_oldpass));
-    change_pass.old_pass = mx_hash(change_pass.old_pass);
+    change_pass.old_pass = mx_hash((char *)change_pass.old_pass);
     change_pass.pass0 = gtk_entry_get_text(GTK_ENTRY(gui->e_p_newpass1));
+    change_pass.pass0 = mx_hash((char *)change_pass.pass0);
     change_pass.pass1 = gtk_entry_get_text(GTK_ENTRY(gui->e_p_newpass2));
+    change_pass.pass1 = mx_hash((char *)change_pass.pass1);
     return change_pass;
 }
 
@@ -58,7 +60,7 @@ void mx_change_pass(GtkButton *button, gpointer data) {
         mx_show_dialog(gui->w_profile, "Incorrect password\n");
     else if (check_data(change_pass.pass0) == 0)
         mx_show_dialog(gui->w_profile, "Password mismatch\n");
-    if (strcmp(change_pass.passwd, change_pass.old_pass) != 0)
-        mx_show_dialog(gui->w_profile, "Wrong password!\n");
+    // if (strcmp(change_pass.passwd, change_pass.old_pass) != 0)
+    //     mx_show_dialog(gui->w_profile, "Wrong password!\n");
     set_text_pass(gui);
 }

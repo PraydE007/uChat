@@ -361,6 +361,7 @@ gboolean mx_error_logging(void *data);
 gboolean mx_error_add_user(void *data);
 gboolean mx_error_delete_user(void *data);
 gboolean mx_error_add_yourself(void *data);
+gboolean mx_error_passwd(void *data);
 //successes
 gboolean mx_success_logging(void *data);
 gboolean mx_success_registr(void *data);
