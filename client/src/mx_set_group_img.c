@@ -18,6 +18,5 @@ void mx_set_group_img(GtkButton *button, gpointer data) {
         node = g_list_next(node);
     }
     g_list_free(head);
-
     (void)button;
 }
