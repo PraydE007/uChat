@@ -149,10 +149,6 @@ SV_SRCS =	$(addprefix $(SV_SRCD)/, $(SV_SRC))
 CL_OBJS	=	$(addprefix $(CL_OBJD)/, $(CL_SRC:%.c=%.o))
 SV_OBJS	=	$(addprefix $(SV_OBJD)/, $(SV_SRC:%.c=%.o))
 
-all: install
-
-$(FILE:a/%=%)
-
 install: install_db $(LMXA) $(DB_MXA) install_client install_server
 
 install_db:
@@ -167,7 +163,6 @@ $(CL_NAME): $(CL_OBJS)
 $(CL_OBJD)/%.o: $(CL_SRCD)/%.c $(CL_INCS)
 	@clang $(CFLG) -c $< $(CL_GTK_SORT_FLAGS) -I/usr/local/opt/openssl/include/ -o $@ -I$(CL_INCD) -I$(LMXI)
 	@printf "\r\33[2K$(CL_NAME) \033[33;1mcompile \033[0m$(<:$(CL_SRCD)/%.c=%) "
-
 
 $(CL_OBJS): | $(CL_OBJD)
 
