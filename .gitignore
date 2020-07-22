@@ -1,4 +1,4 @@
-.DS_Store
+.S_Store
 ._.DS_Store
 *.o
 *.out
@@ -19,6 +19,5 @@ chat_base.db
 Makefile.nix
 *~
 uchat_server.log
-modified:   server/tmp/meme_avatar.png
-*.jpg
-*.png
+*.gch
+test_json.c
