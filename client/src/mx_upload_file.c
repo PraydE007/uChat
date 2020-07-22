@@ -6,6 +6,7 @@ void mx_upload_file(GtkButton *btn, gpointer data) {
 
     (void)btn;
     (void)filepath;
-    mx_send_image(filepath, gui->sockfd, gui);
+    if (filepath)
+        mx_send_image(filepath, gui->sockfd, gui);
     // gtk_widget_show_all(gui->f_chooser);
 }

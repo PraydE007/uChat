@@ -11,6 +11,7 @@
 #include <sys/stat.h>
 
 typedef struct s_sockbd {
+    int n;
     int sockfd;
     int log_sescr;
     const char *login;

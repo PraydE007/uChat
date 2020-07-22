@@ -74,6 +74,8 @@ static void fourth_handle(char *answer, t_s_glade *gui) {
         gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_success_delete_member, gui, 0);
     if (!mx_strcmp(answer, "You can not add yourself into contacts!"))
         gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_error_add_yourself, gui, 0);
+    if (!mx_strcmp(answer, "Wrong password!"))
+        gdk_threads_add_idle_full(G_PRIORITY_HIGH_IDLE, mx_error_passwd, gui, 0);
 }
 
 void *mx_client_recv(void *data) {
