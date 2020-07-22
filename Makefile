@@ -153,11 +153,12 @@ all: install
 
 $(FILE:a/%=%)
 
-install: install_client install_server
+install: install_db $(LMXA) $(DB_MXA) install_client install_server
 
 install_db:
+	@make -sC $(DB_MXD)
 
-install_client: $(LMXA) $(CL_NAME)
+install_client: $(CL_NAME)
 
 $(CL_NAME): $(CL_OBJS)
 	@clang $(CFLG) $(CL_OBJS) $(CL_GTK_FLAGS) -L$(LMXD) -L/usr/local/opt/openssl/lib/ -lssl -lcrypto -lmx -rdynamic -o $@ libjson-c.a
@@ -173,7 +174,7 @@ $(CL_OBJS): | $(CL_OBJD)
 $(CL_OBJD):
 	@mkdir -p $@
 
-install_server: $(LMXA) $(DB_MXA) $(SV_NAME)
+install_server: $(SV_NAME)
 
 $(SV_NAME): $(SV_OBJS)
 	@clang $(CFLG) $(SV_OBJS) -L$(LMXD) -L/usr/local/opt/openssl/lib/ -lssl -lcrypto -lmx -o $@ libjson-c.a $(DB_MXA) -lsqlite3
