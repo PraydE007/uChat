@@ -23,6 +23,7 @@ static void usage_port(int argc, char **argv) {
 
 static void usage_socket(int sockfd, t_sockbd *sockbd) {
    sockbd->bd = NULL;
+   sockbd->n = 0;
    sockbd->sockfd = 0;
    sockbd->login = NULL;
    sockbd->log_sescr = mx_create_log();
@@ -53,7 +54,7 @@ int main(int argc, char **argv) {
 
 
    usage_port(argc, argv);
-   mx_demonize();
+   // mx_demonize();
    sockbd->log_sescr = mx_create_log();
    sockfd = socket(AF_INET, SOCK_STREAM, 0);
    usage_socket(sockfd, sockbd);
