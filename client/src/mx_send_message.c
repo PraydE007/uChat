@@ -51,7 +51,6 @@ void mx_send_message(GtkButton *button, gpointer data) {
         if (gui->send_to && mx_strcmp(message, "")
             && mx_strcmp(gui->send_to, "")  && message) {
             send(gui->sockfd, send_data, strlen(send_data), 0);
-            printf("%s\n", gui->send_to);
             display_message(gui, login, message);
         }
     }
